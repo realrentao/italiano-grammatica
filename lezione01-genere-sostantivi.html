@@ -926,6 +926,19 @@
 <!-- 音频数据：base64编码，第1课独立JS文件 -->
 <script src="audio_l01.js"></script>
 <script>
+// ===== 音频播放 =====
+let _audioEl = null;
+function playAudio(key) {
+  if (typeof AUDIO_DATA === 'undefined' || !AUDIO_DATA[key]) {
+    console.warn('Audio key not found:', key);
+    return;
+  }
+  if (!_audioEl) _audioEl = new Audio();
+  _audioEl.pause();
+  _audioEl.src = AUDIO_DATA[key];
+  _audioEl.play().catch(e => console.warn('Play failed:', e));
+}
+
 // ===== 音频调试 =====
 window.addEventListener('load', function() {
   if (typeof AUDIO_DATA === 'undefined') {
