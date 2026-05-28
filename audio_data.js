@@ -164,8 +164,10 @@ const AUDIO_DATA = {
 
 // Play audio by key — replaces file-based playback
 let currentAudio = null;
+let currentPlayPromise = null;  // 跟踪当前 play() 的 Promise
 let currentPlayId = 0;  // 世代计数器，防止异步回调串场
 let audioUnlocked = false;
+let activeSpeakEl = null;  // 当前正在播放的视觉元素
 
 // 解锁音频播放（某些浏览器需要用户交互后才能播放音频）
 function unlockAudio() {
@@ -188,6 +190,39 @@ function unlockAudio() {
 // 首次点击时解锁
 document.addEventListener('click', function() { unlockAudio(); }, { once: false });
 
+// 彻底停止当前音频播放（关键：处理 play() Promise 未 resolve 的竞态）
+function stopCurrentAudio() {
+  if (currentAudio) {
+    // 先移除所有事件回调，防止回调中再触发操作
+    currentAudio.oncanplaythrough = null;
+    currentAudio.onended = null;
+    currentAudio.onerror = null;
+    currentAudio.onplay = null;
+    currentAudio.onplaying = null;
+
+    // 关键：先 pause 再处理 Promise
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+
+    // 处理 play() Promise 未 resolve 的情况
+    // 浏览器规范：pause() 会让未 resolve 的 play() Promise reject
+    // 必须捕获这个 reject，否则会出现 Uncaught Promise 错误
+    if (currentPlayPromise) {
+      currentPlayPromise.catch(function() { /* play 被 pause 中断，正常 */ });
+      currentPlayPromise = null;
+    }
+
+    currentAudio.src = '';
+    currentAudio = null;
+  }
+
+  // 清除旧视觉反馈
+  if (activeSpeakEl) {
+    activeSpeakEl.classList.remove('speaking');
+    activeSpeakEl = null;
+  }
+}
+
 function playAudio(name) {
   // 递增世代ID，旧回调检测到不匹配则放弃播放
   const playId = ++currentPlayId;
@@ -195,16 +230,8 @@ function playAudio(name) {
   // 确保音频已解锁
   unlockAudio();
 
-  // 彻底停掉旧音频：pause + 移除事件 + 释放
-  if (currentAudio) {
-    currentAudio.oncanplaythrough = null;
-    currentAudio.onended = null;
-    currentAudio.onerror = null;
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
-    currentAudio.src = '';  // 释放资源
-    currentAudio = null;
-  }
+  // 彻底停掉旧音频（含 Promise 竞态处理）
+  stopCurrentAudio();
 
   const src = AUDIO_DATA[name];
   if (!src) {
@@ -213,39 +240,62 @@ function playAudio(name) {
   }
 
   // visual feedback — 不依赖隐式 event 对象
-  let speakEl = null;
   try {
     const evt = window.event;
     if (evt && evt.target) {
-      speakEl = evt.target.closest('.speakable');
-      if (speakEl) speakEl.classList.add('speaking');
+      const speakEl = evt.target.closest('.speakable');
+      if (speakEl) {
+        activeSpeakEl = speakEl;
+        speakEl.classList.add('speaking');
+      }
     }
   } catch(e) {}
 
   const audio = new Audio();
   audio.preload = 'auto';
 
+  // 用闭包捕获当前 audio 引用，避免 currentAudio 在回调时已变
+  const thisAudio = audio;
+
   audio.oncanplaythrough = function() {
     // 世代检查：如果不是最新点击，放弃播放
     if (playId !== currentPlayId) return;
-    audio.play().then(() => {
+    // 双重检查：确保 currentAudio 仍指向这个 audio
+    if (currentAudio !== thisAudio) return;
+
+    const p = thisAudio.play();
+    currentPlayPromise = p;
+    p.then(function() {
+      if (playId !== currentPlayId) {
+        // 播放开始后世代已变，立即停止
+        thisAudio.pause();
+        return;
+      }
       console.log('Playing:', name);
-    }).catch(err => {
-      console.error('Audio play failed:', name, err);
-      if (speakEl) speakEl.classList.remove('speaking');
+    }).catch(function(err) {
+      // AbortError 是 pause() 中断 play() 的正常情况，不报错
+      if (err.name !== 'AbortError') {
+        console.error('Audio play failed:', name, err);
+      }
+      if (activeSpeakEl && playId === currentPlayId) {
+        activeSpeakEl.classList.remove('speaking');
+        activeSpeakEl = null;
+      }
+      currentPlayPromise = null;
     });
   };
 
   audio.onerror = function(e) {
     if (playId !== currentPlayId) return;
-    if (speakEl) speakEl.classList.remove('speaking');
+    if (activeSpeakEl) { activeSpeakEl.classList.remove('speaking'); activeSpeakEl = null; }
     console.error('Audio load error:', name, e);
   };
 
-  audio.onended = () => {
+  audio.onended = function() {
     if (playId !== currentPlayId) return;
-    if (speakEl) speakEl.classList.remove('speaking');
+    if (activeSpeakEl) { activeSpeakEl.classList.remove('speaking'); activeSpeakEl = null; }
     currentAudio = null;
+    currentPlayPromise = null;
   };
 
   currentAudio = audio;
