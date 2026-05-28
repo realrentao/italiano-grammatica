@@ -536,7 +536,20 @@
 </div>
 <script src="audio_l02.js"></script>
 <script>
-window.addEventListener('load',function(){if(typeof AUDIO_DATA==='undefined')console.warn('audio_l02.js not loaded');});
+// ===== 音频播放 =====
+let _audioEl = null;
+function playAudio(key) {
+  if (typeof AUDIO_DATA === 'undefined' || !AUDIO_DATA[key]) {
+    console.warn('Audio key not found:', key);
+    return;
+  }
+  if (!_audioEl) _audioEl = new Audio();
+  _audioEl.pause();
+  _audioEl.src = AUDIO_DATA[key];
+  _audioEl.play().catch(e => console.warn('Play failed:', e));
+}
+
+window.addEventListener('load',function(){if(typeof AUDIO_DATA==='undefined')console.warn('audio_l02.js not loaded');else console.log('AUDIO_DATA loaded, keys:',Object.keys(AUDIO_DATA).length);});
 function showTrap(type){document.getElementById('trap-invariant').style.display=type==='invariant'?'grid':'none';document.getElementById('trap-irregular').style.display=type==='irregular'?'grid':'none';document.querySelectorAll('.trap-tab').forEach((t,i)=>{t.classList.toggle('active',(i===0&&type==='invariant')||(i===1&&type==='irregular'));});}
 const flashcards=[
   {word:'libro',plural:'libri',article:'i',gender:'阳性',meaning:'书',artColor:'var(--blue)',audio:'l02_libri'},
