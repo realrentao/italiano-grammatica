@@ -164,6 +164,7 @@ const AUDIO_DATA = {
 
 // Play audio by key — replaces file-based playback
 let currentAudio = null;
+let currentPlayId = 0;  // 世代计数器，防止异步回调串场
 let audioUnlocked = false;
 
 // 解锁音频播放（某些浏览器需要用户交互后才能播放音频）
@@ -188,12 +189,20 @@ function unlockAudio() {
 document.addEventListener('click', function() { unlockAudio(); }, { once: false });
 
 function playAudio(name) {
+  // 递增世代ID，旧回调检测到不匹配则放弃播放
+  const playId = ++currentPlayId;
+
   // 确保音频已解锁
   unlockAudio();
 
+  // 彻底停掉旧音频：pause + 移除事件 + 释放
   if (currentAudio) {
+    currentAudio.oncanplaythrough = null;
+    currentAudio.onended = null;
+    currentAudio.onerror = null;
     currentAudio.pause();
     currentAudio.currentTime = 0;
+    currentAudio.src = '';  // 释放资源
     currentAudio = null;
   }
 
@@ -217,6 +226,8 @@ function playAudio(name) {
   audio.preload = 'auto';
 
   audio.oncanplaythrough = function() {
+    // 世代检查：如果不是最新点击，放弃播放
+    if (playId !== currentPlayId) return;
     audio.play().then(() => {
       console.log('Playing:', name);
     }).catch(err => {
@@ -226,11 +237,13 @@ function playAudio(name) {
   };
 
   audio.onerror = function(e) {
+    if (playId !== currentPlayId) return;
     if (speakEl) speakEl.classList.remove('speaking');
     console.error('Audio load error:', name, e);
   };
 
   audio.onended = () => {
+    if (playId !== currentPlayId) return;
     if (speakEl) speakEl.classList.remove('speaking');
     currentAudio = null;
   };
