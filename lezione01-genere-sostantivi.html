@@ -923,13 +923,13 @@
   <p><span class="it-flag"></span> 意大利语语法实战课程 · 第1课 · 名词的性</p>
 </div>
 
-<!-- 音频数据：base64编码，外部JS文件 -->
-<script src="audio_data.js"></script>
+<!-- 音频数据：base64编码，第1课独立JS文件 -->
+<script src="audio_l01.js"></script>
 <script>
 // ===== 音频调试 =====
 window.addEventListener('load', function() {
   if (typeof AUDIO_DATA === 'undefined') {
-    alert('⚠️ audio_data.js 未加载！请确保该文件与HTML在同一目录。');
+    alert('⚠️ audio_l01.js 未加载！请确保该文件与HTML在同一目录。');
   } else {
     console.log('✅ AUDIO_DATA loaded, keys:', Object.keys(AUDIO_DATA).length);
   }
