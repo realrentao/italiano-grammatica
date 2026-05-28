@@ -63,8 +63,14 @@
       background: var(--card); border: 1px solid var(--border);
       color: var(--text); padding: 6px 14px; border-radius: 8px;
       cursor: pointer; font-size: 13px; transition: all 0.2s;
+      text-decoration: none; display: inline-flex; align-items: center;
+      font-family: inherit;
     }
     .nav-btn:hover { background: var(--card-hover); border-color: var(--blue); }
+    .lesson-nav-disabled {
+      opacity: 0.35; pointer-events: none; cursor: default;
+      text-decoration: none;
+    }
 
     /* ===== 主体 ===== */
     .container {
@@ -500,6 +506,15 @@
       color: var(--text-dim); font-size: 13px;
       border-top: 1px solid var(--border); margin-top: 60px;
     }
+    .footer-nav {
+      display: flex; justify-content: center; gap: 12px;
+      margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .footer-nav .nav-btn {
+      text-decoration: none; display: inline-flex; align-items: center;
+      padding: 10px 20px; font-size: 14px;
+    }
+    .footer-nav .nav-btn:hover { background: var(--card-hover); border-color: var(--blue); }
 
     /* ===== 动画 ===== */
     @keyframes fadeInUp {
@@ -533,6 +548,9 @@
     <div class="progress-fill" id="progressFill"></div>
   </div>
   <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠 导航</a>
+    <a class="nav-btn lesson-nav-disabled">◀ 上一课</a>
+    <a class="nav-btn" href="lezione02-numero-sostantivi.html">下一课 ▶</a>
     <button class="nav-btn" onclick="scrollToSection('quiz')">📝 测验</button>
     <button class="nav-btn" onclick="playAudio('lezione01_title')">🔊 课名</button>
   </div>
@@ -893,8 +911,12 @@
 
 <!-- Footer -->
 <div class="footer">
+  <div class="footer-nav">
+    <a class="nav-btn" href="index.html">🏠 返回导航页</a>
+    <a class="nav-btn lesson-nav-disabled">◀ 上一课</a>
+    <a class="nav-btn" href="lezione02-numero-sostantivi.html">下一课 ▶</a>
+  </div>
   <p>🇮🇹 意大利语语法实战课程 · 第1课 · 名词的性</p>
-  <p style="margin-top:4px;">🎙️ 发音由 edge-tts IsabellaNeural 生成 · base64内嵌 · 离线可用</p>
 </div>
 
 <!-- 音频数据：base64编码，外部JS文件 -->
