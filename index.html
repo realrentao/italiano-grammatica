@@ -8,32 +8,32 @@
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-    color: #e8e8e8; min-height: 100vh;
+    background: #f5f0e8;
+    color: #2c2c2c; min-height: 100vh;
   }
 
   /* Hero */
   .hero {
     text-align: center; padding: 60px 20px 40px;
-    background: linear-gradient(135deg, rgba(0,102,204,0.15), rgba(139,0,139,0.1));
+    background: linear-gradient(135deg, rgba(0,146,70,0.08), rgba(206,43,55,0.06));
   }
-  .hero h1 { font-size: 2.8em; margin-bottom: 12px; }
+  .hero h1 { font-size: 2.8em; margin-bottom: 12px; color: #2c2c2c; }
   .it-flag {
     display: inline-block; width: 22px; height: 15px; border-radius: 2px;
     background: linear-gradient(to right, #009246 33%, #fff 33% 66%, #ce2b37 66%);
     vertical-align: middle; margin-right: 6px;
   }
   .hero h1 .flag { font-size: 1.1em; }
-  .hero .subtitle { font-size: 1.2em; color: #aac; margin-bottom: 20px; }
+  .hero .subtitle { font-size: 1.2em; color: #6b6b6b; margin-bottom: 20px; }
   .hero .badge-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
   .badge {
     display: inline-block; padding: 6px 16px; border-radius: 20px;
     font-size: 0.85em; font-weight: 600;
   }
-  .badge-green { background: rgba(46,204,113,0.2); color: #2ecc71; border: 1px solid rgba(46,204,113,0.3); }
-  .badge-blue { background: rgba(52,152,219,0.2); color: #3498db; border: 1px solid rgba(52,152,219,0.3); }
-  .badge-purple { background: rgba(155,89,182,0.2); color: #9b59b6; border: 1px solid rgba(155,89,182,0.3); }
-  .badge-orange { background: rgba(230,126,34,0.2); color: #e67e22; border: 1px solid rgba(230,126,34,0.3); }
+  .badge-green { background: rgba(46,204,113,0.12); color: #1a8a4a; border: 1px solid rgba(46,204,113,0.25); }
+  .badge-blue { background: rgba(52,152,219,0.12); color: #2471a3; border: 1px solid rgba(52,152,219,0.25); }
+  .badge-purple { background: rgba(155,89,182,0.12); color: #7d3c98; border: 1px solid rgba(155,89,182,0.25); }
+  .badge-orange { background: rgba(230,126,34,0.12); color: #b9560a; border: 1px solid rgba(230,126,34,0.25); }
 
   /* Stats */
   .stats {
@@ -41,8 +41,8 @@
     flex-wrap: wrap;
   }
   .stat { text-align: center; }
-  .stat .num { font-size: 2.2em; font-weight: 800; color: #fff; }
-  .stat .label { font-size: 0.85em; color: #8899aa; }
+  .stat .num { font-size: 2.2em; font-weight: 800; color: #2c2c2c; }
+  .stat .label { font-size: 0.85em; color: #6b6b6b; }
 
   /* Container */
   .container { max-width: 1000px; margin: 0 auto; padding: 30px 20px 60px; }
@@ -52,7 +52,7 @@
   .part-header {
     display: flex; align-items: center; gap: 12px;
     margin-bottom: 16px; padding-bottom: 10px;
-    border-bottom: 2px solid rgba(255,255,255,0.1);
+    border-bottom: 2px solid rgba(0,0,0,0.08);
   }
   .part-icon {
     width: 42px; height: 42px; border-radius: 10px;
@@ -60,7 +60,7 @@
     font-size: 1.3em; font-weight: 800; flex-shrink: 0;
   }
   .part-header h2 { font-size: 1.3em; font-weight: 700; }
-  .part-header .part-sub { font-size: 0.85em; color: #8899aa; margin-left: auto; }
+  .part-header .part-sub { font-size: 0.85em; color: #6b6b6b; margin-left: auto; }
 
   /* Lesson Grid */
   .lesson-grid {
@@ -71,8 +71,8 @@
 
   /* Lesson Card */
   .lesson-card {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: #ffffff;
+    border: 1px solid #ddd5c8;
     border-radius: 14px; padding: 20px;
     text-decoration: none; color: inherit;
     transition: all 0.3s ease; cursor: pointer;
@@ -84,39 +84,39 @@
     opacity: 0; transition: opacity 0.3s;
   }
   .lesson-card:hover {
-    background: rgba(255,255,255,0.1);
-    border-color: rgba(255,255,255,0.15);
+    background: #faf6f0;
+    border-color: #c5baa8;
     transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
   }
   .lesson-card:hover::before { opacity: 1; }
   .lesson-card .num {
     font-size: 0.75em; font-weight: 700; text-transform: uppercase;
     letter-spacing: 1px; margin-bottom: 6px;
-    opacity: 0.6;
+    color: #6b6b6b;
   }
   .lesson-card .title { font-size: 1.1em; font-weight: 600; margin-bottom: 8px; }
-  .lesson-card .desc { font-size: 0.85em; color: #99aabb; line-height: 1.5; }
+  .lesson-card .desc { font-size: 0.85em; color: #6b6b6b; line-height: 1.5; }
   .lesson-card .tags { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
   .lesson-card .tag {
     font-size: 0.7em; padding: 3px 8px; border-radius: 10px;
-    background: rgba(255,255,255,0.06); color: #aab;
+    background: rgba(0,0,0,0.04); color: #6b6b6b;
   }
 
   /* Status */
   .status-available { --card-color: #2ecc71; }
-  .status-available .num { color: #2ecc71; }
-  .status-upcoming { --card-color: #555; }
+  .status-available .num { color: #1a8a4a; }
+  .status-upcoming { --card-color: #999; }
   .status-upcoming .lesson-card { opacity: 0.5; cursor: default; }
   .status-upcoming .lesson-card:hover { transform: none; box-shadow: none; }
 
   /* Footer */
   footer {
     text-align: center; padding: 30px 20px;
-    color: #556; font-size: 0.85em;
-    border-top: 1px solid rgba(255,255,255,0.05);
+    color: #6b6b6b; font-size: 0.85em;
+    border-top: 1px solid rgba(0,0,0,0.08);
   }
-  footer a { color: #3498db; text-decoration: none; }
+  footer a { color: #2471a3; text-decoration: none; }
 
   /* Responsive */
   @media (max-width: 600px) {
@@ -151,7 +151,7 @@
 <!-- Part 1 -->
 <div class="part-section">
   <div class="part-header">
-    <div class="part-icon" style="background:rgba(46,204,113,0.15);color:#2ecc71;">1</div>
+    <div class="part-icon" style="background:rgba(46,204,113,0.12);color:#1a8a4a;">1</div>
     <h2>基础词法</h2>
     <span class="part-sub">第1-8课 · 名词·冠词·形容词·数词·代词·前置词</span>
   </div>
@@ -210,7 +210,7 @@
 <!-- Part 2 -->
 <div class="part-section">
   <div class="part-header">
-    <div class="part-icon" style="background:rgba(52,152,219,0.15);color:#3498db;">2</div>
+    <div class="part-icon" style="background:rgba(52,152,219,0.12);color:#2471a3;">2</div>
     <h2>动词核心</h2>
     <span class="part-sub">第9-14课 · 情态动词·自反动词·进行时·宾语代词</span>
   </div>
@@ -257,7 +257,7 @@
 <!-- Part 3 -->
 <div class="part-section">
   <div class="part-header">
-    <div class="part-icon" style="background:rgba(155,89,182,0.15);color:#9b59b6;">3</div>
+    <div class="part-icon" style="background:rgba(155,89,182,0.12);color:#7d3c98;">3</div>
     <h2>时态进阶</h2>
     <span class="part-sub">第15-20课 · 过去时·将来时·条件式·命令式·虚拟式</span>
   </div>
@@ -304,7 +304,7 @@
 <!-- Part 4 -->
 <div class="part-section">
   <div class="part-header">
-    <div class="part-icon" style="background:rgba(230,126,34,0.15);color:#e67e22;">4</div>
+    <div class="part-icon" style="background:rgba(230,126,34,0.12);color:#b9560a;">4</div>
     <h2>句法实战</h2>
     <span class="part-sub">第21-24课 · 复合句·被动态·条件从句·综合应用</span>
   </div>
