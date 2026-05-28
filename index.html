@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇮🇹 意大利语语法实战课程</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #e8e8e8; min-height: 100vh;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center; padding: 60px 20px 40px;
+    background: linear-gradient(135deg, rgba(0,102,204,0.15), rgba(139,0,139,0.1));
+  }
+  .hero h1 { font-size: 2.8em; margin-bottom: 12px; }
+  .hero h1 .flag { font-size: 1.1em; }
+  .hero .subtitle { font-size: 1.2em; color: #aac; margin-bottom: 20px; }
+  .hero .badge-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .badge {
+    display: inline-block; padding: 6px 16px; border-radius: 20px;
+    font-size: 0.85em; font-weight: 600;
+  }
+  .badge-green { background: rgba(46,204,113,0.2); color: #2ecc71; border: 1px solid rgba(46,204,113,0.3); }
+  .badge-blue { background: rgba(52,152,219,0.2); color: #3498db; border: 1px solid rgba(52,152,219,0.3); }
+  .badge-purple { background: rgba(155,89,182,0.2); color: #9b59b6; border: 1px solid rgba(155,89,182,0.3); }
+  .badge-orange { background: rgba(230,126,34,0.2); color: #e67e22; border: 1px solid rgba(230,126,34,0.3); }
+
+  /* Stats */
+  .stats {
+    display: flex; justify-content: center; gap: 40px; margin: 30px 0;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat .num { font-size: 2.2em; font-weight: 800; color: #fff; }
+  .stat .label { font-size: 0.85em; color: #8899aa; }
+
+  /* Container */
+  .container { max-width: 1000px; margin: 0 auto; padding: 30px 20px 60px; }
+
+  /* Part Section */
+  .part-section { margin-bottom: 40px; }
+  .part-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px; padding-bottom: 10px;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+  }
+  .part-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3em; font-weight: 800; flex-shrink: 0;
+  }
+  .part-header h2 { font-size: 1.3em; font-weight: 700; }
+  .part-header .part-sub { font-size: 0.85em; color: #8899aa; margin-left: auto; }
+
+  /* Lesson Grid */
+  .lesson-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  /* Lesson Card */
+  .lesson-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px; padding: 20px;
+    text-decoration: none; color: inherit;
+    transition: all 0.3s ease; cursor: pointer;
+    position: relative; overflow: hidden;
+  }
+  .lesson-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--card-color), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .lesson-card:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+  .lesson-card:hover::before { opacity: 1; }
+  .lesson-card .num {
+    font-size: 0.75em; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 6px;
+    opacity: 0.6;
+  }
+  .lesson-card .title { font-size: 1.1em; font-weight: 600; margin-bottom: 8px; }
+  .lesson-card .desc { font-size: 0.85em; color: #99aabb; line-height: 1.5; }
+  .lesson-card .tags { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+  .lesson-card .tag {
+    font-size: 0.7em; padding: 3px 8px; border-radius: 10px;
+    background: rgba(255,255,255,0.06); color: #aab;
+  }
+
+  /* Status */
+  .status-available { --card-color: #2ecc71; }
+  .status-available .num { color: #2ecc71; }
+  .status-upcoming { --card-color: #555; }
+  .status-upcoming .lesson-card { opacity: 0.5; cursor: default; }
+  .status-upcoming .lesson-card:hover { transform: none; box-shadow: none; }
+
+  /* Footer */
+  footer {
+    text-align: center; padding: 30px 20px;
+    color: #556; font-size: 0.85em;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  footer a { color: #3498db; text-decoration: none; }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 2em; }
+    .stats { gap: 20px; }
+    .lesson-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <h1><span class="flag">🇮🇹</span> 意大利语语法实战课程</h1>
+  <p class="subtitle">零基础友好 · 例句贴近生活 · 语法用起来才叫学会</p>
+  <div class="badge-row">
+    <span class="badge badge-green">✅ 交互式教学</span>
+    <span class="badge badge-blue">🎙️ 真人发音</span>
+    <span class="badge badge-purple">📝 在线测验</span>
+    <span class="badge badge-orange">🃏 闪卡练习</span>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="num">24</div><div class="label">课时</div></div>
+    <div class="stat"><div class="num">4</div><div class="label">大部分</div></div>
+    <div class="stat"><div class="num">1</div><div class="label">已完成</div></div>
+  </div>
+</div>
+
+<!-- Course Content -->
+<div class="container">
+
+<!-- Part 1 -->
+<div class="part-section">
+  <div class="part-header">
+    <div class="part-icon" style="background:rgba(46,204,113,0.15);color:#2ecc71;">1</div>
+    <h2>基础词法</h2>
+    <span class="part-sub">第1-8课 · 名词·冠词·形容词·数词·代词·前置词</span>
+  </div>
+  <div class="lesson-grid">
+    <a class="lesson-card status-available" href="lezione01-genere-sostantivi.html">
+      <div class="num">Lezione 1</div>
+      <div class="title">名词的性 — 每个名词都是男孩或女孩</div>
+      <div class="desc">阳性/阴性判断、词尾规律、例外词特训、连冠词一起记</div>
+      <div class="tags"><span class="tag">🔊 发音</span><span class="tag">🃏 闪卡</span><span class="tag">📝 测验</span><span class="tag">✅ 已完成</span></div>
+    </a>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 2</div>
+      <div class="title">名词的数 — 从一到多的变化</div>
+      <div class="desc">单数→复数变换规则、不规则复数、不变形容词</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 3</div>
+      <div class="title">冠词 — 名词前面的"小标签"</div>
+      <div class="desc">定冠词/不定冠词/部分冠词、缩合前置词</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 4</div>
+      <div class="title">形容词 — 给名词"化妆"</div>
+      <div class="desc">形容词性数配合、四尾/两尾形容词、位置与特殊用法</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 5</div>
+      <div class="title">比较级和最高级 — 谁更怎么样</div>
+      <div class="desc">比较级构成、不规则比较级、绝对最高级</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 6</div>
+      <div class="title">人称代词和物主代词 — 你的我的他的</div>
+      <div class="desc">主语/宾语代词、物主形容词与代词、ci/ne的用法</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 7</div>
+      <div class="title">动词的现在时 — 开口说话的第一步</div>
+      <div class="desc">三大变位规则、常见不规则动词、现在时的多种用法</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 8</div>
+      <div class="title">最常用的不规则动词</div>
+      <div class="desc">fare/dare/andare/venire/stare/avere/essere完全变位</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Part 2 -->
+<div class="part-section">
+  <div class="part-header">
+    <div class="part-icon" style="background:rgba(52,152,219,0.15);color:#3498db;">2</div>
+    <h2>动词核心</h2>
+    <span class="part-sub">第9-14课 · 情态动词·自反动词·进行时·宾语代词</span>
+  </div>
+  <div class="lesson-grid">
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 9</div>
+      <div class="title">情态动词 — 能/想/必须/会</div>
+      <div class="desc">potere/volere/dovere/sapere变位与用法、双助动词选择</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 10</div>
+      <div class="title">自反动词 — 起床/洗澡/穿衣</div>
+      <div class="desc">自反代词搭配、日常自反动词、复合时态中的助动词选择</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 11</div>
+      <div class="title">现在进行时 — 正在做什么</div>
+      <div class="desc">stare + gerundio 构成、不规则副动词、与简单现在时的区别</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 12</div>
+      <div class="title">动词 esserci — "有"还是"在"？</div>
+      <div class="desc">c'è/ci sono、esserci的各种时态、与avere的区别</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 13</div>
+      <div class="title">代词 ci 和 ne — 两个万能小词</div>
+      <div class="desc">ci替代地点/事物、ne替代数量/部分、与动词连写</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 14</div>
+      <div class="title">直接/间接宾语代词</div>
+      <div class="desc">mi/ti/lo/la/ci/vi/li/le、间接宾语代词、双宾语组合</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Part 3 -->
+<div class="part-section">
+  <div class="part-header">
+    <div class="part-icon" style="background:rgba(155,89,182,0.15);color:#9b59b6;">3</div>
+    <h2>时态进阶</h2>
+    <span class="part-sub">第15-20课 · 过去时·将来时·条件式·命令式·虚拟式</span>
+  </div>
+  <div class="lesson-grid">
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 15</div>
+      <div class="title">近过去时 — 说"昨天做了啥"</div>
+      <div class="desc">passato prossimo构成、avere/essere选择、过去分词变化</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 16</div>
+      <div class="title">未完成过去时 — 讲故事的时候用</div>
+      <div class="desc">imperfetto构成、与近过去时的区别、习惯性过去</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 17</div>
+      <div class="title">将来时 — 说未来计划</div>
+      <div class="desc">futuro semplice构成、将来时的特殊用法（猜测/可能性）</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 18</div>
+      <div class="title">条件式 — "我想/你能/可以吗？"</div>
+      <div class="desc">condizionale presente构成、礼貌请求、假设表达</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 19</div>
+      <div class="title">命令式 — "请坐""别抽烟"</div>
+      <div class="desc">imperativo肯定/否定、与代词连写、礼貌命令式</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 20</div>
+      <div class="title">虚拟式 — 高级语法，让表达更地道</div>
+      <div class="desc">congiuntivo presente、触发虚拟式的动词与连词</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Part 4 -->
+<div class="part-section">
+  <div class="part-header">
+    <div class="part-icon" style="background:rgba(230,126,34,0.15);color:#e67e22;">4</div>
+    <h2>句法实战</h2>
+    <span class="part-sub">第21-24课 · 复合句·被动态·条件从句·综合应用</span>
+  </div>
+  <div class="lesson-grid">
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 21</div>
+      <div class="title">条件从句 — "如果...就..."</div>
+      <div class="desc">se + 三种条件句、真实/可能/不可能条件</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 22</div>
+      <div class="title">复合句 — 把句子串起来</div>
+      <div class="desc">并列连词、从属连词、关系代词che/cui/preposizioni articolate</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 23</div>
+      <div class="title">被动态和无人称句 — 更地道的表达</div>
+      <div class="desc">被动语态构成、si passivante、无人称si</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+    <div class="lesson-card status-upcoming">
+      <div class="num">Lezione 24</div>
+      <div class="title">综合复习与实战应用 — 开口说意大利语</div>
+      <div class="desc">全课程语法回顾、情景对话综合练习、常见错误总结</div>
+      <div class="tags"><span class="tag">🚧 待制作</span></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <p>🇮🇹 意大利语语法实战课程 · 基于「意大利语语法完全手册」改编</p>
+  <p style="margin-top:6px;">🎙️ 发音由 edge-tts IsabellaNeural 生成 · base64内嵌 · 离线可用</p>
+  <p style="margin-top:6px;"><a href="https://github.com/realrentao/italiano-grammatica">GitHub</a> · © 2026</p>
+</footer>
+
+</body>
+</html>
