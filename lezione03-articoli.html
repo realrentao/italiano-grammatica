@@ -870,6 +870,19 @@
 
 <script src="audio_l03.js"></script>
 <script>
+// ===== 音频播放 =====
+let _audioEl = null;
+function playAudio(key) {
+  if (typeof AUDIO_DATA === 'undefined' || !AUDIO_DATA[key]) {
+    console.warn('Audio key not found:', key);
+    return;
+  }
+  if (!_audioEl) _audioEl = new Audio();
+  _audioEl.pause();
+  _audioEl.src = AUDIO_DATA[key];
+  _audioEl.play().catch(e => console.warn('Play failed:', e));
+}
+
 window.addEventListener('load',function(){if(typeof AUDIO_DATA==='undefined')console.warn('audio_l03.js not loaded');else console.log('AUDIO_DATA loaded, keys:',Object.keys(AUDIO_DATA).length);});
 
 // ===== 例外词切换 =====
