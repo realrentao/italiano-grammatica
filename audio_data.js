@@ -163,11 +163,37 @@ const AUDIO_DATA = {
 };
 
 // Play audio by key — replaces file-based playback
-let currentAudio = null;
-let currentPlayPromise = null;  // 跟踪当前 play() 的 Promise
-let currentPlayId = 0;  // 世代计数器，防止异步回调串场
+// 核心原则：单一 Audio 元素，不用 oncanplaythrough 异步回调，设完 src 直接 play()
+let audioEl = null;          // 全局唯一的 Audio 元素，复用
+let currentPlayPromise = null; // 跟踪当前 play() 的 Promise
+let activeSpeakEl = null;    // 当前正在播放的视觉元素
 let audioUnlocked = false;
-let activeSpeakEl = null;  // 当前正在播放的视觉元素
+
+// 获取或创建全局唯一的 Audio 元素
+function getAudioEl() {
+  if (!audioEl) {
+    audioEl = new Audio();
+    audioEl.preload = 'auto';
+
+    audioEl.onended = function() {
+      if (activeSpeakEl) {
+        activeSpeakEl.classList.remove('speaking');
+        activeSpeakEl = null;
+      }
+      currentPlayPromise = null;
+    };
+
+    audioEl.onerror = function(e) {
+      console.error('Audio error:', e);
+      if (activeSpeakEl) {
+        activeSpeakEl.classList.remove('speaking');
+        activeSpeakEl = null;
+      }
+      currentPlayPromise = null;
+    };
+  }
+  return audioEl;
+}
 
 // 解锁音频播放（某些浏览器需要用户交互后才能播放音频）
 function unlockAudio() {
@@ -181,39 +207,25 @@ function unlockAudio() {
     src.start(0);
     ctx.close();
     audioUnlocked = true;
-    console.log('Audio unlocked');
-  } catch(e) {
-    console.warn('Audio unlock failed:', e);
-  }
+  } catch(e) {}
 }
 
 // 首次点击时解锁
 document.addEventListener('click', function() { unlockAudio(); }, { once: false });
 
-// 彻底停止当前音频播放（关键：处理 play() Promise 未 resolve 的竞态）
-function stopCurrentAudio() {
-  if (currentAudio) {
-    // 先移除所有事件回调，防止回调中再触发操作
-    currentAudio.oncanplaythrough = null;
-    currentAudio.onended = null;
-    currentAudio.onerror = null;
-    currentAudio.onplay = null;
-    currentAudio.onplaying = null;
+function playAudio(name) {
+  unlockAudio();
 
-    // 关键：先 pause 再处理 Promise
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
+  const el = getAudioEl();
 
-    // 处理 play() Promise 未 resolve 的情况
-    // 浏览器规范：pause() 会让未 resolve 的 play() Promise reject
-    // 必须捕获这个 reject，否则会出现 Uncaught Promise 错误
-    if (currentPlayPromise) {
-      currentPlayPromise.catch(function() { /* play 被 pause 中断，正常 */ });
-      currentPlayPromise = null;
-    }
+  // ① 先停掉当前正在播放的音频
+  el.pause();
 
-    currentAudio.src = '';
-    currentAudio = null;
+  // 处理 play() Promise 未 resolve 的情况
+  // 浏览器规范：pause() 会让未 resolve 的 play() Promise reject (AbortError)
+  if (currentPlayPromise) {
+    currentPlayPromise.catch(function() { /* pause() 中断 play()，正常 */ });
+    currentPlayPromise = null;
   }
 
   // 清除旧视觉反馈
@@ -221,17 +233,6 @@ function stopCurrentAudio() {
     activeSpeakEl.classList.remove('speaking');
     activeSpeakEl = null;
   }
-}
-
-function playAudio(name) {
-  // 递增世代ID，旧回调检测到不匹配则放弃播放
-  const playId = ++currentPlayId;
-
-  // 确保音频已解锁
-  unlockAudio();
-
-  // 彻底停掉旧音频（含 Promise 竞态处理）
-  stopCurrentAudio();
 
   const src = AUDIO_DATA[name];
   if (!src) {
@@ -239,7 +240,7 @@ function playAudio(name) {
     return;
   }
 
-  // visual feedback — 不依赖隐式 event 对象
+  // ② 设置新视觉反馈
   try {
     const evt = window.event;
     if (evt && evt.target) {
@@ -251,53 +252,23 @@ function playAudio(name) {
     }
   } catch(e) {}
 
-  const audio = new Audio();
-  audio.preload = 'auto';
+  // ③ 设置新 src 并直接播放（不用 oncanplaythrough）
+  el.src = src;
+  el.currentTime = 0;
 
-  // 用闭包捕获当前 audio 引用，避免 currentAudio 在回调时已变
-  const thisAudio = audio;
-
-  audio.oncanplaythrough = function() {
-    // 世代检查：如果不是最新点击，放弃播放
-    if (playId !== currentPlayId) return;
-    // 双重检查：确保 currentAudio 仍指向这个 audio
-    if (currentAudio !== thisAudio) return;
-
-    const p = thisAudio.play();
-    currentPlayPromise = p;
-    p.then(function() {
-      if (playId !== currentPlayId) {
-        // 播放开始后世代已变，立即停止
-        thisAudio.pause();
-        return;
-      }
-      console.log('Playing:', name);
-    }).catch(function(err) {
-      // AbortError 是 pause() 中断 play() 的正常情况，不报错
-      if (err.name !== 'AbortError') {
-        console.error('Audio play failed:', name, err);
-      }
-      if (activeSpeakEl && playId === currentPlayId) {
-        activeSpeakEl.classList.remove('speaking');
-        activeSpeakEl = null;
-      }
-      currentPlayPromise = null;
-    });
-  };
-
-  audio.onerror = function(e) {
-    if (playId !== currentPlayId) return;
-    if (activeSpeakEl) { activeSpeakEl.classList.remove('speaking'); activeSpeakEl = null; }
-    console.error('Audio load error:', name, e);
-  };
-
-  audio.onended = function() {
-    if (playId !== currentPlayId) return;
-    if (activeSpeakEl) { activeSpeakEl.classList.remove('speaking'); activeSpeakEl = null; }
-    currentAudio = null;
+  var p = el.play();
+  currentPlayPromise = p;
+  p.then(function() {
+    // 播放成功
+  }).catch(function(err) {
+    // AbortError = 新的 play() 被下一次 pause() 中断，正常
+    if (err.name !== 'AbortError') {
+      console.error('Audio play failed:', name, err);
+    }
+    if (activeSpeakEl) {
+      activeSpeakEl.classList.remove('speaking');
+      activeSpeakEl = null;
+    }
     currentPlayPromise = null;
-  };
-
-  currentAudio = audio;
-  audio.src = src;
+  });
 }
