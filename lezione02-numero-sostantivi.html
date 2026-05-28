@@ -4,3 +4,624 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>第2课 · 名词的数 — 意大利语语法实战</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap');
+
+    :root {
+      --green: #009246;
+      --white: #f8f9fa;
+      --red: #ce2b37;
+      --blue: #1a73e8;
+      --orange: #e8710a;
+      --purple: #7c3aed;
+      --bg: #f5f0e8;
+      --card: #ffffff;
+      --card-hover: #f0ebe3;
+      --text: #2c2c2c;
+      --text-dim: #6b6b6b;
+      --border: #ddd5c8;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans SC', -apple-system, sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    .top-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(245,240,232,0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .top-bar .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 16px;
+    }
+    .flag-stripe {
+      width: 36px; height: 24px; border-radius: 4px;
+      background: linear-gradient(to bottom, var(--green) 33%, var(--white) 33% 66%, var(--red) 66%);
+    }
+    .progress-bar {
+      height: 3px; background: var(--border); border-radius: 2px; width: 200px;
+    }
+    .progress-fill {
+      height: 100%; background: linear-gradient(90deg, var(--green), var(--red));
+      border-radius: 2px; transition: width 0.5s ease; width: 0%;
+    }
+    .nav-btns { display: flex; gap: 8px; }
+    .nav-btn {
+      background: var(--card); border: 1px solid var(--border);
+      color: var(--text); padding: 6px 14px; border-radius: 8px;
+      cursor: pointer; font-size: 13px; transition: all 0.2s;
+      text-decoration: none; display: inline-flex; align-items: center;
+      font-family: inherit;
+    }
+    .nav-btn:hover { background: var(--card-hover); border-color: var(--blue); }
+    .lesson-nav-disabled {
+      opacity: 0.35; pointer-events: none; cursor: default;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 860px; margin: 0 auto;
+      padding: 80px 20px 60px;
+    }
+
+    .hero {
+      text-align: center; padding: 60px 20px 40px;
+      position: relative;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,146,70,0.08), rgba(206,43,55,0.06), transparent 70%);
+      pointer-events: none;
+    }
+    .lesson-badge {
+      display: inline-block; padding: 6px 16px; border-radius: 20px;
+      background: rgba(0,146,70,0.15); color: var(--green);
+      font-size: 13px; font-weight: 500; margin-bottom: 20px;
+      border: 1px solid rgba(0,146,70,0.3);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px; font-weight: 700; margin-bottom: 8px;
+      background: linear-gradient(135deg, #2c2c2c 40%, var(--green) 70%, var(--red));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero .subtitle {
+      font-size: 18px; color: var(--text-dim); margin-bottom: 24px;
+    }
+    .hero .hint {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--card); padding: 10px 20px; border-radius: 12px;
+      border: 1px solid var(--border); font-size: 14px; color: var(--text-dim);
+    }
+    .hero .hint .icon { font-size: 20px; }
+
+    .section {
+      margin-top: 48px;
+      opacity: 0; transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    .section.visible { opacity: 1; transform: translateY(0); }
+    .section-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+    }
+    .section-icon {
+      width: 40px; height: 40px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .section-title {
+      font-size: 22px; font-weight: 700;
+    }
+
+    .speakable {
+      cursor: pointer; position: relative;
+      border-bottom: 1px dashed rgba(0,0,0,0.15);
+      transition: all 0.2s;
+    }
+    .speakable:hover {
+      border-bottom-color: var(--green);
+      color: var(--green);
+    }
+    .speakable::after {
+      content: '🔊'; font-size: 12px; margin-left: 2px;
+      opacity: 0; transition: opacity 0.2s;
+      position: relative; top: -2px;
+    }
+    .speakable:hover::after { opacity: 0.7; }
+    .speakable.speaking {
+      color: var(--green);
+      animation: pulse-speak 0.6s ease infinite;
+    }
+    @keyframes pulse-speak {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .grammar-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+      box-shadow: var(--shadow);
+    }
+    .grammar-card .key-point {
+      font-size: 17px; line-height: 1.8; margin-bottom: 16px;
+    }
+    .gender-badge {
+      display: inline-block; padding: 3px 10px; border-radius: 6px;
+      font-size: 13px; font-weight: 600;
+    }
+    .gender-m { background: rgba(26,115,232,0.15); color: var(--blue); }
+    .gender-f { background: rgba(232,113,10,0.15); color: var(--orange); }
+
+    .example-table {
+      width: 100%; border-collapse: separate; border-spacing: 0;
+      margin-top: 16px; overflow: hidden; border-radius: 12px;
+    }
+    .example-table th {
+      background: rgba(0,0,0,0.03); padding: 12px 16px;
+      text-align: left; font-size: 13px; font-weight: 600;
+      color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .example-table td {
+      padding: 12px 16px; border-top: 1px solid var(--border);
+      font-size: 15px;
+    }
+    .example-table tr:hover td {
+      background: rgba(0,0,0,0.02);
+    }
+    .it-text {
+      font-style: italic; font-weight: 500;
+    }
+    .it-flag {
+      display: inline-block; width: 20px; height: 14px; border-radius: 2px;
+      background: linear-gradient(to right, #009246 33%, #fff 33% 66%, #ce2b37 66%);
+      vertical-align: middle; margin-right: 4px;
+    }
+    .zh-text { color: var(--text-dim); font-size: 14px; }
+
+    .mnemonic-card {
+      background: linear-gradient(135deg, rgba(0,146,70,0.1), rgba(206,43,55,0.08));
+      border: 1px solid rgba(0,146,70,0.25);
+      border-radius: var(--radius); padding: 24px;
+      text-align: center; margin-top: 20px;
+    }
+    .mnemonic-card .emoji { font-size: 32px; margin-bottom: 12px; }
+    .mnemonic-card .text {
+      font-size: 20px; font-weight: 700; line-height: 1.6;
+    }
+    .mnemonic-card .text .hl-o { color: var(--blue); }
+    .mnemonic-card .text .hl-a { color: var(--orange); }
+    .mnemonic-card .text .hl-e { color: var(--purple); }
+
+    .rule-cards {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px; margin-top: 16px;
+    }
+    .rule-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      transition: all 0.3s; cursor: default;
+      position: relative; overflow: hidden;
+    }
+    .rule-card:hover {
+      border-color: var(--green); transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,146,70,0.1);
+    }
+    .rule-card .ending {
+      font-size: 36px; font-weight: 700;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 8px;
+    }
+    .rule-card .ending.masc { color: var(--blue); }
+    .rule-card .ending.fem { color: var(--orange); }
+    .rule-card .ending.both { color: var(--purple); }
+    .rule-card .gender-label {
+      font-size: 13px; font-weight: 600; margin-bottom: 12px;
+    }
+    .rule-card .examples {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .rule-card .example-chip {
+      background: rgba(0,0,0,0.04); padding: 5px 12px;
+      border-radius: 8px; font-size: 14px;
+      transition: all 0.2s; cursor: pointer;
+    }
+    .rule-card .example-chip:hover {
+      background: rgba(0,146,70,0.15);
+    }
+
+    .trap-section { margin-top: 12px; }
+    .trap-tabs {
+      display: flex; gap: 8px; margin-bottom: 16px;
+    }
+    .trap-tab {
+      padding: 8px 18px; border-radius: 10px;
+      background: var(--card); border: 1px solid var(--border);
+      cursor: pointer; font-size: 14px; font-weight: 500;
+      transition: all 0.2s; color: var(--text-dim);
+    }
+    .trap-tab.active {
+      border-color: var(--red); color: var(--red);
+      background: rgba(206,43,55,0.1);
+    }
+    .trap-tab:hover:not(.active) {
+      border-color: var(--text-dim);
+    }
+    .trap-list {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .trap-item {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 18px;
+      display: flex; align-items: center; gap: 12px;
+      transition: all 0.3s; cursor: pointer;
+    }
+    .trap-item:hover {
+      border-color: var(--red); transform: scale(1.02);
+    }
+    .trap-item .article {
+      font-size: 13px; font-weight: 700; min-width: 28px;
+    }
+    .trap-item .article.il { color: var(--blue); }
+    .trap-item .article.la { color: var(--orange); }
+    .trap-item .word { font-size: 18px; font-weight: 600; font-style: italic; }
+    .trap-item .meaning { font-size: 13px; color: var(--text-dim); margin-left: auto; }
+    .trap-note {
+      background: rgba(206,43,55,0.08); border: 1px solid rgba(206,43,55,0.2);
+      border-radius: 10px; padding: 12px 16px; margin-top: 12px;
+      font-size: 13px; color: #c0392b;
+    }
+
+    .dialogue-box {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      margin-top: 16px;
+    }
+    .dialogue-line {
+      display: flex; gap: 12px; padding: 10px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      align-items: flex-start;
+    }
+    .dialogue-line:last-child { border-bottom: none; }
+    .speaker {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 700; flex-shrink: 0;
+    }
+    .speaker-a { background: rgba(26,115,232,0.15); color: var(--blue); }
+    .speaker-b { background: rgba(0,146,70,0.15); color: var(--green); }
+    .dialogue-content { flex: 1; }
+    .dialogue-it {
+      font-size: 16px; font-weight: 500; cursor: pointer;
+    }
+    .dialogue-zh {
+      font-size: 13px; color: var(--text-dim); margin-top: 2px;
+    }
+    .play-line-btn {
+      background: none; border: 1px solid var(--border);
+      color: var(--text-dim); padding: 4px 10px; border-radius: 6px;
+      cursor: pointer; font-size: 12px; transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .play-line-btn:hover {
+      border-color: var(--green); color: var(--green);
+    }
+
+    .principle-card {
+      background: linear-gradient(135deg, rgba(26,115,232,0.1), rgba(124,58,237,0.08));
+      border: 1px solid rgba(26,115,232,0.25);
+      border-radius: var(--radius); padding: 24px;
+      margin-top: 20px; text-align: center;
+    }
+    .principle-card .icon { font-size: 36px; margin-bottom: 12px; }
+    .principle-card .text {
+      font-size: 18px; font-weight: 700; line-height: 1.6;
+    }
+    .principle-card .examples-row {
+      display: flex; justify-content: center; gap: 20px;
+      margin-top: 16px; flex-wrap: wrap;
+    }
+    .principle-card .example-pair {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    .principle-card .good { color: var(--green); font-weight: 600; }
+    .principle-card .bad { color: var(--red); text-decoration: line-through; opacity: 0.5; font-size: 13px; }
+
+    .quiz-section { margin-top: 48px; }
+    .quiz-header-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 16px;
+    }
+    .quiz-counter { font-size: 14px; color: var(--text-dim); }
+    .quiz-counter strong { color: var(--green); font-size: 18px; }
+    .quiz-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      margin-bottom: 16px;
+    }
+    .quiz-question { font-size: 17px; font-weight: 600; margin-bottom: 16px; }
+    .quiz-question .quiz-word { font-style: italic; color: var(--green); font-size: 22px; }
+    .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .quiz-option {
+      background: rgba(0,0,0,0.02); border: 2px solid var(--border);
+      border-radius: 12px; padding: 14px; cursor: pointer;
+      transition: all 0.25s; text-align: center; font-size: 16px;
+    }
+    .quiz-option:hover:not(.answered) {
+      border-color: var(--blue); background: rgba(26,115,232,0.08);
+    }
+    .quiz-option.correct { border-color: var(--green) !important; background: rgba(0,146,70,0.15) !important; color: var(--green); }
+    .quiz-option.wrong { border-color: var(--red) !important; background: rgba(206,43,55,0.1) !important; color: var(--red); }
+    .quiz-option.answered { cursor: default; }
+    .quiz-feedback { margin-top: 12px; padding: 10px 14px; border-radius: 8px; font-size: 14px; display: none; }
+    .quiz-feedback.show { display: block; }
+    .quiz-feedback.right { background: rgba(0,146,70,0.1); color: var(--green); }
+    .quiz-feedback.wrong-fb { background: rgba(206,43,55,0.08); color: #c0392b; }
+    .quiz-mode-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+    .quiz-mode-tab {
+      padding: 8px 18px; border-radius: 10px;
+      background: var(--card); border: 1px solid var(--border);
+      cursor: pointer; font-size: 14px; font-weight: 500;
+      transition: all 0.2s; color: var(--text-dim);
+    }
+    .quiz-mode-tab.active { border-color: var(--orange); color: var(--orange); background: rgba(232,113,10,0.1); }
+
+    .flashcard-area { display: flex; flex-direction: column; align-items: center; margin-top: 16px; gap: 16px; }
+    .flashcard { width: 300px; height: 200px; perspective: 600px; cursor: pointer; }
+    .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+    .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+    .flashcard-front, .flashcard-back {
+      position: absolute; inset: 0; border-radius: var(--radius);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      backface-visibility: hidden; padding: 20px;
+    }
+    .flashcard-front { background: linear-gradient(135deg, var(--card), #f0ebe3); border: 1px solid var(--border); }
+    .flashcard-back { background: linear-gradient(135deg, rgba(0,146,70,0.15), rgba(26,115,232,0.1)); border: 1px solid rgba(0,146,70,0.3); transform: rotateY(180deg); }
+    .flashcard .front-word { font-size: 28px; font-weight: 700; font-style: italic; }
+    .flashcard .front-hint { font-size: 13px; color: var(--text-dim); margin-top: 8px; }
+    .flashcard .back-article { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+    .flashcard .back-word { font-size: 24px; font-style: italic; font-weight: 600; }
+    .flashcard .back-meaning { font-size: 14px; color: var(--text-dim); margin-top: 6px; }
+    .flashcard-nav { display: flex; gap: 12px; }
+    .flashcard-nav button { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 10px 24px; border-radius: 10px; cursor: pointer; font-size: 14px; transition: all 0.2s; }
+    .flashcard-nav button:hover { background: var(--card-hover); border-color: var(--green); }
+    .flashcard-counter { font-size: 13px; color: var(--text-dim); }
+
+    .scoreboard { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-align: center; margin-top: 32px; }
+    .score-display { font-size: 48px; font-weight: 700; background: linear-gradient(135deg, var(--green), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .score-label { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+    .score-rank { margin-top: 12px; font-size: 16px; font-weight: 600; }
+
+    .footer { text-align: center; padding: 40px 20px; color: var(--text-dim); font-size: 13px; border-top: 1px solid var(--border); margin-top: 60px; }
+    .footer-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .footer-nav .nav-btn { text-decoration: none; display: inline-flex; align-items: center; padding: 10px 20px; font-size: 14px; }
+    .footer-nav .nav-btn:hover { background: var(--card-hover); border-color: var(--blue); }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-in { animation: fadeInUp 0.5s ease forwards; }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 28px; }
+      .rule-cards { grid-template-columns: 1fr; }
+      .trap-list { grid-template-columns: 1fr; }
+      .quiz-options { grid-template-columns: 1fr; }
+      .flashcard { width: 260px; height: 180px; }
+      .principle-card .examples-row { gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+<div class="top-bar">
+  <div class="logo"><div class="flag-stripe"></div><span>意大利语语法实战</span></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠 导航</a>
+    <a class="nav-btn" href="lezione01-genere-sostantivi.html">◀ 上一课</a>
+    <a class="nav-btn" href="lezione03-articoli.html">下一课 ▶</a>
+    <button class="nav-btn" onclick="scrollToSection('quiz')">📝 测验</button>
+  </div>
+</div>
+<div class="container">
+  <div class="hero animate-in">
+    <div class="lesson-badge">Part 1 · 基础词法 · 第 2 课</div>
+    <h1>名词的数</h1>
+    <p class="subtitle">Il numero dei sostantivi</p>
+    <div class="hint"><span class="icon">👆</span>点击绿色下划线文字即可听到纯正意大利语发音</div>
+  </div>
+  <div class="section" id="sec-core">
+    <div class="section-header"><div class="section-icon" style="background:rgba(0,146,70,0.15);">🎯</div><h2 class="section-title">核心语法</h2></div>
+    <div class="grammar-card">
+      <p class="key-point">意大利语名词分<span class="gender-badge gender-m">单数 singolare</span>和<span class="gender-badge gender-f">复数 plurale</span>，变复数看词尾。<br>一本书叫 libro，两本书叫 libri——词尾变了！</p>
+      <table class="example-table"><thead><tr><th>单数词尾</th><th>复数词尾</th><th>例子</th></tr></thead><tbody>
+        <tr><td><span class="gender-badge gender-m">-o</span></td><td><span class="gender-badge gender-m">-i</span></td><td><span class="speakable it-text" onclick="playAudio('l02_libri')">libro → libri</span> <span class="zh-text">书</span></td></tr>
+        <tr><td><span class="gender-badge gender-f">-a</span></td><td><span class="gender-badge gender-f">-e</span></td><td><span class="speakable it-text" onclick="playAudio('l02_case')">casa → case</span> <span class="zh-text">房子</span></td></tr>
+        <tr><td><span class="gender-badge" style="background:rgba(124,58,237,0.15);color:var(--purple);">-e</span></td><td><span class="gender-badge" style="background:rgba(124,58,237,0.15);color:var(--purple);">-i</span></td><td><span class="speakable it-text" onclick="playAudio('l02_cani')">cane → cani</span> <span class="zh-text">狗·阳</span> / <span class="speakable it-text" onclick="playAudio('l02_chiavi')">chiave → chiavi</span> <span class="zh-text">钥匙·阴</span></td></tr>
+      </tbody></table>
+    </div>
+  </div>
+  <div class="section" id="sec-mnemonic">
+    <div class="mnemonic-card"><div class="emoji">🧠</div><p class="text"><span class="hl-o">-o</span>变<span class="hl-o">-i</span>，<span class="hl-a">-a</span>变<span class="hl-a">-e</span>，<span class="hl-e">-e</span>全变<span class="hl-e">-i</span>——记住这三条，名词变数不发愁。</p></div>
+  </div>
+  <div class="section" id="sec-rules">
+    <div class="section-header"><div class="section-icon" style="background:rgba(26,115,232,0.15);">📋</div><h2 class="section-title">词尾规律一览</h2></div>
+    <div class="rule-cards">
+      <div class="rule-card"><div class="ending masc">-o → -i</div><div class="gender-label"><span class="gender-badge gender-m">阳性复数 ✅</span></div><div class="examples"><span class="example-chip speakable" onclick="playAudio('l02_libri')">libro→libri 书</span><span class="example-chip speakable" onclick="playAudio('l02_ragazzi')">ragazzo→ragazzi 男孩</span><span class="example-chip speakable" onclick="playAudio('l02_gatti')">gatto→gatti 猫</span><span class="example-chip speakable" onclick="playAudio('l02_tavoli')">tavolo→tavoli 桌子</span><span class="example-chip speakable" onclick="playAudio('l02_vini')">vino→vini 葡萄酒</span></div></div>
+      <div class="rule-card"><div class="ending fem">-a → -e</div><div class="gender-label"><span class="gender-badge gender-f">阴性复数 ✅</span></div><div class="examples"><span class="example-chip speakable" onclick="playAudio('l02_case')">casa→case 房子</span><span class="example-chip speakable" onclick="playAudio('l02_ragazze')">ragazza→ragazze 女孩</span><span class="example-chip speakable" onclick="playAudio('l02_pizze')">pizza→pizze 披萨</span><span class="example-chip speakable" onclick="playAudio('l02_macchine')">macchina→macchine 车</span><span class="example-chip speakable" onclick="playAudio('l02_scuole')">scuola→scuole 学校</span></div></div>
+      <div class="rule-card"><div class="ending both">-e → -i</div><div class="gender-label"><span class="gender-badge" style="background:rgba(124,58,237,0.15);color:var(--purple);">阴阳都可能 ✅</span></div><div class="examples"><span class="example-chip speakable" onclick="playAudio('l02_fiori')">fiore→fiori 花·阳</span><span class="example-chip speakable" onclick="playAudio('l02_chiavi')">chiave→chiavi 钥匙·阴</span><span class="example-chip speakable" onclick="playAudio('l02_cani')">cane→cani 狗·阳</span><span class="example-chip speakable" onclick="playAudio('l02_madri')">madre→madri 母亲·阴</span><span class="example-chip speakable" onclick="playAudio('l02_notti')">notte→notti 夜晚·阴</span><span class="example-chip speakable" onclick="playAudio('l02_denti')">dente→denti 牙齿·阳</span></div></div>
+      <div class="rule-card"><div class="ending fem">-ca/-ga → -che/-ghe</div><div class="gender-label"><span class="gender-badge gender-f">阴性加h保发音 ✅</span></div><div class="examples"><span class="example-chip speakable" onclick="playAudio('l02_amiche')">amica→amiche 女友</span><span class="example-chip speakable" onclick="playAudio('l02_banche')">banca→banche 银行</span><span class="example-chip speakable" onclick="playAudio('l02_colleghe')">collega→colleghe 女同事</span><span class="example-chip speakable" onclick="playAudio('l02_spiagge')">spiaggia→spiagge 海滩</span></div></div>
+      <div class="rule-card"><div class="ending both">-co/-go 特殊</div><div class="gender-label"><span class="gender-badge" style="background:rgba(124,58,237,0.15);color:var(--purple);">看重音位置 🤔</span></div><div class="examples"><span class="example-chip speakable" onclick="playAudio('l02_parchi')">parco→parchi 公园</span><span class="example-chip speakable" onclick="playAudio('l02_alberghi')">albergo→alberghi 旅馆</span><span class="example-chip speakable" onclick="playAudio('l02_medici')">medico→medici 医生</span><span class="example-chip speakable" onclick="playAudio('l02_amici')">amico→amici 朋友⚠️</span></div></div>
+    </div>
+  </div>
+  <div class="section" id="sec-traps">
+    <div class="section-header"><div class="section-icon" style="background:rgba(206,43,55,0.15);">⚠️</div><h2 class="section-title">那些容易搞混的</h2></div>
+    <div class="trap-section">
+      <div class="trap-tabs"><div class="trap-tab active" onclick="showTrap('invariant')">不变形词（单复同形）</div><div class="trap-tab" onclick="showTrap('irregular')">最常用不规则复数</div></div>
+      <div id="trap-invariant" class="trap-list">
+        <div class="trap-item" onclick="playAudio('l02_film')"><span class="article il">i</span><span class="word">film</span><span class="meaning">电影 ← 不变</span></div>
+        <div class="trap-item" onclick="playAudio('l02_bar')"><span class="article il">i</span><span class="word">bar</span><span class="meaning">酒吧 ← 不变</span></div>
+        <div class="trap-item" onclick="playAudio('l02_citta')"><span class="article la">le</span><span class="word">città</span><span class="meaning">城市 ← -à不变</span></div>
+        <div class="trap-item" onclick="playAudio('l02_caffe')"><span class="article il">i</span><span class="word">caffè</span><span class="meaning">咖啡 ← 重音不变</span></div>
+        <div class="trap-item" onclick="playAudio('l02_computer')"><span class="article il">i</span><span class="word">computer</span><span class="meaning">电脑 ← 外来词不变</span></div>
+        <div class="trap-item" onclick="playAudio('l02_universita')"><span class="article la">le</span><span class="word">università</span><span class="meaning">大学 ← -tà不变</span></div>
+      </div>
+      <div id="trap-irregular" class="trap-list" style="display:none;">
+        <div class="trap-item" onclick="playAudio('l02_uomini')"><span class="article il">gli</span><span class="word">uomini</span><span class="meaning">男人 ← uomo不规则</span></div>
+        <div class="trap-item" onclick="playAudio('l02_mani')"><span class="article la">le</span><span class="word">mani</span><span class="meaning">手 ← mano→mani</span></div>
+        <div class="trap-item" onclick="playAudio('l02_uova')"><span class="article la">le</span><span class="word">uova</span><span class="meaning">鸡蛋 ← uovo阳→阴！</span></div>
+        <div class="trap-item" onclick="playAudio('l02_braccia')"><span class="article la">le</span><span class="word">braccia</span><span class="meaning">手臂 ← -ccio→-ccia</span></div>
+        <div class="trap-item" onclick="playAudio('l02_dita')"><span class="article la">le</span><span class="word">dita</span><span class="meaning">手指 ← -to→-ta</span></div>
+        <div class="trap-item" onclick="playAudio('l02_labbra')"><span class="article la">le</span><span class="word">labbra</span><span class="meaning">嘴唇 ← -bro→-bra</span></div>
+        <div class="trap-item" onclick="playAudio('l02_ginocchia')"><span class="article la">le</span><span class="word">ginocchia</span><span class="meaning">膝盖 ← -cchio→-cchia</span></div>
+        <div class="trap-item" onclick="playAudio('l02_mila')"><span class="article il">i</span><span class="word">mila</span><span class="meaning">千 ← mille→mila</span></div>
+      </div>
+      <div class="trap-note">💡 不变形词单复同形，靠冠词区分单复数。uovo→uova 最特殊：单数阳性，复数变阴性！</div>
+    </div>
+  </div>
+  <div class="section" id="sec-dialogue">
+    <div class="section-header"><div class="section-icon" style="background:rgba(0,146,70,0.15);">🗣️</div><h2 class="section-title">在餐厅点菜</h2></div>
+    <div class="dialogue-box">
+      <div class="dialogue-line"><div class="speaker speaker-a">A</div><div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l02_dlg1')">Buonasera, cosa desiderate?</div><div class="dialogue-zh">晚上好，想点什么？</div></div><button class="play-line-btn" onclick="playAudio('l02_dlg1')">🔊</button></div>
+      <div class="dialogue-line"><div class="speaker speaker-b">B</div><div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l02_dlg2')">Vorrei due spaghetti e un'insalata.</div><div class="dialogue-zh">我要两份意面和一份沙拉</div></div><button class="play-line-btn" onclick="playAudio('l02_dlg2')">🔊</button></div>
+      <div class="dialogue-line"><div class="speaker speaker-a">A</div><div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l02_dlg3')">Perfetto. Qualcosa da bere?</div><div class="dialogue-zh">好的，喝点什么？</div></div><button class="play-line-btn" onclick="playAudio('l02_dlg3')">🔊</button></div>
+      <div class="dialogue-line"><div class="speaker speaker-b">B</div><div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l02_dlg4')">Due bicchieri di vino rosso.</div><div class="dialogue-zh">两杯红葡萄酒</div></div><button class="play-line-btn" onclick="playAudio('l02_dlg4')">🔊</button></div>
+      <div class="dialogue-line"><div class="speaker speaker-a">A</div><div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l02_dlg5')">Subito!</div><div class="dialogue-zh">马上就来！</div></div><button class="play-line-btn" onclick="playAudio('l02_dlg5')">🔊</button></div>
+      <div style="text-align:center;margin-top:16px;"><button class="nav-btn" onclick="playAudio('l02_dlg_full')" style="padding:10px 24px;">🔊 播放整段对话</button></div>
+    </div>
+  </div>
+  <div class="section" id="sec-principle">
+    <div class="principle-card">
+      <div class="icon">🔑</div>
+      <p class="text">先掌握规则变化，再记住5个最常用不规则复数！</p>
+      <div class="examples-row">
+        <div class="example-pair"><span class="good speakable" onclick="playAudio('l02_uomini')">✅ gli uomini</span><span class="bad">❌ i uomos</span></div>
+        <div class="example-pair"><span class="good speakable" onclick="playAudio('l02_mani')">✅ le mani</span><span class="bad">❌ le manos</span></div>
+        <div class="example-pair"><span class="good speakable" onclick="playAudio('l02_uova')">✅ le uova</span><span class="bad">❌ i uovi</span></div>
+        <div class="example-pair"><span class="good speakable" onclick="playAudio('l02_amiche')">✅ le amiche</span><span class="bad">❌ le amice</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="section" id="sec-flashcard">
+    <div class="section-header"><div class="section-icon" style="background:rgba(124,58,237,0.15);">🃏</div><h2 class="section-title">闪卡练习 — 点击翻转</h2></div>
+    <div class="flashcard-area">
+      <div class="flashcard" id="flashcard" onclick="flipCard()"><div class="flashcard-inner" id="flashcardInner"><div class="flashcard-front"><div class="front-word" id="fcWord">libro</div><div class="front-hint">点击查看复数</div></div><div class="flashcard-back"><div class="back-article" id="fcArticle" style="color:var(--blue)">i</div><div class="back-word" id="fcFullWord">libri</div><div class="back-meaning" id="fcMeaning">书 · 阳性复数</div></div></div></div>
+      <div class="flashcard-nav"><button onclick="prevCard()">← 上一个</button><span class="flashcard-counter" id="fcCounter">1 / 20</span><button onclick="nextCard()">下一个 →</button></div>
+      <button class="nav-btn" onclick="speakCurrentCard()" style="margin-top:4px;">🔊 听发音</button>
+    </div>
+  </div>
+  <div class="section quiz-section" id="sec-quiz">
+    <div class="section-header"><div class="section-icon" style="background:rgba(232,113,10,0.15);">📝</div><h2 class="section-title">小测验 — 写出复数形式</h2></div>
+    <div class="quiz-mode-tabs"><div class="quiz-mode-tab active" onclick="switchQuizMode('basic', this)">🟢 规则变化</div><div class="quiz-mode-tab" onclick="switchQuizMode('special', this)">🔴 特殊变化</div><div class="quiz-mode-tab" onclick="switchQuizMode('all', this)">🟣 全部</div></div>
+    <div class="quiz-header-bar"><div class="quiz-counter">已答 <strong id="answeredCount">0</strong> / <span id="totalCount">20</span></div><button class="nav-btn" onclick="resetQuiz()">🔄 重来</button></div>
+    <div id="quizContainer"></div>
+    <div class="scoreboard" id="scoreboard" style="display:none;"><div class="score-display" id="scoreValue">0</div><div class="score-label">测验得分</div><div class="score-rank" id="scoreRank"></div><button class="nav-btn" onclick="resetQuiz()" style="margin-top:16px;">🔄 重新测验</button></div>
+  </div>
+</div>
+<div class="footer">
+  <div class="footer-nav"><a class="nav-btn" href="index.html">🏠 返回导航页</a><a class="nav-btn" href="lezione01-genere-sostantivi.html">◀ 上一课</a><a class="nav-btn" href="lezione03-articoli.html">下一课 ▶</a></div>
+  <p><span class="it-flag"></span> 意大利语语法实战课程 · 第2课 · 名词的数</p>
+</div>
+<script src="audio_data.js"></script>
+<script>
+window.addEventListener('load',function(){if(typeof AUDIO_DATA==='undefined')console.warn('audio_data.js not loaded');});
+function showTrap(type){document.getElementById('trap-invariant').style.display=type==='invariant'?'grid':'none';document.getElementById('trap-irregular').style.display=type==='irregular'?'grid':'none';document.querySelectorAll('.trap-tab').forEach((t,i)=>{t.classList.toggle('active',(i===0&&type==='invariant')||(i===1&&type==='irregular'));});}
+const flashcards=[
+  {word:'libro',plural:'libri',article:'i',gender:'阳性',meaning:'书',artColor:'var(--blue)',audio:'l02_libri'},
+  {word:'casa',plural:'case',article:'le',gender:'阴性',meaning:'房子',artColor:'var(--orange)',audio:'l02_case'},
+  {word:'ragazzo',plural:'ragazzi',article:'i',gender:'阳性',meaning:'男孩',artColor:'var(--blue)',audio:'l02_ragazzi'},
+  {word:'ragazza',plural:'ragazze',article:'le',gender:'阴性',meaning:'女孩',artColor:'var(--orange)',audio:'l02_ragazze'},
+  {word:'gatto',plural:'gatti',article:'i',gender:'阳性',meaning:'猫',artColor:'var(--blue)',audio:'l02_gatti'},
+  {word:'pizza',plural:'pizze',article:'le',gender:'阴性',meaning:'披萨',artColor:'var(--orange)',audio:'l02_pizze'},
+  {word:'fiore',plural:'fiori',article:'i',gender:'阳性',meaning:'花',artColor:'var(--blue)',audio:'l02_fiori'},
+  {word:'chiave',plural:'chiavi',article:'le',gender:'阴性',meaning:'钥匙',artColor:'var(--orange)',audio:'l02_chiavi'},
+  {word:'cane',plural:'cani',article:'i',gender:'阳性',meaning:'狗',artColor:'var(--blue)',audio:'l02_cani'},
+  {word:'notte',plural:'notti',article:'le',gender:'阴性',meaning:'夜晚',artColor:'var(--orange)',audio:'l02_notti'},
+  {word:'amica',plural:'amiche',article:'le',gender:'阴性',meaning:'女朋友（+h保音）',artColor:'var(--orange)',audio:'l02_amiche'},
+  {word:'banca',plural:'banche',article:'le',gender:'阴性',meaning:'银行（+h保音）',artColor:'var(--orange)',audio:'l02_banche'},
+  {word:'parco',plural:'parchi',article:'i',gender:'阳性',meaning:'公园（+h保音）',artColor:'var(--blue)',audio:'l02_parchi'},
+  {word:'medico',plural:'medici',article:'i',gender:'阳性',meaning:'医生（重音远→ci）',artColor:'var(--blue)',audio:'l02_medici'},
+  {word:'uomo',plural:'uomini',article:'gli',gender:'阳性',meaning:'男人（不规则！）',artColor:'var(--blue)',audio:'l02_uomini'},
+  {word:'mano',plural:'mani',article:'le',gender:'阴性',meaning:'手（不规则！）',artColor:'var(--orange)',audio:'l02_mani'},
+  {word:'uovo',plural:'uova',article:'le',gender:'阳→阴！',meaning:'鸡蛋（性变了！）',artColor:'var(--purple)',audio:'l02_uova'},
+  {word:'dito',plural:'dita',article:'le',gender:'阳→阴！',meaning:'手指（不规则！）',artColor:'var(--purple)',audio:'l02_dita'},
+  {word:'città',plural:'città',article:'le',gender:'阴性',meaning:'城市（不变！）',artColor:'var(--orange)',audio:'l02_citta'},
+  {word:'caffè',plural:'caffè',article:'i',gender:'阳性',meaning:'咖啡（不变！）',artColor:'var(--blue)',audio:'l02_caffe'},
+];
+let fcIndex=0;
+function updateFlashcard(){const c=flashcards[fcIndex];document.getElementById('fcWord').textContent=c.word;document.getElementById('fcArticle').textContent=c.article;document.getElementById('fcArticle').style.color=c.artColor;document.getElementById('fcFullWord').textContent=c.plural;document.getElementById('fcMeaning').textContent=c.meaning+' · '+c.gender+'复数';document.getElementById('fcCounter').textContent=(fcIndex+1)+' / '+flashcards.length;document.getElementById('flashcard').classList.remove('flipped');}
+function flipCard(){document.getElementById('flashcard').classList.toggle('flipped');const c=flashcards[fcIndex];playAudio(c.audio);}
+function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
+function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
+function speakCurrentCard(){const c=flashcards[fcIndex];playAudio(c.audio);}
+const quizBank={
+  basic:[
+    {word:'libro',answer:'libri',options:['libri','libre','libra','libro'],hint:'libro → libri（-o→-i）',audio:'l02_libri'},
+    {word:'casa',answer:'case',options:['casi','case','casa','cashe'],hint:'casa → case（-a→-e）',audio:'l02_case'},
+    {word:'ragazzo',answer:'ragazzi',options:['ragazzi','ragazze','ragazzhi','ragazzo'],hint:'ragazzo → ragazzi（-o→-i）',audio:'l02_ragazzi'},
+    {word:'ragazza',answer:'ragazze',options:['ragazzi','ragazze','ragazzhe','ragazza'],hint:'ragazza → ragazze（-a→-e）',audio:'l02_ragazze'},
+    {word:'gatto',answer:'gatti',options:['gatte','gatti','gattie','gatto'],hint:'gatto → gatti（-o→-i）',audio:'l02_gatti'},
+    {word:'pizza',answer:'pizze',options:['pizzi','pizze','pizzhe','pizza'],hint:'pizza → pizze（-a→-e）',audio:'l02_pizze'},
+    {word:'fiore',answer:'fiori',options:['fiore','fiore','fiori','fiora'],hint:'fiore → fiori（-e→-i）',audio:'l02_fiori'},
+    {word:'chiave',answer:'chiavi',options:['chiave','chiavi','chiavie','chiava'],hint:'chiave → chiavi（-e→-i）',audio:'l02_chiavi'},
+    {word:'cane',answer:'cani',options:['cane','cani','canie','cana'],hint:'cane → cani（-e→-i）',audio:'l02_cani'},
+    {word:'notte',answer:'notti',options:['notti','notte','notta','notta'],hint:'notte → notti（-e→-i）',audio:'l02_notti'},
+    {word:'tavolo',answer:'tavoli',options:['tavoli','tavole','tavola','tavolie'],hint:'tavolo → tavoli（-o→-i）',audio:'l02_tavoli'},
+    {word:'scuola',answer:'scuole',options:['scuoli','scuole','scuolie','scuola'],hint:'scuola → scuole（-a→-e）',audio:'l02_scuole'},
+    {word:'macchina',answer:'macchine',options:['macchine','macchini','macchina','macchinie'],hint:'macchina → macchine（-a→-e）',audio:'l02_macchine'},
+    {word:'dente',answer:'denti',options:['dente','denti','dentie','denta'],hint:'dente → denti（-e→-i）',audio:'l02_denti'},
+    {word:'madre',answer:'madri',options:['madre','madri','madra','madrie'],hint:'madre → madri（-e→-i）',audio:'l02_madri'},
+    {word:'vino',answer:'vini',options:['vini','vine','vina','vino'],hint:'vino → vini（-o→-i）',audio:'l02_vini'},
+    {word:'sorella',answer:'sorelle',options:['sorelli','sorelle','sorellie','sorella'],hint:'sorella → sorelle（-a→-e）',audio:'l02_sorelle'},
+    {word:'bicchiere',answer:'bicchieri',options:['bicchiere','bicchieri','bicchiera','biccherie'],hint:'bicchiere → bicchieri（-e→-i）',audio:'l02_bicchieri'},
+    {word:'letto',answer:'letti',options:['letti','lette','letto','lettie'],hint:'letto → letti（-o→-i）',audio:'l02_letti'},
+    {word:'penna',answer:'penne',options:['penni','penne','penna','pennie'],hint:'penna → penne（-a→-e）',audio:'l02_penne'},
+  ],
+  special:[
+    {word:'amica',answer:'amiche',options:['amice','amiche','amichi','amica'],hint:'amica → amiche（-ca→-che，加h保音！）',audio:'l02_amiche'},
+    {word:'banca',answer:'banche',options:['bance','banche','banchi','banca'],hint:'banca → banche（-ca→-che，加h保音！）',audio:'l02_banche'},
+    {word:'spiaggia',answer:'spiagge',options:['spiaggie','spiagge','spiaggi','spiaggia'],hint:'spiaggia → spiagge（-ggia→-gge，去i！）',audio:'l02_spiagge'},
+    {word:'parco',answer:'parchi',options:['parci','parchi','parce','parco'],hint:'parco → parchi（-co倒数第二音重读→-chi）',audio:'l02_parchi'},
+    {word:'medico',answer:'medici',options:['medichi','medici','medice','medico'],hint:'medico → medici（-co倒数第三音重读→-ci）',audio:'l02_medici'},
+    {word:'amico',answer:'amici',options:['amichi','amici','amice','amico'],hint:'amico → amici（例外！发音变了）',audio:'l02_amici'},
+    {word:'uomo',answer:'uomini',options:['uomi','uomini','uomo','uoma'],hint:'uomo → uomini（完全不规则！）',audio:'l02_uomini'},
+    {word:'mano',answer:'mani',options:['mani','mane','mano','mane'],hint:'mano → mani（-o→-i，但阴性！）',audio:'l02_mani'},
+    {word:'uovo',answer:'uova',options:['uovi','uova','uove','uovo'],hint:'uovo → uova（阳→阴！最特殊！）',audio:'l02_uova'},
+    {word:'braccio',answer:'braccia',options:['bracci','braccia','bracce','braccio'],hint:'braccio → braccia（-ccio→-ccia）',audio:'l02_braccia'},
+    {word:'dito',answer:'dita',options:['diti','dita','dite','dito'],hint:'dito → dita（-to→-ta，复数变阴性！）',audio:'l02_dita'},
+    {word:'labbro',answer:'labbra',options:['labbri','labbra','labbe','labbro'],hint:'labbro → labbra（-bro→-bra）',audio:'l02_labbra'},
+    {word:'città',answer:'città',options:['cittài','città','cittate','cittàs'],hint:'città → città（-à结尾不变！）',audio:'l02_citta'},
+    {word:'caffè',answer:'caffè',options:['caffèi','caffè','caffèe','caffés'],hint:'caffè → caffè（重音结尾不变！）',audio:'l02_caffe'},
+    {word:'film',answer:'film',options:['films','film','filmi','filme'],hint:'film → film（外来词不变！）',audio:'l02_film'},
+    {word:'mille',answer:'mila',options:['mille','mili','mila','milla'],hint:'mille → mila（不规则！）',audio:'l02_mila'},
+    {word:'collega',answer:'colleghe',options:['colleghe','collegi','college','collega'],hint:'collega(f) → colleghe（-ga→-ghe）',audio:'l02_colleghe'},
+    {word:'albergo',answer:'alberghi',options:['alberghi','albergi','alberge','albergo'],hint:'albergo → alberghi（-go→-ghi）',audio:'l02_alberghi'},
+    {word:'ginocchio',answer:'ginocchia',options:['ginocchi','ginocchia','ginocche','ginocchio'],hint:'ginocchio → ginocchia（-cchio→-cchia）',audio:'l02_ginocchia'},
+    {word:'computer',answer:'computer',options:['computers','computer','computeri','computere'],hint:'computer → computer（外来词不变！）',audio:'l02_computer'},
+  ]
+};
+let currentMode='basic';let currentQuizData=[];let quizScore=0;let quizAnswered=0;
+function switchQuizMode(mode,tabEl){currentMode=mode;document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));if(tabEl)tabEl.classList.add('active');resetQuiz();}
+function getQuizData(){let pool;if(currentMode==='basic')pool=quizBank.basic;else if(currentMode==='special')pool=quizBank.special;else pool=[...quizBank.basic,...quizBank.special];const shuffled=[...pool].sort(()=>Math.random()-0.5);return shuffled.slice(0,20);}
+function buildQuiz(){const container=document.getElementById('quizContainer');container.innerHTML='';currentQuizData=getQuizData();document.getElementById('totalCount').textContent=currentQuizData.length;currentQuizData.forEach((q,i)=>{const card=document.createElement('div');card.className='quiz-card';card.id='quiz-'+i;const shuffledOpts=[...q.options].sort(()=>Math.random()-0.5);card.innerHTML=`<div class="quiz-question"><span class="quiz-word">${q.word}</span> 的复数是？</div><div class="quiz-options">${shuffledOpts.map(opt=>`<div class="quiz-option" onclick="checkAnswer(${i},'${opt.replace(/'/g,"\\'")}')">${opt}</div>`).join('')}</div><div class="quiz-feedback" id="fb-${i}"></div>`;container.appendChild(card);});}
+function checkAnswer(idx,chosen){const q=currentQuizData[idx];const card=document.getElementById('quiz-'+idx);const options=card.querySelectorAll('.quiz-option');const fb=document.getElementById('fb-'+idx);if(options[0].classList.contains('answered'))return;options.forEach(o=>o.classList.add('answered'));if(chosen===q.answer){quizScore++;options.forEach(o=>{if(o.textContent===q.answer)o.classList.add('correct');});fb.className='quiz-feedback show right';fb.textContent='✅ 正确！'+q.hint;playAudio(q.audio);}else{options.forEach(o=>{if(o.textContent===q.answer)o.classList.add('correct');if(o.textContent===chosen)o.classList.add('wrong');});fb.className='quiz-feedback show wrong-fb';fb.textContent='❌ 正确答案是 '+q.answer+'：'+q.hint;playAudio(q.audio);}quizAnswered++;document.getElementById('answeredCount').textContent=quizAnswered;updateProgress();if(quizAnswered===currentQuizData.length){setTimeout(()=>{const sb=document.getElementById('scoreboard');sb.style.display='block';document.getElementById('scoreValue').textContent=quizScore+' / '+currentQuizData.length;const pct=quizScore/currentQuizData.length;let rank='';if(pct>=0.95)rank='🏆 完美！你是名词变数大师！';else if(pct>=0.85)rank='🌟 优秀！基本掌握了！';else if(pct>=0.70)rank='👍 不错！再练练特殊变化！';else if(pct>=0.50)rank='💪 加油！多翻翻闪卡！';else rank='📖 别气馁，回去复习词尾规律吧！';document.getElementById('scoreRank').textContent=rank;scrollToSection('scoreboard');},500);}}
+function resetQuiz(){quizScore=0;quizAnswered=0;document.getElementById('scoreboard').style.display='none';document.getElementById('answeredCount').textContent='0';buildQuiz();updateProgress();}
+function updateProgress(){const total=currentQuizData.length||1;const done=quizAnswered/total;document.getElementById('progressFill').style.width=(done*100)+'%';}
+function scrollToSection(id){const el=document.getElementById('sec-'+id)||document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
+document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+buildQuiz();updateFlashcard();
+</script>
+</body>
+</html>
