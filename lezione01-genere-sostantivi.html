@@ -1248,6 +1248,10 @@ document.querySelectorAll('.section').forEach(s => observer.observe(s));
 
 // ===== 初始化 =====
 requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
+// 桌面端自动加载音频（手机端点击播放时才加载）
+if (!/Mobi|Android|iPhone|iPad|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+  loadAudioScript();
+}
 </script>
 
 </body>
