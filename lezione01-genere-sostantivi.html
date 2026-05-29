@@ -940,8 +940,6 @@ function loadAudioScript() {
   });
   return _audioPromise;
 }
-setTimeout(loadAudioScript, 500);
-
 // ===== 音频播放 =====
 let _audioEl = null;
 function playAudio(key) {
@@ -1249,8 +1247,7 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.section').forEach(s => observer.observe(s));
 
 // ===== 初始化 =====
-buildQuiz();
-updateFlashcard();
+requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
 </script>
 
 </body>

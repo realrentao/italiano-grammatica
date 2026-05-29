@@ -1052,8 +1052,6 @@ function loadAudioScript() {
   });
   return _audioPromise;
 }
-setTimeout(loadAudioScript, 500);
-
 // ===== 音频播放 =====
 let _audioEl = null;
 function playAudio(key) {
@@ -1329,8 +1327,7 @@ document.querySelectorAll('.section').forEach(s=>observer.observe(s));
 setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);
 
 // ===== 初始化 =====
-buildQuiz();
-updateFlashcard();
+requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
 </script>
 
 </body>
