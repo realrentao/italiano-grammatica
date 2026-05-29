@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>第4课 · 形容词 — 意大利语语法实战</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap');
 
     :root {
       --green: #009246;
@@ -554,6 +556,50 @@
       .flashcard { width: 260px; height: 180px; }
       .principle-card .examples-row { gap: 12px; }
     }
+    .quiz-card-header {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 8px;
+    }
+    .quiz-type-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .quiz-sentence {
+      font-size: 18px;
+      line-height: 1.6;
+      padding: 12px 16px;
+      background: #f9f7f2;
+      border-radius: 10px;
+      border: 1px solid #e8e0d4;
+      margin-bottom: 4px;
+      font-family: 'Georgia','Times New Roman',serif;
+    }
+    .quiz-sentence-hint {
+      font-size: 13px;
+      color: #888;
+      margin-top: 4px;
+    }
+    .quiz-blank {
+      display: inline-block;
+      min-width: 60px;
+      border-bottom: 2px dashed #ce2b37;
+      color: #ce2b37;
+      font-weight: 700;
+    }
+    .quiz-option-tf {
+      min-width: 80px;
+      text-align: center;
+      font-weight: 600;
+    }
+    .quiz-option-tf:nth-child(1) { border-color: #4caf50; color: #2e7d32; }
+    .quiz-option-tf:nth-child(2) { border-color: #f44336; color: #c62828; }
+    .quiz-option-tf.correct:nth-child(1) { background: #c8e6c9; border-color: #4caf50; }
+    .quiz-option-tf.correct:nth-child(2) { background: #ffcdd2; border-color: #f44336; }
   </style>
 </head>
 <body>
@@ -992,21 +1038,38 @@
   <p><span class="it-flag"></span> 意大利语语法实战课程 · 第4课 · 形容词</p>
 </div>
 
-<script src="audio_l04.js?v=1"></script>
 <script>
+// ===== 音频按需加载（后台预加载，不阻塞首屏）=====
+var _audioLoaded = false;
+var _audioPromise = null;
+function loadAudioScript() {
+  if (_audioPromise) return _audioPromise;
+  _audioPromise = new Promise(function(resolve) {
+    var s = document.createElement('script');
+    s.src = 'audio_l04.js?v=2';
+    s.onload = function() { _audioLoaded = true; resolve(); };
+    document.head.appendChild(s);
+  });
+  return _audioPromise;
+}
+setTimeout(loadAudioScript, 500);
+
 // ===== 音频播放 =====
 let _audioEl = null;
 function playAudio(key) {
-  if (typeof AUDIO_DATA === 'undefined' || !AUDIO_DATA[key]) {
-    showToast('音频数据加载中，请稍候...');
-    return;
+  if (_audioLoaded && typeof AUDIO_DATA !== 'undefined' && AUDIO_DATA[key]) {
+    if (!_audioEl) _audioEl = new Audio();
+    _audioEl.pause();
+    _audioEl.src = AUDIO_DATA[key];
+    _audioEl.play().catch(function(e) {
+      showToast('请先点击页面任意位置，再试一次 🔊');
+    });
+  } else {
+    showToast('正在加载音频...');
+    loadAudioScript().then(function() {
+      playAudio(key);
+    });
   }
-  if (!_audioEl) _audioEl = new Audio();
-  _audioEl.pause();
-  _audioEl.src = AUDIO_DATA[key];
-  _audioEl.play().catch(function(e) {
-    showToast('请先点击页面任意位置，再试一次 🔊');
-  });
 }
 
 // ===== Toast 提示 =====
@@ -1018,13 +1081,6 @@ function showToast(msg) {
   requestAnimationFrame(function() { t.style.opacity = '1'; });
   setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2500);
 }
-
-// ===== 音频加载检测 =====
-window.addEventListener('load', function() {
-  if (typeof AUDIO_DATA === 'undefined') {
-    showToast('音频文件加载中，请刷新页面重试');
-  }
-});
 
 // ===== 例外词切换 =====
 function showTrap(type) {
@@ -1279,49 +1335,3 @@ updateFlashcard();
 
 </body>
 </html>
-.quiz-card-header {
-  display: flex; align-items: center; gap: 8px;
-  margin-bottom: 8px;
-}
-.quiz-type-badge {
-  display: inline-block;
-  padding: 2px 10px;
-  border-radius: 999px;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-.quiz-sentence {
-  font-size: 18px;
-  line-height: 1.6;
-  padding: 12px 16px;
-  background: #f9f7f2;
-  border-radius: 10px;
-  border: 1px solid #e8e0d4;
-  margin-bottom: 4px;
-  font-family: 'Georgia','Times New Roman',serif;
-}
-.quiz-sentence-hint {
-  font-size: 13px;
-  color: #888;
-  margin-top: 4px;
-}
-.quiz-blank {
-  display: inline-block;
-  min-width: 60px;
-  border-bottom: 2px dashed #ce2b37;
-  color: #ce2b37;
-  font-weight: 700;
-}
-.quiz-option-tf {
-  min-width: 80px;
-  text-align: center;
-  font-weight: 600;
-}
-.quiz-option-tf:nth-child(1) { border-color: #4caf50; color: #2e7d32; }
-.quiz-option-tf:nth-child(2) { border-color: #f44336; color: #c62828; }
-.quiz-option-tf.correct:nth-child(1) { background: #c8e6c9; border-color: #4caf50; }
-.quiz-option-tf.correct:nth-child(2) { background: #ffcdd2; border-color: #f44336; }
-
-
