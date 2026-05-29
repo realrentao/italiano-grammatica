@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>第1课 · 名词的性 — 意大利语语法实战</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap');
 
     :root {
       --green: #009246;
@@ -924,22 +926,38 @@
 </div>
 
 <!-- 音频数据：base64编码，第1课独立JS文件 -->
-<script src="audio_l01.js?v=2"></script>
 <script>
+// ===== 音频按需加载（后台预加载，不阻塞首屏）=====
+var _audioLoaded = false;
+var _audioPromise = null;
+function loadAudioScript() {
+  if (_audioPromise) return _audioPromise;
+  _audioPromise = new Promise(function(resolve) {
+    var s = document.createElement('script');
+    s.src = 'audio_l01.js?v=2';
+    s.onload = function() { _audioLoaded = true; resolve(); };
+    document.head.appendChild(s);
+  });
+  return _audioPromise;
+}
+setTimeout(loadAudioScript, 500);
+
 // ===== 音频播放 =====
 let _audioEl = null;
 function playAudio(key) {
-  if (typeof AUDIO_DATA === 'undefined' || !AUDIO_DATA[key]) {
-    showToast('音频数据加载中，请稍候...');
-    return;
+  if (_audioLoaded && typeof AUDIO_DATA !== 'undefined' && AUDIO_DATA[key]) {
+    if (!_audioEl) _audioEl = new Audio();
+    _audioEl.pause();
+    _audioEl.src = AUDIO_DATA[key];
+    _audioEl.play().catch(function(e) {
+      showToast('请先点击页面任意位置，再试一次 🔊');
+    });
+  } else {
+    showToast('正在加载音频...');
+    loadAudioScript().then(function() {
+      playAudio(key);
+    });
   }
-  if (!_audioEl) _audioEl = new Audio();
-  _audioEl.pause();
-  _audioEl.src = AUDIO_DATA[key];
-  _audioEl.play().catch(function(e) {
-    // 浏览器自动播放策略阻止时，提示用户手动触发
-    showToast('请先点击页面任意位置，再试一次 🔊');
-  });
 }
 
 // ===== Toast 提示 =====
@@ -952,12 +970,6 @@ function showToast(msg) {
   setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2500);
 }
 
-// ===== 音频加载检测 =====
-window.addEventListener('load', function() {
-  if (typeof AUDIO_DATA === 'undefined') {
-    showToast('⚠️ 音频文件加载中，请刷新页面重试');
-  }
-});
 </script>
 <script>
 
