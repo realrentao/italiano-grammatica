@@ -542,6 +542,7 @@
       .principle-card .examples-row { gap: 12px; }
     }
   </style>
+  <link rel="prefetch" href="audio_l01.js?v=3">
 </head>
 <body>
 
@@ -1252,7 +1253,15 @@ document.querySelectorAll('.section').forEach(s => observer.observe(s));
 
 // ===== 初始化 =====
 requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
-// 音频按需加载：首次点击发音时自动加载 audio_l01.js，之后零延迟
+// prefetch 后台下载 + idle 闲时解析：零卡顿 + 零延迟
+(function() {
+  function tryLoad() { loadAudioScript(); }
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(tryLoad, { timeout: 4000 });
+  } else {
+    setTimeout(tryLoad, 2500);
+  }
+})();
 </script>
 
 </body>
