@@ -617,7 +617,7 @@
   <div class="nav-btns">
     <a class="nav-btn" href="index.html">🏠 导航</a>
     <a class="nav-btn" href="lezione03-articoli.html">◀ 上一课</a>
-    <a class="nav-btn" class="lesson-nav-disabled">下一课 ▶</a>
+    <a class="nav-btn lesson-nav-disabled">下一课 ▶</a>
     <button class="nav-btn" onclick="scrollToSection('quiz')">📝 测验</button>
     <button class="nav-btn" onclick="playAudio('l04_title')">🔊 课名</button>
   </div>
@@ -753,7 +753,7 @@
   </div>
 
   <!-- 规律：两尾形容词 -->
-  <div class="section">
+  <div class="section" id="sec-due">
     <div class="section-header">
       <div class="section-icon" style="background:rgba(26,115,232,0.15);">📋</div>
       <h2 class="section-title">两尾形容词 <span style="color:var(--text-dim);font-size:16px;font-weight:400;">-e → -i，不分阴阳</span></h2>
@@ -1034,7 +1034,7 @@
   <div class="footer-nav">
     <a class="nav-btn" href="index.html">🏠 返回导航页</a>
     <a class="nav-btn" href="lezione03-articoli.html">◀ 上一课</a>
-    <a class="nav-btn" class="lesson-nav-disabled">下一课 ▶</a>
+    <a class="nav-btn lesson-nav-disabled">下一课 ▶</a>
   </div>
   <p><span class="it-flag"></span> 意大利语语法实战课程 · 第4课 · 形容词</p>
 </div>
@@ -1055,10 +1055,8 @@ function loadAudioScript() {
 }
 // ===== 音频播放 =====
 let _audioEl = null;
-let _toastTimer = null;
 function playAudio(key) {
   if (!_audioLoaded || typeof AUDIO_DATA === 'undefined') {
-    // 音频尚未加载完毕 - 触发加载，加载完后自动播放
     showToast('正在加载音频...');
     loadAudioScript().then(function() {
       playAudio(key);
