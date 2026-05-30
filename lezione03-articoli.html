@@ -537,7 +537,6 @@
       .principle-card .examples-row { gap: 12px; }
     }
   </style>
-  <link rel="preload" href="audio_l03.js?v=2" as="script">
 </head>
 <body>
 
@@ -1130,23 +1129,7 @@ setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEac
 
 // ===== 初始化 =====
 requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
-// ===== 音频加载策略 =====
-// 桌面端：preload 预加载 + 动态注入（不阻塞渲染，文件已在缓存中瞬时执行）
-// 手机端：异步加载（动态创建 script 标签，不阻塞页面渲染，适配苹果/安卓）
-// 不使用懒加载：音频在页面加载时即开始加载，不等待用户点击
-(function() {
-  var isMobile = /Mobi|Android|iPhone|iPad|webOS|BlackBerry|IEMobile|Opera Mini|XiaoMi|HUAWEI|MiuiBrowser/i.test(navigator.userAgent);
-  if (isMobile) {
-    // 手机端：异步加载，不阻塞页面渲染
-    loadAudioScript();
-  } else {
-    // 桌面端：利用 <link rel=preload> 预加载缓存，动态注入脚本不阻塞渲染
-    var s = document.createElement('script');
-    s.src = 'audio_l03.js?v=2';
-    s.onload = function() { _audioLoaded = true; _audioPromise = Promise.resolve(); };
-    document.head.appendChild(s);
-  }
-})();
+// 音频按需加载：首次点击发音时自动加载 audio_l03.js，之后零延迟
 </script>
 
 </body>
