@@ -8,145 +8,1257 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap">
   <style>
-    :root { --green: #009246; --white: #f8f9fa; --red: #ce2b37; --blue: #1a73e8; --orange: #e8710a; --purple: #7c3aed; --bg: #f5f0e8; --card: #ffffff; --card-hover: #f0ebe3; --text: #2c2c2c; --text-dim: #6b6b6b; --border: #ddd5c8; --radius: 16px; --shadow: 0 4px 24px rgba(0,0,0,0.06); }
+
+    :root {
+      --green: #009246;
+      --white: #f8f9fa;
+      --red: #ce2b37;
+      --blue: #1a73e8;
+      --orange: #e8710a;
+      --purple: #7c3aed;
+      --bg: #f5f0e8;
+      --card: #ffffff;
+      --card-hover: #f0ebe3;
+      --text: #2c2c2c;
+      --text-dim: #6b6b6b;
+      --border: #ddd5c8;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -apple-system, sans-serif; line-height: 1.7; overflow-x: hidden; }
-    .top-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245,240,232,0.88); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; }
-    .top-bar .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; }
-    .flag-stripe { width: 36px; height: 24px; border-radius: 4px; background: linear-gradient(to bottom, var(--green) 33%, var(--white) 33% 66%, var(--red) 66%); }
-    .progress-bar { height: 3px; background: var(--border); border-radius: 2px; width: 200px; }
-    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--red)); border-radius: 2px; transition: width 0.5s ease; width: 0%; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans SC', -apple-system, sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ===== 顶部导航 ===== */
+    .top-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(245,240,232,0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .top-bar .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 16px;
+    }
+    .flag-stripe {
+      width: 36px; height: 24px; border-radius: 4px;
+      background: linear-gradient(to bottom, var(--green) 33%, var(--white) 33% 66%, var(--red) 66%);
+    }
+    .progress-bar {
+      height: 3px; background: var(--border); border-radius: 2px; width: 200px;
+    }
+    .progress-fill {
+      height: 100%; background: linear-gradient(90deg, var(--green), var(--red));
+      border-radius: 2px; transition: width 0.5s ease; width: 0%;
+    }
     .nav-btns { display: flex; gap: 8px; }
-    .nav-btn { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 13px; transition: all 0.2s; text-decoration: none; display: inline-flex; align-items: center; font-family: inherit; }
+    .nav-btn {
+      background: var(--card); border: 1px solid var(--border);
+      color: var(--text); padding: 6px 14px; border-radius: 8px;
+      cursor: pointer; font-size: 13px; transition: all 0.2s;
+      text-decoration: none; display: inline-flex; align-items: center;
+      font-family: inherit;
+    }
     .nav-btn:hover { background: var(--card-hover); border-color: var(--blue); }
-    .lesson-nav-disabled { opacity: 0.35; pointer-events: none; cursor: default; text-decoration: none; }
-    .container { max-width: 860px; margin: 0 auto; padding: 80px 20px 60px; }
-    .hero { text-align: center; padding: 60px 20px 40px; position: relative; }
-    .hero::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(0,146,70,0.08), rgba(206,43,55,0.06), transparent 70%); pointer-events: none; }
-    .lesson-badge { display: inline-block; padding: 6px 16px; border-radius: 20px; background: rgba(0,146,70,0.15); color: var(--green); font-size: 13px; font-weight: 500; margin-bottom: 20px; border: 1px solid rgba(0,146,70,0.3); }
-    .hero h1 { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 700; margin-bottom: 8px; background: linear-gradient(135deg, #2c2c2c 40%, var(--green) 70%, var(--red)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .hero .subtitle { font-size: 18px; color: var(--text-dim); margin-bottom: 24px; }
-    .hero .hint { display: inline-flex; align-items: center; gap: 8px; background: var(--card); padding: 10px 20px; border-radius: 12px; border: 1px solid var(--border); font-size: 14px; color: var(--text-dim); }
+    .lesson-nav-disabled {
+      opacity: 0.35; pointer-events: none; cursor: default;
+      text-decoration: none;
+    }
+
+    /* ===== 主体 ===== */
+    .container {
+      max-width: 860px; margin: 0 auto;
+      padding: 80px 20px 60px;
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      text-align: center; padding: 60px 20px 40px;
+      position: relative;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,146,70,0.08), rgba(206,43,55,0.06), transparent 70%);
+      pointer-events: none;
+    }
+    .lesson-badge {
+      display: inline-block; padding: 6px 16px; border-radius: 20px;
+      background: rgba(0,146,70,0.15); color: var(--green);
+      font-size: 13px; font-weight: 500; margin-bottom: 20px;
+      border: 1px solid rgba(0,146,70,0.3);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px; font-weight: 700; margin-bottom: 8px;
+      background: linear-gradient(135deg, #2c2c2c 40%, var(--green) 70%, var(--red));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero .subtitle {
+      font-size: 18px; color: var(--text-dim); margin-bottom: 24px;
+    }
+    .hero .hint {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--card); padding: 10px 20px; border-radius: 12px;
+      border: 1px solid var(--border); font-size: 14px; color: var(--text-dim);
+    }
     .hero .hint .icon { font-size: 20px; }
-    .voice-badge { display: inline-block; padding: 4px 10px; border-radius: 6px; background: rgba(0,146,70,0.12); color: var(--green); font-size: 12px; font-weight: 600; margin-top: 8px; }
-    .section { margin-top: 48px; opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+    .voice-badge {
+      display: inline-block; padding: 4px 10px; border-radius: 6px;
+      background: rgba(0,146,70,0.12); color: var(--green);
+      font-size: 12px; font-weight: 600; margin-top: 8px;
+    }
+
+    /* ===== 区块标题 ===== */
+    .section {
+      margin-top: 48px;
+      opacity: 0; transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
     .section.visible { opacity: 1; transform: translateY(0); }
-    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-    .section-icon { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
-    .section-title { font-size: 22px; font-weight: 700; }
-    .speakable { cursor: pointer; position: relative; border-bottom: 1px dashed rgba(0,0,0,0.15); transition: all 0.2s; }
-    .speakable:hover { border-bottom-color: var(--green); color: var(--green); }
-    .speakable::after { content: '🔊'; font-size: 12px; margin-left: 2px; opacity: 0; transition: opacity 0.2s; position: relative; top: -2px; }
+    .section-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+    }
+    .section-icon {
+      width: 40px; height: 40px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .section-title {
+      font-size: 22px; font-weight: 700;
+    }
+
+    /* ===== 可发音文字 ===== */
+    .speakable {
+      cursor: pointer; position: relative;
+      border-bottom: 1px dashed rgba(0,0,0,0.15);
+      transition: all 0.2s;
+    }
+    .speakable:hover {
+      border-bottom-color: var(--green);
+      color: var(--green);
+    }
+    .speakable::after {
+      content: '🔊'; font-size: 12px; margin-left: 2px;
+      opacity: 0; transition: opacity 0.2s;
+      position: relative; top: -2px;
+    }
     .speakable:hover::after { opacity: 0.7; }
-    .speakable.speaking { color: var(--green); animation: pulse-speak 0.6s ease infinite; }
-    @keyframes pulse-speak { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
-    .grammar-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); }
-    .grammar-card .key-point { font-size: 17px; line-height: 1.8; margin-bottom: 16px; }
-    .gender-badge { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 13px; font-weight: 600; }
+    .speakable.speaking {
+      color: var(--green);
+      animation: pulse-speak 0.6s ease infinite;
+    }
+    @keyframes pulse-speak {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    /* ===== 语法核心卡 ===== */
+    .grammar-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+      box-shadow: var(--shadow);
+    }
+    .grammar-card .key-point {
+      font-size: 17px; line-height: 1.8; margin-bottom: 16px;
+    }
+    .gender-badge {
+      display: inline-block; padding: 3px 10px; border-radius: 6px;
+      font-size: 13px; font-weight: 600;
+    }
     .gender-m { background: rgba(26,115,232,0.15); color: var(--blue); }
     .gender-f { background: rgba(232,113,10,0.15); color: var(--orange); }
-    .example-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 16px; overflow: hidden; border-radius: 12px; }
-    .example-table th { background: rgba(0,0,0,0.03); padding: 12px 16px; text-align: left; font-size: 13px; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
-    .example-table td { padding: 12px 16px; border-top: 1px solid var(--border); font-size: 15px; }
-    .example-table tr:hover td { background: rgba(0,0,0,0.02); }
-    .it-text { font-style: italic; font-weight: 500; }
-    .it-flag { display: inline-block; width: 20px; height: 14px; border-radius: 2px; background: linear-gradient(to right, #009246 33%, #fff 33% 66%, #ce2b37 66%); vertical-align: middle; margin-right: 4px; }
+
+    /* ===== 例词表 ===== */
+    .example-table {
+      width: 100%; border-collapse: separate; border-spacing: 0;
+      margin-top: 16px; overflow: hidden; border-radius: 12px;
+    }
+    .example-table th {
+      background: rgba(0,0,0,0.03); padding: 12px 16px;
+      text-align: left; font-size: 13px; font-weight: 600;
+      color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .example-table td {
+      padding: 12px 16px; border-top: 1px solid var(--border);
+      font-size: 15px;
+    }
+    .example-table tr:hover td {
+      background: rgba(0,0,0,0.02);
+    }
+    .it-text {
+      font-style: italic; font-weight: 500;
+    }
+    .it-flag {
+      display: inline-block; width: 20px; height: 14px; border-radius: 2px;
+      background: linear-gradient(to right, #009246 33%, #fff 33% 66%, #ce2b37 66%);
+      vertical-align: middle; margin-right: 4px;
+    }
     .zh-text { color: var(--text-dim); font-size: 14px; }
-    .mnemonic-card { background: linear-gradient(135deg, rgba(0,146,70,0.1), rgba(206,43,55,0.08)); border: 1px solid rgba(0,146,70,0.25); border-radius: var(--radius); padding: 24px; text-align: center; margin-top: 20px; }
+
+    /* ===== 口诀卡 ===== */
+    .mnemonic-card {
+      background: linear-gradient(135deg, rgba(0,146,70,0.1), rgba(206,43,55,0.08));
+      border: 1px solid rgba(0,146,70,0.25);
+      border-radius: var(--radius); padding: 24px;
+      text-align: center; margin-top: 20px;
+    }
     .mnemonic-card .emoji { font-size: 32px; margin-bottom: 12px; }
-    .mnemonic-card .text { font-size: 20px; font-weight: 700; line-height: 1.6; }
+    .mnemonic-card .text {
+      font-size: 20px; font-weight: 700; line-height: 1.6;
+    }
     .mnemonic-card .text .hl-o { color: var(--blue); }
     .mnemonic-card .text .hl-a { color: var(--orange); }
     .mnemonic-card .text .hl-e { color: var(--purple); }
-    .rule-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 16px; }
-    .rule-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; transition: all 0.3s; cursor: default; position: relative; overflow: hidden; }
-    .rule-card:hover { border-color: var(--green); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,146,70,0.1); }
-    .rule-card .ending { font-size: 36px; font-weight: 700; font-family: 'Playfair Display', serif; margin-bottom: 8px; }
+
+    /* ===== 词尾规律卡片组 ===== */
+    .rule-cards {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px; margin-top: 16px;
+    }
+    .rule-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      transition: all 0.3s; cursor: default;
+      position: relative; overflow: hidden;
+    }
+    .rule-card:hover {
+      border-color: var(--green); transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,146,70,0.1);
+    }
+    .rule-card .ending {
+      font-size: 36px; font-weight: 700;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 8px;
+    }
     .rule-card .ending.masc { color: var(--blue); }
     .rule-card .ending.fem { color: var(--orange); }
     .rule-card .ending.both { color: var(--purple); }
-    .rule-card .gender-label { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
-    .rule-card .examples { display: flex; flex-wrap: wrap; gap: 8px; }
-    .rule-card .example-chip { background: rgba(0,0,0,0.04); padding: 5px 12px; border-radius: 8px; font-size: 14px; transition: all 0.2s; cursor: pointer; }
-    .rule-card .example-chip:hover { background: rgba(0,146,70,0.15); }
+    .rule-card .gender-label {
+      font-size: 13px; font-weight: 600; margin-bottom: 12px;
+    }
+    .rule-card .examples {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .rule-card .example-chip {
+      background: rgba(0,0,0,0.04); padding: 5px 12px;
+      border-radius: 8px; font-size: 14px;
+      transition: all 0.2s; cursor: pointer;
+    }
+    .rule-card .example-chip:hover {
+      background: rgba(0,146,70,0.15);
+    }
+
+    /* ===== 例外词区 ===== */
     .trap-section { margin-top: 12px; }
-    .trap-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
-    .trap-tab { padding: 8px 18px; border-radius: 10px; background: var(--card); border: 1px solid var(--border); cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.2s; color: var(--text-dim); }
-    .trap-tab.active { border-color: var(--red); color: var(--red); background: rgba(206,43,55,0.1); }
-    .trap-tab:hover:not(.active) { border-color: var(--text-dim); }
-    .trap-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .trap-item { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; display: flex; align-items: center; gap: 12px; transition: all 0.3s; cursor: pointer; }
-    .trap-item:hover { border-color: var(--red); transform: scale(1.02); }
-    .trap-item .article { font-size: 13px; font-weight: 700; min-width: 28px; }
+    .trap-tabs {
+      display: flex; gap: 8px; margin-bottom: 16px;
+    }
+    .trap-tab {
+      padding: 8px 18px; border-radius: 10px;
+      background: var(--card); border: 1px solid var(--border);
+      cursor: pointer; font-size: 14px; font-weight: 500;
+      transition: all 0.2s; color: var(--text-dim);
+    }
+    .trap-tab.active {
+      border-color: var(--red); color: var(--red);
+      background: rgba(206,43,55,0.1);
+    }
+    .trap-tab:hover:not(.active) {
+      border-color: var(--text-dim);
+    }
+    .trap-list {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .trap-item {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 18px;
+      display: flex; align-items: center; gap: 12px;
+      transition: all 0.3s; cursor: pointer;
+    }
+    .trap-item:hover {
+      border-color: var(--red); transform: scale(1.02);
+    }
+    .trap-item .article {
+      font-size: 13px; font-weight: 700; min-width: 28px;
+    }
     .trap-item .article.il { color: var(--blue); }
     .trap-item .article.la { color: var(--orange); }
     .trap-item .word { font-size: 18px; font-weight: 600; font-style: italic; }
     .trap-item .meaning { font-size: 13px; color: var(--text-dim); margin-left: auto; }
-    .trap-note { background: rgba(206,43,55,0.08); border: 1px solid rgba(206,43,55,0.2); border-radius: 10px; padding: 12px 16px; margin-top: 12px; font-size: 13px; color: #c0392b; }
-    .dialogue-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-top: 16px; }
-    .dialogue-line { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.04); align-items: flex-start; }
+    .trap-note {
+      background: rgba(206,43,55,0.08); border: 1px solid rgba(206,43,55,0.2);
+      border-radius: 10px; padding: 12px 16px; margin-top: 12px;
+      font-size: 13px; color: #c0392b;
+    }
+
+    /* ===== 对话区 ===== */
+    .dialogue-box {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      margin-top: 16px;
+    }
+    .dialogue-line {
+      display: flex; gap: 12px; padding: 10px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      align-items: flex-start;
+    }
     .dialogue-line:last-child { border-bottom: none; }
-    .speaker { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; flex-shrink: 0; }
+    .speaker {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 700; flex-shrink: 0;
+    }
     .speaker-a { background: rgba(26,115,232,0.15); color: var(--blue); }
     .speaker-b { background: rgba(0,146,70,0.15); color: var(--green); }
     .dialogue-content { flex: 1; }
-    .dialogue-it { font-size: 16px; font-weight: 500; cursor: pointer; }
-    .dialogue-zh { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
-    .play-line-btn { background: none; border: 1px solid var(--border); color: var(--text-dim); padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; transition: all 0.2s; flex-shrink: 0; }
-    .play-line-btn:hover { border-color: var(--green); color: var(--green); }
-    .principle-card { background: linear-gradient(135deg, rgba(26,115,232,0.1), rgba(124,58,237,0.08)); border: 1px solid rgba(26,115,232,0.25); border-radius: var(--radius); padding: 24px; margin-top: 20px; text-align: center; }
+    .dialogue-it {
+      font-size: 16px; font-weight: 500; cursor: pointer;
+    }
+    .dialogue-zh {
+      font-size: 13px; color: var(--text-dim); margin-top: 2px;
+    }
+    .play-line-btn {
+      background: none; border: 1px solid var(--border);
+      color: var(--text-dim); padding: 4px 10px; border-radius: 6px;
+      cursor: pointer; font-size: 12px; transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .play-line-btn:hover {
+      border-color: var(--green); color: var(--green);
+    }
+
+    /* ===== 原则卡 ===== */
+    .principle-card {
+      background: linear-gradient(135deg, rgba(26,115,232,0.1), rgba(124,58,237,0.08));
+      border: 1px solid rgba(26,115,232,0.25);
+      border-radius: var(--radius); padding: 24px;
+      margin-top: 20px; text-align: center;
+    }
     .principle-card .icon { font-size: 36px; margin-bottom: 12px; }
-    .principle-card .text { font-size: 18px; font-weight: 700; line-height: 1.6; }
-    .principle-card .examples-row { display: flex; justify-content: center; gap: 20px; margin-top: 16px; flex-wrap: wrap; }
-    .principle-card .example-pair { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .principle-card .text {
+      font-size: 18px; font-weight: 700; line-height: 1.6;
+    }
+    .principle-card .examples-row {
+      display: flex; justify-content: center; gap: 20px;
+      margin-top: 16px; flex-wrap: wrap;
+    }
+    .principle-card .example-pair {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
     .principle-card .good { color: var(--green); font-weight: 600; }
     .principle-card .bad { color: var(--red); text-decoration: line-through; opacity: 0.5; font-size: 13px; }
-    .quiz-section { margin-top: 48px; }
-    .quiz-header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-    .quiz-counter { font-size: 14px; color: var(--text-dim); }
+
+    /* ===== 互动测验 ===== */
+    .quiz-section {
+      margin-top: 48px;
+    }
+    .quiz-header-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 16px;
+    }
+    .quiz-counter {
+      font-size: 14px; color: var(--text-dim);
+    }
     .quiz-counter strong { color: var(--green); font-size: 18px; }
-    .quiz-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 16px; }
-    .quiz-question { font-size: 17px; font-weight: 600; margin-bottom: 16px; }
-    .quiz-question .quiz-word { font-style: italic; color: var(--green); font-size: 22px; }
-    .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .quiz-option { background: rgba(0,0,0,0.02); border: 2px solid var(--border); border-radius: 12px; padding: 14px; cursor: pointer; transition: all 0.25s; text-align: center; font-size: 16px; }
-    .quiz-option:hover:not(.answered) { border-color: var(--blue); background: rgba(26,115,232,0.08); }
-    .quiz-option.correct { border-color: var(--green) !important; background: rgba(0,146,70,0.15) !important; color: var(--green); }
-    .quiz-option.wrong { border-color: var(--red) !important; background: rgba(206,43,55,0.1) !important; color: var(--red); }
+    .quiz-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      margin-bottom: 16px;
+    }
+    .quiz-question {
+      font-size: 17px; font-weight: 600; margin-bottom: 16px;
+    }
+    .quiz-question .quiz-word {
+      font-style: italic; color: var(--green); font-size: 22px;
+    }
+    .quiz-options {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .quiz-option {
+      background: rgba(0,0,0,0.02); border: 2px solid var(--border);
+      border-radius: 12px; padding: 14px; cursor: pointer;
+      transition: all 0.25s; text-align: center; font-size: 16px;
+    }
+    .quiz-option:hover:not(.answered) {
+      border-color: var(--blue); background: rgba(26,115,232,0.08);
+    }
+    .quiz-option.correct {
+      border-color: var(--green) !important;
+      background: rgba(0,146,70,0.15) !important;
+      color: var(--green);
+    }
+    .quiz-option.wrong {
+      border-color: var(--red) !important;
+      background: rgba(206,43,55,0.1) !important;
+      color: var(--red);
+    }
     .quiz-option.answered { cursor: default; }
-    .quiz-feedback { margin-top: 12px; padding: 10px 14px; border-radius: 8px; font-size: 14px; display: none; }
+    .quiz-feedback {
+      margin-top: 12px; padding: 10px 14px; border-radius: 8px;
+      font-size: 14px; display: none;
+    }
     .quiz-feedback.show { display: block; }
-    .quiz-feedback.right { background: rgba(0,146,70,0.1); color: var(--green); }
-    .quiz-feedback.wrong-fb { background: rgba(206,43,55,0.08); color: #c0392b; }
-    .quiz-mode-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
-    .quiz-mode-tab { padding: 8px 18px; border-radius: 10px; background: var(--card); border: 1px solid var(--border); cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.2s; color: var(--text-dim); }
-    .quiz-mode-tab.active { border-color: var(--orange); color: var(--orange); background: rgba(232,113,10,0.1); }
-    .flashcard-area { display: flex; flex-direction: column; align-items: center; margin-top: 16px; gap: 16px; }
-    .flashcard { width: 300px; height: 200px; perspective: 600px; cursor: pointer; }
-    .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
-    .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
-    .flashcard-front, .flashcard-back { position: absolute; inset: 0; border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; backface-visibility: hidden; padding: 20px; }
-    .flashcard-front { background: linear-gradient(135deg, var(--card), #f0ebe3); border: 1px solid var(--border); }
-    .flashcard-back { background: linear-gradient(135deg, rgba(0,146,70,0.15), rgba(26,115,232,0.1)); border: 1px solid rgba(0,146,70,0.3); transform: rotateY(180deg); }
-    .flashcard .front-word { font-size: 28px; font-weight: 700; font-style: italic; }
-    .flashcard .front-hint { font-size: 13px; color: var(--text-dim); margin-top: 8px; }
-    .flashcard .back-article { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-    .flashcard .back-word { font-size: 24px; font-style: italic; font-weight: 600; }
-    .flashcard .back-meaning { font-size: 14px; color: var(--text-dim); margin-top: 6px; }
-    .flashcard-nav { display: flex; gap: 12px; }
-    .flashcard-nav button { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 10px 24px; border-radius: 10px; cursor: pointer; font-size: 14px; transition: all 0.2s; }
-    .flashcard-nav button:hover { background: var(--card-hover); border-color: var(--green); }
-    .flashcard-counter { font-size: 13px; color: var(--text-dim); }
-    .scoreboard { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-align: center; margin-top: 32px; }
-    .score-display { font-size: 48px; font-weight: 700; background: linear-gradient(135deg, var(--green), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .quiz-feedback.right {
+      background: rgba(0,146,70,0.1); color: var(--green);
+    }
+    .quiz-feedback.wrong-fb {
+      background: rgba(206,43,55,0.08); color: #c0392b;
+    }
+    /* 测验模式切换 */
+    .quiz-mode-tabs {
+      display: flex; gap: 8px; margin-bottom: 20px;
+    }
+    .quiz-mode-tab {
+      padding: 8px 18px; border-radius: 10px;
+      background: var(--card); border: 1px solid var(--border);
+      cursor: pointer; font-size: 14px; font-weight: 500;
+      transition: all 0.2s; color: var(--text-dim);
+    }
+    .quiz-mode-tab.active {
+      border-color: var(--orange); color: var(--orange);
+      background: rgba(232,113,10,0.1);
+    }
+
+    /* ===== 闪卡翻转 ===== */
+    .flashcard-area {
+      display: flex; flex-direction: column; align-items: center;
+      margin-top: 16px; gap: 16px;
+    }
+    .flashcard {
+      width: 300px; height: 200px; perspective: 600px;
+      cursor: pointer;
+    }
+    .flashcard-inner {
+      position: relative; width: 100%; height: 100%;
+      transition: transform 0.6s; transform-style: preserve-3d;
+    }
+    .flashcard.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+    .flashcard-front, .flashcard-back {
+      position: absolute; inset: 0; border-radius: var(--radius);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      backface-visibility: hidden; padding: 20px;
+    }
+    .flashcard-front {
+      background: linear-gradient(135deg, var(--card), #f0ebe3);
+      border: 1px solid var(--border);
+    }
+    .flashcard-back {
+      background: linear-gradient(135deg, rgba(0,146,70,0.15), rgba(26,115,232,0.1));
+      border: 1px solid rgba(0,146,70,0.3);
+      transform: rotateY(180deg);
+    }
+    .flashcard .front-word {
+      font-size: 28px; font-weight: 700; font-style: italic;
+    }
+    .flashcard .front-hint {
+      font-size: 13px; color: var(--text-dim); margin-top: 8px;
+    }
+    .flashcard .back-article {
+      font-size: 20px; font-weight: 700; margin-bottom: 4px;
+    }
+    .flashcard .back-word {
+      font-size: 24px; font-style: italic; font-weight: 600;
+    }
+    .flashcard .back-meaning {
+      font-size: 14px; color: var(--text-dim); margin-top: 6px;
+    }
+    .flashcard-nav {
+      display: flex; gap: 12px;
+    }
+    .flashcard-nav button {
+      background: var(--card); border: 1px solid var(--border);
+      color: var(--text); padding: 10px 24px; border-radius: 10px;
+      cursor: pointer; font-size: 14px; transition: all 0.2s;
+    }
+    .flashcard-nav button:hover {
+      background: var(--card-hover); border-color: var(--green);
+    }
+    .flashcard-counter {
+      font-size: 13px; color: var(--text-dim);
+    }
+
+    /* ===== 得分板 ===== */
+    .scoreboard {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      text-align: center; margin-top: 32px;
+    }
+    .score-display {
+      font-size: 48px; font-weight: 700;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     .score-label { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
-    .score-rank { margin-top: 12px; font-size: 16px; font-weight: 600; }
-    .footer { text-align: center; padding: 40px 20px; color: var(--text-dim); font-size: 13px; border-top: 1px solid var(--border); margin-top: 60px; }
-    .footer-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
-    .footer-nav .nav-btn { text-decoration: none; display: inline-flex; align-items: center; padding: 10px 20px; font-size: 14px; }
+    .score-rank {
+      margin-top: 12px; font-size: 16px; font-weight: 600;
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      text-align: center; padding: 40px 20px;
+      color: var(--text-dim); font-size: 13px;
+      border-top: 1px solid var(--border); margin-top: 60px;
+    }
+    .footer-nav {
+      display: flex; justify-content: center; gap: 12px;
+      margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .footer-nav .nav-btn {
+      text-decoration: none; display: inline-flex; align-items: center;
+      padding: 10px 20px; font-size: 14px;
+    }
     .footer-nav .nav-btn:hover { background: var(--card-hover); border-color: var(--blue); }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .animate-in { animation: fadeInUp 0.5s ease forwards; }
-    @media (max-width: 640px) { .hero h1 { font-size: 28px; } .rule-cards { grid-template-columns: 1fr; } .trap-list { grid-template-columns: 1fr; } .quiz-options { grid-template-columns: 1fr; } .flashcard { width: 260px; height: 180px; } .principle-card .examples-row { gap: 12px; } }
+
+    /* ===== 动画 ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-in {
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 28px; }
+      .rule-cards { grid-template-columns: 1fr; }
+      .trap-list { grid-template-columns: 1fr; }
+      .quiz-options { grid-template-columns: 1fr; }
+      .flashcard { width: 260px; height: 180px; }
+      .principle-card .examples-row { gap: 12px; }
+    }
   </style>
 </head>
+<body>
+
+<!-- 顶部导航 -->
+<div class="top-bar">
+  <div class="logo">
+    <div class="flag-stripe"></div>
+    <span>意大利语语法实战</span>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠 导航</a>
+    <a class="nav-btn lesson-nav-disabled">◀ 上一课</a>
+    <a class="nav-btn" href="lezione02-numero-sostantivi.html">下一课 ▶</a>
+    <button class="nav-btn" onclick="scrollToSection('quiz')">📝 测验</button>
+    <button class="nav-btn" onclick="playAudio('lezione01_title')">🔊 课名</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero animate-in">
+    <div class="lesson-badge">Part 1 · 基础词法 · 第 1 课</div>
+    <h1>名词的性</h1>
+    <p class="subtitle">Il genere dei sostantivi</p>
+    <div class="hint">
+      <span class="icon">👆</span>
+      点击绿色下划线文字即可听到纯正意大利语发音
+    </div>
+  </div>
+
+  <!-- 核心语法 -->
+  <div class="section" id="sec-core">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(0,146,70,0.15);">🎯</div>
+      <h2 class="section-title">核心语法</h2>
+    </div>
+    <div class="grammar-card">
+      <p class="key-point">
+        意大利语名词分<span class="gender-badge gender-m">阳性 maschile</span>和<span class="gender-badge gender-f">阴性 femminile</span>，没有"它"。<br>
+        每个名词要么是"男孩"，要么是"女孩"。
+      </p>
+      <table class="example-table">
+        <thead>
+          <tr><th>意大利语</th><th>意思</th><th>性</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="speakable it-text" onclick="playAudio('il_libro')">il libro</span></td>
+            <td class="zh-text">书</td>
+            <td><span class="gender-badge gender-m">阳性 -o</span></td>
+          </tr>
+          <tr>
+            <td><span class="speakable it-text" onclick="playAudio('la_casa')">la casa</span></td>
+            <td class="zh-text">房子</td>
+            <td><span class="gender-badge gender-f">阴性 -a</span></td>
+          </tr>
+          <tr>
+            <td><span class="speakable it-text" onclick="playAudio('il_caffe')">il caffè</span></td>
+            <td class="zh-text">咖啡</td>
+            <td><span class="gender-badge gender-m">阳性(重音结尾)</span></td>
+          </tr>
+          <tr>
+            <td><span class="speakable it-text" onclick="playAudio('la_stazione')">la stazione</span></td>
+            <td class="zh-text">车站</td>
+            <td><span class="gender-badge gender-f">阴性 -ione</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 口诀 -->
+  <div class="section" id="sec-mnemonic">
+    <div class="mnemonic-card">
+      <div class="emoji">🧠</div>
+      <p class="text">
+        <span class="hl-o">-o</span> 是男孩，<span class="hl-a">-a</span> 是女孩，<span class="hl-e">-e</span> 怎么办？查字典慢慢来。
+      </p>
+    </div>
+  </div>
+
+  <!-- 词尾规律 -->
+  <div class="section" id="sec-rules">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(26,115,232,0.15);">📋</div>
+      <h2 class="section-title">词尾规律一览</h2>
+    </div>
+    <div class="rule-cards">
+      <!-- -o 阳性 -->
+      <div class="rule-card">
+        <div class="ending masc">-o</div>
+        <div class="gender-label"><span class="gender-badge gender-m">阳性 ✅</span></div>
+        <div class="examples">
+          <span class="example-chip speakable" onclick="playAudio('libro')">libro 书</span>
+          <span class="example-chip speakable" onclick="playAudio('ragazzo')">ragazzo 男孩</span>
+          <span class="example-chip speakable" onclick="playAudio('vino')">vino 葡萄酒</span>
+          <span class="example-chip speakable" onclick="playAudio('gatto')">gatto 猫</span>
+          <span class="example-chip speakable" onclick="playAudio('tavolo')">tavolo 桌子</span>
+          <span class="example-chip speakable" onclick="playAudio('orso')">orso 熊</span>
+        </div>
+      </div>
+      <!-- -a 阴性 -->
+      <div class="rule-card">
+        <div class="ending fem">-a</div>
+        <div class="gender-label"><span class="gender-badge gender-f">阴性 ✅</span></div>
+        <div class="examples">
+          <span class="example-chip speakable" onclick="playAudio('casa')">casa 房子</span>
+          <span class="example-chip speakable" onclick="playAudio('ragazza')">ragazza 女孩</span>
+          <span class="example-chip speakable" onclick="playAudio('pizza')">pizza 披萨</span>
+          <span class="example-chip speakable" onclick="playAudio('macchina')">macchina 车</span>
+          <span class="example-chip speakable" onclick="playAudio('sorella')">sorella 姐妹</span>
+          <span class="example-chip speakable" onclick="playAudio('scuola')">scuola 学校</span>
+        </div>
+      </div>
+      <!-- -e 都可能 -->
+      <div class="rule-card">
+        <div class="ending both">-e</div>
+        <div class="gender-label"><span class="gender-badge" style="background:rgba(124,58,237,0.15);color:var(--purple);">都可能 🤔</span></div>
+        <div class="examples">
+          <span class="example-chip speakable" onclick="playAudio('fiore')">fiore 花·阳</span>
+          <span class="example-chip speakable" onclick="playAudio('chiave')">chiave 钥匙·阴</span>
+          <span class="example-chip speakable" onclick="playAudio('cane')">cane 狗·阳</span>
+          <span class="example-chip speakable" onclick="playAudio('madre')">madre 母亲·阴</span>
+          <span class="example-chip speakable" onclick="playAudio('notte')">notte 夜晚·阴</span>
+          <span class="example-chip speakable" onclick="playAudio('dente')">dente 牙齿·阳</span>
+        </div>
+      </div>
+      <!-- -ione 阴性 -->
+      <div class="rule-card">
+        <div class="ending fem">-ione</div>
+        <div class="gender-label"><span class="gender-badge gender-f">阴性 ✅</span></div>
+        <div class="examples">
+          <span class="example-chip speakable" onclick="playAudio('stazione_w')">stazione 车站</span>
+          <span class="example-chip speakable" onclick="playAudio('lezione')">lezione 课</span>
+          <span class="example-chip speakable" onclick="playAudio('televisione')">televisione 电视</span>
+          <span class="example-chip speakable" onclick="playAudio('nazione')">nazione 国家</span>
+        </div>
+      </div>
+      <!-- -tà / -tù 阴性 -->
+      <div class="rule-card">
+        <div class="ending fem">-tà / -tù</div>
+        <div class="gender-label"><span class="gender-badge gender-f">阴性 ✅</span></div>
+        <div class="examples">
+          <span class="example-chip speakable" onclick="playAudio('citta')">città 城市</span>
+          <span class="example-chip speakable" onclick="playAudio('universita')">università 大学</span>
+          <span class="example-chip speakable" onclick="playAudio('gioventu')">gioventù 青春</span>
+          <span class="example-chip speakable" onclick="playAudio('verita')">verità 真理</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 容易搞混的 -->
+  <div class="section" id="sec-traps">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(206,43,55,0.15);">⚠️</div>
+      <h2 class="section-title">那些容易搞混的</h2>
+    </div>
+    <div class="trap-section">
+      <div class="trap-tabs">
+        <div class="trap-tab active" onclick="showTrap('f-as-m')">看起来像阳性 → 其实是阴性</div>
+        <div class="trap-tab" onclick="showTrap('m-as-f')">看起来像阴性 → 其实是阳性</div>
+      </div>
+
+      <div id="trap-f-as-m" class="trap-list">
+        <div class="trap-item" onclick="playAudio('la_mano')">
+          <span class="article la">la</span>
+          <span class="word">mano</span>
+          <span class="meaning">手 ← 最常见！</span>
+        </div>
+        <div class="trap-item" onclick="playAudio('la_radio')">
+          <span class="article la">la</span>
+          <span class="word">radio</span>
+          <span class="meaning">收音机</span>
+        </div>
+        <div class="trap-item" onclick="playAudio('la_foto')">
+          <span class="article la">la</span>
+          <span class="word">foto</span>
+          <span class="meaning">照片 ← fotografia缩写</span>
+        </div>
+        <div class="trap-item" onclick="playAudio('la_moto')">
+          <span class="article la">la</span>
+          <span class="word">moto</span>
+          <span class="meaning">摩托车</span>
+        </div>
+        <div class="trap-item" onclick="playAudio('la_auto')">
+          <span class="article la">la</span>
+          <span class="word">auto</span>
+          <span class="meaning">汽车 ← automobile缩写</span>
+        </div>
+      </div>
+
+      <div id="trap-m-as-f" class="trap-list" style="display:none;">
+        <div class="trap-item" onclick="playAudio('il_problema')">
+          <span class="article il">il</span>
+          <span class="word">problema</span>
+          <span class="meaning">问题</span>
+        </div>
+        <div class="trap-item" onclick="playAudio('il_sistema')">
+          <span class="article il">il</span>
+          <span class="word">sistema</span>
+          <span class="meaning">系统</span>
+        </div>
+        <div class="trap-item" onclick="playAudio('il_programma')">
+          <span class="article il">il</span>
+          <span class="word">programma</span>
+          <span class="meaning">节目/程序</span>
+        </div>
+        <div class="trap-item" onclick="playAudio('il_cinema')">
+          <span class="article il">il</span>
+          <span class="word">cinema</span>
+          <span class="meaning">电影院</span>
+        </div>
+        <div class="trap-item" onclick="playAudio('il_tema')">
+          <span class="article il">il</span>
+          <span class="word">tema</span>
+          <span class="meaning">主题</span>
+        </div>
+        <div class="trap-item" onclick="playAudio('il_clima')">
+          <span class="article il">il</span>
+          <span class="word">clima</span>
+          <span class="meaning">气候</span>
+        </div>
+        <div class="trap-item" onclick="playAudio('il_poeta')">
+          <span class="article il">il</span>
+          <span class="word">poeta</span>
+          <span class="meaning">诗人</span>
+        </div>
+        <div class="trap-item" onclick="playAudio('il_pianeta')">
+          <span class="article il">il</span>
+          <span class="word">pianeta</span>
+          <span class="meaning">行星</span>
+        </div>
+      </div>
+
+      <div class="trap-note">
+        💡 例外词大多来自希腊语，以 -ma / -ta 结尾。记不住没关系，连着冠词一起记就不会错！
+      </div>
+    </div>
+  </div>
+
+  <!-- 生活对话 -->
+  <div class="section" id="sec-dialogue">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(0,146,70,0.15);">🗣️</div>
+      <h2 class="section-title">生活对话</h2>
+    </div>
+    <div class="dialogue-box">
+      <div class="dialogue-line">
+        <div class="speaker speaker-a">A</div>
+        <div class="dialogue-content">
+          <div class="dialogue-it speakable" onclick="playAudio('dlg1')">Che cos'è questo?</div>
+          <div class="dialogue-zh">这是什么？</div>
+        </div>
+        <button class="play-line-btn" onclick="playAudio('dlg1')">🔊</button>
+      </div>
+      <div class="dialogue-line">
+        <div class="speaker speaker-b">B</div>
+        <div class="dialogue-content">
+          <div class="dialogue-it speakable" onclick="playAudio('dlg2')">È un libro italiano.</div>
+          <div class="dialogue-zh">是一本意大利语书</div>
+        </div>
+        <button class="play-line-btn" onclick="playAudio('dlg2')">🔊</button>
+      </div>
+      <div class="dialogue-line">
+        <div class="speaker speaker-a">A</div>
+        <div class="dialogue-content">
+          <div class="dialogue-it speakable" onclick="playAudio('dlg3')">È interessante?</div>
+          <div class="dialogue-zh">有趣吗？</div>
+        </div>
+        <button class="play-line-btn" onclick="playAudio('dlg3')">🔊</button>
+      </div>
+      <div class="dialogue-line">
+        <div class="speaker speaker-b">B</div>
+        <div class="dialogue-content">
+          <div class="dialogue-it speakable" onclick="playAudio('dlg4')">Sì, molto!</div>
+          <div class="dialogue-zh">是的，非常！</div>
+        </div>
+        <button class="play-line-btn" onclick="playAudio('dlg4')">🔊</button>
+      </div>
+      <div style="text-align:center;margin-top:16px;">
+        <button class="nav-btn" onclick="playAudio('dlg_full')" style="padding:10px 24px;">
+          🔊 播放整段对话
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 记住原则 -->
+  <div class="section" id="sec-principle">
+    <div class="principle-card">
+      <div class="icon">🔑</div>
+      <p class="text">学名词的时候，一定要连着冠词一起记！</p>
+      <div class="examples-row">
+        <div class="example-pair">
+          <span class="good speakable" onclick="playAudio('il_libro')">✅ il libro</span>
+          <span class="bad">❌ libro</span>
+        </div>
+        <div class="example-pair">
+          <span class="good speakable" onclick="playAudio('la_casa')">✅ la casa</span>
+          <span class="bad">❌ casa</span>
+        </div>
+        <div class="example-pair">
+          <span class="good speakable" onclick="playAudio('il_problema')">✅ il problema</span>
+          <span class="bad">❌ problema</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 闪卡练习 -->
+  <div class="section" id="sec-flashcard">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(124,58,237,0.15);">🃏</div>
+      <h2 class="section-title">闪卡练习 — 点击翻转</h2>
+    </div>
+    <div class="flashcard-area">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="flashcard-inner" id="flashcardInner">
+          <div class="flashcard-front">
+            <div class="front-word" id="fcWord">libro</div>
+            <div class="front-hint">点击查看答案</div>
+          </div>
+          <div class="flashcard-back">
+            <div class="back-article" id="fcArticle" style="color:var(--blue)">il</div>
+            <div class="back-word" id="fcFullWord">libro</div>
+            <div class="back-meaning" id="fcMeaning">书 · 阳性</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard-nav">
+        <button onclick="prevCard()">← 上一个</button>
+        <span class="flashcard-counter" id="fcCounter">1 / 20</span>
+        <button onclick="nextCard()">下一个 →</button>
+      </div>
+      <button class="nav-btn" onclick="speakCurrentCard()" style="margin-top:4px;">🔊 听发音</button>
+    </div>
+  </div>
+
+  <!-- 互动测验 -->
+  <div class="section quiz-section" id="sec-quiz">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(232,113,10,0.15);">📝</div>
+      <h2 class="section-title">小测验 — 判断名词的性</h2>
+    </div>
+
+    <div class="quiz-mode-tabs">
+      <div class="quiz-mode-tab active" onclick="switchQuizMode('basic', this)">🟢 基础题</div>
+      <div class="quiz-mode-tab" onclick="switchQuizMode('trap', this)">🔴 陷阱题</div>
+      <div class="quiz-mode-tab" onclick="switchQuizMode('all', this)">🟣 全部</div>
+    </div>
+
+    <div class="quiz-header-bar">
+      <div class="quiz-counter">已答 <strong id="answeredCount">0</strong> / <span id="totalCount">20</span></div>
+      <button class="nav-btn" onclick="resetQuiz()">🔄 重来</button>
+    </div>
+
+    <div id="quizContainer"></div>
+
+    <div class="scoreboard" id="scoreboard" style="display:none;">
+      <div class="score-display" id="scoreValue">0</div>
+      <div class="score-label">测验得分</div>
+      <div class="score-rank" id="scoreRank"></div>
+      <button class="nav-btn" onclick="resetQuiz()" style="margin-top:16px;">🔄 重新测验</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-nav">
+    <a class="nav-btn" href="index.html">🏠 返回导航页</a>
+    <a class="nav-btn lesson-nav-disabled">◀ 上一课</a>
+    <a class="nav-btn" href="lezione02-numero-sostantivi.html">下一课 ▶</a>
+  </div>
+  <p><span class="it-flag"></span> 意大利语语法实战课程 · 第1课 · 名词的性</p>
+</div>
+
+<!-- 音频数据：base64编码，第1课独立JS文件 -->
+<script>
+// ===== 音频按需加载（后台预加载，不阻塞首屏）=====
+var _audioLoaded = false;
+var _audioPromise = null;
+function loadAudioScript() {
+  if (_audioPromise) return _audioPromise;
+  _audioPromise = new Promise(function(resolve) {
+    var s = document.createElement('script');
+    s.src = 'audio_l01.js?v=2';
+    s.onload = function() { _audioLoaded = true; resolve(); };
+    document.head.appendChild(s);
+  });
+  return _audioPromise;
+}
+// ===== 音频播放 =====
+let _audioEl = null;
+function playAudio(key) {
+  if (!_audioLoaded || typeof AUDIO_DATA === 'undefined') {
+    showToast('正在加载音频...');
+    loadAudioScript().then(function() {
+      playAudio(key);
+    });
+    return;
+  }
+  if (!AUDIO_DATA[key]) {
+    showToast('该音频尚未收录 🔇');
+    return;
+  }
+  if (_audioEl) _audioEl.pause();
+  _audioEl = new Audio(AUDIO_DATA[key]);
+  _audioEl.play().catch(function(e) {
+    if (e.name === 'AbortError') return;
+    showToast('请先点击页面任意位置，再试一次 🔊');
+  });
+}
+
+// ===== Toast 提示 =====
+function showToast(msg) {
+  var t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12px 24px;border-radius:8px;font-size:14px;z-index:9999;opacity:0;transition:opacity 0.3s;max-width:90%;text-align:center';
+  document.body.appendChild(t);
+  requestAnimationFrame(function() { t.style.opacity = '1'; });
+  setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2500);
+}
+
+</script>
+<script>
+
+// ===== 例外词切换 =====
+function showTrap(type) {
+  document.getElementById('trap-f-as-m').style.display = type === 'f-as-m' ? 'grid' : 'none';
+  document.getElementById('trap-m-as-f').style.display = type === 'm-as-f' ? 'grid' : 'none';
+  document.querySelectorAll('.trap-tab').forEach((t, i) => {
+    t.classList.toggle('active', (i === 0 && type === 'f-as-m') || (i === 1 && type === 'm-as-f'));
+  });
+}
+
+// ===== 闪卡系统 =====
+const flashcards = [
+  { word: 'libro', article: 'il', gender: '阳性', meaning: '书', artColor: 'var(--blue)', audio: 'il_libro' },
+  { word: 'casa', article: 'la', gender: '阴性', meaning: '房子', artColor: 'var(--orange)', audio: 'la_casa' },
+  { word: 'fiore', article: 'il', gender: '阳性', meaning: '花', artColor: 'var(--blue)', audio: 'il_fiore' },
+  { word: 'chiave', article: 'la', gender: '阴性', meaning: '钥匙', artColor: 'var(--orange)', audio: 'la_chiave' },
+  { word: 'stazione', article: 'la', gender: '阴性', meaning: '车站', artColor: 'var(--orange)', audio: 'la_stazione' },
+  { word: 'città', article: 'la', gender: '阴性', meaning: '城市', artColor: 'var(--orange)', audio: 'città_w' },
+  { word: 'mano', article: 'la', gender: '阴性', meaning: '手（例外！）', artColor: 'var(--orange)', audio: 'la_mano' },
+  { word: 'problema', article: 'il', gender: '阳性', meaning: '问题（例外！）', artColor: 'var(--blue)', audio: 'il_problema' },
+  { word: 'ragazzo', article: 'il', gender: '阳性', meaning: '男孩', artColor: 'var(--blue)', audio: 'ragazzo_w' },
+  { word: 'pizza', article: 'la', gender: '阴性', meaning: '披萨', artColor: 'var(--orange)', audio: 'pizza_w' },
+  { word: 'vino', article: 'il', gender: '阳性', meaning: '葡萄酒', artColor: 'var(--blue)', audio: 'vino_w' },
+  { word: 'macchina', article: 'la', gender: '阴性', meaning: '车', artColor: 'var(--orange)', audio: 'macchina_w' },
+  { word: 'lezione', article: 'la', gender: '阴性', meaning: '课', artColor: 'var(--orange)', audio: 'lezione_w' },
+  { word: 'gatto', article: 'il', gender: '阳性', meaning: '猫', artColor: 'var(--blue)', audio: 'gatto_w' },
+  { word: 'cane', article: 'il', gender: '阳性', meaning: '狗', artColor: 'var(--blue)', audio: 'cane_w' },
+  { word: 'notte', article: 'la', gender: '阴性', meaning: '夜晚', artColor: 'var(--orange)', audio: 'notte' },
+  { word: 'sistema', article: 'il', gender: '阳性', meaning: '系统（例外！）', artColor: 'var(--blue)', audio: 'il_sistema' },
+  { word: 'università', article: "l'", gender: '阴性', meaning: '大学', artColor: 'var(--orange)', audio: 'università_w' },
+  { word: 'caffè', article: 'il', gender: '阳性', meaning: '咖啡', artColor: 'var(--blue)', audio: 'il_caffè_w' },
+  { word: 'poeta', article: 'il', gender: '阳性', meaning: '诗人（例外！）', artColor: 'var(--blue)', audio: 'il_poeta' },
+];
+let fcIndex = 0;
+
+function updateFlashcard() {
+  const c = flashcards[fcIndex];
+  document.getElementById('fcWord').textContent = c.word;
+  document.getElementById('fcArticle').textContent = c.article;
+  document.getElementById('fcArticle').style.color = c.artColor;
+  document.getElementById('fcFullWord').textContent = c.article + ' ' + c.word;
+  document.getElementById('fcMeaning').textContent = c.meaning + ' · ' + c.gender;
+  document.getElementById('fcCounter').textContent = (fcIndex + 1) + ' / ' + flashcards.length;
+  document.getElementById('flashcard').classList.remove('flipped');
+}
+
+function flipCard() {
+  document.getElementById('flashcard').classList.toggle('flipped');
+  const c = flashcards[fcIndex];
+  playAudio(c.audio);
+}
+
+function nextCard() {
+  fcIndex = (fcIndex + 1) % flashcards.length;
+  updateFlashcard();
+}
+
+function prevCard() {
+  fcIndex = (fcIndex - 1 + flashcards.length) % flashcards.length;
+  updateFlashcard();
+}
+
+function speakCurrentCard() {
+  const c = flashcards[fcIndex];
+  playAudio(c.audio);
+}
+
+// ===== 测验系统 =====
+// 完整题库：basic=基础规律题, trap=陷阱题
+const quizBank = {
+  basic: [
+    { word: 'libro', answer: 'm', hint: 'il libro（书）-o结尾→阳性', audio: 'il_libro' },
+    { word: 'casa', answer: 'f', hint: 'la casa（房子）-a结尾→阴性', audio: 'la_casa' },
+    { word: 'vino', answer: 'm', hint: 'il vino（葡萄酒）-o结尾→阳性', audio: 'vino_w' },
+    { word: 'pizza', answer: 'f', hint: 'la pizza（披萨）-a结尾→阴性', audio: 'pizza_w' },
+    { word: 'ragazzo', answer: 'm', hint: 'il ragazzo（男孩）-o结尾→阳性', audio: 'ragazzo_w' },
+    { word: 'ragazza', answer: 'f', hint: 'la ragazza（女孩）-a结尾→阴性', audio: 'ragazza_w' },
+    { word: 'gatto', answer: 'm', hint: 'il gatto（猫）-o结尾→阳性', audio: 'gatto_w' },
+    { word: 'macchina', answer: 'f', hint: 'la macchina（车）-a结尾→阴性', audio: 'macchina_w' },
+    { word: 'tavolo', answer: 'm', hint: 'il tavolo（桌子）-o结尾→阳性', audio: 'tavolo' },
+    { word: 'scuola', answer: 'f', hint: 'la scuola（学校）-a结尾→阴性', audio: 'scuola' },
+    { word: 'cane', answer: 'm', hint: 'il cane（狗）-e结尾需查字典→阳性', audio: 'cane_w' },
+    { word: 'chiave', answer: 'f', hint: 'la chiave（钥匙）-e结尾需查字典→阴性', audio: 'chiave_w' },
+    { word: 'stazione', answer: 'f', hint: 'la stazione（车站）-ione结尾→阴性', audio: 'la_stazione' },
+    { word: 'lezione', answer: 'f', hint: 'la lezione（课）-ione结尾→阴性', audio: 'lezione_w' },
+    { word: 'televisione', answer: 'f', hint: 'la televisione（电视）-ione结尾→阴性', audio: 'televisione_w' },
+    { word: 'nazione', answer: 'f', hint: 'la nazione（国家）-ione结尾→阴性', audio: 'nazione' },
+    { word: 'città', answer: 'f', hint: 'la città（城市）-tà结尾→阴性', audio: 'città_w' },
+    { word: 'università', answer: 'f', hint: "l'università（大学）-tà结尾→阴性", audio: 'università_w' },
+    { word: 'verità', answer: 'f', hint: 'la verità（真理）-tà结尾→阴性', audio: 'verita' },
+    { word: 'gioventù', answer: 'f', hint: 'la gioventù（青春）-tù结尾→阴性', audio: 'gioventù_w' },
+    { word: 'fiore', answer: 'm', hint: 'il fiore（花）-e结尾需查字典→阳性', audio: 'fiore_w' },
+    { word: 'madre', answer: 'f', hint: 'la madre（母亲）-e结尾需查字典→阴性', audio: 'madre_w' },
+    { word: 'notte', answer: 'f', hint: 'la notte（夜晚）-e结尾需查字典→阴性', audio: 'notte' },
+    { word: 'dente', answer: 'm', hint: 'il dente（牙齿）-e结尾需查字典→阳性', audio: 'dente' },
+    { word: 'caffè', answer: 'm', hint: 'il caffè（咖啡）重音结尾→阳性', audio: 'il_caffè_w' },
+    { word: 'mela', answer: 'f', hint: 'la mela（苹果）-a结尾→阴性', audio: 'mela' },
+    { word: 'letto', answer: 'm', hint: 'il letto（床）-o结尾→阳性', audio: 'letto' },
+    { word: 'penna', answer: 'f', hint: 'la penna（笔）-a结尾→阴性', audio: 'penna' },
+    { word: 'bicchiere', answer: 'm', hint: 'il bicchiere（杯子）-e结尾需查字典→阳性', audio: 'bicchiere' },
+    { word: 'forchetta', answer: 'f', hint: 'la forchetta（叉子）-a结尾→阴性', audio: 'forchetta' },
+    { word: 'sedia', answer: 'f', hint: 'la sedia（椅子）-a结尾→阴性', audio: 'sedia' },
+    { word: 'divano', answer: 'm', hint: 'il divano（沙发）-o结尾→阳性', audio: 'divano' },
+    { word: 'lampada', answer: 'f', hint: 'la lampada（灯）-a结尾→阴性', audio: 'lampada' },
+    { word: 'finestra', answer: 'f', hint: 'la finestra（窗户）-a结尾→阴性', audio: 'finestra' },
+    { word: 'borsa', answer: 'f', hint: 'la borsa（包）-a结尾→阴性', audio: 'borsa' },
+    { word: 'acqua', answer: 'f', hint: "l'acqua（水）-a结尾→阴性", audio: 'acqua' },
+    { word: 'formaggio', answer: 'm', hint: 'il formaggio（奶酪）-o结尾→阳性', audio: 'formaggio' },
+    { word: 'pomodoro', answer: 'm', hint: 'il pomodoro（番茄）-o结尾→阳性', audio: 'pomodoro' },
+    { word: 'piatto', answer: 'm', hint: 'il piatto（盘子）-o结尾→阳性', audio: 'piatto' },
+    { word: 'coltello', answer: 'm', hint: 'il coltello（刀）-o结尾→阳性', audio: 'coltello' },
+  ],
+  trap: [
+    { word: 'mano', answer: 'f', hint: 'la mano（手）⚠️ -o结尾却是阴性！', audio: 'la_mano' },
+    { word: 'radio', answer: 'f', hint: 'la radio（收音机）⚠️ -o结尾却是阴性！', audio: 'la_radio' },
+    { word: 'foto', answer: 'f', hint: 'la foto（照片）⚠️ -o结尾却是阴性！fotografia缩写', audio: 'la_foto' },
+    { word: 'moto', answer: 'f', hint: 'la moto（摩托车）⚠️ -o结尾却是阴性！', audio: 'la_moto' },
+    { word: 'problema', answer: 'm', hint: 'il problema（问题）⚠️ -a结尾却是阳性！来自希腊语', audio: 'il_problema' },
+    { word: 'sistema', answer: 'm', hint: 'il sistema（系统）⚠️ -a结尾却是阳性！来自希腊语', audio: 'il_sistema' },
+    { word: 'programma', answer: 'm', hint: 'il programma（节目）⚠️ -a结尾却是阳性！来自希腊语', audio: 'il_programma' },
+    { word: 'cinema', answer: 'm', hint: 'il cinema（电影院）⚠️ -a结尾却是阳性！来自希腊语', audio: 'il_cinema' },
+    { word: 'clima', answer: 'm', hint: 'il clima（气候）⚠️ -a结尾却是阳性！来自希腊语', audio: 'il_clima' },
+    { word: 'poeta', answer: 'm', hint: 'il poeta（诗人）⚠️ -a结尾却是阳性！来自希腊语', audio: 'il_poeta' },
+    { word: 'pianeta', answer: 'm', hint: 'il pianeta（行星）⚠️ -a结尾却是阳性！来自希腊语', audio: 'il_pianeta' },
+    { word: 'tema', answer: 'm', hint: 'il tema（主题）⚠️ -a结尾却是阳性！来自希腊语', audio: 'il_tema' },
+    { word: 'giornale', answer: 'm', hint: 'il giornale（报纸）-e结尾→阳性，容易猜错', audio: 'giornale' },
+    { word: 'mare', answer: 'm', hint: 'il mare（海）-e结尾→阳性', audio: 'mare' },
+    { word: 'sole', answer: 'm', hint: 'il sole（太阳）-e结尾→阳性', audio: 'sole' },
+    { word: 'arte', answer: 'f', hint: "l'arte（艺术）-e结尾→阴性", audio: 'arte' },
+    { word: 'luce', answer: 'f', hint: 'la luce（光）-e结尾→阴性', audio: 'luce' },
+    { word: 'neve', answer: 'f', hint: 'la neve（雪）-e结尾→阴性', audio: 'neve' },
+    { word: 'fiume', answer: 'm', hint: 'il fiume（河）-e结尾→阳性', audio: 'fiume' },
+    { word: 'parete', answer: 'f', hint: 'la parete（墙）-e结尾→阴性', audio: 'parete' },
+  ]
+};
+
+let currentMode = 'basic';
+let currentQuizData = [];
+let quizScore = 0;
+let quizAnswered = 0;
+
+function switchQuizMode(mode, tabEl) {
+  currentMode = mode;
+  document.querySelectorAll('.quiz-mode-tab').forEach(t => t.classList.remove('active'));
+  if (tabEl) tabEl.classList.add('active');
+  resetQuiz();
+}
+
+function getQuizData() {
+  let pool;
+  if (currentMode === 'basic') {
+    pool = quizBank.basic;
+  } else if (currentMode === 'trap') {
+    pool = quizBank.trap;
+  } else {
+    pool = [...quizBank.basic, ...quizBank.trap];
+  }
+  // 随机抽取20题（或全取）
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, 20);
+}
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  currentQuizData = getQuizData();
+
+  document.getElementById('totalCount').textContent = currentQuizData.length;
+
+  currentQuizData.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'quiz-card';
+    card.id = 'quiz-' + i;
+    // 转义单引号
+    const safeWord = q.word.replace(/'/g, "\\'");
+    const safeHint = q.hint.replace(/'/g, "\\'");
+    card.innerHTML = `
+      <div class="quiz-question">
+        <span class="quiz-word">${q.word}</span> 是阳性还是阴性？
+      </div>
+      <div class="quiz-options">
+        <div class="quiz-option" onclick="checkAnswer(${i},'m')">
+          🔵 阳性 (maschile)
+        </div>
+        <div class="quiz-option" onclick="checkAnswer(${i},'f')">
+          🟠 阴性 (femminile)
+        </div>
+      </div>
+      <div class="quiz-feedback" id="fb-${i}"></div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function checkAnswer(idx, chosen) {
+  const q = currentQuizData[idx];
+  const card = document.getElementById('quiz-' + idx);
+  const options = card.querySelectorAll('.quiz-option');
+  const fb = document.getElementById('fb-' + idx);
+
+  if (options[0].classList.contains('answered')) return;
+
+  options.forEach(o => o.classList.add('answered'));
+  const correct = q.answer;
+
+  if (chosen === correct) {
+    quizScore++;
+    options[chosen === 'm' ? 0 : 1].classList.add('correct');
+    fb.className = 'quiz-feedback show right';
+    fb.textContent = '✅ 正确！' + q.hint;
+    playAudio(q.audio);
+  } else {
+    options[chosen === 'm' ? 0 : 1].classList.add('wrong');
+    options[correct === 'm' ? 0 : 1].classList.add('correct');
+    fb.className = 'quiz-feedback show wrong-fb';
+    fb.textContent = '❌ 正确答案是' + (correct === 'm' ? '阳性' : '阴性') + '：' + q.hint;
+    // 也播放正确答案的发音
+    playAudio(q.audio);
+  }
+
+  quizAnswered++;
+  document.getElementById('answeredCount').textContent = quizAnswered;
+  updateProgress();
+
+  if (quizAnswered === currentQuizData.length) {
+    setTimeout(() => {
+      const sb = document.getElementById('scoreboard');
+      sb.style.display = 'block';
+      document.getElementById('scoreValue').textContent = quizScore + ' / ' + currentQuizData.length;
+      // 评级
+      const pct = quizScore / currentQuizData.length;
+      let rank = '';
+      if (pct >= 0.95) rank = '🏆 完美！你是名词性别大师！';
+      else if (pct >= 0.85) rank = '🌟 优秀！基本掌握了！';
+      else if (pct >= 0.70) rank = '👍 不错！再练练陷阱题！';
+      else if (pct >= 0.50) rank = '💪 加油！多翻翻闪卡！';
+      else rank = '📖 别气馁，回去复习词尾规律吧！';
+      document.getElementById('scoreRank').textContent = rank;
+      scrollToSection('scoreboard');
+    }, 500);
+  }
+}
+
+function resetQuiz() {
+  quizScore = 0;
+  quizAnswered = 0;
+  document.getElementById('scoreboard').style.display = 'none';
+  document.getElementById('answeredCount').textContent = '0';
+  buildQuiz();
+  updateProgress();
+}
+
+// ===== 进度条 =====
+function updateProgress() {
+  const total = currentQuizData.length || 1;
+  const done = quizAnswered / total;
+  document.getElementById('progressFill').style.width = (done * 100) + '%';
+}
+
+// ===== 滚动 =====
+function scrollToSection(id) {
+  const el = document.getElementById('sec-' + id) || document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ===== Intersection Observer =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+// ===== 初始化 =====
+requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
+// 桌面端立即加载，移动端异步预加载（不阻塞首屏）
+if (/Mobi|Android|iPhone|iPad|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+  setTimeout(loadAudioScript, 500);
+} else {
+  loadAudioScript();
+}
+</script>
+
+</body>
+</html>
