@@ -537,7 +537,6 @@
       .principle-card .examples-row { gap: 12px; }
     }
   </style>
-  <link rel="prefetch" href="audio_l03.js?v=3">
 </head>
 <body>
 
@@ -874,39 +873,24 @@
 
 <script>
 // ===== 音频按需加载（后台预加载，不阻塞首屏）=====
-var _audioLoaded = false;
-var _audioPromise = null;
-function loadAudioScript() {
-  if (_audioPromise) return _audioPromise;
-  _audioPromise = new Promise(function(resolve) {
-    var s = document.createElement('script');
-    s.src = 'audio_l03.js?v=2';
-    s.onload = function() { _audioLoaded = true; resolve(); };
+;
     document.head.appendChild(s);
   });
   return _audioPromise;
 }
 // ===== 音频播放 =====
 let _audioEl = null;
+
+var AUDIO_URLS = {"l03_al":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_al.mp3","l03_dal":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_dal.mp3","l03_del":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_del.mp3","l03_della":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_della.mp3","l03_dlg1":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_dlg1.mp3","l03_dlg2":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_dlg2.mp3","l03_dlg3":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_dlg3.mp3","l03_dlg4":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_dlg4.mp3","l03_dlg_full":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_dlg_full.mp3","l03_gli_amici":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_gli_amici.mp3","l03_gli_studenti":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_gli_studenti.mp3","l03_gli_zii":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_gli_zii.mp3","l03_i_fiori":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_i_fiori.mp3","l03_i_gatti":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_i_gatti.mp3","l03_i_libri":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_i_libri.mp3","l03_il_caffe":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_il_caffe.mp3","l03_il_fiore":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_il_fiore.mp3","l03_il_gatto":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_il_gatto.mp3","l03_il_libro":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_il_libro.mp3","l03_il_problema":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_il_problema.mp3","l03_il_sistema":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_il_sistema.mp3","l03_il_tavolo":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_il_tavolo.mp3","l03_l_amica":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_l_amica.mp3","l03_l_amico":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_l_amico.mp3","l03_l_universita":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_l_universita.mp3","l03_la_casa":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_la_casa.mp3","l03_la_chiave":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_la_chiave.mp3","l03_la_macchina":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_la_macchina.mp3","l03_la_pizza":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_la_pizza.mp3","l03_la_scuola":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_la_scuola.mp3","l03_la_stazione":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_la_stazione.mp3","l03_le_case":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_le_case.mp3","l03_le_chiavi":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_le_chiavi.mp3","l03_le_pizze":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_le_pizze.mp3","l03_le_scuole":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_le_scuole.mp3","l03_le_universita":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_le_universita.mp3","l03_lo_gnomo":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_lo_gnomo.mp3","l03_lo_pneumatico":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_lo_pneumatico.mp3","l03_lo_psicologo":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_lo_psicologo.mp3","l03_lo_spagnolo":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_lo_spagnolo.mp3","l03_lo_specchio":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_lo_specchio.mp3","l03_lo_studente":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_lo_studente.mp3","l03_lo_xilofono":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_lo_xilofono.mp3","l03_lo_zaino":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_lo_zaino.mp3","l03_lo_zoo":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_lo_zoo.mp3","l03_nel":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_nel.mp3","l03_sul":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_sul.mp3","l03_title":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_title.mp3","l03_un_amica":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_un_amica.mp3","l03_un_amico":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_un_amico.mp3","l03_un_isola":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_un_isola.mp3","l03_un_libro":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_un_libro.mp3","l03_una_casa":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_una_casa.mp3","l03_una_pizza":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_una_pizza.mp3","l03_uno_studente":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_uno_studente.mp3","l03_uno_zio":"https://realrentao.github.io/italiano-grammatica/audio/l03/l03_uno_zio.mp3"};
+var _currentAudio = null;
 function playAudio(key) {
-  if (!_audioLoaded || typeof AUDIO_DATA === 'undefined') {
-    showToast('正在加载音频...');
-    loadAudioScript().then(function() {
-      playAudio(key);
-    });
-    return;
-  }
-  if (!AUDIO_DATA[key]) {
-    showToast('该音频尚未收录 🔇');
-    return;
-  }
-  if (_audioEl) _audioEl.pause();
-  _audioEl = new Audio(AUDIO_DATA[key]);
-  _audioEl.play().catch(function(e) {
-    if (e.name === 'AbortError') return;
-    showToast('请先点击页面任意位置，再试一次 🔊');
-  });
+  var url = AUDIO_URLS[key];
+  if (!url) return;
+  if (_currentAudio) { _currentAudio.pause(); _currentAudio = null; }
+  _currentAudio = new Audio(url);
+  _currentAudio.play().catch(function(){});
 }
+
 
 // ===== Toast 提示 =====
 function showToast(msg) {
@@ -1130,15 +1114,6 @@ setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEac
 
 // ===== 初始化 =====
 requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
-// prefetch 后台下载 + idle 闲时解析：零卡顿 + 零延迟
-(function() {
-  function tryLoad() { loadAudioScript(); }
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(tryLoad, { timeout: 4000 });
-  } else {
-    setTimeout(tryLoad, 2500);
-  }
-})();
 </script>
 
 </body>
