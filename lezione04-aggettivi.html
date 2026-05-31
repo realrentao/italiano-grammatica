@@ -601,7 +601,6 @@
     .quiz-option-tf.correct:nth-child(1) { background: #c8e6c9; border-color: #4caf50; }
     .quiz-option-tf.correct:nth-child(2) { background: #ffcdd2; border-color: #f44336; }
   </style>
-  <link rel="prefetch" href="audio_l04.js?v=3">
 </head>
 <body>
 
@@ -1041,39 +1040,24 @@
 
 <script>
 // ===== 音频按需加载（后台预加载，不阻塞首屏）=====
-var _audioLoaded = false;
-var _audioPromise = null;
-function loadAudioScript() {
-  if (_audioPromise) return _audioPromise;
-  _audioPromise = new Promise(function(resolve) {
-    var s = document.createElement('script');
-    s.src = 'audio_l04.js?v=2';
-    s.onload = function() { _audioLoaded = true; resolve(); };
+;
     document.head.appendChild(s);
   });
   return _audioPromise;
 }
 // ===== 音频播放 =====
 let _audioEl = null;
+
+var AUDIO_URLS = {"l04_alto":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_alto.mp3","l04_amico_vecchio":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_amico_vecchio.mp3","l04_aperto":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_aperto.mp3","l04_begli_amici":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_begli_amici.mp3","l04_bei_libri":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_bei_libri.mp3","l04_bel_ragazzo":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_bel_ragazzo.mp3","l04_bell_amico":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_bell_amico.mp3","l04_bella_casa":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_bella_casa.mp3","l04_bella_donna":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_bella_donna.mp3","l04_belle_case":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_belle_case.mp3","l04_belle_donne":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_belle_donne.mp3","l04_bello":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_bello.mp3","l04_bello_studente":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_bello_studente.mp3","l04_bianco":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_bianco.mp3","l04_brava":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_brava.mp3","l04_brave":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_brave.mp3","l04_bravi":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_bravi.mp3","l04_bravo":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_bravo.mp3","l04_buon_amico":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_buon_amico.mp3","l04_buon_pane":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_buon_pane.mp3","l04_buon_vino":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_buon_vino.mp3","l04_buona_cena":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_buona_cena.mp3","l04_buono":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_buono.mp3","l04_casa_bianca":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_casa_bianca.mp3","l04_casa_nuova":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_casa_nuova.mp3","l04_cena_buona":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_cena_buona.mp3","l04_contento":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_contento.mp3","l04_dlg1":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_dlg1.mp3","l04_dlg2":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_dlg2.mp3","l04_dlg3":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_dlg3.mp3","l04_dlg4":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_dlg4.mp3","l04_dlg_full":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_dlg_full.mp3","l04_donna_alta":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_donna_alta.mp3","l04_donne_alte":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_donne_alte.mp3","l04_esame_importante":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_esame_importante.mp3","l04_felice":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_felice.mp3","l04_felici":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_felici.mp3","l04_fiore_viola":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_fiore_viola.mp3","l04_gentile":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_gentile.mp3","l04_gentili":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_gentili.mp3","l04_gran_casa":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_gran_casa.mp3","l04_grand_amico":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_grand_amico.mp3","l04_grande":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_grande.mp3","l04_grandi":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_grandi.mp3","l04_importante":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_importante.mp3","l04_importanti":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_importanti.mp3","l04_intelligente":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_intelligente.mp3","l04_intelligenti":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_intelligenti.mp3","l04_italiano":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_italiano.mp3","l04_libri_italiani":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_libri_italiani.mp3","l04_libro_italiano":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_libro_italiano.mp3","l04_maglia_blu":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_maglia_blu.mp3","l04_nuovo":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_nuovo.mp3","l04_piccolo":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_piccolo.mp3","l04_pizza_italiana":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_pizza_italiana.mp3","l04_pizze_italiane":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_pizze_italiane.mp3","l04_povero":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_povero.mp3","l04_povero_uomo":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_povero_uomo.mp3","l04_questione_importante":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_questione_importante.mp3","l04_ragazza_brava":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_ragazza_brava.mp3","l04_ragazza_intelligente":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_ragazza_intelligente.mp3","l04_ragazze_brave":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_ragazze_brave.mp3","l04_ragazze_intelligenti":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_ragazze_intelligenti.mp3","l04_ragazzi_bravi":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_ragazzi_bravi.mp3","l04_ragazzi_intelligenti":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_ragazzi_intelligenti.mp3","l04_ragazzo_bravo":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_ragazzo_bravo.mp3","l04_ragazzo_intelligente":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_ragazzo_intelligente.mp3","l04_rosso":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_rosso.mp3","l04_scarpe_rosa":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_scarpe_rosa.mp3","l04_simpatico":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_simpatico.mp3","l04_stanco":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_stanco.mp3","l04_title":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_title.mp3","l04_un_grand_uomo":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_un_grand_uomo.mp3","l04_uomini_alti":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_uomini_alti.mp3","l04_uomo_alto":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_uomo_alto.mp3","l04_vecchio":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_vecchio.mp3","l04_vecchio_amico":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_vecchio_amico.mp3","l04_vini_buoni":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_vini_buoni.mp3","l04_vino_buono":"https://realrentao.github.io/italiano-grammatica/audio/l04/l04_vino_buono.mp3"};
+var _currentAudio = null;
 function playAudio(key) {
-  if (!_audioLoaded || typeof AUDIO_DATA === 'undefined') {
-    showToast('正在加载音频...');
-    loadAudioScript().then(function() {
-      playAudio(key);
-    });
-    return;
-  }
-  if (!AUDIO_DATA[key]) {
-    showToast('该音频尚未收录 🔇');
-    return;
-  }
-  if (_audioEl) _audioEl.pause();
-  _audioEl = new Audio(AUDIO_DATA[key]);
-  _audioEl.play().catch(function(e) {
-    if (e.name === 'AbortError') return;
-    showToast('请先点击页面任意位置，再试一次 🔊');
-  });
+  var url = AUDIO_URLS[key];
+  if (!url) return;
+  if (_currentAudio) { _currentAudio.pause(); _currentAudio = null; }
+  _currentAudio = new Audio(url);
+  _currentAudio.play().catch(function(){});
 }
+
 
 // ===== Toast 提示 =====
 function showToast(msg) {
@@ -1333,15 +1317,6 @@ setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEac
 
 // ===== 初始化 =====
 requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
-// prefetch 后台下载 + idle 闲时解析：零卡顿 + 零延迟
-(function() {
-  function tryLoad() { loadAudioScript(); }
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(tryLoad, { timeout: 4000 });
-  } else {
-    setTimeout(tryLoad, 2500);
-  }
-})();
 </script>
 
 </body>
