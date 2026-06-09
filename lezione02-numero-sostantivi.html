@@ -425,7 +425,6 @@
       .principle-card .examples-row { gap: 12px; }
     }
   </style>
-  <link rel="prefetch" href="audio_l02.js?v=3">
 </head>
 <body>
 <div class="top-bar">
@@ -539,40 +538,30 @@
   <p><span class="it-flag"></span> 意大利语语法实战课程 · 第2课 · 名词的数</p>
 </div>
 <script>
-// ===== 音频按需加载（后台预加载，不阻塞首屏）=====
-var _audioLoaded = false;
-var _audioPromise = null;
-function loadAudioScript() {
-  if (_audioPromise) return _audioPromise;
-  _audioPromise = new Promise(function(resolve) {
-    var s = document.createElement('script');
-    s.src = 'audio_l02.js?v=2';
-    s.onload = function() { _audioLoaded = true; resolve(); };
-    document.head.appendChild(s);
-  });
-  return _audioPromise;
-}
-// ===== 音频播放 =====
+// ===== 音频播放（按需加载，每次只加载一个音频文件）=====
 const _audioEl = new Audio();
+const _LESSON = 'l02';
+
 function playAudio(key) {
-  if (!_audioLoaded || typeof AUDIO_DATA === 'undefined') {
-    showToast('正在加载音频...');
-    loadAudioScript().then(function() {
-      playAudio(key);
+  if (window.__AC && __AC[key]) {
+    _audioEl.pause();
+    _audioEl.src = __AC[key];
+    _audioEl.load();
+    _audioEl.play().catch(function(e) {
+      if (e.name === 'AbortError') return;
+      showToast('请先点击页面任意位置，再试一次 🔊');
     });
     return;
   }
-  if (!AUDIO_DATA[key]) {
+  var s = document.createElement('script');
+  s.src = 'audio_data/' + _LESSON + '/' + key + '.js?v=1';
+  s.onload = function() {
+    playAudio(key);
+  };
+  s.onerror = function() {
     showToast('该音频尚未收录 🔇');
-    return;
-  }
-  _audioEl.pause();
-  _audioEl.src = AUDIO_DATA[key];
-  _audioEl.load();
-  _audioEl.play().catch(function(e) {
-    if (e.name === 'AbortError') return;
-    showToast('请先点击页面任意位置，再试一次 🔊');
-  });
+  };
+  document.head.appendChild(s);
 }
 
 // ===== Toast 提示 =====
@@ -672,15 +661,6 @@ document.querySelectorAll('.section').forEach(s=>observer.observe(s));
 // 安全兜底：3秒后所有未显示区块强制可见（解决部分手机浏览器Observer不触发的问题）
 setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);
 requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
-// prefetch 后台下载 + idle 闲时解析：零卡顿 + 零延迟
-(function() {
-  function tryLoad() { loadAudioScript(); }
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(tryLoad, { timeout: 4000 });
-  } else {
-    setTimeout(tryLoad, 2500);
-  }
-})();
 </script>
 </body>
 </html>

@@ -601,7 +601,6 @@
     .quiz-option-tf.correct:nth-child(1) { background: #c8e6c9; border-color: #4caf50; }
     .quiz-option-tf.correct:nth-child(2) { background: #ffcdd2; border-color: #f44336; }
   </style>
-  <link rel="prefetch" href="audio_l04.js?v=3">
 </head>
 <body>
 
@@ -1040,40 +1039,30 @@
 </div>
 
 <script>
-// ===== 音频按需加载（后台预加载，不阻塞首屏）=====
-var _audioLoaded = false;
-var _audioPromise = null;
-function loadAudioScript() {
-  if (_audioPromise) return _audioPromise;
-  _audioPromise = new Promise(function(resolve) {
-    var s = document.createElement('script');
-    s.src = 'audio_l04.js?v=2';
-    s.onload = function() { _audioLoaded = true; resolve(); };
-    document.head.appendChild(s);
-  });
-  return _audioPromise;
-}
-// ===== 音频播放 =====
+// ===== 音频播放（按需加载，每次只加载一个音频文件）=====
 const _audioEl = new Audio();
+const _LESSON = 'l04';
+
 function playAudio(key) {
-  if (!_audioLoaded || typeof AUDIO_DATA === 'undefined') {
-    showToast('正在加载音频...');
-    loadAudioScript().then(function() {
-      playAudio(key);
+  if (window.__AC && __AC[key]) {
+    _audioEl.pause();
+    _audioEl.src = __AC[key];
+    _audioEl.load();
+    _audioEl.play().catch(function(e) {
+      if (e.name === 'AbortError') return;
+      showToast('请先点击页面任意位置，再试一次 🔊');
     });
     return;
   }
-  if (!AUDIO_DATA[key]) {
+  var s = document.createElement('script');
+  s.src = 'audio_data/' + _LESSON + '/' + key + '.js?v=1';
+  s.onload = function() {
+    playAudio(key);
+  };
+  s.onerror = function() {
     showToast('该音频尚未收录 🔇');
-    return;
-  }
-  _audioEl.pause();
-  _audioEl.src = AUDIO_DATA[key];
-  _audioEl.load();
-  _audioEl.play().catch(function(e) {
-    if (e.name === 'AbortError') return;
-    showToast('请先点击页面任意位置，再试一次 🔊');
-  });
+  };
+  document.head.appendChild(s);
 }
 
 // ===== Toast 提示 =====
@@ -1334,15 +1323,6 @@ setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEac
 
 // ===== 初始化 =====
 requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
-// prefetch 后台下载 + idle 闲时解析：零卡顿 + 零延迟
-(function() {
-  function tryLoad() { loadAudioScript(); }
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(tryLoad, { timeout: 4000 });
-  } else {
-    setTimeout(tryLoad, 2500);
-  }
-})();
 </script>
 
 </body>
