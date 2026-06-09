@@ -102,6 +102,62 @@
     @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
     .animate-in{animation:fadeInUp 0.5s ease forwards;}
     @media(max-width:640px){.hero h1{font-size:28px;}.rule-cards{grid-template-columns:1fr;}.trap-list{grid-template-columns:1fr;}}
+
+    /* ===== 闪卡翻转 ===== */
+    .flashcard-area{display:flex;flex-direction:column;align-items:center;margin-top:16px;gap:16px;}
+    .flashcard{width:300px;height:200px;perspective:600px;cursor:pointer;}
+    .flashcard-inner{position:relative;width:100%;height:100%;transition:transform 0.6s;transform-style:preserve-3d;}
+    .flashcard.flipped .flashcard-inner{transform:rotateY(180deg);}
+    .flashcard-front,.flashcard-back{position:absolute;inset:0;border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;backface-visibility:hidden;padding:20px;}
+    .flashcard-front{background:linear-gradient(135deg,var(--card),#f0ebe3);border:1px solid var(--border);}
+    .flashcard-back{background:linear-gradient(135deg,rgba(0,146,70,0.15),rgba(26,115,232,0.1));border:1px solid rgba(0,146,70,0.3);transform:rotateY(180deg);}
+    .flashcard .front-word{font-size:28px;font-weight:700;font-style:italic;}
+    .flashcard .front-hint{font-size:13px;color:var(--text-dim);margin-top:8px;}
+    .flashcard .back-article{font-size:20px;font-weight:700;margin-bottom:4px;}
+    .flashcard .back-word{font-size:24px;font-style:italic;font-weight:600;}
+    .flashcard .back-detail{font-size:13px;color:var(--text-dim);margin-top:4px;}
+    .flashcard .back-meaning{font-size:14px;color:var(--text-dim);margin-top:2px;}
+    .flashcard-nav{display:flex;gap:12px;}
+    .flashcard-nav button{background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 24px;border-radius:10px;cursor:pointer;font-size:14px;transition:all 0.2s;}
+    .flashcard-nav button:hover{background:var(--card-hover);border-color:var(--green);}
+    .flashcard-counter{font-size:13px;color:var(--text-dim);}
+
+    /* ===== 互动测验 ===== */
+    .quiz-section{margin-top:48px;}
+    .quiz-header-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+    .quiz-counter{font-size:14px;color:var(--text-dim);}
+    .quiz-counter strong{color:var(--green);font-size:18px;}
+    .quiz-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:16px;}
+    .quiz-question{font-size:17px;font-weight:600;margin-bottom:16px;}
+    .quiz-question .quiz-word{font-style:italic;color:var(--green);font-size:22px;}
+    .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .quiz-option{background:rgba(0,0,0,0.02);border:2px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;transition:all 0.25s;text-align:center;font-size:16px;}
+    .quiz-option:hover:not(.answered){border-color:var(--blue);background:rgba(26,115,232,0.08);}
+    .quiz-option.correct{border-color:var(--green)!important;background:rgba(0,146,70,0.15)!important;color:var(--green);}
+    .quiz-option.wrong{border-color:var(--red)!important;background:rgba(206,43,55,0.1)!important;color:var(--red);}
+    .quiz-option.answered{cursor:default;}
+    .quiz-feedback{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:14px;display:none;}
+    .quiz-feedback.show{display:block;}
+    .quiz-feedback.right{background:rgba(0,146,70,0.1);color:var(--green);}
+    .quiz-feedback.wrong-fb{background:rgba(206,43,55,0.08);color:#c0392b;}
+    .quiz-mode-tabs{display:flex;gap:8px;margin-bottom:20px;}
+    .quiz-mode-tab{padding:8px 18px;border-radius:10px;background:var(--card);border:1px solid var(--border);cursor:pointer;font-size:14px;font-weight:500;transition:all 0.2s;color:var(--text-dim);}
+    .quiz-mode-tab.active{border-color:var(--orange);color:var(--orange);background:rgba(232,113,10,0.1);}
+    .scoreboard{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;margin-top:32px;}
+    .score-display{font-size:48px;font-weight:700;background:linear-gradient(135deg,var(--green),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .score-label{font-size:14px;color:var(--text-dim);margin-top:4px;}
+    .score-rank{margin-top:12px;font-size:16px;font-weight:600;}
+    @media(max-width:640px){.quiz-options{grid-template-columns:1fr;}.flashcard{width:260px;height:180px;}}
+    .quiz-card-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+    .quiz-type-badge{display:inline-block;padding:2px 10px;border-radius:999px;color:#fff;font-size:11px;font-weight:600;letter-spacing:0.5px;}
+    .quiz-sentence{font-size:18px;line-height:1.6;padding:12px 16px;background:#f9f7f2;border-radius:10px;border:1px solid #e8e0d4;margin-bottom:4px;font-family:'Georgia','Times New Roman',serif;}
+    .quiz-sentence-hint{font-size:13px;color:#888;margin-top:4px;}
+    .quiz-blank{display:inline-block;min-width:60px;border-bottom:2px dashed #ce2b37;color:#ce2b37;font-weight:700;}
+    .quiz-option-tf{min-width:80px;text-align:center;font-weight:600;}
+    .quiz-option-tf:nth-child(1){border-color:#4caf50;color:#2e7d32;}
+    .quiz-option-tf:nth-child(2){border-color:#f44336;color:#c62828;}
+    .quiz-option-tf.correct:nth-child(1){background:#c8e6c9;border-color:#4caf50;}
+    .quiz-option-tf.correct:nth-child(2){background:#ffcdd2;border-color:#f44336;}
   </style>
 </head>
 <body>
@@ -112,6 +168,8 @@
     <a class="nav-btn" href="index.html">🏠 导航</a>
     <a class="nav-btn" href="lezione08-verbi-irregolari.html">◀ 上一课</a>
     <a class="nav-btn" href="lezione08-verbi-irregolari.html">下一课 ▶</a>
+    <button class="nav-btn" onclick="scrollToSection('quiz')">📝 测验</button>
+    <button class="nav-btn" onclick="playAudio('l07_title')">🔊 课名</button>
   </div>
 </div>
 <div class="container">
@@ -194,6 +252,65 @@
       <div class="examples-row"><div class="example-pair"><span class="good">✅ io parlo</span><span class="bad">❌ io parla</span></div><div class="example-pair"><span class="good">✅ noi scriviamo</span><span class="bad">❌ noi scrivamo</span></div><div class="example-pair"><span class="good">✅ loro capiscono</span><span class="bad">❌ loro capano</span></div></div>
     </div>
   </div>
+
+  <!-- 闪卡练习 -->
+  <div class="section" id="sec-flashcard">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(124,58,237,0.15);">🃏</div>
+      <h2 class="section-title">闪卡练习 — 点击翻转看动词变位</h2>
+    </div>
+    <div class="flashcard-area">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="flashcard-inner" id="flashcardInner">
+          <div class="flashcard-front">
+            <div class="front-word" id="fcWord">parlare</div>
+            <div class="front-hint">点击查看变位</div>
+          </div>
+          <div class="flashcard-back">
+            <div class="back-article" id="fcArticle" style="color:var(--blue)">-are 组</div>
+            <div class="back-word" id="fcFullWord">parl-o / parl-i / parl-a</div>
+            <div class="back-detail" id="fcDetail">parl-iamo / parl-ate / parl-ano</div>
+            <div class="back-meaning" id="fcMeaning">说话</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard-nav">
+        <button onclick="prevCard()">← 上一个</button>
+        <span class="flashcard-counter" id="fcCounter">1 / 20</span>
+        <button onclick="nextCard()">下一个 →</button>
+      </div>
+      <button class="nav-btn" onclick="speakCurrentCard()" style="margin-top:4px;">🔊 听发音</button>
+    </div>
+  </div>
+
+  <!-- 互动测验 -->
+  <div class="section quiz-section" id="sec-quiz">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(232,113,10,0.15);">📝</div>
+      <h2 class="section-title">小测验 — 选择正确的动词变位形式</h2>
+    </div>
+
+    <div class="quiz-mode-tabs">
+      <div class="quiz-mode-tab active" onclick="switchQuizMode('basic', this)">🟢 规则变位</div>
+      <div class="quiz-mode-tab" onclick="switchQuizMode('trap', this)">🔴 特殊/易错</div>
+      <div class="quiz-mode-tab" onclick="switchQuizMode('all', this)">🟣 全部</div>
+    </div>
+
+    <div class="quiz-header-bar">
+      <div class="quiz-counter">已答 <strong id="answeredCount">0</strong> / <span id="totalCount">20</span></div>
+      <button class="nav-btn" onclick="resetQuiz()">🔄 重来</button>
+    </div>
+
+    <div id="quizContainer"></div>
+
+    <div class="scoreboard" id="scoreboard" style="display:none;">
+      <div class="score-display" id="scoreValue">0</div>
+      <div class="score-label">测验得分</div>
+      <div class="score-rank" id="scoreRank"></div>
+      <button class="nav-btn" onclick="resetQuiz()" style="margin-top:16px;">🔄 重新测验</button>
+    </div>
+  </div>
+
 </div>
 
 <div class="footer">
@@ -238,10 +355,223 @@ function showToast(msg) {
   setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2500);
 }
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
-const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
+
+// ===== 闪卡系统 =====
+const flashcards = [
+  {word:'parlare',masc:'-are',fem:'-are',mpl:'-are',fpl:'-are',meaning:'说话 -o/-i/-a/-iamo/-ate/-ano',audio:'l07_io_parl_o'},
+  {word:'io parlo',masc:'parl-o',fem:'parl-o',mpl:'parl-iamo',fpl:'parl-iamo',meaning:'我说（-are）',audio:'l07_io_parl_o'},
+  {word:'tu parli',masc:'parl-i',fem:'parl-i',mpl:'parl-ate',fpl:'parl-ate',meaning:'你说（-are）',audio:'l07_tu_parl_i'},
+  {word:'lui parla',masc:'parl-a',fem:'parl-a',mpl:'parl-ano',fpl:'parl-ano',meaning:'他说（-are）',audio:'l07_lui_parl_a'},
+  {word:'noi parliamo',masc:'parl-iamo',fem:'parl-iamo',mpl:'parl-iamo',fpl:'parl-iamo',meaning:'我们说（-are）',audio:'l07_noi_parl_iamo'},
+  {word:'loro parlano',masc:'parl-ano',fem:'parl-ano',mpl:'parl-ano',fpl:'parl-ano',meaning:'他们说（-are）',audio:'l07_loro_parl_ano'},
+  {word:'scrivere',masc:'-ere',fem:'-ere',mpl:'-ere',fpl:'-ere',meaning:'写 -o/-i/-e/-iamo/-ite/-ono',audio:'l07_io_scriv_o'},
+  {word:'io scrivo',masc:'scriv-o',fem:'scriv-o',mpl:'scriv-iamo',fpl:'scriv-iamo',meaning:'我写（-ere）',audio:'l07_io_scriv_o'},
+  {word:'tu scrivi',masc:'scriv-i',fem:'scriv-i',mpl:'scriv-ite',fpl:'scriv-ite',meaning:'你写（-ere）',audio:'l07_tu_scriv_i'},
+  {word:'lui scrive',masc:'scriv-e',fem:'scriv-e',mpl:'scriv-ono',fpl:'scriv-ono',meaning:'他写（-ere）',audio:'l07_lui_scriv_e'},
+  {word:'noi scriviamo',masc:'scriv-iamo',fem:'scriv-iamo',mpl:'scriv-iamo',fpl:'scriv-iamo',meaning:'我们写（-ere）',audio:'l07_noi_scriv_iamo'},
+  {word:'partire',masc:'-ire',fem:'-ire',mpl:'-ire',fpl:'-ire',meaning:'出发 -o/-i/-e/-iamo/-ite/-ono',audio:'l07_io_part_o'},
+  {word:'io parto',masc:'part-o',fem:'part-o',mpl:'part-iamo',fpl:'part-iamo',meaning:'我出发（-ire）',audio:'l07_io_part_o'},
+  {word:'tu parti',masc:'part-i',fem:'part-i',mpl:'part-ite',fpl:'part-ite',meaning:'你出发（-ire）',audio:'l07_tu_part_i'},
+  {word:'lui parte',masc:'part-e',fem:'part-e',mpl:'part-ono',fpl:'part-ono',meaning:'他出发（-ire）',audio:'l07_lui_part_e'},
+  {word:'capire (isc)',masc:'-isc-',fem:'-isc-',mpl:'-isc-',fpl:'-isc-',meaning:'理解 -isco/-isci/-isce/-iamo/-ite/-iscono',audio:'l07_io_capisc_o'},
+  {word:'io capisco',masc:'cap-isc-o',fem:'cap-isc-o',mpl:'cap-iamo',fpl:'cap-iamo',meaning:'我理解（加isc）',audio:'l07_io_capisc_o'},
+  {word:'tu capisci',masc:'cap-isc-i',fem:'cap-isc-i',mpl:'cap-ite',fpl:'cap-ite',meaning:'你理解（加isc）',audio:'l07_tu_capisc_i'},
+  {word:'finire (isc)',masc:'fin-isc-o',fem:'fin-isc-o',mpl:'fin-iamo',fpl:'fin-iamo',meaning:'完成（加isc）',audio:'l07'},
+  {word:'preferire (isc)',masc:'prefer-isc-o',fem:'prefer-isc-o',mpl:'prefer-iamo',fpl:'prefer-iamo',meaning:'偏好（加isc）',audio:'l07'},
+];
+let fcIndex=0;
+
+function updateFlashcard(){
+  const c=flashcards[fcIndex];
+  document.getElementById('fcWord').textContent=c.word;
+  document.getElementById('fcArticle').textContent=c.masc;
+  var isTwoEnding = (c.masc === c.fem);
+  document.getElementById('fcArticle').style.color=isTwoEnding ? 'var(--purple)' : 'var(--blue)';
+  document.getElementById('fcFullWord').textContent=c.masc+' / '+c.fem;
+  document.getElementById('fcDetail').textContent=c.mpl+' / '+c.fpl;
+  document.getElementById('fcMeaning').textContent=c.meaning;
+  document.getElementById('fcCounter').textContent=(fcIndex+1)+' / '+flashcards.length;
+  document.getElementById('flashcard').classList.remove('flipped');
+}
+function flipCard(){
+  document.getElementById('flashcard').classList.toggle('flipped');
+  const c=flashcards[fcIndex];playAudio(c.audio);
+}
+function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
+function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
+function speakCurrentCard(){const c=flashcards[fcIndex];playAudio(c.audio);}
+
+// ===== 测验系统 =====
+const quizBank={
+  basic:[
+    // ---- 动词组别与词尾 (10题) ----
+    {type:'fill', word:'意大利语规则动词分为哪三组？', answer:'-are / -ere / -ire', options:['-are / -ere / -ire','-ar / -er / -ir','-o / -i / -e','-a / -e / -i'], hint:'三组动词不定式词尾', audio:''},
+    {type:'fill', word:'parlare 的 io 变位是？', answer:'parlo', options:['parlo','parli','parla','parliamo'], hint:'io + parl- + o', audio:'l07_io_parl_o'},
+    {type:'fill', word:'parlare 的 tu 变位是？', answer:'parli', options:['parli','parlo','parla','parlate'], hint:'tu + parl- + i', audio:'l07_tu_parl_i'},
+    {type:'fill', word:'parlare 的 lui/lei 变位是？', answer:'parla', options:['parla','parlo','parli','parlano'], hint:'lui + parl- + a', audio:'l07_lui_parl_a'},
+    {type:'fill', word:'parlare 的 noi 变位是？', answer:'parliamo', options:['parliamo','parlate','parlano','parlo'], hint:'noi + parl- + iamo', audio:'l07_noi_parl_iamo'},
+    {type:'fill', word:'parlare 的 voi 变位是？', answer:'parlate', options:['parlate','parlano','parliamo','parlo'], hint:'voi + parl- + ate', audio:''},
+    {type:'fill', word:'parlare 的 loro 变位是？', answer:'parlano', options:['parlano','parlate','parliamo','parla'], hint:'loro + parl- + ano', audio:'l07_loro_parl_ano'},
+    {type:'fill', word:'scrivere 的 io 变位是？', answer:'scrivo', options:['scrivo','scrivi','scrive','scriviamo'], hint:'io + scriv- + o', audio:'l07_io_scriv_o'},
+    {type:'fill', word:'scrivere 的 loro 变位是？', answer:'scrivono', options:['scrivono','scrivete','scrive','scriviamo'], hint:'loro + scriv- + ono', audio:''},
+    {type:'fill', word:'partire 的 io 变位是？', answer:'parto', options:['parto','parti','parte','partiamo'], hint:'io + part- + o', audio:'l07_io_part_o'},
+    // ---- 句子填空 (5题) ----
+    {type:'sentence', word:'Io ___ italiano.', answer:'parlo', options:['parlo','parli','parla','parlano'], hint:'io+parlare=parlo', audio:''},
+    {type:'sentence', word:'Tu ___ molto bene!', answer:'parli', options:['parli','parlo','parla','parlate'], hint:'tu+parlare=parli', audio:''},
+    {type:'sentence', word:'Noi ___ una lettera.', answer:'scriviamo', options:['scriviamo','scrivete','scrivono','scrive'], hint:'noi+scrivere=scriviamo', audio:''},
+    {type:'sentence', word:'Loro ___ per Roma domani.', answer:'partono', options:['partono','partite','parte','parti'], hint:'loro+partire=partono', audio:''},
+    {type:'sentence', word:'Lei ___ molto bene l\'italiano.', answer:'parla', options:['parla','parli','parlo','parlano'], hint:'lei+parlare=parla', audio:''},
+    // ---- 翻译选择 (5题) ----
+    {type:'translate', word:'意大利语中 -are 类动词的 noi 词尾是？', answer:'-iamo', options:['-iamo','-ate','-ano','-o'], hint:'noi词尾对所有三组都是-iamo', audio:''},
+    {type:'translate', word:'意大利语中 -ere 类动词的 loro 词尾是？', answer:'-ono', options:['-ono','-ano','-ino','-e'], hint:'-ere的loro词尾是-ono', audio:''},
+    {type:'translate', word:'意大利语中 -ire 类动词的 loro 词尾是？', answer:'-ono', options:['-ono','-ano','-ino','-e'], hint:'-ire的loro词尾也是-ono', audio:''},
+    {type:'translate', word:'"parlano" 是哪个人称的变位？', answer:'loro（他们）', options:['loro（他们）','noi（我们）','voi（你们）','lui（他）'], hint:'parl-ano=loro parlano', audio:''},
+    {type:'translate', word:'"scrivete" 是哪个人称的变位？', answer:'voi（你们）', options:['voi（你们）','loro（他们）','noi（我们）','tu（你）'], hint:'scriv-ete=voi scrivete', audio:''},
+  ],
+  trap:[
+    // ---- -ire加isc (8题) ----
+    {type:'fill', word:'capire 的 io 变位是？（注意isc）', answer:'capisco', options:['capisco','capo','capio','capiscio'], hint:'capire加isc→capisco', audio:'l07_io_capisc_o'},
+    {type:'fill', word:'finire 的 io 变位是？', answer:'finisco', options:['finisco','fino','finio','finesco'], hint:'finire加isc→finisco', audio:''},
+    {type:'fill', word:'preferire 的 io 变位是？', answer:'preferisco', options:['preferisco','prefero','preferio','preferiscio'], hint:'preferire加isc→preferisco', audio:''},
+    {type:'fill', word:'capire 的 tu 变位是？', answer:'capisci', options:['capisci','capi','cape','capisce'], hint:'tu+capire+isc=capisci', audio:'l07_tu_capisc_i'},
+    {type:'fill', word:'partire 的 io 变位是？（不加isc）', answer:'parto', options:['parto','partisco','partio','partescio'], hint:'partire不加isc→parto', audio:'l07_io_part_o'},
+    {type:'fill', word:'dormire 的 io 变位是？（不加isc）', answer:'dormo', options:['dormo','dormisco','dormio','dormescio'], hint:'dormire不加isc→dormo', audio:''},
+    {type:'fill', word:'capire 的 loro 变位是？', answer:'capiscono', options:['capiscono','capono','capano','capiscano'], hint:'loro+cap-isc-ono=capiscono', audio:''},
+    {type:'fill', word:'三个常见的加isc的-ire动词是？', answer:'capire/finire/preferire', options:['capire/finire/preferire','partire/dormire/sentire','aprire/offrire/coprire','venire/salire/uscire'], hint:'capire/finire/preferire/pulire等加isc', audio:''},
+    // ---- 判断正误 (4题) ----
+    {type:'truefalse', word:'"io parto" 是正确的意大利语现在时变位', answer:'对', options:['对','错'], hint:'partire→parto，正确', audio:''},
+    {type:'truefalse', word:'"io partisco" 是正确的意大利语现在时变位', answer:'错', options:['对','错'], hint:'partire不加isc，应该是parto', audio:''},
+    {type:'truefalse', word:'"noi partiamo" 中-iamo是所有三组共通的', answer:'对', options:['对','错'], hint:'所有三组动词的noi变位都是-iamo', audio:''},
+    {type:'truefalse', word:'"loro parlano" 的动词属-are组', answer:'对', options:['对','错'], hint:'parl-ano是-are组的loro词尾', audio:''},
+    // ---- 句子填空 (5题) ----
+    {type:'sentence', word:'Io non ___ questa parola.', answer:'capisco', options:['capisco','capo','capisci','capisce'], hint:'io+capire+isc=capisco', audio:''},
+    {type:'sentence', word:'Tu ___ di studiare italiano?', answer:'preferisci', options:['preferisci','preferi','preferisce','preferisco'], hint:'tu+preferire+isc=preferisci', audio:''},
+    {type:'sentence', word:'Lui ___ sempre i compiti in tempo.', answer:'finisce', options:['finisce','fine','fina','finono'], hint:'lui+finire+isc=finisce', audio:''},
+    {type:'sentence', word:'Noi ___ per le vacanze domani.', answer:'partiamo', options:['partiamo','partite','partono','parte'], hint:'noi+partire=partiamo', audio:''},
+    {type:'sentence', word:'Voi ___ mai tardi.', answer:'dormite', options:['dormite','dormono','dorme','dormo'], hint:'voi+dormire=dormite', audio:''},
+    // ---- 翻译选择 (3题) ----
+    {type:'translate', word:'"capiscono" 是哪个人称的变位？', answer:'loro（他们理解）', options:['loro（他们理解）','lui（他理解）','voi（你们理解）','noi（我们理解）'], hint:'cap-isc-ono=loro capiscono', audio:''},
+    {type:'translate', word:'"finiamo" 是哪个人称的变位？', answer:'noi（我们完成）', options:['noi（我们完成）','loro（他们完成）','voi（你们完成）','tu（你完成）'], hint:'fin-iamo=noi finiamo（注意noi不加isc）', audio:''},
+  ]
+};let currentMode='basic';
+let currentQuizData=[];
+let quizScore=0;
+let quizAnswered=0;
+
+function switchQuizMode(mode,tabEl){
+  currentMode=mode;
+  document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));
+  if(tabEl)tabEl.classList.add('active');
+  resetQuiz();
+}
+
+function getQuizData(){
+  let pool;
+  if(currentMode==='basic')pool=quizBank.basic;
+  else if(currentMode==='trap')pool=quizBank.trap;
+  else pool=[...quizBank.basic,...quizBank.trap];
+  const shuffled=[...pool].sort(()=>Math.random()-0.5);
+  return shuffled.slice(0,20);
+}
+
+function buildQuiz(){
+  const container=document.getElementById('quizContainer');
+  container.innerHTML='';
+  currentQuizData=getQuizData();
+  document.getElementById('totalCount').textContent=currentQuizData.length;
+  const typeLabels={'fill':'填空选择','sentence':'句子填空','match':'搭配选择','translate':'翻译选择','truefalse':'判断正误'};
+  const typeColors={'fill':'#009246','sentence':'#1a73e8','match':'#7c3aed','translate':'#e8710a','truefalse':'#ce2b37'};
+  currentQuizData.forEach((q,i)=>{
+    const card=document.createElement('div');
+    card.className='quiz-card';card.id='quiz-'+i;
+    const badge='<span class="quiz-type-badge" style="background:'+(typeColors[q.type]||'#666')+'">'+(typeLabels[q.type]||q.type)+'</span>';
+    let questionHtml='';
+    if(q.type==='fill'){
+      questionHtml='<div class="quiz-question"><span class="quiz-word">'+q.word+'</span></div>';
+    }else if(q.type==='sentence'){
+      questionHtml='<div class="quiz-question"><div class="quiz-sentence">'+q.word.replace(/___/g,'<span class="quiz-blank">___</span>')+'</div><div class="quiz-sentence-hint">请选择正确形式填入空白处：</div></div>';
+    }else if(q.type==='match'){
+      questionHtml='<div class="quiz-question">哪个名词能搭配 <span class="quiz-word">'+q.word+'</span> ？</div>';
+    }else if(q.type==='translate'){
+      questionHtml='<div class="quiz-question">请选择正确的翻译：<div class="quiz-sentence">'+q.word+'</div></div>';
+    }else if(q.type==='truefalse'){
+      questionHtml='<div class="quiz-question"><div class="quiz-sentence">'+q.word+'</div><div class="quiz-sentence-hint">判断上述说法的正误：</div></div>';
+    }
+    card.innerHTML='<div class="quiz-card-header">'+badge+'</div>'+questionHtml+'<div class="quiz-options">'+q.options.map((o,j)=>{
+      const safe=o.replace(/'/g,"\\'");
+      return '<div class="quiz-option'+(q.type==='truefalse'?' quiz-option-tf':'')+'" onclick="checkAnswer('+i+",'"+safe+"')"+'">'+o+'</div>';
+    }).join('')+'</div><div class="quiz-feedback" id="fb-'+i+'"></div>';
+    container.appendChild(card);
+  });
+}
+
+function checkAnswer(idx,chosen){
+  const q=currentQuizData[idx];
+  const card=document.getElementById('quiz-'+idx);
+  const options=card.querySelectorAll('.quiz-option');
+  const fb=document.getElementById('fb-'+idx);
+  if(options[0].classList.contains('answered'))return;
+  options.forEach(o=>o.classList.add('answered'));
+  const correct=q.answer;
+  if(chosen===correct){
+    quizScore++;
+    options.forEach(o=>{if(o.textContent===correct)o.classList.add('correct');});
+    fb.className='quiz-feedback show right';
+    fb.textContent='✅ 正确！'+q.hint;
+  }else{
+    options.forEach(o=>{if(o.textContent===chosen)o.classList.add('wrong');if(o.textContent===correct)o.classList.add('correct');});
+    fb.className='quiz-feedback show wrong-fb';
+    fb.textContent='❌ 正确答案是 '+correct+'：'+q.hint;
+  }
+  if(q.audio)playAudio(q.audio);
+  quizAnswered++;
+  document.getElementById('answeredCount').textContent=quizAnswered;
+  updateProgress();
+  if(quizAnswered===currentQuizData.length){
+    setTimeout(()=>{
+      const sb=document.getElementById('scoreboard');sb.style.display='block';
+      document.getElementById('scoreValue').textContent=quizScore+' / '+currentQuizData.length;
+      const pct=quizScore/currentQuizData.length;
+      let rank='';
+      if(pct>=0.95)rank='🏆 完美！动词变位大师！';
+      else if(pct>=0.85)rank='🌟 优秀！基本掌握变位规则！';
+      else if(pct>=0.70)rank='👍 不错！再练练-isc动词！';
+      else if(pct>=0.50)rank='💪 加油！多翻翻闪卡！';
+      else rank='📖 别气馁，回去复习变位规律吧！';
+      document.getElementById('scoreRank').textContent=rank;
+      scrollToSection('scoreboard');
+    },500);
+  }
+}
+
+function resetQuiz(){
+  quizScore=0;quizAnswered=0;
+  document.getElementById('scoreboard').style.display='none';
+  document.getElementById('answeredCount').textContent='0';
+  buildQuiz();updateProgress();
+}
+
+// ===== 进度条 =====
+function updateProgress(){
+  const total=currentQuizData.length||1;
+  const done=quizAnswered/total;
+  document.getElementById('progressFill').style.width=(done*100)+'%';
+}
+
+// ===== 滚动 =====
+function scrollToSection(id){
+  const el=document.getElementById('sec-'+id)||document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ===== Intersection Observer =====
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting&&!e.target.classList.contains('visible')){e.target.classList.add('visible');}});},{threshold:0.1});
 document.querySelectorAll('.section').forEach(s=>observer.observe(s));
 // 安全兜底：3秒后所有未显示区块强制可见
 setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);
+
+// ===== 初始化 =====
+requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
 </script>
 </body>
 </html>
