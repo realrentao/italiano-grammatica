@@ -102,6 +102,62 @@
     @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
     .animate-in{animation:fadeInUp 0.5s ease forwards;}
     @media(max-width:640px){.hero h1{font-size:28px;}.rule-cards{grid-template-columns:1fr;}.trap-list{grid-template-columns:1fr;}}
+
+    /* ===== 闪卡翻转 ===== */
+    .flashcard-area{display:flex;flex-direction:column;align-items:center;margin-top:16px;gap:16px;}
+    .flashcard{width:300px;height:200px;perspective:600px;cursor:pointer;}
+    .flashcard-inner{position:relative;width:100%;height:100%;transition:transform 0.6s;transform-style:preserve-3d;}
+    .flashcard.flipped .flashcard-inner{transform:rotateY(180deg);}
+    .flashcard-front,.flashcard-back{position:absolute;inset:0;border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;backface-visibility:hidden;padding:20px;}
+    .flashcard-front{background:linear-gradient(135deg,var(--card),#f0ebe3);border:1px solid var(--border);}
+    .flashcard-back{background:linear-gradient(135deg,rgba(0,146,70,0.15),rgba(26,115,232,0.1));border:1px solid rgba(0,146,70,0.3);transform:rotateY(180deg);}
+    .flashcard .front-word{font-size:28px;font-weight:700;font-style:italic;}
+    .flashcard .front-hint{font-size:13px;color:var(--text-dim);margin-top:8px;}
+    .flashcard .back-article{font-size:20px;font-weight:700;margin-bottom:4px;}
+    .flashcard .back-word{font-size:24px;font-style:italic;font-weight:600;}
+    .flashcard .back-detail{font-size:13px;color:var(--text-dim);margin-top:4px;}
+    .flashcard .back-meaning{font-size:14px;color:var(--text-dim);margin-top:2px;}
+    .flashcard-nav{display:flex;gap:12px;}
+    .flashcard-nav button{background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 24px;border-radius:10px;cursor:pointer;font-size:14px;transition:all 0.2s;}
+    .flashcard-nav button:hover{background:var(--card-hover);border-color:var(--green);}
+    .flashcard-counter{font-size:13px;color:var(--text-dim);}
+
+    /* ===== 互动测验 ===== */
+    .quiz-section{margin-top:48px;}
+    .quiz-header-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+    .quiz-counter{font-size:14px;color:var(--text-dim);}
+    .quiz-counter strong{color:var(--green);font-size:18px;}
+    .quiz-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:16px;}
+    .quiz-question{font-size:17px;font-weight:600;margin-bottom:16px;}
+    .quiz-question .quiz-word{font-style:italic;color:var(--green);font-size:22px;}
+    .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .quiz-option{background:rgba(0,0,0,0.02);border:2px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;transition:all 0.25s;text-align:center;font-size:16px;}
+    .quiz-option:hover:not(.answered){border-color:var(--blue);background:rgba(26,115,232,0.08);}
+    .quiz-option.correct{border-color:var(--green)!important;background:rgba(0,146,70,0.15)!important;color:var(--green);}
+    .quiz-option.wrong{border-color:var(--red)!important;background:rgba(206,43,55,0.1)!important;color:var(--red);}
+    .quiz-option.answered{cursor:default;}
+    .quiz-feedback{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:14px;display:none;}
+    .quiz-feedback.show{display:block;}
+    .quiz-feedback.right{background:rgba(0,146,70,0.1);color:var(--green);}
+    .quiz-feedback.wrong-fb{background:rgba(206,43,55,0.08);color:#c0392b;}
+    .quiz-mode-tabs{display:flex;gap:8px;margin-bottom:20px;}
+    .quiz-mode-tab{padding:8px 18px;border-radius:10px;background:var(--card);border:1px solid var(--border);cursor:pointer;font-size:14px;font-weight:500;transition:all 0.2s;color:var(--text-dim);}
+    .quiz-mode-tab.active{border-color:var(--orange);color:var(--orange);background:rgba(232,113,10,0.1);}
+    .scoreboard{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;margin-top:32px;}
+    .score-display{font-size:48px;font-weight:700;background:linear-gradient(135deg,var(--green),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .score-label{font-size:14px;color:var(--text-dim);margin-top:4px;}
+    .score-rank{margin-top:12px;font-size:16px;font-weight:600;}
+    @media(max-width:640px){.quiz-options{grid-template-columns:1fr;}.flashcard{width:260px;height:180px;}}
+    .quiz-card-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+    .quiz-type-badge{display:inline-block;padding:2px 10px;border-radius:999px;color:#fff;font-size:11px;font-weight:600;letter-spacing:0.5px;}
+    .quiz-sentence{font-size:18px;line-height:1.6;padding:12px 16px;background:#f9f7f2;border-radius:10px;border:1px solid #e8e0d4;margin-bottom:4px;font-family:'Georgia','Times New Roman',serif;}
+    .quiz-sentence-hint{font-size:13px;color:#888;margin-top:4px;}
+    .quiz-blank{display:inline-block;min-width:60px;border-bottom:2px dashed #ce2b37;color:#ce2b37;font-weight:700;}
+    .quiz-option-tf{min-width:80px;text-align:center;font-weight:600;}
+    .quiz-option-tf:nth-child(1){border-color:#4caf50;color:#2e7d32;}
+    .quiz-option-tf:nth-child(2){border-color:#f44336;color:#c62828;}
+    .quiz-option-tf.correct:nth-child(1){background:#c8e6c9;border-color:#4caf50;}
+    .quiz-option-tf.correct:nth-child(2){background:#ffcdd2;border-color:#f44336;}
   </style>
 </head>
 <body>
@@ -112,6 +168,8 @@
     <a class="nav-btn" href="index.html">🏠 导航</a>
     <a class="nav-btn" href="lezione05-comparativo-superlativo.html">◀ 上一课</a>
     <a class="nav-btn" href="lezione07-verbo-presente.html">下一课 ▶</a>
+    <button class="nav-btn" onclick="scrollToSection('quiz')">📝 测验</button>
+    <button class="nav-btn" onclick="playAudio('l06_title')">🔊 课名</button>
   </div>
 </div>
 <div class="container">
@@ -194,6 +252,65 @@
       <div class="examples-row"><div class="example-pair"><span class="good">✅ il mio libro</span><span class="bad">❌ mio libro</span></div><div class="example-pair"><span class="good">✅ mio padre</span><span class="bad">❌ il mio padre</span></div><div class="example-pair"><span class="good">✅ il libro di Maria</span><span class="bad">❌ il suo libro（有歧义）</span></div></div>
     </div>
   </div>
+
+  <!-- 闪卡练习 -->
+  <div class="section" id="sec-flashcard">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(124,58,237,0.15);">🃏</div>
+      <h2 class="section-title">闪卡练习 — 点击翻转看代词/物主形式</h2>
+    </div>
+    <div class="flashcard-area">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="flashcard-inner" id="flashcardInner">
+          <div class="flashcard-front">
+            <div class="front-word" id="fcWord">io</div>
+            <div class="front-hint">点击查看详情</div>
+          </div>
+          <div class="flashcard-back">
+            <div class="back-article" id="fcArticle" style="color:var(--blue)">io</div>
+            <div class="back-word" id="fcFullWord">io / mio / mia</div>
+            <div class="back-detail" id="fcDetail">miei / mie（复数）</div>
+            <div class="back-meaning" id="fcMeaning">我 · 我的</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard-nav">
+        <button onclick="prevCard()">← 上一个</button>
+        <span class="flashcard-counter" id="fcCounter">1 / 20</span>
+        <button onclick="nextCard()">下一个 →</button>
+      </div>
+      <button class="nav-btn" onclick="speakCurrentCard()" style="margin-top:4px;">🔊 听发音</button>
+    </div>
+  </div>
+
+  <!-- 互动测验 -->
+  <div class="section quiz-section" id="sec-quiz">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(232,113,10,0.15);">📝</div>
+      <h2 class="section-title">小测验 — 选择正确的代词/物主形式</h2>
+    </div>
+
+    <div class="quiz-mode-tabs">
+      <div class="quiz-mode-tab active" onclick="switchQuizMode('basic', this)">🟢 物主代词</div>
+      <div class="quiz-mode-tab" onclick="switchQuizMode('trap', this)">🔴 特殊/易错</div>
+      <div class="quiz-mode-tab" onclick="switchQuizMode('all', this)">🟣 全部</div>
+    </div>
+
+    <div class="quiz-header-bar">
+      <div class="quiz-counter">已答 <strong id="answeredCount">0</strong> / <span id="totalCount">20</span></div>
+      <button class="nav-btn" onclick="resetQuiz()">🔄 重来</button>
+    </div>
+
+    <div id="quizContainer"></div>
+
+    <div class="scoreboard" id="scoreboard" style="display:none;">
+      <div class="score-display" id="scoreValue">0</div>
+      <div class="score-label">测验得分</div>
+      <div class="score-rank" id="scoreRank"></div>
+      <button class="nav-btn" onclick="resetQuiz()" style="margin-top:16px;">🔄 重新测验</button>
+    </div>
+  </div>
+
 </div>
 
 <div class="footer">
@@ -238,10 +355,223 @@ function showToast(msg) {
   setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2500);
 }
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
-const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
+
+// ===== 闪卡系统 =====
+const flashcards = [
+  {word:'io',masc:'io',fem:'io',mpl:'noi',fpl:'noi',meaning:'我',audio:'l06_io'},
+  {word:'tu',masc:'tu',fem:'tu',mpl:'voi',fpl:'voi',meaning:'你',audio:'l06_tu'},
+  {word:'lui',masc:'lui',fem:'lui',mpl:'loro',fpl:'loro',meaning:'他',audio:'l06_lui'},
+  {word:'lei',masc:'lei',fem:'lei',mpl:'loro',fpl:'loro',meaning:'她/您',audio:'l06_lei'},
+  {word:'noi',masc:'noi',fem:'noi',mpl:'noi',fpl:'noi',meaning:'我们',audio:'l06_noi'},
+  {word:'voi',masc:'voi',fem:'voi',mpl:'voi',fpl:'voi',meaning:'你们',audio:'l06_voi'},
+  {word:'loro',masc:'loro',fem:'loro',mpl:'loro',fpl:'loro',meaning:'他们/她们',audio:'l06_loro'},
+  {word:'il mio',masc:'mio',fem:'mia',mpl:'miei',fpl:'mie',meaning:'我的',audio:'l06_io_mio_mia'},
+  {word:'il tuo',masc:'tuo',fem:'tua',mpl:'tuoi',fpl:'tue',meaning:'你的',audio:'l06_tu_tuo_tua'},
+  {word:'il suo',masc:'suo',fem:'sua',mpl:'suoi',fpl:'sue',meaning:'他/她/您的',audio:'l06_lui_suo_sua'},
+  {word:'il nostro',masc:'nostro',fem:'nostra',mpl:'nostri',fpl:'nostre',meaning:'我们的',audio:'l06_noi_nostro_nostra'},
+  {word:'il vostro',masc:'vostro',fem:'vostra',mpl:'vostri',fpl:'vostre',meaning:'你们的',audio:'l06'},
+  {word:'il loro',masc:'loro',fem:'loro',mpl:'loro',fpl:'loro',meaning:'他们的',audio:'l06_loro'},
+  {word:'mio padre',masc:'mio',fem:'mia',mpl:'miei',fpl:'mie',meaning:'我的父亲（省冠词）',audio:'l06_mio_padre'},
+  {word:'tua madre',masc:'tuo',fem:'tua',mpl:'tuoi',fpl:'tue',meaning:'你的母亲（省冠词）',audio:'l06_tua_madre'},
+  {word:'la mia mamma',masc:'mio',fem:'mia',mpl:'miei',fpl:'mie',meaning:'我的妈妈（要冠词）',audio:'l06_la_mia_mamma'},
+  {word:'i miei fratelli',masc:'mio',fem:'mia',mpl:'miei',fpl:'mie',meaning:'我的兄弟们（复数要冠词）',audio:'l06'},
+  {word:'il libro di Maria',masc:'di',fem:'di',mpl:'di',fpl:'di',meaning:'Maria的书（最清晰）',audio:'l06'},
+  {word:'di lui / di lei',masc:'di lui',fem:'di lei',mpl:'di loro',fpl:'di loro',meaning:'他的/她的（消除歧义）',audio:'l06'},
+  {word:'la tua casa',masc:'tuo',fem:'tua',mpl:'tuoi',fpl:'tue',meaning:'你的房子',audio:'l06_la_tua_casa'},
+];
+let fcIndex=0;
+
+function updateFlashcard(){
+  const c=flashcards[fcIndex];
+  document.getElementById('fcWord').textContent=c.word;
+  document.getElementById('fcArticle').textContent=c.masc;
+  var isTwoEnding = (c.masc === c.fem);
+  document.getElementById('fcArticle').style.color=isTwoEnding ? 'var(--purple)' : 'var(--blue)';
+  document.getElementById('fcFullWord').textContent=c.masc+' / '+c.fem;
+  document.getElementById('fcDetail').textContent=c.mpl+' / '+c.fpl;
+  document.getElementById('fcMeaning').textContent=c.meaning;
+  document.getElementById('fcCounter').textContent=(fcIndex+1)+' / '+flashcards.length;
+  document.getElementById('flashcard').classList.remove('flipped');
+}
+function flipCard(){
+  document.getElementById('flashcard').classList.toggle('flipped');
+  const c=flashcards[fcIndex];playAudio(c.audio);
+}
+function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
+function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
+function speakCurrentCard(){const c=flashcards[fcIndex];playAudio(c.audio);}
+
+// ===== 测验系统 =====
+const quizBank={
+  basic:[
+    // ---- 填空 (10题) ----
+    {type:'fill', word:'"我的书" 用意大利语怎么说？', answer:'il mio libro', options:['il mio libro','mio libro','il mio libri','la mia libro'], hint:'mio+阳性单数名词+冠词', audio:''},
+    {type:'fill', word:'"你的房子" 用意大利语怎么说？', answer:'la tua casa', options:['la tua casa','tua casa','la tuo casa','il tua casa'], hint:'tua+阴性单数名词+冠词', audio:''},
+    {type:'fill', word:'"他的朋友（m）" 用意大利语怎么说？', answer:'il suo amico', options:['il suo amico','suo amico','la sua amico','il suo amica'], hint:'suo+阳性单数', audio:''},
+    {type:'fill', word:'"你们的老师（m）" 用意大利语怎么说？', answer:'il vostro insegnante', options:['il vostro insegnante','vostro insegnante','la vostra insegnante','il vostra insegnante'], hint:'vostro+阳性单数', audio:''},
+    {type:'fill', word:'"我们的家" 用意大利语怎么说？', answer:'la nostra casa', options:['la nostra casa','nostra casa','il nostro casa','la nostro casa'], hint:'nostra+阴性单数', audio:''},
+    {type:'fill', word:'"我的" 的阴性复数形式是？', answer:'mie', options:['mie','miei','mia','mio'], hint:'mie=我的（阴性复数）', audio:''},
+    {type:'fill', word:'"你的" 的阳性复数形式是？', answer:'tuoi', options:['tuoi','tue','tuo','tua'], hint:'tuoi=你的（阳性复数）', audio:''},
+    {type:'fill', word:'"他的" 的阴性复数形式是？', answer:'sue', options:['sue','suoi','suo','sua'], hint:'sue=他的（阴性复数）', audio:''},
+    {type:'fill', word:'"我们的" 的阳性复数形式是？', answer:'nostri', options:['nostri','nostre','nostro','nostra'], hint:'nostri=我们的（阳性复数）', audio:''},
+    {type:'fill', word:'"你们的" 的阴性复数形式是？', answer:'vostre', options:['vostre','vostri','vostro','vostra'], hint:'vostre=你们的（阴性复数）', audio:''},
+    // ---- 句子填空 (5题) ----
+    {type:'sentence', word:'___ mio libro è molto interessante.', answer:'Il', options:['Il','La','I','Le'], hint:'il mio libro需要冠词il', audio:''},
+    {type:'sentence', word:'___ nostra casa è grande.', answer:'La', options:['La','Il','Le','I'], hint:'la nostra casa阴性单数用La', audio:''},
+    {type:'sentence', word:'___ tuoi amici sono simpatici.', answer:'I', options:['I','Il','La','Le'], hint:'i tuoi amici阳性复数用I', audio:''},
+    {type:'sentence', word:'___ sue sorelle studiano molto.', answer:'Le', options:['Le','La','Il','I'], hint:'le sue sorelle阴性复数用Le', audio:''},
+    {type:'sentence', word:'Questo è ___ mio zio, Paolo.', answer:'il', options:['il','la','i','lo'], hint:'zio阳性单数→il mio zio', audio:''},
+    // ---- 翻译选择 (5题) ----
+    {type:'translate', word:'"mio padre" 的中文意思是？（注意冠词）', answer:'我的父亲（省冠词）', options:['我的父亲（省冠词）','我的父亲（要冠词）','我的母亲','我的兄弟'], hint:'单数家人名词前省冠词', audio:''},
+    {type:'translate', word:'"la mia mamma" 的中文意思是？', answer:'我的妈妈（要冠词）', options:['我的妈妈（要冠词）','我的妈妈（省冠词）','我的父亲','我的姐妹'], hint:'mamma要加冠词（例外）', audio:''},
+    {type:'translate', word:'"i miei fratelli" 的中文意思是？', answer:'我的兄弟们', options:['我的兄弟们','我的兄弟','我的姐妹','我的哥哥'], hint:'复数家人要加冠词', audio:''},
+    {type:'translate', word:'"di chi è questo libro?" 的中文意思是？', answer:'这是谁的书？', options:['这是谁的书？','这是谁？','这本书在哪里？','谁要这本书？'], hint:'di chi=谁的', audio:''},
+    {type:'translate', word:'"il libro di Maria" 比 "il suo libro" 更？', answer:'清晰明确', options:['清晰明确','简洁','正式','口语化'], hint:'用名字+di消除suo的歧义', audio:''},
+  ],
+  trap:[
+    // ---- 家人省冠词规则 (8题) ----
+    {type:'fill', word:'"我的父亲" 意大利语是 ___ （注意冠词）', answer:'mio padre', options:['mio padre','il mio padre','la mia padre','i miei padri'], hint:'单数家人前省冠词！', audio:'l06_mio_padre'},
+    {type:'fill', word:'"你的母亲" 意大利语是 ___ （注意冠词）', answer:'tua madre', options:['tua madre','la tua madre','il tuo madre','le tue madri'], hint:'单数家人省冠词', audio:'l06_tua_madre'},
+    {type:'fill', word:'"他的姐妹" 意大利语是 ___ （注意冠词）', answer:'sua sorella', options:['sua sorella','la sua sorella','il suo sorella','le sue sorelle'], hint:'单数家人省冠词！', audio:''},
+    {type:'fill', word:'"我的妈妈" 意大利语是 ___ （注意mamma例外）', answer:'la mia mamma', options:['la mia mamma','mia mamma','il mio mamma','le mie mamme'], hint:'mamma例外，要加冠词！', audio:'l06_la_mia_mamma'},
+    {type:'fill', word:'"我的兄弟们" 意大利语是 ___ （复数）', answer:'i miei fratelli', options:['i miei fratelli','miei fratelli','il mio fratello','la mia fratella'], hint:'复数家人要加冠词', audio:''},
+    {type:'fill', word:'"你的父母" 意大利语是 ___ （复数）', answer:'i tuoi genitori', options:['i tuoi genitori','tuoi genitori','il tuo genitore','la tua genitrice'], hint:'复数要加冠词', audio:''},
+    {type:'fill', word:'suo 的歧义体现在？', answer:'男他/女她/您都是suo', options:['男他/女她/您都是suo','只表示男他','只表示女她','只表示您'], hint:'suo可以表示他的/她的/您的', audio:''},
+    {type:'fill', word:'消除 suo 歧义最好用？', answer:'di lui / di lei /名字+di', options:['di lui / di lei /名字+di','直接用suo','用tuo','用nostro'], hint:'di结构最清晰', audio:''},
+    // ---- 判断正误 (5题) ----
+    {type:'truefalse', word:'"il mio padre" 是正确的意大利语表达', answer:'错', options:['对','错'], hint:'单数家人前省冠词，正确是mio padre', audio:''},
+    {type:'truefalse', word:'"la mia mamma" 是正确的意大利语表达', answer:'对', options:['对','错'], hint:'mamma/papà是例外，要加冠词', audio:''},
+    {type:'truefalse', word:'"i miei fratelli" 中的冠词i是必须的', answer:'对', options:['对','错'], hint:'复数家人必须加冠词', audio:''},
+    {type:'truefalse', word:'"suo" 只能表示"他的"', answer:'错', options:['对','错'], hint:'suo可以表示他的/她的/您的，有歧义', audio:''},
+    {type:'truefalse', word:'物主形容词在意大利语中必须与名词性数一致', answer:'对', options:['对','错'], hint:'mio/tuo/suo等必须与名词性数配合', audio:''},
+    // ---- 句子填空 (5题) ----
+    {type:'sentence', word:'___ mia mamma cucina molto bene.', answer:'La', options:['La','Il','Le','I'], hint:'mamma要加冠词→La mia mamma', audio:''},
+    {type:'sentence', word:'___ padre lavora in banca.', answer:'Mio', options:['Mio','Il mio','La mia','Mia'], hint:'单数家人省冠词→Mio padre', audio:''},
+    {type:'sentence', word:'Ho parlato con ___ tua sorella ieri.', answer:'tua', options:['tua','la tua','il tuo','tue'], hint:'单数家人省冠词→tua sorella', audio:''},
+    {type:'sentence', word:'___ suoi fratelli sono molto alti.', answer:'I', options:['I','Il','La','Le'], hint:'复数家人要冠词→I suoi fratelli', audio:''},
+    {type:'sentence', word:'Questo libro non è mio, è di Maria. È ___ suo libro.', answer:'il', options:['il','la','i','le'], hint:'il suo libro=Maria的书', audio:''},
+    // ---- 翻译选择 (2题) ----
+    {type:'translate', word:'"È il libro di Maria" 的中文意思是？', answer:'这是Maria的书', options:['这是Maria的书','这是她的书','这是Maria','书是Maria的'], hint:'di Maria结构清晰', audio:''},
+  ]
+};let currentMode='basic';
+let currentQuizData=[];
+let quizScore=0;
+let quizAnswered=0;
+
+function switchQuizMode(mode,tabEl){
+  currentMode=mode;
+  document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));
+  if(tabEl)tabEl.classList.add('active');
+  resetQuiz();
+}
+
+function getQuizData(){
+  let pool;
+  if(currentMode==='basic')pool=quizBank.basic;
+  else if(currentMode==='trap')pool=quizBank.trap;
+  else pool=[...quizBank.basic,...quizBank.trap];
+  const shuffled=[...pool].sort(()=>Math.random()-0.5);
+  return shuffled.slice(0,20);
+}
+
+function buildQuiz(){
+  const container=document.getElementById('quizContainer');
+  container.innerHTML='';
+  currentQuizData=getQuizData();
+  document.getElementById('totalCount').textContent=currentQuizData.length;
+  const typeLabels={'fill':'填空选择','sentence':'句子填空','match':'搭配选择','translate':'翻译选择','truefalse':'判断正误'};
+  const typeColors={'fill':'#009246','sentence':'#1a73e8','match':'#7c3aed','translate':'#e8710a','truefalse':'#ce2b37'};
+  currentQuizData.forEach((q,i)=>{
+    const card=document.createElement('div');
+    card.className='quiz-card';card.id='quiz-'+i;
+    const badge='<span class="quiz-type-badge" style="background:'+(typeColors[q.type]||'#666')+'">'+(typeLabels[q.type]||q.type)+'</span>';
+    let questionHtml='';
+    if(q.type==='fill'){
+      questionHtml='<div class="quiz-question"><span class="quiz-word">'+q.word+'</span></div>';
+    }else if(q.type==='sentence'){
+      questionHtml='<div class="quiz-question"><div class="quiz-sentence">'+q.word.replace(/___/g,'<span class="quiz-blank">___</span>')+'</div><div class="quiz-sentence-hint">请选择正确形式填入空白处：</div></div>';
+    }else if(q.type==='match'){
+      questionHtml='<div class="quiz-question">哪个名词能搭配 <span class="quiz-word">'+q.word+'</span> ？</div>';
+    }else if(q.type==='translate'){
+      questionHtml='<div class="quiz-question">请选择正确的翻译：<div class="quiz-sentence">'+q.word+'</div></div>';
+    }else if(q.type==='truefalse'){
+      questionHtml='<div class="quiz-question"><div class="quiz-sentence">'+q.word+'</div><div class="quiz-sentence-hint">判断上述说法的正误：</div></div>';
+    }
+    card.innerHTML='<div class="quiz-card-header">'+badge+'</div>'+questionHtml+'<div class="quiz-options">'+q.options.map((o,j)=>{
+      const safe=o.replace(/'/g,"\\'");
+      return '<div class="quiz-option'+(q.type==='truefalse'?' quiz-option-tf':'')+'" onclick="checkAnswer('+i+",'"+safe+"')"+'">'+o+'</div>';
+    }).join('')+'</div><div class="quiz-feedback" id="fb-'+i+'"></div>';
+    container.appendChild(card);
+  });
+}
+
+function checkAnswer(idx,chosen){
+  const q=currentQuizData[idx];
+  const card=document.getElementById('quiz-'+idx);
+  const options=card.querySelectorAll('.quiz-option');
+  const fb=document.getElementById('fb-'+idx);
+  if(options[0].classList.contains('answered'))return;
+  options.forEach(o=>o.classList.add('answered'));
+  const correct=q.answer;
+  if(chosen===correct){
+    quizScore++;
+    options.forEach(o=>{if(o.textContent===correct)o.classList.add('correct');});
+    fb.className='quiz-feedback show right';
+    fb.textContent='✅ 正确！'+q.hint;
+  }else{
+    options.forEach(o=>{if(o.textContent===chosen)o.classList.add('wrong');if(o.textContent===correct)o.classList.add('correct');});
+    fb.className='quiz-feedback show wrong-fb';
+    fb.textContent='❌ 正确答案是 '+correct+'：'+q.hint;
+  }
+  if(q.audio)playAudio(q.audio);
+  quizAnswered++;
+  document.getElementById('answeredCount').textContent=quizAnswered;
+  updateProgress();
+  if(quizAnswered===currentQuizData.length){
+    setTimeout(()=>{
+      const sb=document.getElementById('scoreboard');sb.style.display='block';
+      document.getElementById('scoreValue').textContent=quizScore+' / '+currentQuizData.length;
+      const pct=quizScore/currentQuizData.length;
+      let rank='';
+      if(pct>=0.95)rank='🏆 完美！代词大师！';
+      else if(pct>=0.85)rank='🌟 优秀！基本掌握物主代词！';
+      else if(pct>=0.70)rank='👍 不错！再练练家人省冠词规则！';
+      else if(pct>=0.50)rank='💪 加油！多翻翻闪卡！';
+      else rank='📖 别气馁，回去复习代词规律吧！';
+      document.getElementById('scoreRank').textContent=rank;
+      scrollToSection('scoreboard');
+    },500);
+  }
+}
+
+function resetQuiz(){
+  quizScore=0;quizAnswered=0;
+  document.getElementById('scoreboard').style.display='none';
+  document.getElementById('answeredCount').textContent='0';
+  buildQuiz();updateProgress();
+}
+
+// ===== 进度条 =====
+function updateProgress(){
+  const total=currentQuizData.length||1;
+  const done=quizAnswered/total;
+  document.getElementById('progressFill').style.width=(done*100)+'%';
+}
+
+// ===== 滚动 =====
+function scrollToSection(id){
+  const el=document.getElementById('sec-'+id)||document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ===== Intersection Observer =====
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting&&!e.target.classList.contains('visible')){e.target.classList.add('visible');}});},{threshold:0.1});
 document.querySelectorAll('.section').forEach(s=>observer.observe(s));
-// 安全兜底：3秒后所有未显示区块强制可见（解决某些手机浏览器Observer不触发的问题）
+// 安全兜底：3秒后所有未显示区块强制可见
 setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);
+
+// ===== 初始化 =====
+requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
 </script>
 </body>
 </html>
