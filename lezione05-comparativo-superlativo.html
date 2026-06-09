@@ -102,6 +102,62 @@
     @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
     .animate-in{animation:fadeInUp 0.5s ease forwards;}
     @media(max-width:640px){.hero h1{font-size:28px;}.rule-cards{grid-template-columns:1fr;}.trap-list{grid-template-columns:1fr;}}
+
+    /* ===== 闪卡翻转 ===== */
+    .flashcard-area{display:flex;flex-direction:column;align-items:center;margin-top:16px;gap:16px;}
+    .flashcard{width:300px;height:200px;perspective:600px;cursor:pointer;}
+    .flashcard-inner{position:relative;width:100%;height:100%;transition:transform 0.6s;transform-style:preserve-3d;}
+    .flashcard.flipped .flashcard-inner{transform:rotateY(180deg);}
+    .flashcard-front,.flashcard-back{position:absolute;inset:0;border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;backface-visibility:hidden;padding:20px;}
+    .flashcard-front{background:linear-gradient(135deg,var(--card),#f0ebe3);border:1px solid var(--border);}
+    .flashcard-back{background:linear-gradient(135deg,rgba(0,146,70,0.15),rgba(26,115,232,0.1));border:1px solid rgba(0,146,70,0.3);transform:rotateY(180deg);}
+    .flashcard .front-word{font-size:28px;font-weight:700;font-style:italic;}
+    .flashcard .front-hint{font-size:13px;color:var(--text-dim);margin-top:8px;}
+    .flashcard .back-article{font-size:20px;font-weight:700;margin-bottom:4px;}
+    .flashcard .back-word{font-size:24px;font-style:italic;font-weight:600;}
+    .flashcard .back-detail{font-size:13px;color:var(--text-dim);margin-top:4px;}
+    .flashcard .back-meaning{font-size:14px;color:var(--text-dim);margin-top:2px;}
+    .flashcard-nav{display:flex;gap:12px;}
+    .flashcard-nav button{background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 24px;border-radius:10px;cursor:pointer;font-size:14px;transition:all 0.2s;}
+    .flashcard-nav button:hover{background:var(--card-hover);border-color:var(--green);}
+    .flashcard-counter{font-size:13px;color:var(--text-dim);}
+
+    /* ===== 互动测验 ===== */
+    .quiz-section{margin-top:48px;}
+    .quiz-header-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+    .quiz-counter{font-size:14px;color:var(--text-dim);}
+    .quiz-counter strong{color:var(--green);font-size:18px;}
+    .quiz-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:16px;}
+    .quiz-question{font-size:17px;font-weight:600;margin-bottom:16px;}
+    .quiz-question .quiz-word{font-style:italic;color:var(--green);font-size:22px;}
+    .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .quiz-option{background:rgba(0,0,0,0.02);border:2px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;transition:all 0.25s;text-align:center;font-size:16px;}
+    .quiz-option:hover:not(.answered){border-color:var(--blue);background:rgba(26,115,232,0.08);}
+    .quiz-option.correct{border-color:var(--green)!important;background:rgba(0,146,70,0.15)!important;color:var(--green);}
+    .quiz-option.wrong{border-color:var(--red)!important;background:rgba(206,43,55,0.1)!important;color:var(--red);}
+    .quiz-option.answered{cursor:default;}
+    .quiz-feedback{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:14px;display:none;}
+    .quiz-feedback.show{display:block;}
+    .quiz-feedback.right{background:rgba(0,146,70,0.1);color:var(--green);}
+    .quiz-feedback.wrong-fb{background:rgba(206,43,55,0.08);color:#c0392b;}
+    .quiz-mode-tabs{display:flex;gap:8px;margin-bottom:20px;}
+    .quiz-mode-tab{padding:8px 18px;border-radius:10px;background:var(--card);border:1px solid var(--border);cursor:pointer;font-size:14px;font-weight:500;transition:all 0.2s;color:var(--text-dim);}
+    .quiz-mode-tab.active{border-color:var(--orange);color:var(--orange);background:rgba(232,113,10,0.1);}
+    .scoreboard{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;margin-top:32px;}
+    .score-display{font-size:48px;font-weight:700;background:linear-gradient(135deg,var(--green),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .score-label{font-size:14px;color:var(--text-dim);margin-top:4px;}
+    .score-rank{margin-top:12px;font-size:16px;font-weight:600;}
+    @media(max-width:640px){.quiz-options{grid-template-columns:1fr;}.flashcard{width:260px;height:180px;}}
+    .quiz-card-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+    .quiz-type-badge{display:inline-block;padding:2px 10px;border-radius:999px;color:#fff;font-size:11px;font-weight:600;letter-spacing:0.5px;}
+    .quiz-sentence{font-size:18px;line-height:1.6;padding:12px 16px;background:#f9f7f2;border-radius:10px;border:1px solid #e8e0d4;margin-bottom:4px;font-family:'Georgia','Times New Roman',serif;}
+    .quiz-sentence-hint{font-size:13px;color:#888;margin-top:4px;}
+    .quiz-blank{display:inline-block;min-width:60px;border-bottom:2px dashed #ce2b37;color:#ce2b37;font-weight:700;}
+    .quiz-option-tf{min-width:80px;text-align:center;font-weight:600;}
+    .quiz-option-tf:nth-child(1){border-color:#4caf50;color:#2e7d32;}
+    .quiz-option-tf:nth-child(2){border-color:#f44336;color:#c62828;}
+    .quiz-option-tf.correct:nth-child(1){background:#c8e6c9;border-color:#4caf50;}
+    .quiz-option-tf.correct:nth-child(2){background:#ffcdd2;border-color:#f44336;}
   </style>
 </head>
 <body>
@@ -112,6 +168,8 @@
     <a class="nav-btn" href="index.html">🏠 导航</a>
     <a class="nav-btn" href="lezione04-aggettivi.html">◀ 上一课</a>
     <a class="nav-btn" href="lezione06-pronomi-possessivi.html">下一课 ▶</a>
+    <button class="nav-btn" onclick="scrollToSection('quiz')">📝 测验</button>
+    <button class="nav-btn" onclick="playAudio('l05_title')">🔊 课名</button>
   </div>
 </div>
 <div class="container">
@@ -195,6 +253,65 @@
       <div class="examples-row"><div class="example-pair"><span class="good">✅ più grande di te</span><span class="bad">❌ più grande che te</span></div><div class="example-pair"><span class="good">✅ il più bravo della classe</span><span class="bad">❌ il più bravo di classe</span></div><div class="example-pair"><span class="good">✅ tanto bello quanto intelligente</span><span class="bad">❌ tanto bello di intelligente</span></div></div>
     </div>
   </div>
+
+  <!-- 闪卡练习 -->
+  <div class="section" id="sec-flashcard">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(124,58,237,0.15);">🃏</div>
+      <h2 class="section-title">闪卡练习 — 点击翻转看比较级/最高级形式</h2>
+    </div>
+    <div class="flashcard-area">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="flashcard-inner" id="flashcardInner">
+          <div class="flashcard-front">
+            <div class="front-word" id="fcWord">più grande di</div>
+            <div class="front-hint">点击查看详情</div>
+          </div>
+          <div class="flashcard-back">
+            <div class="back-article" id="fcArticle" style="color:var(--blue)">più...di</div>
+            <div class="back-word" id="fcFullWord">più grande di</div>
+            <div class="back-detail" id="fcDetail">比较级：比...更大</div>
+            <div class="back-meaning" id="fcMeaning">比...更大</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard-nav">
+        <button onclick="prevCard()">← 上一个</button>
+        <span class="flashcard-counter" id="fcCounter">1 / 20</span>
+        <button onclick="nextCard()">下一个 →</button>
+      </div>
+      <button class="nav-btn" onclick="speakCurrentCard()" style="margin-top:4px;">🔊 听发音</button>
+    </div>
+  </div>
+
+  <!-- 互动测验 -->
+  <div class="section quiz-section" id="sec-quiz">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(232,113,10,0.15);">📝</div>
+      <h2 class="section-title">小测验 — 选择正确的比较级/最高级形式</h2>
+    </div>
+
+    <div class="quiz-mode-tabs">
+      <div class="quiz-mode-tab active" onclick="switchQuizMode('basic', this)">🟢 比较级</div>
+      <div class="quiz-mode-tab" onclick="switchQuizMode('trap', this)">🔴 特殊/易错</div>
+      <div class="quiz-mode-tab" onclick="switchQuizMode('all', this)">🟣 全部</div>
+    </div>
+
+    <div class="quiz-header-bar">
+      <div class="quiz-counter">已答 <strong id="answeredCount">0</strong> / <span id="totalCount">20</span></div>
+      <button class="nav-btn" onclick="resetQuiz()">🔄 重来</button>
+    </div>
+
+    <div id="quizContainer"></div>
+
+    <div class="scoreboard" id="scoreboard" style="display:none;">
+      <div class="score-display" id="scoreValue">0</div>
+      <div class="score-label">测验得分</div>
+      <div class="score-rank" id="scoreRank"></div>
+      <button class="nav-btn" onclick="resetQuiz()" style="margin-top:16px;">🔄 重新测验</button>
+    </div>
+  </div>
+
 </div>
 
 <div class="footer">
@@ -239,10 +356,224 @@ function showToast(msg) {
   setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2500);
 }
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
-const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
+
+// ===== 闪卡系统 =====
+const flashcards = [
+  {word:'più grande di',masc:'più...di',fem:'più...di',mpl:'i più...',fpl:'le più...',meaning:'比...更大',audio:'l05_pi_grande_di'},
+  {word:'meno veloce di',masc:'meno...di',fem:'meno...di',mpl:'i meno...',fpl:'le meno...',meaning:'不如...快',audio:'l05_meno_veloce_di'},
+  {word:'tanto alto quanto',masc:'tanto...quanto',fem:'tanta...quanta',mpl:'tanti...quanti',fpl:'tante...quante',meaning:'和...一样高',audio:'l05_tanto_alto_quanto'},
+  {word:'il più bravo',masc:'il più (m.sg)',fem:'la più (f.sg)',mpl:'i più (m.pl)',fpl:'le più (f.pl)',meaning:'最厉害的',audio:'l05_il_pi_bravo'},
+  {word:'la più bella',masc:'il più bello',fem:'la più bella',mpl:'i più belli',fpl:'le più belle',meaning:'最美的',audio:'l05_la_pi_bella'},
+  {word:'migliore (buono)',masc:'migliore',fem:'migliore',mpl:'migliori',fpl:'migliori',meaning:'更好的（不规则）',audio:'l05_buono_migliore'},
+  {word:'peggiore (cattivo)',masc:'peggiore',fem:'peggiore',mpl:'peggiori',fpl:'peggiori',meaning:'更坏的（不规则）',audio:'l05_cattivo_peggiore'},
+  {word:'maggiore (grande)',masc:'maggiore',fem:'maggiore',mpl:'maggiori',fpl:'maggiori',meaning:'更大的（不规则）',audio:'l05_grande_maggiore'},
+  {word:'minore (piccolo)',masc:'minore',fem:'minore',mpl:'minori',fpl:'minori',meaning:'更小的（不规则）',audio:'l05_piccolo_minore'},
+  {word:'bellissimo',masc:'bellissimo',fem:'bellissima',mpl:'bellissimi',fpl:'bellissime',meaning:'非常美（绝对最高级）',audio:'l05'},
+  {word:'grandissimo',masc:'grandissimo',fem:'grandissima',mpl:'grandissimi',fpl:'grandissime',meaning:'非常大（绝对最高级）',audio:'l05'},
+  {word:'bravissimo',masc:'bravissimo',fem:'bravissima',mpl:'bravissimi',fpl:'bravissime',meaning:'非常厉害（绝对最高级）',audio:'l05'},
+  {word:'più veloce di',masc:'più...di',fem:'più...di',mpl:'i più...',fpl:'le più...',meaning:'比...更快',audio:'l05_pi_veloce_di'},
+  {word:'il meno costoso',masc:'il meno (m.sg)',fem:'la meno (f.sg)',mpl:'i meno (m.pl)',fpl:'le meno (f.pl)',meaning:'最不贵的',audio:'l05'},
+  {word:'tanto bella quanto',masc:'tanto bello quanto',fem:'tanto bella quanto',mpl:'tanti belli quanti',fpl:'tante belle quante',meaning:'和...一样美',audio:'l05_tanto_bella_quanto'},
+  {word:'più intelligente di',masc:'più...di',fem:'più...di',mpl:'i più...',fpl:'le più...',meaning:'比...更聪明',audio:'l05_pi_intelligente_di'},
+  {word:'il più alto',masc:'il più alto',fem:'la più alta',mpl:'i più alti',fpl:'le più alte',meaning:'最高的',audio:'l05'},
+  {word:'buonissimo',masc:'buonissimo',fem:'buonissima',mpl:'buonissimi',fpl:'buonissime',meaning:'非常好（绝对最高级）',audio:'l05'},
+  {word:'piccolissimo',masc:'piccolissimo',fem:'piccolissima',mpl:'piccolissimi',fpl:'piccolissime',meaning:'非常小（绝对最高级）',audio:'l05'},
+  {word:'il mio libro più bello',masc:'il più bello',fem:'la più bella',mpl:'i più belli',fpl:'le più belle',meaning:'我最美的书',audio:'l05'},
+];
+let fcIndex=0;
+
+function updateFlashcard(){
+  const c=flashcards[fcIndex];
+  document.getElementById('fcWord').textContent=c.word;
+  document.getElementById('fcArticle').textContent=c.masc;
+  var isTwoEnding = (c.masc === c.fem);
+  document.getElementById('fcArticle').style.color=isTwoEnding ? 'var(--purple)' : 'var(--blue)';
+  document.getElementById('fcFullWord').textContent=c.masc+' / '+c.fem;
+  document.getElementById('fcDetail').textContent=c.mpl+' / '+c.fpl;
+  document.getElementById('fcMeaning').textContent=c.meaning;
+  document.getElementById('fcCounter').textContent=(fcIndex+1)+' / '+flashcards.length;
+  document.getElementById('flashcard').classList.remove('flipped');
+}
+function flipCard(){
+  document.getElementById('flashcard').classList.toggle('flipped');
+  const c=flashcards[fcIndex];playAudio(c.audio);
+}
+function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
+function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
+function speakCurrentCard(){const c=flashcards[fcIndex];playAudio(c.audio);}
+
+// ===== 测验系统 =====
+const quizBank={
+  basic:[
+    // ---- 填空 (10题) ----
+    {type:'fill', word:'Marco è ___ alto di Luca.', answer:'più', options:['più','meno','tanto','il più'], hint:'più...di=比...更', audio:''},
+    {type:'fill', word:'Questa stanza è ___ grande di quella.', answer:'meno', options:['meno','più','tanto','il'], hint:'meno...di=不如...', audio:''},
+    {type:'fill', word:'Sono ___ alto quanto te.', answer:'tanto', options:['tanto','più','meno','il'], hint:'tanto...quanto=和...一样', audio:''},
+    {type:'fill', word:'Lei è ___ più brava della classe.', answer:'la', options:['la','il','le','i'], hint:'la più=阴性单数最高级', audio:''},
+    {type:'fill', word:'Lui è ___ più bravo della classe.', answer:'il', options:['il','la','i','le'], hint:'il più=阳性单数最高级', audio:''},
+    {type:'fill', word:'___ ragazzi più alti sono in squadra.', answer:'I', options:['I','Il','La','Le'], hint:'i più=阳性复数最高级', audio:''},
+    {type:'fill', word:'___ ragazze più intelligenti studiano molto.', answer:'Le', options:['Le','La','Il','I'], hint:'le più=阴性复数最高级', audio:''},
+    {type:'fill', word:'Marco corre ___ veloce di Luca.', answer:'più', options:['più','meno','tanto','il'], hint:'più+副词=比较级', audio:''},
+    {type:'fill', word:'Parlo italiano ___ bene quanto te.', answer:'tanto', options:['tanto','più','meno','il'], hint:'tanto...quanto也可搭配副词', audio:''},
+    {type:'fill', word:'Questo vino è ___ buono, è il migliore!', answer:'molto', options:['molto','più','tanto','il'], hint:'molto buono=很好，不是比较级', audio:''},
+    // ---- 句子填空 (5题) ----
+    {type:'sentence', word:'Marco è ___ alto di Luca.', answer:'più', options:['più','meno','tanto','il'], hint:'比较级用più', audio:''},
+    {type:'sentence', word:'Lei canta ___ bene di me.', answer:'meglio', options:['meglio','bene','buono','migliore'], hint:'bene的比较级不规则→meglio', audio:''},
+    {type:'sentence', word:'Questo ristorante è il ___ caro della città.', answer:'più', options:['più','meno','tanto','meglio'], hint:'最高级用il più', audio:''},
+    {type:'sentence', word:'Sono ___ stanca quanto te.', answer:'tanto', options:['tanto','più','molto','meno'], hint:'tanto...quanto同级比较', audio:''},
+    {type:'sentence', word:'La pizza è buona, ma la pasta è ___ buona.', answer:'più', options:['più','meno','tanto','molto'], hint:'比较级用più', audio:''},
+    // ---- 翻译选择 (5题) ----
+    {type:'translate', word:'"più grande di" 的中文意思是？', answer:'比...更大', options:['比...更大','比...更小','和...一样大','最大的'], hint:'più...di=比...更', audio:''},
+    {type:'translate', word:'"il più bravo" 的中文意思是？', answer:'最厉害的', options:['最厉害的','更厉害的','厉害的','非常厉害'], hint:'il più=最高级定冠词', audio:''},
+    {type:'translate', word:'"meno costoso di" 的中文意思是？', answer:'比...更便宜', options:['比...更便宜','比...更贵','一样贵','最便宜的'], hint:'meno...di=比...更不=不如...贵', audio:''},
+    {type:'translate', word:'"bellissimo" 的中文意思是？', answer:'非常美', options:['非常美','更美','最美的','美丽'], hint:'-issimo=绝对最高级=非常', audio:''},
+    {type:'translate', word:'"tanto alto quanto" 的中文意思是？', answer:'和...一样高', options:['和...一样高','比...更高','最高的','非常高的'], hint:'tanto...quanto=同级比较', audio:''},
+  ],
+  trap:[
+    // ---- di/che 选择 (8题) ----
+    {type:'fill', word:'比较两个名词用：più alto ___ Marco', answer:'di', options:['di','che','quanto','da'], hint:'名词/代词前用di', audio:''},
+    {type:'fill', word:'比较两个形容词用：più bello ___ intelligente', answer:'che', options:['che','di','quanto','da'], hint:'形容词前用che', audio:''},
+    {type:'fill', word:'比较两个动词用：più mangiare ___ dormire', answer:'che', options:['che','di','quanto','da'], hint:'动词前用che', audio:''},
+    {type:'fill', word:'buono 的不规则比较级是？', answer:'migliore', options:['migliore','meglio','buonissimo','più buono'], hint:'buono→migliore（不规则）', audio:'l05_buono_migliore'},
+    {type:'fill', word:'cattivo 的不规则比较级是？', answer:'peggiore', options:['peggiore','più cattivo','cattivissimo','male'], hint:'cattivo→peggiore', audio:'l05_cattivo_peggiore'},
+    {type:'fill', word:'grande 的不规则比较级是？', answer:'maggiore', options:['maggiore','più grande','grandissimo','meglio'], hint:'grande→maggiore（抽象义）', audio:'l05_grande_maggiore'},
+    {type:'fill', word:'piccolo 的不规则比较级是？', answer:'minore', options:['minore','più piccolo','piccolissimo','meno'], hint:'piccolo→minore', audio:'l05_piccolo_minore'},
+    {type:'fill', word:'bene 的比较级是？', answer:'meglio', options:['meglio','migliore','bene','benissimo'], hint:'bene→meglio（副词不规则）', audio:''},
+    // ---- 绝对最高级 (5题) ----
+    {type:'fill', word:'bello 的绝对最高级是？', answer:'bellissimo', options:['bellissimo','il più bello','più bello','bellino'], hint:'-issimo=绝对最高级', audio:''},
+    {type:'fill', word:'grande 的绝对最高级是？', answer:'grandissimo', options:['grandissimo','il più grande','maggiore','grande'], hint:'词干+issimo', audio:''},
+    {type:'fill', word:'bravo 的绝对最高级是？', answer:'bravissimo', options:['bravissimo','il più bravo','più bravo','bravino'], hint:'去掉词尾+issimo', audio:''},
+    {type:'fill', word:'buono 的绝对最高级是？', answer:'buonissimo', options:['buonissimo','migliore','il più buono','più buono'], hint:'buono→buonissimo', audio:''},
+    {type:'fill', word:'piccolo 的绝对最高级是？', answer:'piccolissimo', options:['piccolissimo','minore','il più piccolo','piccolino'], hint:'piccolo→piccolissimo', audio:''},
+    // ---- 判断正误 (4题) ----
+    {type:'truefalse', word:'"più grande che Marco" 是正确的比较级表达', answer:'错', options:['对','错'], hint:'名词/代词前用di：più grande di Marco', audio:''},
+    {type:'truefalse', word:'"più bello di intelligente" 是正确的', answer:'错', options:['对','错'], hint:'形容词前用che：più bello che intelligente', audio:''},
+    {type:'truefalse', word:'"il più bravo" 是最高级形式', answer:'对', options:['对','错'], hint:'il+più+形容词=最高级', audio:''},
+    {type:'truefalse', word:'"bellissimo" 和 "il più bello" 含义完全相同', answer:'错', options:['对','错'], hint:'bellissimo=非常美（绝对），il più bello=最美（相对）', audio:''},
+    // ---- 句子填空 (3题) ----
+    {type:'sentence', word:'Marco è il ___ bravo della classe.', answer:'più', options:['più','meno','tanto','molto'], hint:'最高级=il+più+形容词', audio:''},
+    {type:'sentence', word:'Questa è la ___ bella casa del quartiere.', answer:'più', options:['più','meno','tanto','molto'], hint:'la più bella=最美的', audio:''},
+    {type:'sentence', word:'Sono ___ stanco che affamato.', answer:'più', options:['più','meno','tanto','il'], hint:'比较两个形容词用che：più...che', audio:''},
+  ]
+};let currentMode='basic';
+let currentQuizData=[];
+let quizScore=0;
+let quizAnswered=0;
+
+function switchQuizMode(mode,tabEl){
+  currentMode=mode;
+  document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));
+  if(tabEl)tabEl.classList.add('active');
+  resetQuiz();
+}
+
+function getQuizData(){
+  let pool;
+  if(currentMode==='basic')pool=quizBank.basic;
+  else if(currentMode==='trap')pool=quizBank.trap;
+  else pool=[...quizBank.basic,...quizBank.trap];
+  const shuffled=[...pool].sort(()=>Math.random()-0.5);
+  return shuffled.slice(0,20);
+}
+
+function buildQuiz(){
+  const container=document.getElementById('quizContainer');
+  container.innerHTML='';
+  currentQuizData=getQuizData();
+  document.getElementById('totalCount').textContent=currentQuizData.length;
+  const typeLabels={'fill':'填空选择','sentence':'句子填空','match':'搭配选择','translate':'翻译选择','truefalse':'判断正误'};
+  const typeColors={'fill':'#009246','sentence':'#1a73e8','match':'#7c3aed','translate':'#e8710a','truefalse':'#ce2b37'};
+  currentQuizData.forEach((q,i)=>{
+    const card=document.createElement('div');
+    card.className='quiz-card';card.id='quiz-'+i;
+    const badge='<span class="quiz-type-badge" style="background:'+(typeColors[q.type]||'#666')+'">'+(typeLabels[q.type]||q.type)+'</span>';
+    let questionHtml='';
+    if(q.type==='fill'){
+      questionHtml='<div class="quiz-question"><span class="quiz-word">'+q.word+'</span></div>';
+    }else if(q.type==='sentence'){
+      questionHtml='<div class="quiz-question"><div class="quiz-sentence">'+q.word.replace(/___/g,'<span class="quiz-blank">___</span>')+'</div><div class="quiz-sentence-hint">请选择正确形式填入空白处：</div></div>';
+    }else if(q.type==='match'){
+      questionHtml='<div class="quiz-question">哪个名词能搭配 <span class="quiz-word">'+q.word+'</span> ？</div>';
+    }else if(q.type==='translate'){
+      questionHtml='<div class="quiz-question">请选择正确的翻译：<div class="quiz-sentence">'+q.word+'</div></div>';
+    }else if(q.type==='truefalse'){
+      questionHtml='<div class="quiz-question"><div class="quiz-sentence">'+q.word+'</div><div class="quiz-sentence-hint">判断上述说法的正误：</div></div>';
+    }
+    card.innerHTML='<div class="quiz-card-header">'+badge+'</div>'+questionHtml+'<div class="quiz-options">'+q.options.map((o,j)=>{
+      const safe=o.replace(/'/g,"\\'");
+      return '<div class="quiz-option'+(q.type==='truefalse'?' quiz-option-tf':'')+'" onclick="checkAnswer('+i+",'"+safe+"')"+'">'+o+'</div>';
+    }).join('')+'</div><div class="quiz-feedback" id="fb-'+i+'"></div>';
+    container.appendChild(card);
+  });
+}
+
+function checkAnswer(idx,chosen){
+  const q=currentQuizData[idx];
+  const card=document.getElementById('quiz-'+idx);
+  const options=card.querySelectorAll('.quiz-option');
+  const fb=document.getElementById('fb-'+idx);
+  if(options[0].classList.contains('answered'))return;
+  options.forEach(o=>o.classList.add('answered'));
+  const correct=q.answer;
+  if(chosen===correct){
+    quizScore++;
+    options.forEach(o=>{if(o.textContent===correct)o.classList.add('correct');});
+    fb.className='quiz-feedback show right';
+    fb.textContent='✅ 正确！'+q.hint;
+  }else{
+    options.forEach(o=>{if(o.textContent===chosen)o.classList.add('wrong');if(o.textContent===correct)o.classList.add('correct');});
+    fb.className='quiz-feedback show wrong-fb';
+    fb.textContent='❌ 正确答案是 '+correct+'：'+q.hint;
+  }
+  if(q.audio)playAudio(q.audio);
+  quizAnswered++;
+  document.getElementById('answeredCount').textContent=quizAnswered;
+  updateProgress();
+  if(quizAnswered===currentQuizData.length){
+    setTimeout(()=>{
+      const sb=document.getElementById('scoreboard');sb.style.display='block';
+      document.getElementById('scoreValue').textContent=quizScore+' / '+currentQuizData.length;
+      const pct=quizScore/currentQuizData.length;
+      let rank='';
+      if(pct>=0.95)rank='🏆 完美！比较级大师！';
+      else if(pct>=0.85)rank='🌟 优秀！基本掌握比较级！';
+      else if(pct>=0.70)rank='👍 不错！再练练不规则形式！';
+      else if(pct>=0.50)rank='💪 加油！多翻翻闪卡！';
+      else rank='📖 别气馁，回去复习比较级规律吧！';
+      document.getElementById('scoreRank').textContent=rank;
+      scrollToSection('scoreboard');
+    },500);
+  }
+}
+
+function resetQuiz(){
+  quizScore=0;quizAnswered=0;
+  document.getElementById('scoreboard').style.display='none';
+  document.getElementById('answeredCount').textContent='0';
+  buildQuiz();updateProgress();
+}
+
+// ===== 进度条 =====
+function updateProgress(){
+  const total=currentQuizData.length||1;
+  const done=quizAnswered/total;
+  document.getElementById('progressFill').style.width=(done*100)+'%';
+}
+
+// ===== 滚动 =====
+function scrollToSection(id){
+  const el=document.getElementById('sec-'+id)||document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ===== Intersection Observer =====
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting&&!e.target.classList.contains('visible')){e.target.classList.add('visible');}});},{threshold:0.1});
 document.querySelectorAll('.section').forEach(s=>observer.observe(s));
-// 安全兜底：3秒后所有未显示区块强制可见（解决某些手机浏览器Observer不触发的问题）
+// 安全兜底：3秒后所有未显示区块强制可见
 setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);
+
+// ===== 初始化 =====
+requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
 </script>
 </body>
 </html>
