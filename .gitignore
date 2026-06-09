@@ -1,6 +1,6 @@
 *.json
-l02_audio/
-l03_audio/
+l0[2-9]_audio/
+l1[0-9]_audio/
 repo_clone/
 repo_files/
 check_audio_keys.py
