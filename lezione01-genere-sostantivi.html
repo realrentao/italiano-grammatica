@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第1课 · 名词的性 — 意大利语语法实战</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap">
+  <style>
+
+    :root {
+      --green: #009246;
+      --white: #f8f9fa;
+      --red: #ce2b37;
+      --blue: #1a73e8;
+      --orange: #e8710a;
+      --purple: #7c3aed;
+      --bg: #f5f0e8;
+      --card: #ffffff;
+      --card-hover: #f0ebe3;
+      --text: #2c2c2c;
+      --text-dim: #6b6b6b;
+      --border: #ddd5c8;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans SC', -apple-system, sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ===== 顶部导航 ===== */
+    .top-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(245,240,232,0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .top-bar .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 16px;
+    }
+    .flag-stripe {
+      width: 36px; height: 24px; border-radius: 4px;
+      background: linear-gradient(to bottom, var(--green) 33%, var(--white) 33% 66%, var(--red) 66%);
+    }
+    .progress-bar {
+      height: 3px; background: var(--border); border-radius: 2px; width: 200px;
+    }
+    .progress-fill {
+      height: 100%; background: linear-gradient(90deg, var(--green), var(--red));
+      border-radius: 2px; transition: width 0.5s ease; width: 0%;
+    }
+    .nav-btns { display: flex; gap: 8px; }
+    .nav-btn {
+      background: var(--card); border: 1px solid var(--border);
+      color: var(--text); padding: 6px 14px; border-radius: 8px;
+      cursor: pointer; font-size: 13px; transition: all 0.2s;
+      text-decoration: none; display: inline-flex; align-items: center;
+      font-family: inherit;
+    }
+    .nav-btn:hover { background: var(--card-hover); border-color: var(--blue); }
+    .lesson-nav-disabled {
+      opacity: 0.35; pointer-events: none; cursor: default;
+      text-decoration: none;
+    }
+
+    /* ===== 主体 ===== */
+    .container {
+      max-width: 860px; margin: 0 auto;
+      padding: 80px 20px 60px;
+    }
