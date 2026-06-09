@@ -218,11 +218,12 @@ function playAudio(key) {
     _audioEl.load();
     _audioEl.play().catch(function(e) {
       if (e.name === 'AbortError') return;
+      showToast('请先点击页面任意位置，再试一次 🔊');
     });
     return;
   }
   var s = document.createElement('script');
-  s.src = 'audio_data/l06/ + key + '.js?v=1';
+  s.src = 'audio_data/' + _LESSON + '/' + key + '.js?v=1';
   s.onload = function() { playAudio(key); };
   s.onerror = function() { showToast('音频未收录'); };
   document.head.appendChild(s);
