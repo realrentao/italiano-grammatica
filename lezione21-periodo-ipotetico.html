@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第21课 · 条件从句 — 意大利语语法实战</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap');
+    :root {--green:#009246;--white:#f8f9fa;--red:#ce2b37;--blue:#1a73e8;--orange:#e8710a;--purple:#7c3aed;--bg:#f5f0e8;--card:#ffffff;--card-hover:#f0ebe3;--text:#2c2c2c;--text-dim:#6b6b6b;--border:#ddd5c8;--radius:16px;--shadow:0 4px 24px rgba(0,0,0,0.06);}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',-apple-system,sans-serif;line-height:1.7;overflow-x:hidden;}
+    .top-bar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;}
+    .top-bar .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;}
+    .flag-stripe{width:36px;height:24px;border-radius:4px;background:linear-gradient(to bottom,var(--green) 33%,var(--white) 33% 66%,var(--red) 66%);}
+    .progress-bar{height:3px;background:var(--border);border-radius:2px;width:200px;}
+    .progress-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--red));border-radius:2px;transition:width 0.5s;width:0%;}
+    .nav-btns{display:flex;gap:8px;}
+    .nav-btn{background:var(--card);border:1px solid var(--border);color:var(--text);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:13px;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;font-family:inherit;}
+    .nav-btn:hover{background:var(--card-hover);border-color:var(--blue);}
+    .lesson-nav-disabled{opacity:0.35;pointer-events:none;cursor:default;}
+    .container{max-width:860px;margin:0 auto;padding:80px 20px 60px;}
+    .hero{text-align:center;padding:60px 20px 40px;position:relative;}
+    .hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,146,70,0.08),rgba(206,43,55,0.06),transparent 70%);pointer-events:none;}
+    .lesson-badge{display:inline-block;padding:6px 16px;border-radius:20px;background:rgba(0,146,70,0.15);color:var(--green);font-size:13px;font-weight:500;margin-bottom:20px;border:1px solid rgba(0,146,70,0.3);}
+    .hero h1{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;margin-bottom:8px;background:linear-gradient(135deg,#2c2c2c 40%,var(--green) 70%,var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero .subtitle{font-size:18px;color:var(--text-dim);margin-bottom:24px;}
+    .hero .hint{display:inline-flex;align-items:center;gap:8px;background:var(--card);padding:10px 20px;border-radius:12px;border:1px solid var(--border);font-size:14px;color:var(--text-dim);}
+    .hero .hint .icon{font-size:20px;}
+    .section{margin-top:48px;opacity:0;transform:translateY(30px);transition:all 0.6s;}
+    .section.visible{opacity:1;transform:translateY(0);}
+    .section-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+    .section-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+    .section-title{font-size:22px;font-weight:700;}
+    .speakable{cursor:pointer;position:relative;border-bottom:1px dashed rgba(0,0,0,0.15);transition:all 0.2s;}
+    .speakable:hover{border-bottom-color:var(--green);color:var(--green);}
+    .speakable::after{content:'🔊';font-size:12px;margin-left:2px;opacity:0;transition:opacity 0.2s;position:relative;top:-2px;}
+    .speakable:hover::after{opacity:0.7;}
+    .speakable.speaking{color:var(--green);animation:pulse-speak 0.6s ease infinite;}
+    @keyframes pulse-speak{0%,100%{opacity:1;}50%{opacity:0.6;}}
+    .grammar-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);}
+    .grammar-card .key-point{font-size:17px;line-height:1.8;margin-bottom:16px;}
+    .gender-badge{display:inline-block;padding:3px 10px;border-radius:6px;font-size:13px;font-weight:600;}
+    .gender-m{background:rgba(26,115,232,0.15);color:var(--blue);}
+    .gender-f{background:rgba(232,113,10,0.15);color:var(--orange);}
+    .example-table{width:100%;border-collapse:separate;border-spacing:0;margin-top:16px;overflow:hidden;border-radius:12px;}
+    .example-table th{background:rgba(0,0,0,0.03);padding:12px 16px;text-align:left;font-size:13px;font-weight:600;color:var(--text-dim);}
+    .example-table td{padding:12px 16px;border-top:1px solid var(--border);font-size:15px;}
+    .example-table tr:hover td{background:rgba(0,0,0,0.02);}
+    .it-text{font-style:italic;font-weight:500;}
+    .it-flag{display:inline-block;width:20px;height:14px;border-radius:2px;background:linear-gradient(to right,#009246 33%,#fff 33% 66%,#ce2b37 66%);vertical-align:middle;margin-right:4px;}
+    .zh-text{color:var(--text-dim);font-size:14px;}
+    .mnemonic-card{background:linear-gradient(135deg,rgba(0,146,70,0.1),rgba(206,43,55,0.08));border:1px solid rgba(0,146,70,0.25);border-radius:var(--radius);padding:24px;text-align:center;margin-top:20px;}
+    .mnemonic-card .emoji{font-size:32px;margin-bottom:12px;}
+    .mnemonic-card .text{font-size:20px;font-weight:700;line-height:1.6;}
+    .mnemonic-card .text .hl-o{color:var(--blue);}
+    .mnemonic-card .text .hl-a{color:var(--orange);}
+    .mnemonic-card .text .hl-e{color:var(--purple);}
+    .rule-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:16px;}
+    .rule-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:all 0.3s;cursor:default;overflow:hidden;}
+    .rule-card:hover{border-color:var(--green);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,146,70,0.1);}
+    .rule-card .ending{font-size:36px;font-weight:700;font-family:'Playfair Display',serif;margin-bottom:8px;}
+    .rule-card .ending.masc{color:var(--blue);}.rule-card .ending.fem{color:var(--orange);}.rule-card .ending.both{color:var(--purple);}
+    .rule-card .gender-label{font-size:13px;font-weight:600;margin-bottom:12px;}
+    .rule-card .examples{display:flex;flex-wrap:wrap;gap:8px;}
+    .rule-card .example-chip{background:rgba(0,0,0,0.04);padding:5px 12px;border-radius:8px;font-size:14px;cursor:pointer;}
+    .rule-card .example-chip:hover{background:rgba(0,146,70,0.15);}
+    .trap-section{margin-top:12px;}
+    .trap-tabs{display:flex;gap:8px;margin-bottom:16px;}
+    .trap-tab{padding:8px 18px;border-radius:10px;background:var(--card);border:1px solid var(--border);cursor:pointer;font-size:14px;font-weight:500;transition:all 0.2s;color:var(--text-dim);}
+    .trap-tab.active{border-color:var(--red);color:var(--red);background:rgba(206,43,55,0.1);}
+    .trap-tab:hover:not(.active){border-color:var(--text-dim);}
+    .trap-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .trap-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:12px;transition:all 0.3s;cursor:pointer;}
+    .trap-item:hover{border-color:var(--red);transform:scale(1.02);}
+    .trap-item .article{font-size:13px;font-weight:700;min-width:28px;}
+    .trap-item .article.il{color:var(--blue);}.trap-item .article.la{color:var(--orange);}
+    .trap-item .word{font-size:18px;font-weight:600;font-style:italic;}
+    .trap-item .meaning{font-size:13px;color:var(--text-dim);margin-left:auto;}
+    .trap-note{background:rgba(206,43,55,0.08);border:1px solid rgba(206,43,55,0.2);border-radius:10px;padding:12px 16px;margin-top:12px;font-size:13px;color:#c0392b;}
+    .dialogue-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-top:16px;}
+    .dialogue-line{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.04);align-items:flex-start;}
+    .dialogue-line:last-child{border-bottom:none;}
+    .speaker{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0;}
+    .speaker-a{background:rgba(26,115,232,0.15);color:var(--blue);}
+    .speaker-b{background:rgba(0,146,70,0.15);color:var(--green);}
+    .dialogue-content{flex:1;}
+    .dialogue-it{font-size:16px;font-weight:500;cursor:pointer;}
+    .dialogue-zh{font-size:13px;color:var(--text-dim);margin-top:2px;}
+    .play-line-btn{background:none;border:1px solid var(--border);color:var(--text-dim);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px;flex-shrink:0;}
+    .play-line-btn:hover{border-color:var(--green);color:var(--green);}
+    .principle-card{background:linear-gradient(135deg,rgba(26,115,232,0.1),rgba(124,58,237,0.08));border:1px solid rgba(26,115,232,0.25);border-radius:var(--radius);padding:24px;margin-top:20px;text-align:center;}
+    .principle-card .icon{font-size:36px;margin-bottom:12px;}
+    .principle-card .text{font-size:18px;font-weight:700;line-height:1.6;}
+    .principle-card .examples-row{display:flex;justify-content:center;gap:20px;margin-top:16px;flex-wrap:wrap;}
+    .principle-card .example-pair{display:flex;flex-direction:column;align-items:center;gap:4px;}
+    .principle-card .good{color:var(--green);font-weight:600;}
+    .principle-card .bad{color:var(--red);text-decoration:line-through;opacity:0.5;font-size:13px;}
+    .footer{text-align:center;padding:40px 20px;color:var(--text-dim);font-size:13px;border-top:1px solid var(--border);margin-top:60px;}
+    .footer-nav{display:flex;justify-content:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
+    .footer-nav .nav-btn{text-decoration:none;display:inline-flex;align-items:center;padding:10px 20px;font-size:14px;}
+    .footer-nav .nav-btn:hover{background:var(--card-hover);border-color:var(--blue);}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    .animate-in{animation:fadeInUp 0.5s ease forwards;}
+    @media(max-width:640px){.hero h1{font-size:28px;}.rule-cards{grid-template-columns:1fr;}.trap-list{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="top-bar">
+  <div class="logo"><div class="flag-stripe"></div><span>意大利语语法实战</span></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠 导航</a>
+    <a class="nav-btn" href="lezione20-congiuntivo.html">◀ 上一课</a>
+    <a class="nav-btn" href="lezione22-frasi-complesse.html">下一课 ▶</a>
+  </div>
+</div>
+<div class="container">
+  <div class="hero animate-in">
+    <div class="lesson-badge">Part 4 · 句法实战 · 第 21 课</div>
+    <h1>条件从句</h1>
+    <p class="subtitle">Il periodo ipotetico</p>
+    <div class="hint"><span class="icon">👆</span>点击绿色下划线文字即可听到纯正意大利语发音</div>
+  </div>
+
+  <div class="section" id="sec-core">
+    <div class="section-header"><div class="section-icon" style="background:rgba(0,146,70,0.15);">🎯</div><h2 class="section-title">核心语法</h2></div>
+    <div class="grammar-card">
+      <p class="key-point">三种条件句：<span class='gender-badge gender-m'>真实</span>、<span class='gender-badge gender-f'>可能</span>、<span class='gender-badge' style='background:rgba(124,58,237,0.15);color:var(--purple);'>不可能</span></p>
+      <table class="example-table"><thead><tr><th>意大利语</th><th>意思</th><th>说明</th></tr></thead><tbody>
+<tr><td><span class="speakable it-text" onclick="playAudio('l21_se_piove_resto_a_casa')">se piove, resto a casa</span></td><td class="zh-text">如果下雨我待在家</td><td>真实条件</td></tr>
+<tr><td><span class="speakable it-text" onclick="playAudio('l21_se_piovesse_resterei')">se piovesse, resterei</span></td><td class="zh-text">如果下雨我会待在家</td><td>可能条件</td></tr>
+<tr><td><span class="speakable it-text" onclick="playAudio('l21_se_fosse_piovuto_sarei_restato')">se fosse piovuto, sarei restato</span></td><td class="zh-text">如果下了雨我就会</td><td>不可能条件</td></tr>
+<tr><td><span class="speakable it-text" onclick="playAudio('l21_se_potessi_viaggerei')">se potessi, viaggerei</span></td><td class="zh-text">如果我能我会旅行</td><td>假设</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <div class="section" id="sec-mnemonic">
+    <div class="mnemonic-card"><div class="emoji">🧠</div><p class="text"><span class="hl-o">真实</span>用现在时，<span class="hl-a">可能</span>用虚拟+条件式，<span class="hl-e">不可能</span>用愈过去时！</p></div>
+  </div>
+
+  
+
+  
+
+  <div class="section" id="sec-dialogue">
+    <div class="section-header"><div class="section-icon" style="background:rgba(0,146,70,0.15);">🗣️</div><h2 class="section-title">生活对话</h2></div>
+    <div class="dialogue-box">
+<div class="dialogue-line">
+        <div class="speaker speaker-a">A</div>
+        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l21_come_stai')">Come stai?</div><div class="dialogue-zh">你好吗？</div></div>
+        <button class="play-line-btn" onclick="playAudio('l21_sto_bene_grazie')">🔊</button></div>
+<div class="dialogue-line">
+        <div class="speaker speaker-b">B</div>
+        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l21_cosa_studi_oggi')">Sto bene, grazie!</div><div class="dialogue-zh">我很好，谢谢！</div></div>
+        <button class="play-line-btn" onclick="playAudio('l21_studio_l_italiano')">🔊</button></div>
+<div class="dialogue-line">
+        <div class="speaker speaker-a">A</div>
+        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l21')">Cosa studi oggi?</div><div class="dialogue-zh">你今天学什么？</div></div>
+        <button class="play-line-btn" onclick="playAudio('l21')">🔊</button></div>
+<div class="dialogue-line">
+        <div class="speaker speaker-b">B</div>
+        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l21')">Studio l'italiano!</div><div class="dialogue-zh">我学意大利语！</div></div>
+        <button class="play-line-btn" onclick="playAudio('l21')">🔊</button></div>
+    </div>
+  </div>
+
+  <div class="section" id="sec-principle">
+    <div class="principle-card">
+      <div class="icon">🔑</div>
+      <p class="text">学语法最终是为了开口说！</p>
+      <div class="examples-row"><div class="example-pair"><span class="good">✅ 多练</span><span class="bad">❌ 只看</span></div><div class="example-pair"><span class="good">✅ 开口</span><span class="bad">❌ 沉默</span></div><div class="example-pair"><span class="good">✅ 坚持</span><span class="bad">❌ 放弃</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-nav">
+    <a class="nav-btn" href="index.html">🏠 返回导航页</a>
+    <a class="nav-btn" href="lezione20-congiuntivo.html">◀ 上一课</a>
+    <a class="nav-btn" href="lezione22-frasi-complesse.html">下一课 ▶</a>
+  </div>
+  <p><span class="it-flag"></span> 意大利语语法实战课程 · 第21课 · 条件从句</p>
+</div>
+
+
+<script>
+// ===== 音频播放（按需加载）=====
+const _audioEl = new Audio();
+const _LESSON = 'l21';
+
+function playAudio(key) {
+  if (window.__AC && __AC[key]) {
+    _audioEl.pause();
+    _audioEl.src = __AC[key];
+    _audioEl.load();
+    _audioEl.play().catch(function(e) {
+      if (e.name === 'AbortError') return;
+      showToast('请先点击页面任意位置，再试一次 🔊');
+    });
+    return;
+  }
+  var s = document.createElement('script');
+  s.src = 'audio_data/' + _LESSON + '/' + key + '.js?v=1';
+  s.onload = function() { playAudio(key); };
+  s.onerror = function() { showToast('音频未收录'); };
+  document.head.appendChild(s);
+}
+
+function showToast(msg) {
+  var t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12px 24px;border-radius:8px;font-size:14px;z-index:9999;opacity:0;transition:opacity 0.3s;max-width:90%;text-align:center';
+  document.body.appendChild(t);
+  requestAnimationFrame(function() { t.style.opacity = '1'; });
+  setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2500);
+}
+function showTrap(('load',function(){if(typeof AUDIO_DATA==='undefined')console.warn('audio_data.js not loaded');});
+function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
+document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+// 安全兜底：3秒后所有未显示区块强制可见
+setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
+document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+</script>
+</body>
+</html>
