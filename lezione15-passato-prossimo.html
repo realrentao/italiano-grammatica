@@ -252,37 +252,31 @@ function showToast(msg) {
 }
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
 const flashcards = [
-  {word:'l15', article:'', meaning:'l15', audio:'l15'},
-  {word:'come stai', article:'', meaning:'l15_come_stai', audio:'l15_come_stai'},
-  {word:'cosa studi oggi', article:'', meaning:'l15_cosa_studi_oggi', audio:'l15_cosa_studi_oggi'},
-  {word:'ho mangiato', article:'', meaning:'l15_ho_mangiato', audio:'l15_ho_mangiato'},
-  {word:'ho scritto', article:'', meaning:'l15_ho_scritto', audio:'l15_ho_scritto'},
-  {word:'si alzato', article:'', meaning:'l15_si_alzato', audio:'l15_si_alzato'},
-  {word:'sono andato', article:'', meaning:'l15_sono_andato', audio:'l15_sono_andato'},
-  {word:'sto bene grazie', article:'', meaning:'l15_sto_bene_grazie', audio:'l15_sto_bene_grazie'},
-  {word:'studio l italiano', article:'', meaning:'l15_studio_l_italiano', audio:'l15_studio_l_italiano'},
+  {word:'ho parlato', article:'avere', meaning:'我说话了', audio:'l15_ho_mangiato'},
+  {word:'sono andato', article:'essere', meaning:'我去了', audio:'l15_sono_andato'},
+  {word:'ho scritto', article:'avere', meaning:'我写了', audio:'l15_ho_scritto'},
+  {word:'ho mangiato', article:'avere', meaning:'我吃了', audio:'l15_ho_mangiato'},
+  {word:'si è alzato', article:'essere(自反)', meaning:'他起床了', audio:'l15_si_alzato'},
+  {word:'ho dormito', article:'avere', meaning:'我睡了', audio:'l15_ho_mangiato'},
+  {word:'sono partito', article:'essere', meaning:'我出发了', audio:'l15_sono_andato'},
+  {word:'ho capito', article:'avere', meaning:'我明白了', audio:'l15_ho_scritto'},
+  {word:'sono rimasto', article:'essere', meaning:'我留下了', audio:'l15_sono_andato'},
 ];
 const quizBank={
   basic:[
-    {type:'fill', word:'l15', answer:'l15', options:['l15','请听发音','参考课程','记住它'], hint:'l15', audio:''},
-    {type:'fill', word:'come stai', answer:'come stai', options:['come stai','请听发音','参考课程','记住它'], hint:'l15_come_stai', audio:''},
-    {type:'fill', word:'cosa studi oggi', answer:'cosa studi oggi', options:['cosa studi oggi','请听发音','参考课程','记住它'], hint:'l15_cosa_studi_oggi', audio:''},
-    {type:'fill', word:'ho mangiato', answer:'ho mangiato', options:['ho mangiato','请听发音','参考课程','记住它'], hint:'l15_ho_mangiato', audio:''},
-    {type:'fill', word:'ho scritto', answer:'ho scritto', options:['ho scritto','请听发音','参考课程','记住它'], hint:'l15_ho_scritto', audio:''},
-    {type:'fill', word:'si alzato', answer:'si alzato', options:['si alzato','请听发音','参考课程','记住它'], hint:'l15_si_alzato', audio:''},
-    {type:'fill', word:'sono andato', answer:'sono andato', options:['sono andato','请听发音','参考课程','记住它'], hint:'l15_sono_andato', audio:''},
-    {type:'fill', word:'sto bene grazie', answer:'sto bene grazie', options:['sto bene grazie','请听发音','参考课程','记住它'], hint:'l15_sto_bene_grazie', audio:''},
-    {type:'fill', word:'studio l italiano', answer:'studio l italiano', options:['studio l italiano','请听发音','参考课程','记住它'], hint:'l15_studio_l_italiano', audio:''},
+    {type:'fill', word:'ho parlato 的助动词是？', answer:'avere', options:["avere", "essere", "和are动词", "过去分词"], hint:'及物动词用avere', audio:''},
+    {type:'fill', word:'sono andato 的助动词是？', answer:'essere', options:["essere", "avere", "两个都行", "要看"], hint:'不及物运动动词用essere', audio:''},
+    {type:'fill', word:'ho mangiato 是什么时态？', answer:'近过去时', options:["近过去时", "未完成过去", "现在时", "将来时"], hint:'passato prossimo=近过去时', audio:''},
+    {type:'fill', word:'Ieri ___ mangiato la pizza.', answer:'ho', options:["ho", "sono", "ha", "è"], hint:'mangiare及物动词用avere', audio:''},
+    {type:'fill', word:'Lei ___ andata a Roma.', answer:'è', options:["è", "ha", "ho", "sono"], hint:'andare不及物用essere', audio:''},
+    {type:'fill', word:'过去分词和主语的性数配合出现在？', answer:'essere作助动词时', options:["essere作助动时", "avere作助动时", "所有情况", "never"], hint:'essere的过去分词要和主语配合', audio:''},
   ],
   trap:[
-    {type:'fill', word:'l15 的意思？', answer:'l15', options:['l15','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'come stai 的意思？', answer:'come stai', options:['come stai','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'cosa studi oggi 的意思？', answer:'cosa studi oggi', options:['cosa studi oggi','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'ho mangiato 的意思？', answer:'ho mangiato', options:['ho mangiato','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'ho scritto 的意思？', answer:'ho scritto', options:['ho scritto','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
+    {type:'fill', word:'及物动词的过去分词是否需要和宾语配合？', answer:'一般不需要', options:["一般不需要", "必须配合", "只有阴性配合", "只有复数配合"], hint:'avere作助动词时过去分词一般不变', audio:''},
+    {type:'fill', word:'自反动词的助动词是？', answer:'essere', options:["essere", "avere", "两个都行", "si"], hint:'自反动词全部用essere', audio:''},
+    {type:'fill', word:'movimento动词如andare/venire的助动词？', answer:'essere', options:["essere", "avere", "两个都行", "及物用avere"], hint:'趋向动词用essere', audio:''},
   ]
 };
-
 let currentMode='basic';let currentQuizData=[];let quizScore=0;let quizAnswered=0;
 
 function switchQuizMode(mode,tabEl){currentMode=mode;document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));if(tabEl)tabEl.classList.add('active');resetQuiz();}
