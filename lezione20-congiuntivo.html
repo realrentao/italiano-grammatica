@@ -252,37 +252,31 @@ function showToast(msg) {
 }
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
 const flashcards = [
-  {word:'l20', article:'', meaning:'l20', audio:'l20'},
-  {word:'come stai', article:'', meaning:'l20_come_stai', audio:'l20_come_stai'},
-  {word:'cosa studi oggi', article:'', meaning:'l20_cosa_studi_oggi', audio:'l20_cosa_studi_oggi'},
-  {word:'penso che sia', article:'', meaning:'l20_penso_che_sia', audio:'l20_penso_che_sia'},
-  {word:'possibile che piova', article:'', meaning:'l20_possibile_che_piova', audio:'l20_possibile_che_piova'},
-  {word:'spero che stia bene', article:'', meaning:'l20_spero_che_stia_bene', audio:'l20_spero_che_stia_bene'},
-  {word:'sto bene grazie', article:'', meaning:'l20_sto_bene_grazie', audio:'l20_sto_bene_grazie'},
-  {word:'studio l italiano', article:'', meaning:'l20_studio_l_italiano', audio:'l20_studio_l_italiano'},
-  {word:'voglio che tu venga', article:'', meaning:'l20_voglio_che_tu_venga', audio:'l20_voglio_che_tu_venga'},
+  {word:'che io parli', article:'parlare', meaning:'说我(虚拟)', audio:'l20_spero_che_stia_bene'},
+  {word:'che lui venga', article:'venire', meaning:'他来(虚拟)', audio:'l20_voglio_che_tu_venga'},
+  {word:'che sia', article:'essere', meaning:'是(虚拟)', audio:'l20_penso_che_sia'},
+  {word:'che abbia', article:'avere', meaning:'有(虚拟)', audio:'l20_penso_che_sia'},
+  {word:'che faccia', article:'fare', meaning:'做(虚拟)', audio:'l20_possibile_che_piova'},
+  {word:'che possa', article:'potere', meaning:'能(虚拟)', audio:'l20_voglio_che_tu_venga'},
+  {word:'che vada', article:'andare', meaning:'去(虚拟)', audio:'l20_penso_che_sia'},
+  {word:'che stia', article:'stare', meaning:'在(虚拟)', audio:'l20_spero_che_stia_bene'},
+  {word:'che piova', article:'piovere', meaning:'下雨(虚拟)', audio:'l20_possibile_che_piova'},
 ];
 const quizBank={
   basic:[
-    {type:'fill', word:'l20', answer:'l20', options:['l20','请听发音','参考课程','记住它'], hint:'l20', audio:''},
-    {type:'fill', word:'come stai', answer:'come stai', options:['come stai','请听发音','参考课程','记住它'], hint:'l20_come_stai', audio:''},
-    {type:'fill', word:'cosa studi oggi', answer:'cosa studi oggi', options:['cosa studi oggi','请听发音','参考课程','记住它'], hint:'l20_cosa_studi_oggi', audio:''},
-    {type:'fill', word:'penso che sia', answer:'penso che sia', options:['penso che sia','请听发音','参考课程','记住它'], hint:'l20_penso_che_sia', audio:''},
-    {type:'fill', word:'possibile che piova', answer:'possibile che piova', options:['possibile che piova','请听发音','参考课程','记住它'], hint:'l20_possibile_che_piova', audio:''},
-    {type:'fill', word:'spero che stia bene', answer:'spero che stia bene', options:['spero che stia bene','请听发音','参考课程','记住它'], hint:'l20_spero_che_stia_bene', audio:''},
-    {type:'fill', word:'sto bene grazie', answer:'sto bene grazie', options:['sto bene grazie','请听发音','参考课程','记住它'], hint:'l20_sto_bene_grazie', audio:''},
-    {type:'fill', word:'studio l italiano', answer:'studio l italiano', options:['studio l italiano','请听发音','参考课程','记住它'], hint:'l20_studio_l_italiano', audio:''},
-    {type:'fill', word:'voglio che tu venga', answer:'voglio che tu venga', options:['voglio che tu venga','请听发音','参考课程','记住它'], hint:'l20_voglio_che_tu_venga', audio:''},
+    {type:'fill', word:'虚拟式常用于什么从句？', answer:'che引导的从句', options:["che从句", "se从句", "perché从句", "anche se从句"], hint:'虚拟式用于che从句表主观', audio:''},
+    {type:'fill', word:'Penso ___ lui abbia ragione.', answer:'che', options:["che", "di", "se", "a"], hint:'penso che+虚拟式', audio:''},
+    {type:'fill', word:'Spero che tu ___ bene.', answer:'stia', options:["stia", "stai", "stavi", "staresti"], hint:'spero che+虚拟式', audio:''},
+    {type:'fill', word:'___ possibile che piova domani.', answer:'È', options:["È", "Ha", "Sia", "Abbia"], hint:'è possibile che+虚拟式', audio:''},
+    {type:'fill', word:'Voglio che tu ___ presto.', answer:'venga', options:["venga", "vieni", "venivi", "verresti"], hint:'volere che+虚拟式', audio:''},
+    {type:'fill', word:'Credo che lui ___ già arrivato.', answer:'sia', options:["sia", "è", "era", "fosse"], hint:'credere che+虚拟式现在时', audio:''},
   ],
   trap:[
-    {type:'fill', word:'l20 的意思？', answer:'l20', options:['l20','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'come stai 的意思？', answer:'come stai', options:['come stai','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'cosa studi oggi 的意思？', answer:'cosa studi oggi', options:['cosa studi oggi','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'penso che sia 的意思？', answer:'penso che sia', options:['penso che sia','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'possibile che piova 的意思？', answer:'possibile che piova', options:['possibile che piova','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
+    {type:'fill', word:'虚拟式和直陈式的区别？', answer:'主观vs客观', options:["主观vs客观", "现在vs过去", "单数vs复数", "肯定vs否定"], hint:'虚拟表主观/不确定/情感', audio:''},
+    {type:'fill', word:'sapere che 后面用？', answer:'直陈式', options:["直陈式", "虚拟式", "两个都行", "条件式"], hint:'肯定知道的事实用直陈', audio:''},
+    {type:'fill', word:'non sapere che 后面用？', answer:'虚拟式', options:["虚拟式", "直陈式", "两个都行", "命令式"], hint:'否定/不确定用虚拟', audio:''},
   ]
 };
-
 let currentMode='basic';let currentQuizData=[];let quizScore=0;let quizAnswered=0;
 
 function switchQuizMode(mode,tabEl){currentMode=mode;document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));if(tabEl)tabEl.classList.add('active');resetQuiz();}
