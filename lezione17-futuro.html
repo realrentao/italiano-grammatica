@@ -252,37 +252,31 @@ function showToast(msg) {
 }
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
 const flashcards = [
-  {word:'l17', article:'', meaning:'l17', audio:'l17'},
-  {word:'andr', article:'', meaning:'l17_andr', audio:'l17_andr'},
-  {word:'come stai', article:'', meaning:'l17_come_stai', audio:'l17_come_stai'},
-  {word:'cosa studi oggi', article:'', meaning:'l17_cosa_studi_oggi', audio:'l17_cosa_studi_oggi'},
-  {word:'parler', article:'', meaning:'l17_parler', audio:'l17_parler'},
-  {word:'partir', article:'', meaning:'l17_partir', audio:'l17_partir'},
-  {word:'scriver', article:'', meaning:'l17_scriver', audio:'l17_scriver'},
-  {word:'sto bene grazie', article:'', meaning:'l17_sto_bene_grazie', audio:'l17_sto_bene_grazie'},
-  {word:'studio l italiano', article:'', meaning:'l17_studio_l_italiano', audio:'l17_studio_l_italiano'},
+  {word:'parlerò', article:'-erò', meaning:'我将会说', audio:'l17_parler'},
+  {word:'scriverò', article:'-erò', meaning:'我将会写', audio:'l17_scriver'},
+  {word:'partirò', article:'-irò', meaning:'我将会出发', audio:'l17_partir'},
+  {word:'andrò', article:'不规则', meaning:'我将会去', audio:'l17_andr'},
+  {word:'farò', article:'不规则', meaning:'我将会做', audio:'l17_parler'},
+  {word:'sarò', article:'essere', meaning:'我将会是', audio:'l17_parler'},
+  {word:'avrò', article:'avere', meaning:'我将会', audio:'l17_scriver'},
+  {word:'potrò', article:'情态', meaning:'我将会能', audio:'l17_partir'},
+  {word:'vorrò', article:'情态', meaning:'我将想要', audio:'l17_andr'},
 ];
 const quizBank={
   basic:[
-    {type:'fill', word:'l17', answer:'l17', options:['l17','请听发音','参考课程','记住它'], hint:'l17', audio:''},
-    {type:'fill', word:'andr', answer:'andr', options:['andr','请听发音','参考课程','记住它'], hint:'l17_andr', audio:''},
-    {type:'fill', word:'come stai', answer:'come stai', options:['come stai','请听发音','参考课程','记住它'], hint:'l17_come_stai', audio:''},
-    {type:'fill', word:'cosa studi oggi', answer:'cosa studi oggi', options:['cosa studi oggi','请听发音','参考课程','记住它'], hint:'l17_cosa_studi_oggi', audio:''},
-    {type:'fill', word:'parler', answer:'parler', options:['parler','请听发音','参考课程','记住它'], hint:'l17_parler', audio:''},
-    {type:'fill', word:'partir', answer:'partir', options:['partir','请听发音','参考课程','记住它'], hint:'l17_partir', audio:''},
-    {type:'fill', word:'scriver', answer:'scriver', options:['scriver','请听发音','参考课程','记住它'], hint:'l17_scriver', audio:''},
-    {type:'fill', word:'sto bene grazie', answer:'sto bene grazie', options:['sto bene grazie','请听发音','参考课程','记住它'], hint:'l17_sto_bene_grazie', audio:''},
-    {type:'fill', word:'studio l italiano', answer:'studio l italiano', options:['studio l italiano','请听发音','参考课程','记住它'], hint:'l17_studio_l_italiano', audio:''},
+    {type:'fill', word:'parlerò 是哪个人称的将来时？', answer:'io', options:["io", "tu", "lui", "noi"], hint:'-erò是io的将来时词尾', audio:''},
+    {type:'fill', word:'Domani ___ a Roma.', answer:'andrò', options:["andrò", "vado", "sono andato", "andavo"], hint:'将来动作用将来时', audio:''},
+    {type:'fill', word:'L'anno prossimo ___ in Italia.', answer:'sarò', options:["sarò", "sono", "ero", "fui"], hint:'将来状态用将来时', audio:''},
+    {type:'fill', word:'将来时词尾 -erò/-erai/-erà 对应？', answer:'-are/-ere动词', options:["-are/-ere", "-ire", "不规则", "所有动词"], hint:'规则将来时词尾', audio:''},
+    {type:'fill', word:'Quando ___ grande, farò il medico.', answer:'sarò', options:["sarò", "sono", "ero", "fui"], hint:'将来时间从句用将来时', audio:''},
+    {type:'fill', word:'和英语一样，意大利语将来时表示？', answer:'将来发生的动作', options:["将来动作", "过去动作", "正在发生", "已经发生"], hint:'futuro=将来', audio:''},
   ],
   trap:[
-    {type:'fill', word:'l17 的意思？', answer:'l17', options:['l17','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'andr 的意思？', answer:'andr', options:['andr','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'come stai 的意思？', answer:'come stai', options:['come stai','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'cosa studi oggi 的意思？', answer:'cosa studi oggi', options:['cosa studi oggi','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'parler 的意思？', answer:'parler', options:['parler','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
+    {type:'fill', word:'essere的将来时是？', answer:'sarò/sarai/sarà...', options:["sarò等", "fui等", "ero等", "sono等"], hint:'essere将来时不规则', audio:''},
+    {type:'fill', word:'avere的将来时是？', answer:'avrò/avrai/avrà...', options:["avrò等", "ebbi等", "avevo等", "ho等"], hint:'avere将来时去v', audio:''},
+    {type:'fill', word:'fare的将来时是？', answer:'farò/farai/farà...', options:["farò等", "feci等", "facevo等", "faccio等"], hint:'fare将来时简化', audio:''},
   ]
 };
-
 let currentMode='basic';let currentQuizData=[];let quizScore=0;let quizAnswered=0;
 
 function switchQuizMode(mode,tabEl){currentMode=mode;document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));if(tabEl)tabEl.classList.add('active');resetQuiz();}
