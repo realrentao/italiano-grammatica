@@ -252,37 +252,31 @@ function showToast(msg) {
 }
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
 const flashcards = [
-  {word:'l14', article:'', meaning:'l14', audio:'l14'},
-  {word:'ci aiutano', article:'', meaning:'l14_ci_aiutano', audio:'l14_ci_aiutano'},
-  {word:'come stai', article:'', meaning:'l14_come_stai', audio:'l14_come_stai'},
-  {word:'cosa studi oggi', article:'', meaning:'l14_cosa_studi_oggi', audio:'l14_cosa_studi_oggi'},
-  {word:'gli do il libro', article:'', meaning:'l14_gli_do_il_libro', audio:'l14_gli_do_il_libro'},
-  {word:'le parlo', article:'', meaning:'l14_le_parlo', audio:'l14_le_parlo'},
-  {word:'lo vedo', article:'', meaning:'l14_lo_vedo', audio:'l14_lo_vedo'},
-  {word:'sto bene grazie', article:'', meaning:'l14_sto_bene_grazie', audio:'l14_sto_bene_grazie'},
-  {word:'studio l italiano', article:'', meaning:'l14_studio_l_italiano', audio:'l14_studio_l_italiano'},
+  {word:'lo vedo', article:'lo=他/它', meaning:'我看见他', audio:'l14_lo_vedo'},
+  {word:'la chiamo', article:'la=她', meaning:'我叫她', audio:'l14_lo_vedo'},
+  {word:'li compro', article:'li=它们(阳)', meaning:'我买它们', audio:'l14_ci_aiutano'},
+  {word:'gli parlo', article:'gli=给他', meaning:'我跟他说', audio:'l14_gli_do_il_libro'},
+  {word:'le dico', article:'le=给她', meaning:'我跟她说', audio:'l14_le_parlo'},
+  {word:'mi aiuta', article:'mi=我', meaning:'他帮我', audio:'l14_ci_aiutano'},
+  {word:'ti vedo', article:'ti=你', meaning:'我看见你', audio:'l14_lo_vedo'},
+  {word:'ci chiama', article:'ci=我们', meaning:'他叫我们', audio:'l14_ci_aiutano'},
+  {word:'vi aspetto', article:'vi=你们', meaning:'我等你们', audio:'l14_lo_vedo'},
 ];
 const quizBank={
   basic:[
-    {type:'fill', word:'l14', answer:'l14', options:['l14','请听发音','参考课程','记住它'], hint:'l14', audio:''},
-    {type:'fill', word:'ci aiutano', answer:'ci aiutano', options:['ci aiutano','请听发音','参考课程','记住它'], hint:'l14_ci_aiutano', audio:''},
-    {type:'fill', word:'come stai', answer:'come stai', options:['come stai','请听发音','参考课程','记住它'], hint:'l14_come_stai', audio:''},
-    {type:'fill', word:'cosa studi oggi', answer:'cosa studi oggi', options:['cosa studi oggi','请听发音','参考课程','记住它'], hint:'l14_cosa_studi_oggi', audio:''},
-    {type:'fill', word:'gli do il libro', answer:'gli do il libro', options:['gli do il libro','请听发音','参考课程','记住它'], hint:'l14_gli_do_il_libro', audio:''},
-    {type:'fill', word:'le parlo', answer:'le parlo', options:['le parlo','请听发音','参考课程','记住它'], hint:'l14_le_parlo', audio:''},
-    {type:'fill', word:'lo vedo', answer:'lo vedo', options:['lo vedo','请听发音','参考课程','记住它'], hint:'l14_lo_vedo', audio:''},
-    {type:'fill', word:'sto bene grazie', answer:'sto bene grazie', options:['sto bene grazie','请听发音','参考课程','记住它'], hint:'l14_sto_bene_grazie', audio:''},
-    {type:'fill', word:'studio l italiano', answer:'studio l italiano', options:['studio l italiano','请听发音','参考课程','记住它'], hint:'l14_studio_l_italiano', audio:''},
+    {type:'fill', word:'lo vedo 中 lo 替代？', answer:'他(阳性单数)', options:["他(阳单)", "她", "他们", "它"], hint:'lo替代阳性单数', audio:''},
+    {type:'fill', word:'la chiamo 中 la 替代？', answer:'她', options:["她", "他", "它", "你"], hint:'la替代阴性单数', audio:''},
+    {type:'fill', word:'gli parlo 中 gli 替代？', answer:'给他(阳)', options:["给他", "给她", "给他们", "给你"], hint:'gli是间接宾语阳性', audio:''},
+    {type:'fill', word:'le dico 中 le 替代？', answer:'给她', options:["给她", "给他", "给他们", "给"], hint:'le是间接宾语阴性', audio:''},
+    {type:'fill', word:'mi aiuta 中 mi 的语法作用？', answer:'直接宾语(我)', options:["直接宾语(我)", "间接宾语(给我)", "反身", "物主"], hint:'mi可以是直接或间接', audio:''},
+    {type:'fill', word:'Hai visto Marco? - Sì, ___ ho visto.', answer:'lo', options:["lo", "la", "li", "le"], hint:'lo替代Marco', audio:''},
   ],
   trap:[
-    {type:'fill', word:'l14 的意思？', answer:'l14', options:['l14','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'ci aiutano 的意思？', answer:'ci aiutano', options:['ci aiutano','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'come stai 的意思？', answer:'come stai', options:['come stai','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'cosa studi oggi 的意思？', answer:'cosa studi oggi', options:['cosa studi oggi','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'gli do il libro 的意思？', answer:'gli do il libro', options:['gli do il libro','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
+    {type:'fill', word:'gli 和 le 的区别？', answer:'gli给男性，le给女性', options:["gli给男le给女", "意思相同", "gli复数le单数", "gli直接le间接"], hint:'间接宾语要注意阴阳性', audio:''},
+    {type:'fill', word:'li 和 le(复数) 的区别？', answer:'li阳性le阴性', options:["li阳le阴", "li单le复", "意思相同", "li间接le直接"], hint:'复数宾语代词阴阳有别', audio:''},
+    {type:'fill', word:'Ho comprato le mele. - ___ ho comprate.', answer:'Le', options:["Le", "Li", "Lo", "La"], hint:'le(阴性复数)替代le mele', audio:''},
   ]
 };
-
 let currentMode='basic';let currentQuizData=[];let quizScore=0;let quizAnswered=0;
 
 function switchQuizMode(mode,tabEl){currentMode=mode;document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));if(tabEl)tabEl.classList.add('active');resetQuiz();}
