@@ -252,29 +252,27 @@ function showToast(msg) {
 }
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
 const flashcards = [
-  {word:'l24', article:'', meaning:'l24', audio:'l24'},
-  {word:'come stai', article:'', meaning:'l24_come_stai', audio:'l24_come_stai'},
-  {word:'cosa studi oggi', article:'', meaning:'l24_cosa_studi_oggi', audio:'l24_cosa_studi_oggi'},
-  {word:'sto bene grazie', article:'', meaning:'l24_sto_bene_grazie', audio:'l24_sto_bene_grazie'},
-  {word:'studio l italiano', article:'', meaning:'l24_studio_l_italiano', audio:'l24_studio_l_italiano'},
+  {word:'ho imparato', article:'近过去时', meaning:'我学会了', audio:'l24_come_stai'},
+  {word:'parlavo italiano', article:'未完成过去', meaning:'我曾说意大利语', audio:'l24_studio_l_italiano'},
+  {word:'parlerò italiano', article:'将来时', meaning:'我将会说意大利语', audio:'l24_sto_bene_grazie'},
+  {word:'parlerei italiano', article:'条件式', meaning:'我会说意大利语', audio:'l24_studio_l_italiano'},
+  {word:'che io parli', article:'虚拟式', meaning:'我说(虚拟)', audio:'l24_cosa_studi_oggi'},
 ];
 const quizBank={
   basic:[
-    {type:'fill', word:'l24', answer:'l24', options:['l24','请听发音','参考课程','记住它'], hint:'l24', audio:''},
-    {type:'fill', word:'come stai', answer:'come stai', options:['come stai','请听发音','参考课程','记住它'], hint:'l24_come_stai', audio:''},
-    {type:'fill', word:'cosa studi oggi', answer:'cosa studi oggi', options:['cosa studi oggi','请听发音','参考课程','记住它'], hint:'l24_cosa_studi_oggi', audio:''},
-    {type:'fill', word:'sto bene grazie', answer:'sto bene grazie', options:['sto bene grazie','请听发音','参考课程','记住它'], hint:'l24_sto_bene_grazie', audio:''},
-    {type:'fill', word:'studio l italiano', answer:'studio l italiano', options:['studio l italiano','请听发音','参考课程','记住它'], hint:'l24_studio_l_italiano', audio:''},
+    {type:'fill', word:'ho imparato 是什么时态？', answer:'近过去时', options:["近过去时", "现在时", "将来时", "条件式"], hint:'passato prossimo', audio:''},
+    {type:'fill', word:'parlavo 是什么时态？', answer:'未完成过去时', options:["未完成过去时", "近过去时", "将来时", "现在时"], hint:'imperfetto', audio:''},
+    {type:'fill', word:'parlerò 是什么时态？', answer:'将来时', options:["将来时", "条件式", "现在时", "虚拟式"], hint:'futuro semplice', audio:''},
+    {type:'fill', word:'parlerei 是什么时态？', answer:'条件式', options:["条件式", "将来时", "现在时", "虚拟式"], hint:'condizionale', audio:''},
+    {type:'fill', word:'che io parli 是什么时态？', answer:'虚拟式', options:["虚拟式", "直陈式", "命令式", "不定式"], hint:'congiuntivo', audio:''},
+    {type:'fill', word:'24课学完，你达到了什么水平？', answer:'基础意大利语交流', options:["基础交流", "精通", "母语", "翻译"], hint:'24课=意大利语A1-A2水平', audio:''},
   ],
   trap:[
-    {type:'fill', word:'l24 的意思？', answer:'l24', options:['l24','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'come stai 的意思？', answer:'come stai', options:['come stai','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'cosa studi oggi 的意思？', answer:'cosa studi oggi', options:['cosa studi oggi','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'sto bene grazie 的意思？', answer:'sto bene grazie', options:['sto bene grazie','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'studio l italiano 的意思？', answer:'studio l italiano', options:['studio l italiano','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
+    {type:'fill', word:'意大利语最难掌握的时态是？', answer:'虚拟式', options:["虚拟式", "现在时", "将来时", "过去时"], hint:'虚拟式是意大利语学习最大难点', audio:''},
+    {type:'fill', word:'最重要的助动词是哪两个？', answer:'essere和avere', options:["essere/avere", "和are/和ere", "potere/volere", "fare/dire"], hint:'所有复合时态都需要助动词', audio:''},
+    {type:'fill', word:'学好意大利语的关键？', answer:'多听多说多练', options:["多听多说多练", "只学语法", "只看课本", "死记硬背"], hint:'语言学习需要实践', audio:''},
   ]
 };
-
 let currentMode='basic';let currentQuizData=[];let quizScore=0;let quizAnswered=0;
 
 function switchQuizMode(mode,tabEl){currentMode=mode;document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));if(tabEl)tabEl.classList.add('active');resetQuiz();}
