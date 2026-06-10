@@ -407,22 +407,22 @@ function speakCurrentCard(){const c=flashcards[fcIndex];playAudio(c.audio);}
 const quizBank={
   basic:[
     // ---- 填空 (10题) ----
-    {type:'fill', word:'Marco è ___ alto di Luca.', answer:'più', options:['più','meno','tanto','il più'], hint:'più...di=比...更', audio:''},
-    {type:'fill', word:'Questa stanza è ___ grande di quella.', answer:'meno', options:['meno','più','tanto','il'], hint:'meno...di=不如...', audio:''},
+    {type:'fill', word:'Marco è ___ alto di Luca.', answer:'più', options:['più','tanto','il più','molto'], hint:'più...di=比...更', audio:''},
+    {type:'fill', word:'Questa stanza è ___ grande di quella.', answer:'meno', options:['meno','tanto','il','molto'], hint:'meno...di=不如...', audio:''},
     {type:'fill', word:'Sono ___ alto quanto te.', answer:'tanto', options:['tanto','più','meno','il'], hint:'tanto...quanto=和...一样', audio:''},
     {type:'fill', word:'Lei è ___ più brava della classe.', answer:'la', options:['la','il','le','i'], hint:'la più=阴性单数最高级', audio:''},
     {type:'fill', word:'Lui è ___ più bravo della classe.', answer:'il', options:['il','la','i','le'], hint:'il più=阳性单数最高级', audio:''},
     {type:'fill', word:'___ ragazzi più alti sono in squadra.', answer:'I', options:['I','Il','La','Le'], hint:'i più=阳性复数最高级', audio:''},
     {type:'fill', word:'___ ragazze più intelligenti studiano molto.', answer:'Le', options:['Le','La','Il','I'], hint:'le più=阴性复数最高级', audio:''},
-    {type:'fill', word:'Marco corre ___ veloce di Luca.', answer:'più', options:['più','meno','tanto','il'], hint:'più+副词=比较级', audio:''},
+    {type:'fill', word:'Marco corre ___ veloce di Luca.', answer:'più', options:['più','tanto','il','molto'], hint:'più+副词=比较级', audio:''},
     {type:'fill', word:'Parlo italiano ___ bene quanto te.', answer:'tanto', options:['tanto','più','meno','il'], hint:'tanto...quanto也可搭配副词', audio:''},
     {type:'fill', word:'Questo vino è ___ buono, è il migliore!', answer:'molto', options:['molto','più','tanto','il'], hint:'molto buono=很好，不是比较级', audio:''},
     // ---- 句子填空 (5题) ----
-    {type:'sentence', word:'Marco è ___ alto di Luca.', answer:'più', options:['più','meno','tanto','il'], hint:'比较级用più', audio:''},
+    {type:'sentence', word:'Questa torta è ___ buona di quella.', answer:'meno', options:['meno','più','tanto','molto'], hint:'meno...di=不如...', audio:''},
     {type:'sentence', word:'Lei canta ___ di me.', answer:'meglio', options:['meglio','bene','buono','migliore'], hint:'bene的比较级不规则→meglio', audio:''},
-    {type:'sentence', word:'Questo ristorante è il ___ caro della città.', answer:'più', options:['più','meno','tanto','meglio'], hint:'最高级用il più', audio:''},
-    {type:'sentence', word:'Sono ___ stanca quanto te.', answer:'tanto', options:['tanto','più','molto','meno'], hint:'tanto...quanto同级比较', audio:''},
-    {type:'sentence', word:'La pizza è buona, ma la pasta è ___ buona.', answer:'più', options:['più','meno','tanto','molto'], hint:'比较级用più', audio:''},
+    {type:'sentence', word:'Questo ristorante è il ___ caro della città.', answer:'più', options:['più','tanto','meglio','molto'], hint:'最高级用il più', audio:''},
+    {type:'sentence', word:'Sono ___ stanca quanto te.', answer:'tanto', options:['tanto','più','molto','il'], hint:'tanto...quanto同级比较', audio:''},
+    {type:'sentence', word:'La pizza è buona, ma la pasta è ___ buona.', answer:'più', options:['più','tanto','molto','il'], hint:'比较级用più', audio:''},
     // ---- 翻译选择 (5题) ----
     {type:'translate', word:'"più grande di" 的中文意思是？', answer:'比...更大', options:['比...更大','比...更小','和...一样大','最大的'], hint:'più...di=比...更', audio:''},
     {type:'translate', word:'"il più bravo" 的中文意思是？', answer:'最厉害的', options:['最厉害的','更厉害的','厉害的','非常厉害'], hint:'il più=最高级定冠词', audio:''},
@@ -452,9 +452,9 @@ const quizBank={
     {type:'truefalse', word:'"il più bravo" 是最高级形式', answer:'对', options:['对','错'], hint:'il+più+形容词=最高级', audio:''},
     {type:'truefalse', word:'"bellissimo" 和 "il più bello" 含义完全相同', answer:'错', options:['对','错'], hint:'bellissimo=非常美（绝对），il più bello=最美（相对）', audio:''},
     // ---- 句子填空 (3题) ----
-    {type:'sentence', word:'Marco è il ___ bravo della classe.', answer:'più', options:['più','meno','tanto','molto'], hint:'最高级=il+più+形容词', audio:''},
-    {type:'sentence', word:'Questa è la ___ bella casa del quartiere.', answer:'più', options:['più','meno','tanto','molto'], hint:'la più bella=最美的', audio:''},
-    {type:'sentence', word:'Sono ___ stanco che affamato.', answer:'più', options:['più','meno','tanto','il'], hint:'比较两个形容词用che：più...che', audio:''},
+    {type:'sentence', word:'Marco è il ___ bravo della classe.', answer:'più', options:['più','tanto','molto','il'], hint:'最高级=il+più+形容词', audio:''},
+    {type:'sentence', word:'Questa è la ___ bella casa del quartiere.', answer:'più', options:['più','tanto','molto','il'], hint:'la più bella=最美的', audio:''},
+    {type:'sentence', word:'Sono ___ stanco che affamato.', answer:'più', options:['più','tanto','il','molto'], hint:'比较两个形容词用che：più...che', audio:''},
   ]
 };let currentMode='basic';
 let currentQuizData=[];
