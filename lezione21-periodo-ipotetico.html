@@ -252,37 +252,31 @@ function showToast(msg) {
 }
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
 const flashcards = [
-  {word:'l21', article:'', meaning:'l21', audio:'l21'},
-  {word:'come stai', article:'', meaning:'l21_come_stai', audio:'l21_come_stai'},
-  {word:'cosa studi oggi', article:'', meaning:'l21_cosa_studi_oggi', audio:'l21_cosa_studi_oggi'},
-  {word:'se fosse piovuto sarei restato', article:'', meaning:'l21_se_fosse_piovuto_sarei_restato', audio:'l21_se_fosse_piovuto_sarei_restato'},
-  {word:'se piove resto a casa', article:'', meaning:'l21_se_piove_resto_a_casa', audio:'l21_se_piove_resto_a_casa'},
-  {word:'se piovesse resterei', article:'', meaning:'l21_se_piovesse_resterei', audio:'l21_se_piovesse_resterei'},
-  {word:'se potessi viaggerei', article:'', meaning:'l21_se_potessi_viaggerei', audio:'l21_se_potessi_viaggerei'},
-  {word:'sto bene grazie', article:'', meaning:'l21_sto_bene_grazie', audio:'l21_sto_bene_grazie'},
-  {word:'studio l italiano', article:'', meaning:'l21_studio_l_italiano', audio:'l21_studio_l_italiano'},
+  {word:'se piove resto', article:'第一类(现实)', meaning:'如果下雨我就留下', audio:'l21_se_piove_resto_a_casa'},
+  {word:'se piovesse resterei', article:'第二类(可能)', meaning:'如果下雨我会留下', audio:'l21_se_piovesse_resterei'},
+  {word:'se fosse piovuto sarei restato', article:'第三类(不可能)', meaning:'如果当时下雨我就留下了', audio:'l21_se_fosse_piovuto_sarei_restato'},
+  {word:'se potessi viaggerei', article:'第二类', meaning:'如果我可以我会旅行', audio:'l21_se_potessi_viaggerei'},
+  {word:'se studio imparo', article:'第一类', meaning:'如果我学我就学会', audio:'l21_se_piove_resto_a_casa'},
+  {word:'se avessi tempo...', article:'第二类', meaning:'如果我有时间...', audio:'l21_se_potessi_viaggerei'},
+  {word:'se fossi ricco...', article:'第二类', meaning:'如果我有钱...', audio:'l21_se_piovesse_resterei'},
+  {word:'se avessi studiato...', article:'第三类', meaning:'如果我当时学了...', audio:'l21_se_fosse_piovuto_sarei_restato'},
+  {word:'se sapessi...', article:'第二类', meaning:'如果我知道...', audio:'l21_se_potessi_viaggerei'},
 ];
 const quizBank={
   basic:[
-    {type:'fill', word:'l21', answer:'l21', options:['l21','请听发音','参考课程','记住它'], hint:'l21', audio:''},
-    {type:'fill', word:'come stai', answer:'come stai', options:['come stai','请听发音','参考课程','记住它'], hint:'l21_come_stai', audio:''},
-    {type:'fill', word:'cosa studi oggi', answer:'cosa studi oggi', options:['cosa studi oggi','请听发音','参考课程','记住它'], hint:'l21_cosa_studi_oggi', audio:''},
-    {type:'fill', word:'se fosse piovuto sarei restato', answer:'se fosse piovuto sarei restato', options:['se fosse piovuto sarei restato','请听发音','参考课程','记住它'], hint:'l21_se_fosse_piovuto_sarei_restato', audio:''},
-    {type:'fill', word:'se piove resto a casa', answer:'se piove resto a casa', options:['se piove resto a casa','请听发音','参考课程','记住它'], hint:'l21_se_piove_resto_a_casa', audio:''},
-    {type:'fill', word:'se piovesse resterei', answer:'se piovesse resterei', options:['se piovesse resterei','请听发音','参考课程','记住它'], hint:'l21_se_piovesse_resterei', audio:''},
-    {type:'fill', word:'se potessi viaggerei', answer:'se potessi viaggerei', options:['se potessi viaggerei','请听发音','参考课程','记住它'], hint:'l21_se_potessi_viaggerei', audio:''},
-    {type:'fill', word:'sto bene grazie', answer:'sto bene grazie', options:['sto bene grazie','请听发音','参考课程','记住它'], hint:'l21_sto_bene_grazie', audio:''},
-    {type:'fill', word:'studio l italiano', answer:'studio l italiano', options:['studio l italiano','请听发音','参考课程','记住它'], hint:'l21_studio_l_italiano', audio:''},
+    {type:'fill', word:'第一类条件从句的结构？', answer:'se+直陈+直陈', options:["se+直陈+直陈", "se+虚拟+条件", "se+愈过去+条件", "se+命令+命令"], hint:'现实条件用直陈', audio:''},
+    {type:'fill', word:'第二类条件从句的结构？', answer:'se+虚拟+条件式', options:["se+虚拟+条件式", "se+直陈+直陈", "se+愈过去+条件", "se+命令+命令"], hint:'可能条件用虚拟', audio:''},
+    {type:'fill', word:'第三类条件从句的结构？', answer:'se+愈过去+条件式过去', options:["se+愈过去+条件过去", "se+虚拟+条件", "se+直陈+直陈", "se+条件+条件"], hint:'不可能条件', audio:''},
+    {type:'fill', word:'Se ___ tempo, andrei al mare.', answer:'avessi', options:["avessi", "ho", "avevo", "avrò"], hint:'第二类se+虚拟', audio:''},
+    {type:'fill', word:'Se studio, ___ l'esame.', answer:'passo', options:["passo", "passerei", "passavo", "passerò"], hint:'第一类se+直陈现在+直陈现在', audio:''},
+    {type:'fill', word:'Se avessi studiato, ___ l'esame.', answer:'avrei passato', options:["avrei passato", "passo", "passerei", "passavo"], hint:'第三类se+愈过去+条件过去', audio:''},
   ],
   trap:[
-    {type:'fill', word:'l21 的意思？', answer:'l21', options:['l21','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'come stai 的意思？', answer:'come stai', options:['come stai','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'cosa studi oggi 的意思？', answer:'cosa studi oggi', options:['cosa studi oggi','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'se fosse piovuto sarei restato 的意思？', answer:'se fosse piovuto sarei restato', options:['se fosse piovuto sarei restato','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'se piove resto a casa 的意思？', answer:'se piove resto a casa', options:['se piove resto a casa','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
+    {type:'fill', word:'第一类和第二类的核心区别？', answer:'现实vs可能', options:["现实vs可能", "时间不同", "主语不同", "动词不同"], hint:'第一类=很可能，第二类=可能性小', audio:''},
+    {type:'fill', word:'se后面可以跟条件式吗？', answer:'不可以', options:["不可以", "可以", "只有第二类可以", "只有第三类可以"], hint:'se后面不跟条件式', audio:''},
+    {type:'fill', word:'第三类表示？', answer:'与过去事实相反', options:["与过去相反", "与现在相反", "未来可能", "确定事实"], hint:'第三类=if I had..., I would have...', audio:''},
   ]
 };
-
 let currentMode='basic';let currentQuizData=[];let quizScore=0;let quizAnswered=0;
 
 function switchQuizMode(mode,tabEl){currentMode=mode;document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));if(tabEl)tabEl.classList.add('active');resetQuiz();}
