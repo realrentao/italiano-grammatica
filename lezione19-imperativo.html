@@ -252,37 +252,31 @@ function showToast(msg) {
 }
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
 const flashcards = [
-  {word:'l19', article:'', meaning:'l19', audio:'l19'},
-  {word:'come stai', article:'', meaning:'l19_come_stai', audio:'l19_come_stai'},
-  {word:'cosa studi oggi', article:'', meaning:'l19_cosa_studi_oggi', audio:'l19_cosa_studi_oggi'},
-  {word:'mangi', article:'', meaning:'l19_mangi', audio:'l19_mangi'},
-  {word:'mangia', article:'', meaning:'l19_mangia', audio:'l19_mangia'},
-  {word:'mangiamo', article:'', meaning:'l19_mangiamo', audio:'l19_mangiamo'},
-  {word:'non mangiare', article:'', meaning:'l19_non_mangiare', audio:'l19_non_mangiare'},
-  {word:'sto bene grazie', article:'', meaning:'l19_sto_bene_grazie', audio:'l19_sto_bene_grazie'},
-  {word:'studio l italiano', article:'', meaning:'l19_studio_l_italiano', audio:'l19_studio_l_italiano'},
+  {word:'parla!', article:'tu', meaning:'你说！', audio:'l19_mangi'},
+  {word:'mangi!', article:'Lei', meaning:'您说！', audio:'l19_mangia'},
+  {word:'parliamo!', article:'noi', meaning:'我们说吧！', audio:'l19_mangiamo'},
+  {word:'parlate!', article:'voi', meaning:'你们说！', audio:'l19_mangi'},
+  {word:'non parlare!', article:'否定', meaning:'别说！', audio:'l19_non_mangiare'},
+  {word:'vieni!', article:'tu', meaning:'你来！', audio:'l19_mangia'},
+  {word:'vada!', article:'Lei', meaning:'您去！', audio:'l19_mangi'},
+  {word:'fai!/fa'!', article:'tu', meaning:'你做！', audio:'l19_mangia'},
+  {word:'stai!/sta'!', article:'tu', meaning:'你待在！', audio:'l19_mangi'},
 ];
 const quizBank={
   basic:[
-    {type:'fill', word:'l19', answer:'l19', options:['l19','请听发音','参考课程','记住它'], hint:'l19', audio:''},
-    {type:'fill', word:'come stai', answer:'come stai', options:['come stai','请听发音','参考课程','记住它'], hint:'l19_come_stai', audio:''},
-    {type:'fill', word:'cosa studi oggi', answer:'cosa studi oggi', options:['cosa studi oggi','请听发音','参考课程','记住它'], hint:'l19_cosa_studi_oggi', audio:''},
-    {type:'fill', word:'mangi', answer:'mangi', options:['mangi','请听发音','参考课程','记住它'], hint:'l19_mangi', audio:''},
-    {type:'fill', word:'mangia', answer:'mangia', options:['mangia','请听发音','参考课程','记住它'], hint:'l19_mangia', audio:''},
-    {type:'fill', word:'mangiamo', answer:'mangiamo', options:['mangiamo','请听发音','参考课程','记住它'], hint:'l19_mangiamo', audio:''},
-    {type:'fill', word:'non mangiare', answer:'non mangiare', options:['non mangiare','请听发音','参考课程','记住它'], hint:'l19_non_mangiare', audio:''},
-    {type:'fill', word:'sto bene grazie', answer:'sto bene grazie', options:['sto bene grazie','请听发音','参考课程','记住它'], hint:'l19_sto_bene_grazie', audio:''},
-    {type:'fill', word:'studio l italiano', answer:'studio l italiano', options:['studio l italiano','请听发音','参考课程','记住它'], hint:'l19_studio_l_italiano', audio:''},
+    {type:'fill', word:'命令式(parla!)用于什么人称？', answer:'tu(你)', options:["tu", "Lei", "noi", "voi"], hint:'tu命令式=第三人称单数变位', audio:''},
+    {type:'fill', word:'命令式(mangi!)用于什么人称？', answer:'Lei(您)', options:["Lei", "tu", "noi", "voi"], hint:'Lei命令式用虚拟式变位', audio:''},
+    {type:'fill', word:'命令式(parliamo!)用于什么人称？', answer:'noi(我们)', options:["noi", "tu", "Lei", "voi"], hint:'noi命令式=直陈式现在时', audio:''},
+    {type:'fill', word:'否定命令式(non parlare!)的结构？', answer:'non+不定式', options:["non+不定式", "non+变位", "non+过去分词", "mai+变位"], hint:'tu否定命令式=non+不定式', audio:''},
+    {type:'fill', word:'___ qui, per favore!', answer:'Venga', options:["Venga", "Vieni", "Venite", "Veniamo"], hint:'敬语命令式用Lei', audio:''},
+    {type:'fill', word:'Ragazzi, ___ attenti!', answer:'state', options:["state", "stia", "stiamo", "stai"], hint:'voi命令式用直陈式', audio:''},
   ],
   trap:[
-    {type:'fill', word:'l19 的意思？', answer:'l19', options:['l19','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'come stai 的意思？', answer:'come stai', options:['come stai','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'cosa studi oggi 的意思？', answer:'cosa studi oggi', options:['cosa studi oggi','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'mangi 的意思？', answer:'mangi', options:['mangi','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'mangia 的意思？', answer:'mangia', options:['mangia','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
+    {type:'fill', word:'Lei命令式和tu命令式区别？', answer:'Lei用虚拟，tu用直陈', options:["Lei虚拟tu直陈", "一样", "Lei直陈tu虚拟", "Lei正式tu随意"], hint:'敬语命令式使用虚拟式', audio:''},
+    {type:'fill', word:'否定命令式tu用？', answer:'non+不定式', options:["non+不定式", "non+变位", "non+命令式", "mai+命令式"], hint:'tu否定用不定式', audio:''},
+    {type:'fill', word:'动词andare的tu命令式？', answer:'va\'/vai', options:["va'", "vada", "andiamo", "andate"], hint:'andare的命令式不规则', audio:''},
   ]
 };
-
 let currentMode='basic';let currentQuizData=[];let quizScore=0;let quizAnswered=0;
 
 function switchQuizMode(mode,tabEl){currentMode=mode;document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));if(tabEl)tabEl.classList.add('active');resetQuiz();}
