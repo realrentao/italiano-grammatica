@@ -102,6 +102,201 @@
     @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
     .animate-in{animation:fadeInUp 0.5s ease forwards;}
     @media(max-width:640px){.hero h1{font-size:28px;}.rule-cards{grid-template-columns:1fr;}.trap-list{grid-template-columns:1fr;}}
+  
+    /* ===== 闪卡翻转 ===== */
+    .flashcard-area {
+      display: flex; flex-direction: column; align-items: center;
+      margin-top: 16px; gap: 16px;
+    }
+    .flashcard {
+      width: 300px; height: 200px; perspective: 600px;
+      cursor: pointer;
+    }
+    .flashcard-inner {
+      position: relative; width: 100%; height: 100%;
+      transition: transform 0.6s; transform-style: preserve-3d;
+    }
+    .flashcard.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+    .flashcard-front, .flashcard-back {
+      position: absolute; inset: 0; border-radius: var(--radius);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      backface-visibility: hidden; padding: 20px;
+    }
+    .flashcard-front {
+      background: linear-gradient(135deg, var(--card), #f0ebe3);
+      border: 1px solid var(--border);
+    }
+    .flashcard-back {
+      background: linear-gradient(135deg, rgba(0,146,70,0.15), rgba(26,115,232,0.1));
+      border: 1px solid rgba(0,146,70,0.3);
+      transform: rotateY(180deg);
+    }
+    .flashcard .front-word {
+      font-size: 28px; font-weight: 700; font-style: italic;
+    }
+    .flashcard .front-hint {
+      font-size: 13px; color: var(--text-dim); margin-top: 8px;
+    }
+    .flashcard .back-article {
+      font-size: 20px; font-weight: 700; margin-bottom: 4px;
+    }
+    .flashcard .back-word {
+      font-size: 24px; font-style: italic; font-weight: 600;
+    }
+    .flashcard .back-detail {
+      font-size: 13px; color: var(--text-dim); margin-top: 4px;
+    }
+    .flashcard .back-meaning {
+      font-size: 14px; color: var(--text-dim); margin-top: 2px;
+    }
+    .flashcard-nav {
+      display: flex; gap: 12px;
+    }
+    .flashcard-nav button {
+      background: var(--card); border: 1px solid var(--border);
+      color: var(--text); padding: 10px 24px; border-radius: 10px;
+      cursor: pointer; font-size: 14px; transition: all 0.2s;
+    }
+    .flashcard-nav button:hover {
+      background: var(--card-hover); border-color: var(--green);
+    }
+    .flashcard-counter {
+      font-size: 13px; color: var(--text-dim);
+    }
+
+    /* ===== 互动测验 ===== */
+    .quiz-section {
+      margin-top: 48px;
+    }
+    .quiz-header-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 16px;
+    }
+    .quiz-counter {
+      font-size: 14px; color: var(--text-dim);
+    }
+    .quiz-counter strong { color: var(--green); font-size: 18px; }
+    .quiz-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      margin-bottom: 16px;
+    }
+    .quiz-question {
+      font-size: 17px; font-weight: 600; margin-bottom: 16px;
+    }
+    .quiz-question .quiz-word {
+      font-style: italic; color: var(--green); font-size: 22px;
+    }
+    .quiz-options {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .quiz-option {
+      background: rgba(0,0,0,0.02); border: 2px solid var(--border);
+      border-radius: 12px; padding: 14px; cursor: pointer;
+      transition: all 0.25s; text-align: center; font-size: 16px;
+    }
+    .quiz-option:hover:not(.answered) {
+      border-color: var(--blue); background: rgba(26,115,232,0.08);
+    }
+    .quiz-option.correct {
+      border-color: var(--green) !important;
+      background: rgba(0,146,70,0.15) !important;
+      color: var(--green);
+    }
+    .quiz-option.wrong {
+      border-color: var(--red) !important;
+      background: rgba(206,43,55,0.1) !important;
+      color: var(--red);
+    }
+    .quiz-option.answered { cursor: default; }
+    .quiz-feedback {
+      margin-top: 12px; padding: 10px 14px; border-radius: 8px;
+      font-size: 14px; display: none;
+    }
+    .quiz-feedback.show { display: block; }
+    .quiz-feedback.right {
+      background: rgba(0,146,70,0.1); color: var(--green);
+    }
+    .quiz-feedback.wrong-fb {
+      background: rgba(206,43,55,0.08); color: #c0392b;
+    }
+    .quiz-mode-tabs {
+      display: flex; gap: 8px; margin-bottom: 20px;
+    }
+    .quiz-mode-tab {
+      padding: 8px 18px; border-radius: 10px;
+      background: var(--card); border: 1px solid var(--border);
+      cursor: pointer; font-size: 14px; font-weight: 500;
+      transition: all 0.2s; color: var(--text-dim);
+    }
+    .quiz-mode-tab.active {
+      border-color: var(--orange); color: var(--orange);
+      background: rgba(232,113,10,0.1);
+    }
+
+    /* ===== 得分板 ===== */
+    .scoreboard {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      text-align: center; margin-top: 32px;
+    }
+    .score-display {
+      font-size: 48px; font-weight: 700;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .score-label { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+    .score-rank {
+      margin-top: 12px; font-size: 16px; font-weight: 600;
+    }
+    .quiz-card-header {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 8px;
+    }
+    .quiz-type-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .quiz-sentence {
+      font-size: 18px;
+      line-height: 1.6;
+      padding: 12px 16px;
+      background: #f9f7f2;
+      border-radius: 10px;
+      border: 1px solid #e8e0d4;
+      margin-bottom: 4px;
+      font-family: 'Georgia','Times New Roman',serif;
+    }
+    .quiz-sentence-hint {
+      font-size: 13px;
+      color: #888;
+      margin-top: 4px;
+    }
+    .quiz-blank {
+      display: inline-block;
+      min-width: 60px;
+      border-bottom: 2px dashed #ce2b37;
+      color: #ce2b37;
+      font-weight: 700;
+    }
+    .quiz-option-tf {
+      min-width: 80px;
+      text-align: center;
+      font-weight: 600;
+    }
+    .quiz-option-tf:nth-child(1) { border-color: #4caf50; color: #2e7d32; }
+    .quiz-option-tf:nth-child(2) { border-color: #f44336; color: #c62828; }
+    .quiz-option-tf.correct:nth-child(1) { background: #c8e6c9; border-color: #4caf50; }
+    .quiz-option-tf.correct:nth-child(2) { background: #ffcdd2; border-color: #f44336; }
+
   </style>
 </head>
 <body>
@@ -187,7 +382,39 @@
     </div>
   </div>
 
-  <div class="section" id="sec-principle">
+  
+  <!-- 闪卡练习 -->
+  <div class="section" id="sec-flashcard">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(124,58,237,0.15);">🃏</div>
+      <h2 class="section-title">闪卡练习 — 自反动词变位</h2>
+    </div>
+    <div class="flashcard-area">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="flashcard-inner" id="flashcardInner">
+          <div class="flashcard-front">
+            <div class="front-word" id="fcWord">mi alzo</div>
+            <div class="front-hint">点击查看详情</div>
+          </div>
+          <div class="flashcard-back">
+            <div class="back-article" id="fcArticle" style="color:var(--blue)">mi alzo</div>
+            <div class="back-word" id="fcFullWord">mi alzo / ti alzi</div>
+            <div class="back-detail" id="fcDetail">si alza / ci alziamo / vi alzate / si alzano</div>
+            <div class="back-meaning" id="fcMeaning">我起床</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard-nav">
+        <button onclick="prevCard()">← 上一个</button>
+        <span class="flashcard-counter" id="fcCounter">1 / 20</span>
+        <button onclick="nextCard()">下一个 →</button>
+      </div>
+      <button class="nav-btn" onclick="speakCurrentCard()" style="margin-top:4px;">🔊 听发音</button>
+    </div>
+  </div>
+
+
+<div class="section" id="sec-principle">
     <div class="principle-card">
       <div class="icon">🔑</div>
       <p class="text">自反动词=自反代词+动词变位，近过去用essere，过去分词配合。</p>
@@ -195,6 +422,36 @@
     </div>
   </div>
 </div>
+
+
+
+  <!-- 互动测验 -->
+  <div class="section quiz-section" id="sec-quiz">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(232,113,10,0.15);">📝</div>
+      <h2 class="section-title">小测验 — 自反动词运用</h2>
+    </div>
+
+    <div class="quiz-mode-tabs">
+      <div class="quiz-mode-tab active" onclick="switchQuizMode('basic', this)">🟢 基础</div>
+      <div class="quiz-mode-tab" onclick="switchQuizMode('trap', this)">🔴 进阶/易错</div>
+      <div class="quiz-mode-tab" onclick="switchQuizMode('all', this)">🟣 全部</div>
+    </div>
+
+    <div class="quiz-header-bar">
+      <div class="quiz-counter">已答 <strong id="answeredCount">0</strong> / <span id="totalCount">20</span></div>
+      <button class="nav-btn" onclick="resetQuiz()">🔄 重来</button>
+    </div>
+
+    <div id="quizContainer"></div>
+
+    <div class="scoreboard" id="scoreboard" style="display:none;">
+      <div class="score-display" id="scoreValue">0</div>
+      <div class="score-label">测验得分</div>
+      <div class="score-rank" id="scoreRank"></div>
+      <button class="nav-btn" onclick="resetQuiz()" style="margin-top:16px;">🔄 重新测验</button>
+    </div>
+  </div>
 
 <div class="footer">
   <div class="footer-nav">
@@ -237,13 +494,149 @@ function showToast(msg) {
   requestAnimationFrame(function() { t.style.opacity = '1'; });
   setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2500);
 }
-function showTrap(('load',function(){if(typeof AUDIO_DATA==='undefined')console.warn('audio_data.js not loaded');});
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
+
+// ===== 闪卡系统 =====
+const flashcards = [{"word": "mi alzo", "fr": "io", "full": "io mi alzo", "detail": "我起床", "meaning": "alzarsi", "audio": "l10_mi_alzo"}, {"word": "ti alzi", "fr": "tu", "full": "tu ti alzi", "detail": "你起床", "meaning": "alzarsi", "audio": "l10_ti_alzi"}, {"word": "si alza", "fr": "lui/lei", "full": "lui/lei si alza", "detail": "他/她起床", "meaning": "alzarsi", "audio": "l10_si_alza"}, {"word": "ci alziamo", "fr": "noi", "full": "noi ci alziamo", "detail": "我们起床", "meaning": "alzarsi", "audio": "l10_ci_alziamo"}, {"word": "vi alzate", "fr": "voi", "full": "voi vi alzate", "detail": "你们起床", "meaning": "alzarsi", "audio": ""}, {"word": "si alzano", "fr": "loro", "full": "loro si alzano", "detail": "他们起床", "meaning": "alzarsi", "audio": ""}, {"word": "mi lavo", "fr": "io", "full": "io mi lavo", "detail": "我洗(澡)", "meaning": "lavarsi", "audio": "l10_mi_lavo"}, {"word": "ti lavi", "fr": "tu", "full": "tu ti lavi", "detail": "你洗(澡)", "meaning": "lavarsi", "audio": "l10_ti_lavi"}, {"word": "si lava", "fr": "lui/lei", "full": "lui/lei si lava", "detail": "他/她洗(澡)", "meaning": "lavarsi", "audio": "l10_si_lava"}, {"word": "ci laviamo", "fr": "noi", "full": "noi ci laviamo", "detail": "我们洗(澡)", "meaning": "lavarsi", "audio": "l10_ci_laviamo"}, {"word": "mi vesto", "fr": "io", "full": "io mi vesto", "detail": "我穿衣", "meaning": "vestirsi", "audio": "l10_mi_vesto"}, {"word": "ti vesti", "fr": "tu", "full": "tu ti vesti", "detail": "你穿衣", "meaning": "vestirsi", "audio": "l10_ti_vesti"}, {"word": "si veste", "fr": "lui/lei", "full": "lui/lei si veste", "detail": "他/她穿衣", "meaning": "vestirsi", "audio": "l10_si_veste"}, {"word": "ci vestiamo", "fr": "noi", "full": "noi ci vestiamo", "detail": "我们穿衣", "meaning": "vestirsi", "audio": "l10_ci_vestiamo"}, {"word": "mi chiamo", "fr": "io", "full": "io mi chiamo", "detail": "我叫…", "meaning": "chiamarsi", "audio": ""}, {"word": "mi sveglio", "fr": "io", "full": "io mi sveglio", "detail": "我醒来", "meaning": "svegliarsi", "audio": "l10_mi_sveglio"}, {"word": "ci svegliamo", "fr": "noi", "full": "noi ci svegliamo", "detail": "我们醒来", "meaning": "svegliarsi", "audio": "l10_ci_svegliamo"}, {"word": "mi sono alzato", "fr": "io(m)", "full": "io mi sono alzato", "detail": "我起床了(男)", "meaning": "passato prossimo", "audio": "l10_mi_sono_alzato"}, {"word": "mi sono alzata", "fr": "io(f)", "full": "io mi sono alzata", "detail": "我起床了(女)", "meaning": "passato prossimo", "audio": "l10_mi_sono_alzata"}, {"word": "ci siamo svegliati", "fr": "noi(m)", "full": "noi ci siamo svegliati", "detail": "我们醒了(男复)", "meaning": "passato prossimo", "audio": "l10_ci_siamo_svegliati"}];
+let fcIndex=0;
+
+function updateFlashcard(){
+  const c=flashcards[fcIndex];
+  document.getElementById('fcWord').textContent=c.word;
+  document.getElementById('fcArticle').textContent=c.fr;
+  document.getElementById('fcFullWord').textContent=c.full;
+  document.getElementById('fcDetail').textContent=c.detail;
+  document.getElementById('fcMeaning').textContent=c.meaning;
+  document.getElementById('fcCounter').textContent=(fcIndex+1)+' / '+flashcards.length;
+  document.getElementById('flashcard').classList.remove('flipped');
+}
+function flipCard(){
+  document.getElementById('flashcard').classList.toggle('flipped');
+  const c=flashcards[fcIndex];if(c.audio)playAudio(c.audio);
+}
+function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
+function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
+function speakCurrentCard(){const c=flashcards[fcIndex];if(c.audio)playAudio(c.audio);}
+
+// ===== 测验系统 =====
+const quizBank={"basic": [{"type": "fill", "word": "alzarsi (io)", "answer": "mi alzo", "options": ["mi alzo", "ti alzi", "si alza", "ci alziamo"], "hint": "io mi alzo", "audio": "l10_mi_alzo"}, {"type": "fill", "word": "alzarsi (tu)", "answer": "ti alzi", "options": ["ti alzi", "mi alzo", "si alza", "ci alziamo"], "hint": "tu ti alzi", "audio": "l10_ti_alzi"}, {"type": "fill", "word": "alzarsi (lui)", "answer": "si alza", "options": ["si alza", "mi alzo", "ti alzi", "ci alziamo"], "hint": "lui si alza", "audio": "l10_si_alza"}, {"type": "fill", "word": "lavarsi (io)", "answer": "mi lavo", "options": ["mi lavo", "ti lavi", "si lava", "ci laviamo"], "hint": "io mi lavo", "audio": "l10_mi_lavo"}, {"type": "fill", "word": "lavarsi (noi)", "answer": "ci laviamo", "options": ["ci laviamo", "mi lavo", "ti lavi", "si lava"], "hint": "noi ci laviamo", "audio": "l10_ci_laviamo"}, {"type": "fill", "word": "vestirsi (io)", "answer": "mi vesto", "options": ["mi vesto", "ti vesti", "si veste", "ci vestiamo"], "hint": "io mi vesto", "audio": "l10_mi_vesto"}, {"type": "fill", "word": "vestirsi (tu)", "answer": "ti vesti", "options": ["ti vesti", "mi vesto", "si veste", "ci vestiamo"], "hint": "tu ti vesti", "audio": "l10_ti_vesti"}, {"type": "fill", "word": "svegliarsi (io)", "answer": "mi sveglio", "options": ["mi sveglio", "ti svegli", "si sveglia", "ci svegliamo"], "hint": "io mi sveglio", "audio": ""}, {"type": "fill", "word": "chiamarsi (tu)", "answer": "ti chiami", "options": ["ti chiami", "mi chiamo", "si chiama", "ci chiamiamo"], "hint": "tu ti chiami", "audio": ""}, {"type": "fill", "word": "alzarsi (voi)", "answer": "vi alzate", "options": ["vi alzate", "ci alziamo", "si alzano", "ti alzi"], "hint": "voi vi alzate", "audio": ""}, {"type": "sentence", "word": "Io ___ alle sette.", "answer": "mi alzo", "options": ["mi alzo", "ti alzi", "si alza", "ci alziamo"], "hint": "io mi alzo", "audio": "l10_mi_alzo"}, {"type": "sentence", "word": "Tu ___ subito.", "answer": "ti lavi", "options": ["ti lavi", "mi lavo", "si lava", "ci laviamo"], "hint": "tu ti lavi", "audio": "l10_ti_lavi"}, {"type": "sentence", "word": "Lui ___ elegantemente.", "answer": "si veste", "options": ["si veste", "mi vesto", "ti vesti", "ci vestiamo"], "hint": "lui si veste", "audio": "l10_si_veste"}, {"type": "sentence", "word": "Noi ___ presto.", "answer": "ci svegliamo", "options": ["ci svegliamo", "mi sveglio", "ti svegli", "si sveglia"], "hint": "noi ci svegliamo", "audio": "l10_ci_svegliamo"}, {"type": "sentence", "word": "Loro ___ tardi.", "answer": "si alzano", "options": ["si alzano", "ci alziamo", "vi alzate", "mi alzo"], "hint": "loro si alzano", "audio": ""}, {"type": "translate", "word": " \"我七点起床\"", "answer": "Mi alzo alle sette", "options": ["Mi alzo alle sette", "Ti alzi alle sette", "Si alza alle sette", "Ci alziamo alle sette"], "hint": "io mi alzo", "audio": ""}, {"type": "translate", "word": " \"你叫什么名字？\"", "answer": "Come ti chiami?", "options": ["Come ti chiami?", "Come mi chiamo?", "Come si chiama?", "Come ci chiamiamo?"], "hint": "tu ti chiami", "audio": ""}, {"type": "translate", "word": " \"我叫玛丽亚\"", "answer": "Mi chiamo Maria", "options": ["Mi chiamo Maria", "Ti chiami Maria", "Si chiama Maria", "Ci chiamiamo Maria"], "hint": "io mi chiamo", "audio": ""}, {"type": "match", "word": "mi", "answer": "io", "options": ["io", "tu", "lui/lei", "noi"], "hint": "mi = 自反代词(io)", "audio": ""}, {"type": "match", "word": "si", "answer": "lui/lei/loro", "options": ["lui/lei/loro", "io", "tu", "noi"], "hint": "si = 第三/六人称", "audio": ""}], "trap": [{"type": "fill", "word": "自反动词近过去用___助动词", "answer": "essere", "options": ["essere", "avere", "sia", "abbia"], "hint": "自反一律用essere", "audio": ""}, {"type": "fill", "word": "alzarsi 近过去 (io, 男)", "answer": "mi sono alzato", "options": ["mi sono alzato", "mi ho alzato", "sono alzato", "ho alzato"], "hint": "essere+过去分词配合", "audio": "l10_mi_sono_alzato"}, {"type": "fill", "word": "alzarsi 近过去 (io, 女)", "answer": "mi sono alzata", "options": ["mi sono alzata", "mi ho alzata", "sono alzata", "ho alzato"], "hint": "阴性用-alzata", "audio": "l10_mi_sono_alzata"}, {"type": "sentence", "word": "Ieri ___ alzato alle 8.", "answer": "mi sono", "options": ["mi sono", "mi ho", "si è", "ci siamo"], "hint": "io (m) + alzarsi = mi sono alzato", "audio": ""}, {"type": "sentence", "word": "Le ragazze ___ svegliate tardi.", "answer": "si sono", "options": ["si sono", "si hanno", "ci siamo", "vi siete"], "hint": "loro(f) + svegliarsi = si sono svegliate", "audio": ""}, {"type": "truefalse", "word": "自反动词近过去分词需要和主语性数配合", "answer": "对", "options": ["对", "错"], "hint": "用essere的过去分词都要配合", "audio": ""}, {"type": "truefalse", "word": "自反代词放在动词后面才是正确语序", "answer": "错", "options": ["对", "错"], "hint": "自反代词在动词前面！ mi alzo ✅ alzo mi ❌", "audio": ""}, {"type": "translate", "word": " \"我起床了(女)\"", "answer": "Mi sono alzata", "options": ["Mi sono alzata", "Mi sono alzato", "Mi ho alzata", "Sono alzata"], "hint": "自反+essere+性数配合", "audio": "l10_mi_sono_alzata"}, {"type": "translate", "word": " \"我们醒了(男复)\"", "answer": "Ci siamo svegliati", "options": ["Ci siamo svegliati", "Ci siamo svegliate", "Ci abbiamo svegliati", "Siamo svegliati"], "hint": "noi(m) ci siamo svegliati", "audio": "l10_ci_siamo_svegliati"}, {"type": "sentence", "word": "___ chiamo Marco.", "answer": "Mi", "options": ["Mi", "Ti", "Si", "Ci"], "hint": "io mi chiamo", "audio": ""}, {"type": "sentence", "word": "A che ora ___ alzi?", "answer": "ti", "options": ["ti", "mi", "si", "ci"], "hint": "tu ti alzi", "audio": "l10_a_che_ora_ti_alzi"}, {"type": "truefalse", "word": "自反动词可以和其他动词一样随意用avere做助动词", "answer": "错", "options": ["对", "错"], "hint": "自反动词永远只用essere", "audio": ""}, {"type": "fill", "word": "svegliarsi (loro, f)", "answer": "si svegliano", "options": ["si svegliano", "si sveglia", "ci svegliamo", "vi svegliate"], "hint": "loro si svegliano", "audio": ""}, {"type": "fill", "word": "divertirsi (io)", "answer": "mi diverto", "options": ["mi diverto", "ti diverti", "si diverte", "ci divertiamo"], "hint": "io mi diverto", "audio": ""}, {"type": "sentence", "word": "Loro si ___ divertiti molto.", "answer": "sono", "options": ["sono", "hanno", "erano", "stavano"], "hint": "divertirsi 近过去用essere", "audio": ""}, {"type": "translate", "word": " \"她坐下了\"", "answer": "Si è seduta", "options": ["Si è seduta", "Si è seduto", "Ha seduto", "È seduta"], "hint": "lei(f) si è seduta", "audio": ""}, {"type": "match", "word": "si", "answer": "第三人称单数+复数", "options": ["第三人称单数+复数", "第一人称单数", "第二人称单数", "第一人称复数"], "hint": "si可以代lui/lei/loro", "audio": ""}, {"type": "truefalse", "word": "Mi alzo 和 alzo mi 都对", "answer": "错", "options": ["对", "错"], "hint": "自反代词必须在动词前面", "audio": ""}, {"type": "fill", "word": "sedersi (loro)", "answer": "si siedono", "options": ["si siedono", "si siede", "ci sediamo", "vi sedete"], "hint": "loro si siedono", "audio": ""}]};let currentMode='basic';
+let currentQuizData=[];
+let quizScore=0;
+let quizAnswered=0;
+
+function switchQuizMode(mode,tabEl){
+  currentMode=mode;
+  document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));
+  if(tabEl)tabEl.classList.add('active');
+  resetQuiz();
+}
+
+function getQuizData(){
+  let pool;
+  if(currentMode==='basic')pool=quizBank.basic;
+  else if(currentMode==='trap')pool=quizBank.trap;
+  else pool=[...quizBank.basic,...quizBank.trap];
+  const shuffled=[...pool].sort(()=>Math.random()-0.5);
+  return shuffled.slice(0,20);
+}
+
+function buildQuiz(){
+  const container=document.getElementById('quizContainer');
+  container.innerHTML='';
+  currentQuizData=getQuizData();
+  document.getElementById('totalCount').textContent=currentQuizData.length;
+  const typeLabels={'fill':'填空形变','sentence':'句子填空','match':'搭配选择','translate':'翻译选择','truefalse':'判断正误'};
+  const typeColors={'fill':'#009246','sentence':'#1a73e8','match':'#7c3aed','translate':'#e8710a','truefalse':'#ce2b37'};
+  currentQuizData.forEach((q,i)=>{
+    const card=document.createElement('div');
+    card.className='quiz-card';card.id='quiz-'+i;
+    const badge='<span class="quiz-type-badge" style="background:'+(typeColors[q.type]||'#666')+'">'+(typeLabels[q.type]||q.type)+'</span>';
+    let questionHtml='';
+    if(q.type==='fill'){
+      questionHtml='<div class="quiz-question"><span class="quiz-word">'+q.word+'</span> 的正确答案是？</div>';
+    }else if(q.type==='sentence'){
+      questionHtml='<div class="quiz-question"><div class="quiz-sentence">'+q.word.replace(/___/g,'<span class="quiz-blank">___</span>')+'</div><div class="quiz-sentence-hint">请选择正确选项填入空白处：</div></div>';
+    }else if(q.type==='match'){
+      questionHtml='<div class="quiz-question">哪个选项与 <span class="quiz-word">'+q.word+'</span> 正确搭配？</div>';
+    }else if(q.type==='translate'){
+      questionHtml='<div class="quiz-question">请选择正确的翻译：<div class="quiz-sentence">'+q.word+'</div></div>';
+    }else if(q.type==='truefalse'){
+      questionHtml='<div class="quiz-question"><div class="quiz-sentence">'+q.word+'</div><div class="quiz-sentence-hint">判断上述说法的正误：</div></div>';
+    }
+    card.innerHTML='<div class="quiz-card-header">'+badge+'</div>'+questionHtml+'<div class="quiz-options">'+q.options.map((o,j)=>{
+      const safe=o.replace(/'/g,"\\'");
+      return '<div class="quiz-option'+(q.type==='truefalse'?' quiz-option-tf':'')+'" onclick="checkAnswer('+i+",'"+safe+"')"+'">'+o+'</div>';
+    }).join('')+'</div><div class="quiz-feedback" id="fb-'+i+'"></div>';
+    container.appendChild(card);
+  });
+}
+
+function checkAnswer(idx,chosen){
+  const q=currentQuizData[idx];
+  const card=document.getElementById('quiz-'+idx);
+  const options=card.querySelectorAll('.quiz-option');
+  const fb=document.getElementById('fb-'+idx);
+  if(options[0].classList.contains('answered'))return;
+  options.forEach(o=>o.classList.add('answered'));
+  const correct=q.answer;
+  if(chosen===correct){
+    quizScore++;
+    options.forEach(o=>{if(o.textContent===correct)o.classList.add('correct');});
+    fb.className='quiz-feedback show right';
+    fb.textContent='✅ 正确！'+q.hint;
+  }else{
+    options.forEach(o=>{if(o.textContent===chosen)o.classList.add('wrong');if(o.textContent===correct)o.classList.add('correct');});
+    fb.className='quiz-feedback show wrong-fb';
+    fb.textContent='❌ 正确答案是 '+correct+'：'+q.hint;
+  }
+  if(q.audio)playAudio(q.audio);
+  quizAnswered++;
+  document.getElementById('answeredCount').textContent=quizAnswered;
+  updateProgress();
+  if(quizAnswered===currentQuizData.length){
+    setTimeout(()=>{
+      const sb=document.getElementById('scoreboard');sb.style.display='block';
+      document.getElementById('scoreValue').textContent=quizScore+' / '+currentQuizData.length;
+      const pct=quizScore/currentQuizData.length;
+      let rank='';
+      if(pct>=0.95)rank='🏆 完美！语法大师！';
+      else if(pct>=0.85)rank='🌟 优秀！基本掌握！';
+      else if(pct>=0.70)rank='👍 不错！再练练易错点！';
+      else if(pct>=0.50)rank='💪 加油！多翻翻闪卡！';
+      else rank='📖 别气馁，回去复习规律吧！';
+      document.getElementById('scoreRank').textContent=rank;
+      scrollToSection('scoreboard');
+    },500);
+  }
+}
+
+function resetQuiz(){
+  quizScore=0;quizAnswered=0;
+  document.getElementById('scoreboard').style.display='none';
+  document.getElementById('answeredCount').textContent='0';
+  buildQuiz();updateProgress();
+}
+
+// ===== 进度条 =====
+function updateProgress(){
+  const total=currentQuizData.length||1;
+  const done=quizAnswered/total;
+  document.getElementById('progressFill').style.width=(done*100)+'%';
+}
+
+// ===== 滚动 =====
+function scrollToSection(id){
+  const el=document.getElementById('sec-'+id)||document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ===== 初始化 =====
+requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
+
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
 document.querySelectorAll('.section').forEach(s=>observer.observe(s));
 // 安全兜底：3秒后所有未显示区块强制可见
-setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
-document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);
 </script>
 </body>
 </html>
