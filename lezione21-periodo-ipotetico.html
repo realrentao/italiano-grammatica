@@ -101,7 +101,10 @@
     .footer-nav .nav-btn:hover{background:var(--card-hover);border-color:var(--blue);}
     @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
     .animate-in{animation:fadeInUp 0.5s ease forwards;}
-    @media(max-width:640px){.hero h1{font-size:28px;}.rule-cards{grid-template-columns:1fr;}.trap-list{grid-template-columns:1fr;}}
+    
+
+
+@media(max-width:640px){.hero h1{font-size:28px;}.rule-cards{grid-template-columns:1fr;}.trap-list{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
@@ -165,7 +168,32 @@
     </div>
   </div>
 
-  <div class="section" id="sec-principle">
+    <div class="section" id="sec-flashcard">
+    <div class="section-header"><div class="section-icon" style="background:rgba(124,58,237,0.15);">🃏</div><h2 class="section-title">闪卡练习 — 点击翻转</h2></div>
+    <div class="flashcard-area">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="flashcard-inner" id="flashcardInner">
+          <div class="flashcard-front">
+            <div class="front-word" id="fcWord">l21</div>
+            <div class="front-hint">点击查看详情</div>
+          </div>
+          <div class="flashcard-back">
+            <div class="back-article" id="fcArticle">l21</div>
+            <div class="back-word" id="fcFullWord">条件从句 - l21</div>
+            <div class="back-meaning" id="fcMeaning">条件从句</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard-nav">
+        <button onclick="prevCard()">← 上一个</button>
+        <span class="flashcard-counter" id="fcCounter">1 / 9</span>
+        <button onclick="nextCard()">下一个 →</button>
+      </div>
+      <button class="nav-btn" onclick="speakCurrentCard()" style="margin-top:4px;">🔊 听发音</button>
+    </div>
+  </div>
+
+<div class="section" id="sec-principle">
     <div class="principle-card">
       <div class="icon">🔑</div>
       <p class="text">学语法最终是为了开口说！</p>
@@ -174,6 +202,13 @@
   </div>
 </div>
 
+  <div class="section quiz-section" id="sec-quiz">
+    <div class="section-header"><div class="section-icon" style="background:rgba(232,113,10,0.15);">📝</div><h2 class="section-title">小测验</h2></div>
+    <div class="quiz-mode-tabs"><div class="quiz-mode-tab active" onclick="switchQuizMode('basic', this)">🟢 基础</div><div class="quiz-mode-tab" onclick="switchQuizMode('trap', this)">🔴 易错</div><div class="quiz-mode-tab" onclick="switchQuizMode('all', this)">🟣 全部</div></div>
+    <div class="quiz-header-bar"><div class="quiz-counter">已答 <strong id="answeredCount">0</strong> / <span id="totalCount">9</span></div><button class="nav-btn" onclick="resetQuiz()">🔄 重来</button></div>
+    <div id="quizContainer"></div>
+    <div class="scoreboard" id="scoreboard" style="display:none;"><div class="score-display" id="scoreValue">0</div><div class="score-label">测验得分</div><div class="score-rank" id="scoreRank"></div><button class="nav-btn" onclick="resetQuiz()" style="margin-top:16px;">🔄 重新测验</button></div>
+  </div>
 <div class="footer">
   <div class="footer-nav">
     <a class="nav-btn" href="index.html">🏠 返回导航页</a>
@@ -215,13 +250,11 @@ function showToast(msg) {
   requestAnimationFrame(function() { t.style.opacity = '1'; });
   setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2500);
 }
-function showTrap(('load',function(){if(typeof AUDIO_DATA==='undefined')console.warn('audio_data.js not loaded');});
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
 document.querySelectorAll('.section').forEach(s=>observer.observe(s));
 // 安全兜底：3秒后所有未显示区块强制可见
-setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
-document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);
 </script>
 </body>
 </html>
