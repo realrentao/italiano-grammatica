@@ -252,37 +252,31 @@ function showToast(msg) {
 }
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
 const flashcards = [
-  {word:'l16', article:'', meaning:'l16', audio:'l16'},
-  {word:'andavo a scuola', article:'', meaning:'l16_andavo_a_scuola', audio:'l16_andavo_a_scuola'},
-  {word:'come stai', article:'', meaning:'l16_come_stai', audio:'l16_come_stai'},
-  {word:'cosa studi oggi', article:'', meaning:'l16_cosa_studi_oggi', audio:'l16_cosa_studi_oggi'},
-  {word:'era bello', article:'', meaning:'l16_era_bello', audio:'l16_era_bello'},
-  {word:'mangiavo', article:'', meaning:'l16_mangiavo', audio:'l16_mangiavo'},
-  {word:'pioveva', article:'', meaning:'l16_pioveva', audio:'l16_pioveva'},
-  {word:'sto bene grazie', article:'', meaning:'l16_sto_bene_grazie', audio:'l16_sto_bene_grazie'},
-  {word:'studio l italiano', article:'', meaning:'l16_studio_l_italiano', audio:'l16_studio_l_italiano'},
+  {word:'parlavo', article:'-avo', meaning:'我曾说(经常)', audio:'l16_mangiavo'},
+  {word:'leggevo', article:'-evo', meaning:'我曾读', audio:'l16_mangiavo'},
+  {word:'dormivo', article:'-ivo', meaning:'我曾睡', audio:'l16_mangiavo'},
+  {word:'ero', article:'essere', meaning:'我曾是', audio:'l16_era_bello'},
+  {word:'avevo', article:'avere', meaning:'我曾有', audio:'l16_mangiavo'},
+  {word:'andavo', article:'-avo', meaning:'我曾去', audio:'l16_andavo_a_scuola'},
+  {word:'pioveva', article:'-eva', meaning:'曾下雨', audio:'l16_pioveva'},
+  {word:'facevo', article:'-evo', meaning:'我曾做', audio:'l16_mangiavo'},
+  {word:'stavo', article:'-avo', meaning:'我曾在', audio:'l16_andavo_a_scuola'},
 ];
 const quizBank={
   basic:[
-    {type:'fill', word:'l16', answer:'l16', options:['l16','请听发音','参考课程','记住它'], hint:'l16', audio:''},
-    {type:'fill', word:'andavo a scuola', answer:'andavo a scuola', options:['andavo a scuola','请听发音','参考课程','记住它'], hint:'l16_andavo_a_scuola', audio:''},
-    {type:'fill', word:'come stai', answer:'come stai', options:['come stai','请听发音','参考课程','记住它'], hint:'l16_come_stai', audio:''},
-    {type:'fill', word:'cosa studi oggi', answer:'cosa studi oggi', options:['cosa studi oggi','请听发音','参考课程','记住它'], hint:'l16_cosa_studi_oggi', audio:''},
-    {type:'fill', word:'era bello', answer:'era bello', options:['era bello','请听发音','参考课程','记住它'], hint:'l16_era_bello', audio:''},
-    {type:'fill', word:'mangiavo', answer:'mangiavo', options:['mangiavo','请听发音','参考课程','记住它'], hint:'l16_mangiavo', audio:''},
-    {type:'fill', word:'pioveva', answer:'pioveva', options:['pioveva','请听发音','参考课程','记住它'], hint:'l16_pioveva', audio:''},
-    {type:'fill', word:'sto bene grazie', answer:'sto bene grazie', options:['sto bene grazie','请听发音','参考课程','记住它'], hint:'l16_sto_bene_grazie', audio:''},
-    {type:'fill', word:'studio l italiano', answer:'studio l italiano', options:['studio l italiano','请听发音','参考课程','记住它'], hint:'l16_studio_l_italiano', audio:''},
+    {type:'fill', word:'parlavo 是哪个人称？', answer:'io(第一人称单数)', options:["io单数", "tu单数", "lui单数", "noi复数"], hint:'-avo是io的未完成过去', audio:''},
+    {type:'fill', word:'未完成过去时表示什么？', answer:'过去持续/习惯', options:["过去持续/习惯", "一次性过去动作", "刚刚发生的动作", "将来动作"], hint:'imperfetto表示过去习惯/状态', audio:''},
+    {type:'fill', word:'Da piccolo, ___ sempre al parco.', answer:'giocavo', options:["giocavo", "ho giocato", "giocherò", "gioco"], hint:'小时候习惯用imperfetto', audio:''},
+    {type:'fill', word:'Mentre ___ , è arrivato Marco.', answer:'mangiavo', options:["mangiavo", "ho mangiato", "mangerò", "mangio"], hint:'背景动作用imperfetto', audio:''},
+    {type:'fill', word:'ieri ___ bel tempo.', answer:'faceva', options:["faceva", "ha fatto", "farà", "fa"], hint:'过去天气描述用imperfetto', audio:''},
+    {type:'fill', word:'未完成过去时和近过去时的区别？', answer:'持续vs一次性', options:["持续vs一次性", "时间不同", "主语不同", "动词不同"], hint:'imperfetto持续/passato prossimo一次性', audio:''},
   ],
   trap:[
-    {type:'fill', word:'l16 的意思？', answer:'l16', options:['l16','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'andavo a scuola 的意思？', answer:'andavo a scuola', options:['andavo a scuola','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'come stai 的意思？', answer:'come stai', options:['come stai','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'cosa studi oggi 的意思？', answer:'cosa studi oggi', options:['cosa studi oggi','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
-    {type:'fill', word:'era bello 的意思？', answer:'era bello', options:['era bello','其他含义','不确定','再想想'], hint:'复习课程内容', audio:''},
+    {type:'fill', word:'essere的未完成过去时变位？', answer:'ero/eri/era/eravamo/eravate/erano', options:["ero等", "fui等", "sono等", "sarò等"], hint:'essere的imperfetto变位不规则', audio:''},
+    {type:'fill', word:'avere的未完成过去时变位？', answer:'avevo/avevi/aveva/avevamo/avevate/avevano', options:["avevo等", "ebbi等", "ho等", "avrò等"], hint:'avere的imperfetto规则', audio:''},
+    {type:'fill', word:'描述年龄用哪个时态？', answer:'未完成过去时', options:["未完成过去时", "近过去时", "现在时", "将来时"], hint:'过去的状态用imperfetto', audio:''},
   ]
 };
-
 let currentMode='basic';let currentQuizData=[];let quizScore=0;let quizAnswered=0;
 
 function switchQuizMode(mode,tabEl){currentMode=mode;document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));if(tabEl)tabEl.classList.add('active');resetQuiz();}
