@@ -113,7 +113,9 @@
     <button class="nav-btn" onclick="scrollToSection('quiz')">📝 测验</button>
     <button class="nav-btn" onclick="playAudio('l19')">🔊 课名</button>
     <a class="nav-btn" href="lezione18-condizionale.html">◀ 上一课</a>
-    <a class="nav-btn" href="lezione20-congiuntivo.html">下一课 ▶</a>
+    <a class="nav-btn" href="lezione20-congiuntivo.html">    <button class="nav-btn" onclick="scrollToSection('quiz')">📝 测验</button>
+    <button class="nav-btn" onclick="playAudio('l19')">🔊 课名</button>
+下一课 ▶</a>
   </div>
 </div>
 <div class="container">
@@ -175,6 +177,37 @@
     </div>
   </div>
 </div>
+
+<div class="section quiz-section" id="sec-quiz">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(232,113,10,0.15);">📝</div>
+      <h2 class="section-title">小测验 — 选择正确形容词形式</h2>
+    </div>
+
+    <div class="quiz-mode-tabs">
+      <div class="quiz-mode-tab active" onclick="switchQuizMode('basic', this)">🟢 形容词变位</div>
+      <div class="quiz-mode-tab" onclick="switchQuizMode('trap', this)">🔴 特殊/易错</div>
+      <div class="quiz-mode-tab" onclick="switchQuizMode('all', this)">🟣 全部</div>
+    </div>
+
+    <div class="quiz-header-bar">
+      <div class="quiz-counter">已答 <strong id="answeredCount">0</strong> / <span id="totalCount">20</span></div>
+      <button class="nav-btn" onclick="resetQuiz()">🔄 重来</button>
+    </div>
+
+    <div id="quizContainer"></div>
+
+    <div class="scoreboard" id="scoreboard" style="display:none;">
+      <div class="score-display" id="scoreValue">0</div>
+      <div class="score-label">测验得分</div>
+      <div class="score-rank" id="scoreRank"></div>
+      <button class="nav-btn" onclick="resetQuiz()" style="margin-top:16px;">🔄 重新测验</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
 
 <div class="footer">
   <div class="footer-nav">
