@@ -112,6 +112,8 @@
     <a class="nav-btn" href="index.html">🏠 导航</a>
     <button class="nav-btn" onclick="scrollToSection('quiz')">📝 测验</button>
     <button class="nav-btn" onclick="playAudio('l19')">🔊 课名</button>
+    <button class="nav-btn" onclick="scrollToSection('quiz')">📝 测验</button>
+    <button class="nav-btn" onclick="playAudio('l19')">🔊 课名</button>
     <a class="nav-btn" href="lezione18-condizionale.html">◀ 上一课</a>
     <a class="nav-btn" href="lezione20-congiuntivo.html">    <button class="nav-btn" onclick="scrollToSection('quiz')">📝 测验</button>
     <button class="nav-btn" onclick="playAudio('l19')">🔊 课名</button>
@@ -169,7 +171,33 @@
     </div>
   </div>
 
-  <div class="section" id="sec-principle">
+    <div class="section" id="sec-flashcard">
+    <div class="section-header"><div class="section-icon" style="background:rgba(124,58,237,0.15);">🃏</div><h2 class="section-title">闪卡练习 — 点击翻转</h2></div>
+    <div class="flashcard-area">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="flashcard-inner" id="flashcardInner">
+          <div class="flashcard-front">
+            <div class="front-word" id="fcWord">parola</div>
+            <div class="front-hint">点击查看详情</div>
+          </div>
+          <div class="flashcard-back">
+            <div class="back-article" id="fcArticle">tipo</div>
+            <div class="back-word" id="fcFullWord">significato</div>
+            <div class="back-detail" id="fcDetail">dettaglio</div>
+            <div class="back-meaning" id="fcMeaning">lezione</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard-nav">
+        <button onclick="prevCard()">← 上一个</button>
+        <span class="flashcard-counter" id="fcCounter">1 / 9</span>
+        <button onclick="nextCard()">下一个 →</button>
+      </div>
+      <button class="nav-btn" onclick="speakCurrentCard()" style="margin-top:4px;">🔊 听发音</button>
+    </div>
+  </div>
+
+<div class="section" id="sec-principle">
     <div class="principle-card">
       <div class="icon">🔑</div>
       <p class="text">学语法最终是为了开口说！</p>
