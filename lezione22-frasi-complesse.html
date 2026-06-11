@@ -219,6 +219,88 @@ function showToast(msg) {
 }
 function showTrap(('load',function(){if(typeof AUDIO_DATA==='undefined')console.warn('audio_data.js not loaded');});
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
+const flashcards = [
+  {word:'che(关系代词)', article:'指代事物', meaning:'我正在读的书', audio:'l22_il_libro_che_leggo'},
+  {word:'cui(关系代词)', article:'指代人/物(间接)', meaning:'我说话的人', audio:'l22_la_persona_a_cui_parlo'},
+  {word:'perché(原因)', article:'因为', meaning:'因为我累了', audio:'l22_vado_perch_sono_stanco'},
+  {word:'ma(转折)', article:'但是', meaning:'虽然学了但是记不住', audio:'l22_studio_ma_non_imparo'},
+  {word:'anche se(让步)', article:'即使', meaning:'即使累也去', audio:'l22_vado_perch_sono_stanco'},
+  {word:'quando(时间)', article:'当...时', meaning:'当我小的时候', audio:'l22_studio_ma_non_imparo'},
+  {word:'se(条件)', article:'如果', meaning:'如果你来', audio:'l22_il_libro_che_leggo'},
+  {word:'che(连接词)', article:'连接句子', meaning:'我知道你来了', audio:'l22_la_persona_a_cui_parlo'},
+  {word:'per(目的)', article:'为了', meaning:'为了学习', audio:'l22_studio_ma_non_imparo'},
+];
+const quizBank={
+  basic:[
+    {type:'fill', word:'Il libro ___ leggo è interessante.', answer:'che', options:["che", "cui", "chi", "cui"], hint:'che替代物(直接宾语)', audio:''},
+    {type:'fill', word:'La persona ___ cui parlo è Maria.', answer:'a', options:["a", "di", "con", "per"], hint:'a cui=间接宾语+介词a', audio:''},
+    {type:'fill', word:'Studio molto ___ voglio imparare.', answer:'perché', options:["perché", "ma", "anche se", "quando"], hint:'perché表原因', audio:''},
+    {type:'fill', word:'Vado ___ sono stanco.', answer:'anche se', options:["anche se", "perché", "ma", "quando"], hint:'anche se表让步', audio:''},
+    {type:'fill', word:'___ vengo, ti avviso.', answer:'Se', options:["Se", "Che", "Per", "Ma"], hint:'se表条件', audio:''},
+    {type:'fill', word:'关系代词che和cui的区别？', answer:'che直接cui间接', options:["che直接cui间接", "意思相同", "che单数cui复数", "che物cui人"], hint:'che无介词，cui有介词', audio:''},
+  ],
+  trap:[
+    {type:'fill', word:'cui前面需要什么？', answer:'介词', options:["介词", "连接词", "冠词", "没有"], hint:'cui前面需要a/di/con等介词', audio:''},
+    {type:'fill', word:'il quale可以替代che吗？', answer:'可以，更正式', options:["可以更正式", "不可以", "只在口语", "只在书面"], hint:'il quale是che的正式替代', audio:''},
+    {type:'fill', word:'perché在句首表示？', answer:'原因/因为', options:["原因/因为", "目的/为了", "转折/但是", "时间/当"], hint:'perché=because', audio:''},
+  ]
+};
+let currentMode='basic';let currentQuizData=[];let quizScore=0;let quizAnswered=0;
+
+function switchQuizMode(mode,tabEl){currentMode=mode;document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));if(tabEl)tabEl.classList.add('active');resetQuiz();}
+function getQuizData(){let pool;if(currentMode==='basic')pool=quizBank.basic;else if(currentMode==='trap')pool=quizBank.trap;else pool=[...quizBank.basic,...quizBank.trap];const shuffled=[...pool].sort(()=>Math.random()-0.5);return shuffled.slice(0,20);}
+function buildQuiz(){
+  const container=document.getElementById('quizContainer');
+  if(!container)return;
+  container.innerHTML='';
+  currentQuizData=getQuizData();
+  const tc=document.getElementById('totalCount');
+  if(tc)tc.textContent=currentQuizData.length;
+  currentQuizData.forEach((q,i)=>{
+    const card=document.createElement('div');card.className='quiz-card';card.id='quiz-'+i;
+    const shuffledOpts=[...q.options].sort(()=>Math.random()-0.5);
+    card.innerHTML='<div class="quiz-question"><span class="quiz-word">'+q.word+'</span></div><div class="quiz-options">'+shuffledOpts.map(o=>'<div class="quiz-option" onclick="checkAnswer('+i+',\''+o.replace(/'/g,"\\'")+'\')">'+o+'</div>').join('')+'</div><div class="quiz-feedback" id="fb-'+i+'"></div>';
+    container.appendChild(card);
+  });
+}
+function checkAnswer(idx,chosen){
+  const q=currentQuizData[idx];const card=document.getElementById('quiz-'+idx);
+  if(!card)return;
+  const options=card.querySelectorAll('.quiz-option');const fb=document.getElementById('fb-'+idx);
+  if(options[0]&&options[0].classList.contains('answered'))return;
+  options.forEach(o=>o.classList.add('answered'));
+  if(chosen===q.answer){
+    quizScore++;options.forEach(o=>{if(o.textContent===q.answer)o.classList.add('correct');});
+    if(fb){fb.className='quiz-feedback show right';fb.textContent='✅ 正确！'+q.hint;}
+  }else{
+    options.forEach(o=>{if(o.textContent===q.answer)o.classList.add('correct');if(o.textContent===chosen)o.classList.add('wrong');});
+    if(fb){fb.className='quiz-feedback show wrong-fb';fb.textContent='❌ 正确答案是 '+q.answer+'：'+q.hint;}
+  }
+  quizAnswered++;const ac=document.getElementById('answeredCount');
+  if(ac)ac.textContent=quizAnswered;
+  if(quizAnswered===currentQuizData.length){
+    setTimeout(()=>{
+      const sb=document.getElementById('scoreboard');
+      if(sb)sb.style.display='block';
+      const sv=document.getElementById('scoreValue');
+      if(sv)sv.textContent=quizScore+' / '+currentQuizData.length;
+    },500);
+  }
+}
+function resetQuiz(){quizScore=0;quizAnswered=0;const sb=document.getElementById('scoreboard');if(sb)sb.style.display='none';const ac=document.getElementById('answeredCount');if(ac)ac.textContent='0';buildQuiz();}
+function updateProgress(){}
+function scrollToSection(id){const el=document.getElementById('sec-'+id);if(el)el.scrollIntoView({behavior:'smooth'});}
+let fcIndex=0;
+function updateFlashcard(){
+  const c=flashcards[fcIndex];const w=document.getElementById('fcWord');const a=document.getElementById('fcArticle');const f=document.getElementById('fcFullWord');const m=document.getElementById('fcMeaning');const ct=document.getElementById('fcCounter');const fl=document.getElementById('flashcard');
+  if(w)w.textContent=c.word;if(a)a.textContent=c.article;if(f)f.textContent=c.meaning;if(m)m.textContent=c.meaning;if(ct)ct.textContent=(fcIndex+1)+' / '+flashcards.length;if(fl)fl.classList.remove('flipped');
+}
+function flipCard(){const fl=document.getElementById('flashcard');if(fl)fl.classList.toggle('flipped');const c=flashcards[fcIndex];if(c.audio)playAudio(c.audio);}
+function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
+function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
+function speakCurrentCard(){const c=flashcards[fcIndex];if(c.audio)playAudio(c.audio);}
+
+requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
 document.querySelectorAll('.section').forEach(s=>observer.observe(s));
 // 安全兜底：3秒后所有未显示区块强制可见
