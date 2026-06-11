@@ -110,14 +110,10 @@
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   <div class="nav-btns">
     <a class="nav-btn" href="index.html">🏠 导航</a>
-    <button class="nav-btn" onclick="scrollToSection('quiz')">📝 测验</button>
-    <button class="nav-btn" onclick="playAudio('l20')">🔊 课名</button>
-    <button class="nav-btn" onclick="scrollToSection('quiz')">📝 测验</button>
+        <button class="nav-btn" onclick="scrollToSection('quiz')">📝 测验</button>
     <button class="nav-btn" onclick="playAudio('l20')">🔊 课名</button>
     <a class="nav-btn" href="lezione19-imperativo.html">◀ 上一课</a>
-    <a class="nav-btn" href="lezione21-periodo-ipotetico.html">    <button class="nav-btn" onclick="scrollToSection('quiz')">📝 测验</button>
-    <button class="nav-btn" onclick="playAudio('l20')">🔊 课名</button>
-下一课 ▶</a>
+    <a class="nav-btn" href="lezione21-periodo-ipotetico.html">下一课 ▶</a>
   </div>
 </div>
 <div class="container">
@@ -171,7 +167,7 @@
     </div>
   </div>
 
-<div class="section" id="sec-flashcard">
+  <div class="section" id="sec-flashcard">
     <div class="section-header"><div class="section-icon" style="background:rgba(124,58,237,0.15);">🃏</div><h2 class="section-title">闪卡练习 — 点击翻转</h2></div>
     <div class="flashcard-area">
       <div class="flashcard" id="flashcard" onclick="flipCard()">
@@ -206,36 +202,13 @@
   </div>
 </div>
 
-<div class="section quiz-section" id="sec-quiz">
-    <div class="section-header">
-      <div class="section-icon" style="background:rgba(232,113,10,0.15);">📝</div>
-      <h2 class="section-title">小测验 — 选择正确形容词形式</h2>
-    </div>
-
-    <div class="quiz-mode-tabs">
-      <div class="quiz-mode-tab active" onclick="switchQuizMode('basic', this)">🟢 形容词变位</div>
-      <div class="quiz-mode-tab" onclick="switchQuizMode('trap', this)">🔴 特殊/易错</div>
-      <div class="quiz-mode-tab" onclick="switchQuizMode('all', this)">🟣 全部</div>
-    </div>
-
-    <div class="quiz-header-bar">
-      <div class="quiz-counter">已答 <strong id="answeredCount">0</strong> / <span id="totalCount">20</span></div>
-      <button class="nav-btn" onclick="resetQuiz()">🔄 重来</button>
-    </div>
-
+  <div class="section quiz-section" id="sec-quiz">
+    <div class="section-header"><div class="section-icon" style="background:rgba(232,113,10,0.15);">📝</div><h2 class="section-title">小测验</h2></div>
+    <div class="quiz-mode-tabs"><div class="quiz-mode-tab active" onclick="switchQuizMode('basic', this)">🟢 基础</div><div class="quiz-mode-tab" onclick="switchQuizMode('trap', this)">🔴 易错</div><div class="quiz-mode-tab" onclick="switchQuizMode('all', this)">🟣 全部</div></div>
+    <div class="quiz-header-bar"><div class="quiz-counter">已答 <strong id="answeredCount">0</strong> / <span id="totalCount">9</span></div><button class="nav-btn" onclick="resetQuiz()">🔄 重来</button></div>
     <div id="quizContainer"></div>
-
-    <div class="scoreboard" id="scoreboard" style="display:none;">
-      <div class="score-display" id="scoreValue">0</div>
-      <div class="score-label">测验得分</div>
-      <div class="score-rank" id="scoreRank"></div>
-      <button class="nav-btn" onclick="resetQuiz()" style="margin-top:16px;">🔄 重新测验</button>
-    </div>
+    <div class="scoreboard" id="scoreboard" style="display:none;"><div class="score-display" id="scoreValue">0</div><div class="score-label">测验得分</div><div class="score-rank" id="scoreRank"></div><button class="nav-btn" onclick="resetQuiz()" style="margin-top:16px;">🔄 重新测验</button></div>
   </div>
-
-</div>
-
-<!-- Footer -->
 
 <div class="footer">
   <div class="footer-nav">
@@ -278,7 +251,6 @@ function showToast(msg) {
   requestAnimationFrame(function() { t.style.opacity = '1'; });
   setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2500);
 }
-function showTrap(('load',function(){if(typeof AUDIO_DATA==='undefined')console.warn('audio_data.js not loaded');});
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
 const flashcards = [
   {word:'che io parli', article:'parlare', meaning:'说我(虚拟)', audio:'l20_spero_che_stia_bene'},
@@ -365,8 +337,7 @@ requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
 document.querySelectorAll('.section').forEach(s=>observer.observe(s));
 // 安全兜底：3秒后所有未显示区块强制可见
-setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
-document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);
 </script>
 </body>
 </html>
