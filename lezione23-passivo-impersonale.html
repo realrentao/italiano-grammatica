@@ -219,6 +219,88 @@ function showToast(msg) {
 }
 function showTrap(('load',function(){if(typeof AUDIO_DATA==='undefined')console.warn('audio_data.js not loaded');});
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
+const flashcards = [
+  {word:'si dice', article:'si+第三人称', meaning:'人们说', audio:'l23_si_dice_che'},
+  {word:'si parla', article:'si+第三人称', meaning:'人们说(语言)', audio:'l23_si_parla_italiano'},
+  {word:'si mangia', article:'si+第三人称', meaning:'人们吃', audio:'l23_si_parla_italiano'},
+  {word:'è scritto', article:'essere+过去分词', meaning:'被写', audio:'l23_il_libro_scritto_da_marco'},
+  {word:'è mangiato', article:'essere+过去分词', meaning:'被吃', audio:'l23_la_pizza_mangiata'},
+  {word:'venire+pp', article:'被动态进行', meaning:'被...', audio:'l23_il_libro_scritto_da_marco'},
+  {word:'da(被动施动者)', article:'by', meaning:'被某人', audio:'l23_il_libro_scritto_da_marco'},
+  {word:'si + 复数', article:'无人称复数', meaning:'人们(复数)', audio:'l23_si_parla_italiano'},
+  {word:'è stato + pp', article:'被动完成', meaning:'已经被...', audio:'l23_la_pizza_mangiata'},
+];
+const quizBank={
+  basic:[
+    {type:'fill', word:'si parla italiano 中 si 的用法？', answer:'无人称(人们说)', options:["无人称", "自反", "被动", "相互"], hint:'si+第三人称=无人称', audio:''},
+    {type:'fill', word:'Il libro è scritto da Marco 是被动语态？', answer:'是，essere+pp', options:["是essere+pp", "不是", "是进行时", "是过去时"], hint:'essere+过去分词=被动', audio:''},
+    {type:'fill', word:'si construisce 的si是？', answer:'被动si', options:["被动si", "无人称si", "自反si", "相互si"], hint:'si+第三人称单数=被动', audio:''},
+    {type:'fill', word:'在被动句中，施动者用哪个介词？', answer:'da', options:["da", "di", "a", "per"], hint:'da引入动作的执行者', audio:''},
+    {type:'fill', word:'La pizza ___ mangiata da Mario.', answer:'è', options:["è", "ha", "viene", "si"], hint:'被动=essere+过去分词', audio:''},
+    {type:'fill', word:'In Italia ___ parla italiano.', answer:'si', options:["si", "ci", "ne", "lo"], hint:'si+parla=人们说', audio:''},
+  ],
+  trap:[
+    {type:'fill', word:'被动si和无人称si的区别？', answer:'被动主语是物，无人称泛指人', options:["被动物无人称泛指人", "意思相同", "被动及物无人称不及物", "被动复数无人称单数"], hint:'被动si=物做主语，无人称si=泛指人', audio:''},
+    {type:'fill', word:'及物动词的被动语态构成？', answer:'essere+过去分词+da', options:["essere+pp+da", "avere+pp+da", "venire+pp+da", "si+pp+da"], hint:'被动=essere+过去分词(+da施动者)', audio:''},
+    {type:'fill', word:'venire+过去分词表示？', answer:'被动语态(更正式)', options:["被动语态", "主动语态", "进行时", "将来时"], hint:'venire+pp也构成被动', audio:''},
+  ]
+};
+let currentMode='basic';let currentQuizData=[];let quizScore=0;let quizAnswered=0;
+
+function switchQuizMode(mode,tabEl){currentMode=mode;document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));if(tabEl)tabEl.classList.add('active');resetQuiz();}
+function getQuizData(){let pool;if(currentMode==='basic')pool=quizBank.basic;else if(currentMode==='trap')pool=quizBank.trap;else pool=[...quizBank.basic,...quizBank.trap];const shuffled=[...pool].sort(()=>Math.random()-0.5);return shuffled.slice(0,20);}
+function buildQuiz(){
+  const container=document.getElementById('quizContainer');
+  if(!container)return;
+  container.innerHTML='';
+  currentQuizData=getQuizData();
+  const tc=document.getElementById('totalCount');
+  if(tc)tc.textContent=currentQuizData.length;
+  currentQuizData.forEach((q,i)=>{
+    const card=document.createElement('div');card.className='quiz-card';card.id='quiz-'+i;
+    const shuffledOpts=[...q.options].sort(()=>Math.random()-0.5);
+    card.innerHTML='<div class="quiz-question"><span class="quiz-word">'+q.word+'</span></div><div class="quiz-options">'+shuffledOpts.map(o=>'<div class="quiz-option" onclick="checkAnswer('+i+',\''+o.replace(/'/g,"\\'")+'\')">'+o+'</div>').join('')+'</div><div class="quiz-feedback" id="fb-'+i+'"></div>';
+    container.appendChild(card);
+  });
+}
+function checkAnswer(idx,chosen){
+  const q=currentQuizData[idx];const card=document.getElementById('quiz-'+idx);
+  if(!card)return;
+  const options=card.querySelectorAll('.quiz-option');const fb=document.getElementById('fb-'+idx);
+  if(options[0]&&options[0].classList.contains('answered'))return;
+  options.forEach(o=>o.classList.add('answered'));
+  if(chosen===q.answer){
+    quizScore++;options.forEach(o=>{if(o.textContent===q.answer)o.classList.add('correct');});
+    if(fb){fb.className='quiz-feedback show right';fb.textContent='✅ 正确！'+q.hint;}
+  }else{
+    options.forEach(o=>{if(o.textContent===q.answer)o.classList.add('correct');if(o.textContent===chosen)o.classList.add('wrong');});
+    if(fb){fb.className='quiz-feedback show wrong-fb';fb.textContent='❌ 正确答案是 '+q.answer+'：'+q.hint;}
+  }
+  quizAnswered++;const ac=document.getElementById('answeredCount');
+  if(ac)ac.textContent=quizAnswered;
+  if(quizAnswered===currentQuizData.length){
+    setTimeout(()=>{
+      const sb=document.getElementById('scoreboard');
+      if(sb)sb.style.display='block';
+      const sv=document.getElementById('scoreValue');
+      if(sv)sv.textContent=quizScore+' / '+currentQuizData.length;
+    },500);
+  }
+}
+function resetQuiz(){quizScore=0;quizAnswered=0;const sb=document.getElementById('scoreboard');if(sb)sb.style.display='none';const ac=document.getElementById('answeredCount');if(ac)ac.textContent='0';buildQuiz();}
+function updateProgress(){}
+function scrollToSection(id){const el=document.getElementById('sec-'+id);if(el)el.scrollIntoView({behavior:'smooth'});}
+let fcIndex=0;
+function updateFlashcard(){
+  const c=flashcards[fcIndex];const w=document.getElementById('fcWord');const a=document.getElementById('fcArticle');const f=document.getElementById('fcFullWord');const m=document.getElementById('fcMeaning');const ct=document.getElementById('fcCounter');const fl=document.getElementById('flashcard');
+  if(w)w.textContent=c.word;if(a)a.textContent=c.article;if(f)f.textContent=c.meaning;if(m)m.textContent=c.meaning;if(ct)ct.textContent=(fcIndex+1)+' / '+flashcards.length;if(fl)fl.classList.remove('flipped');
+}
+function flipCard(){const fl=document.getElementById('flashcard');if(fl)fl.classList.toggle('flipped');const c=flashcards[fcIndex];if(c.audio)playAudio(c.audio);}
+function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
+function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
+function speakCurrentCard(){const c=flashcards[fcIndex];if(c.audio)playAudio(c.audio);}
+
+requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
 document.querySelectorAll('.section').forEach(s=>observer.observe(s));
 // 安全兜底：3秒后所有未显示区块强制可见
