@@ -219,6 +219,88 @@ function showToast(msg) {
 }
 function showTrap(('load',function(){if(typeof AUDIO_DATA==='undefined')console.warn('audio_data.js not loaded');});
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
+const flashcards = [
+  {word:'che io parli', article:'parlare', meaning:'说我(虚拟)', audio:'l20_spero_che_stia_bene'},
+  {word:'che lui venga', article:'venire', meaning:'他来(虚拟)', audio:'l20_voglio_che_tu_venga'},
+  {word:'che sia', article:'essere', meaning:'是(虚拟)', audio:'l20_penso_che_sia'},
+  {word:'che abbia', article:'avere', meaning:'有(虚拟)', audio:'l20_penso_che_sia'},
+  {word:'che faccia', article:'fare', meaning:'做(虚拟)', audio:'l20_possibile_che_piova'},
+  {word:'che possa', article:'potere', meaning:'能(虚拟)', audio:'l20_voglio_che_tu_venga'},
+  {word:'che vada', article:'andare', meaning:'去(虚拟)', audio:'l20_penso_che_sia'},
+  {word:'che stia', article:'stare', meaning:'在(虚拟)', audio:'l20_spero_che_stia_bene'},
+  {word:'che piova', article:'piovere', meaning:'下雨(虚拟)', audio:'l20_possibile_che_piova'},
+];
+const quizBank={
+  basic:[
+    {type:'fill', word:'虚拟式常用于什么从句？', answer:'che引导的从句', options:["che从句", "se从句", "perché从句", "anche se从句"], hint:'虚拟式用于che从句表主观', audio:''},
+    {type:'fill', word:'Penso ___ lui abbia ragione.', answer:'che', options:["che", "di", "se", "a"], hint:'penso che+虚拟式', audio:''},
+    {type:'fill', word:'Spero che tu ___ bene.', answer:'stia', options:["stia", "stai", "stavi", "staresti"], hint:'spero che+虚拟式', audio:''},
+    {type:'fill', word:'___ possibile che piova domani.', answer:'È', options:["È", "Ha", "Sia", "Abbia"], hint:'è possibile che+虚拟式', audio:''},
+    {type:'fill', word:'Voglio che tu ___ presto.', answer:'venga', options:["venga", "vieni", "venivi", "verresti"], hint:'volere che+虚拟式', audio:''},
+    {type:'fill', word:'Credo che lui ___ già arrivato.', answer:'sia', options:["sia", "è", "era", "fosse"], hint:'credere che+虚拟式现在时', audio:''},
+  ],
+  trap:[
+    {type:'fill', word:'虚拟式和直陈式的区别？', answer:'主观vs客观', options:["主观vs客观", "现在vs过去", "单数vs复数", "肯定vs否定"], hint:'虚拟表主观/不确定/情感', audio:''},
+    {type:'fill', word:'sapere che 后面用？', answer:'直陈式', options:["直陈式", "虚拟式", "两个都行", "条件式"], hint:'肯定知道的事实用直陈', audio:''},
+    {type:'fill', word:'non sapere che 后面用？', answer:'虚拟式', options:["虚拟式", "直陈式", "两个都行", "命令式"], hint:'否定/不确定用虚拟', audio:''},
+  ]
+};
+let currentMode='basic';let currentQuizData=[];let quizScore=0;let quizAnswered=0;
+
+function switchQuizMode(mode,tabEl){currentMode=mode;document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));if(tabEl)tabEl.classList.add('active');resetQuiz();}
+function getQuizData(){let pool;if(currentMode==='basic')pool=quizBank.basic;else if(currentMode==='trap')pool=quizBank.trap;else pool=[...quizBank.basic,...quizBank.trap];const shuffled=[...pool].sort(()=>Math.random()-0.5);return shuffled.slice(0,20);}
+function buildQuiz(){
+  const container=document.getElementById('quizContainer');
+  if(!container)return;
+  container.innerHTML='';
+  currentQuizData=getQuizData();
+  const tc=document.getElementById('totalCount');
+  if(tc)tc.textContent=currentQuizData.length;
+  currentQuizData.forEach((q,i)=>{
+    const card=document.createElement('div');card.className='quiz-card';card.id='quiz-'+i;
+    const shuffledOpts=[...q.options].sort(()=>Math.random()-0.5);
+    card.innerHTML='<div class="quiz-question"><span class="quiz-word">'+q.word+'</span></div><div class="quiz-options">'+shuffledOpts.map(o=>'<div class="quiz-option" onclick="checkAnswer('+i+',\''+o.replace(/'/g,"\\'")+'\')">'+o+'</div>').join('')+'</div><div class="quiz-feedback" id="fb-'+i+'"></div>';
+    container.appendChild(card);
+  });
+}
+function checkAnswer(idx,chosen){
+  const q=currentQuizData[idx];const card=document.getElementById('quiz-'+idx);
+  if(!card)return;
+  const options=card.querySelectorAll('.quiz-option');const fb=document.getElementById('fb-'+idx);
+  if(options[0]&&options[0].classList.contains('answered'))return;
+  options.forEach(o=>o.classList.add('answered'));
+  if(chosen===q.answer){
+    quizScore++;options.forEach(o=>{if(o.textContent===q.answer)o.classList.add('correct');});
+    if(fb){fb.className='quiz-feedback show right';fb.textContent='✅ 正确！'+q.hint;}
+  }else{
+    options.forEach(o=>{if(o.textContent===q.answer)o.classList.add('correct');if(o.textContent===chosen)o.classList.add('wrong');});
+    if(fb){fb.className='quiz-feedback show wrong-fb';fb.textContent='❌ 正确答案是 '+q.answer+'：'+q.hint;}
+  }
+  quizAnswered++;const ac=document.getElementById('answeredCount');
+  if(ac)ac.textContent=quizAnswered;
+  if(quizAnswered===currentQuizData.length){
+    setTimeout(()=>{
+      const sb=document.getElementById('scoreboard');
+      if(sb)sb.style.display='block';
+      const sv=document.getElementById('scoreValue');
+      if(sv)sv.textContent=quizScore+' / '+currentQuizData.length;
+    },500);
+  }
+}
+function resetQuiz(){quizScore=0;quizAnswered=0;const sb=document.getElementById('scoreboard');if(sb)sb.style.display='none';const ac=document.getElementById('answeredCount');if(ac)ac.textContent='0';buildQuiz();}
+function updateProgress(){}
+function scrollToSection(id){const el=document.getElementById('sec-'+id);if(el)el.scrollIntoView({behavior:'smooth'});}
+let fcIndex=0;
+function updateFlashcard(){
+  const c=flashcards[fcIndex];const w=document.getElementById('fcWord');const a=document.getElementById('fcArticle');const f=document.getElementById('fcFullWord');const m=document.getElementById('fcMeaning');const ct=document.getElementById('fcCounter');const fl=document.getElementById('flashcard');
+  if(w)w.textContent=c.word;if(a)a.textContent=c.article;if(f)f.textContent=c.meaning;if(m)m.textContent=c.meaning;if(ct)ct.textContent=(fcIndex+1)+' / '+flashcards.length;if(fl)fl.classList.remove('flipped');
+}
+function flipCard(){const fl=document.getElementById('flashcard');if(fl)fl.classList.toggle('flipped');const c=flashcards[fcIndex];if(c.audio)playAudio(c.audio);}
+function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
+function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
+function speakCurrentCard(){const c=flashcards[fcIndex];if(c.audio)playAudio(c.audio);}
+
+requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
 document.querySelectorAll('.section').forEach(s=>observer.observe(s));
 // 安全兜底：3秒后所有未显示区块强制可见
