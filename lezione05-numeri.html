@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第5课 · 数词 — 数一数，意大利语怎么说？ — 意大利语语法实战</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap');
+    :root {--green:#009246;--white:#f8f9fa;--red:#ce2b37;--blue:#1a73e8;--orange:#e8710a;--purple:#7c3aed;--bg:#f5f0e8;--card:#ffffff;--card-hover:#f0ebe3;--text:#2c2c2c;--text-dim:#6b6b6b;--border:#ddd5c8;--radius:16px;--shadow:0 4px 24px rgba(0,0,0,0.06);}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',-apple-system,sans-serif;line-height:1.7;overflow-x:hidden;}
+    .top-bar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;}
+    .top-bar .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;}
+    .flag-stripe{width:36px;height:24px;border-radius:4px;background:linear-gradient(to bottom,var(--green) 33%,var(--white) 33% 66%,var(--red) 66%);}
+    .nav-btns{display:flex;gap:8px;}
+    .nav-btn{background:var(--card);border:1px solid var(--border);color:var(--text);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:13px;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;font-family:inherit;}
+    .nav-btn:hover{background:var(--card-hover);border-color:var(--blue);}
+    .lesson-nav-disabled{opacity:0.35;pointer-events:none;cursor:default;}
+    .container{max-width:860px;margin:0 auto;padding:80px 20px 60px;}
+    .hero{text-align:center;padding:60px 20px 40px;position:relative;}
+    .hero h1{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;margin-bottom:8px;background:linear-gradient(135deg,#2c2c2c 40%,var(--green) 70%,var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero .subtitle{font-size:18px;color:var(--text-dim);margin-bottom:24px;}
+    .section{margin-top:48px;opacity:0;transform:translateY(30px);transition:all 0.6s;}
+    .section.visible{opacity:1;transform:translateY(0);}
+    .section-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+    .section-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+    .section-title{font-size:22px;font-weight:700;}
+    .grammar-card{background:var(--card);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border);box-shadow:var(--shadow);}
+    .grammar-card .key-point{font-size:17px;line-height:1.7;}
+    .grammar-card .rule-title{font-size:16px;font-weight:700;color:var(--blue);margin-bottom:8px;}
+    .grammar-card .rule-content{font-size:14px;line-height:1.8;color:var(--text);}
+    .example-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+    .example-chip{display:inline-block;padding:6px 14px;border-radius:20px;background:rgba(0,0,0,0.04);font-size:13px;cursor:pointer;transition:all 0.2s;border:1px solid transparent;}
+    .example-chip:hover{background:var(--card-hover);border-color:var(--green);}
+    .gender-badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:12px;font-weight:600;}
+    .gender-badge.gender-m{background:rgba(0,146,70,0.15);color:var(--green);}
+    .gender-badge.gender-f{background:rgba(206,43,55,0.12);color:var(--red);}
+    .grammar-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;}
+    .grammar-table th,.grammar-table td{border:1px solid var(--border);padding:10px 14px;text-align:left;}
+    .grammar-table th{background:rgba(0,0,0,0.03);font-weight:600;}
+    .trap-section{margin-top:12px;}
+    .trap-tabs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+    .trap-tab{padding:8px 18px;border-radius:20px;background:var(--card);border:1px solid var(--border);cursor:pointer;font-size:13px;transition:all 0.2s;}
+    .trap-tab.active{background:var(--red);color:#fff;border-color:var(--red);}
+    .trap-item{background:var(--card);padding:14px 18px;border-radius:12px;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;display:flex;gap:10px;align-items:baseline;}
+    .trap-item:hover{border-color:var(--red);background:var(--card-hover);}
+    .trap-item .word{font-weight:600;font-size:16px;flex-shrink:0;}
+    .trap-item .meaning{color:var(--text-dim);font-size:13px;}
+    .trap-list{display:grid;grid-template-columns:1fr;gap:8px;}
+    .dialogue-card{background:var(--card);border-radius:var(--radius);padding:24px;border:1px solid var(--border);box-shadow:var(--shadow);}
+    .dialogue-line{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;}
+    .speaker{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;}
+    .speaker-a{background:rgba(0,146,70,0.15);color:var(--green);}
+    .speaker-b{background:rgba(206,43,55,0.12);color:var(--red);}
+    .dialogue-it{font-weight:600;font-size:16px;cursor:pointer;}
+    .dialogue-zh{font-size:14px;color:var(--text-dim);margin-top:4px;}
+    .play-line-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:4px 10px;cursor:pointer;font-size:14px;white-space:nowrap;}
+    .mnemonic-card{background:linear-gradient(135deg,rgba(0,146,70,0.06),rgba(206,43,55,0.04));border-radius:var(--radius);padding:24px;text-align:center;font-size:16px;line-height:1.8;border:1px solid var(--border);}
+    .mnemonic-card .text{max-width:600px;margin:0 auto;}
+    .principle-card{background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(26,115,232,0.06));border-radius:var(--radius);padding:28px;text-align:center;border:1px solid var(--border);}
+    .principle-card .text{font-size:16px;line-height:1.7;max-width:650px;margin:0 auto;}
+    .principle-card .emoji{font-size:36px;margin-bottom:12px;}
+    .hl-o{color:var(--green);font-weight:700;}
+    .hl-a{color:var(--red);font-weight:700;}
+    .hl-e{color:var(--purple);font-weight:700;}
+    .rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    @media (max-width:700px){.rule-grid{grid-template-columns:1fr;}}
+    .flashcard-container{max-width:400px;margin:0 auto;}
+    .flashcard{width:100%;height:220px;cursor:pointer;perspective:1000px;margin-bottom:20px;}
+    .fc-inner{position:relative;width:100%;height:100%;transition:transform 0.6s;transform-style:preserve-3d;border-radius:var(--radius);box-shadow:var(--shadow);}
+    .flipped .fc-inner{transform:rotateY(180deg);}
+    .fc-front,.fc-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;}
+    .fc-front{background:linear-gradient(135deg,var(--green),var(--red));color:#fff;}
+    .fc-back{background:var(--card);border:2px solid var(--green);transform:rotateY(180deg);color:var(--text);}
+    .fc-label{font-size:13px;opacity:0.7;margin-bottom:8px;}
+    .fc-word{font-size:28px;font-weight:700;}
+    .fc-meaning{font-size:16px;color:var(--text-dim);margin-top:8px;}
+    .fc-controls{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+    .footer{text-align:center;padding:40px 20px;color:var(--text-dim);font-size:13px;border-top:1px solid var(--border);margin-top:60px;}
+    .footer-nav{display:flex;justify-content:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <a href="index.html" class="nav-btn" style="text-decoration:none;">🏠</a>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html">📖 导航</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero">
+      <h1>数词 — 数一数，意大利语怎么说？</h1>
+      <p class="subtitle">基数词/序数词/分数/集合数词</p>
+    </div>
+
+    <div class="section" id="sec-core">
+      <div class="section-header"><div class="section-icon" style="background:rgba(0,146,70,0.15);">🎯</div><h2 class="section-title">核心语法</h2></div>
+      <div class="grammar-card">
+        <p class="key-point">数词分为<strong>基数词</strong>(uno/due/tre...)、<strong>序数词</strong>(primo/secondo/terzo...)、<strong>分数</strong>(un terzo/due terzi)和<strong>集合数词</strong>(una decina/un centinaio)。milione和miliardo后加名词需用di。</p>
+        <table class="grammar-table"><thead><tr><th>类别</th><th>形式</th><th>示例</th></tr></thead>
+        <tr><td>基数</td><td>uno/due/tre...</td><td>ventuno(不是ventiuno)</td></tr>
+        <tr><td>序数</td><td>primo/secondo...</td><td>il primo maggio(第一天)</td></tr>
+        <tr><td>分数</td><td>un terzo/due terzi</td><td>tre quarti degli studenti</td></tr>
+        <tr><td>集合</td><td>decina/dozzina/centinaio</td><td>una decina di amici</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section" id="sec-mnemonic">
+      <div class="mnemonic-card"><div class="emoji">🧠</div><p class="text"><span class="hl-o">1-10</span>是基础，<span class="hl-a">11-19</span>记规律，<span class="hl-e">20-90</span>去尾加。<br><span class="hl-o">1/8</span>时要去尾：vent<strong>i</strong>+uno=vent<strong>u</strong>no<br><span class="hl-a">-esimo</span>是序数后缀</p></div>
+    </div>
+
+    <div class="section" id="sec-rules">
+      <div class="section-header"><div class="section-icon" style="background:rgba(26,115,232,0.15);">📋</div><h2 class="section-title">规律一览</h2></div>
+      <div class="rule-grid">
+      <div class="grammar-card">
+        <h3 class="rule-title">基数词 1-20</h3>
+        <div class="rule-content">uno, due, tre, quattro, cinque, sei, sette, otto, nove, dieci, undici, dodici, tredici, quattordici, quindici, sedici, diciassette, diciotto, diciannove, venti</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l26_uno_1')">uno 1</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_dieci_10')">dieci 10</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_venti_20')">venti 20</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_cento_100')">cento 100</span>
+          </div>
+      </div>
+      <div class="grammar-card">
+        <h3 class="rule-title">基数词 21-99</h3>
+        <div class="rule-content">十位数+个位数：venti+due=ventidue
+▲ 个位1/8时十位去元音：ventuno(不是ventiuno), ventotto
+▲ tré(3)带尖音符：ventitré, trentatré</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l26_ventuno_21')">ventuno 21</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_ventidue_22')">ventidue 22</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_trentatr__33')">trentatré 33</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_novantanove_99')">novantanove 99</span>
+          </div>
+      </div>
+      <div class="grammar-card">
+        <h3 class="rule-title">基数词 百千万</h3>
+        <div class="rule-content">cento(100), mille(1000), duemila(2000)
+un milione(百万) → 后加di：un milione di euro
+un miliardo(十亿) → 后加di：un miliardo di persone</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l26_cento_100')">cento 100</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_mille_1000')">mille 1000</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_un_milione____')">un milione 一百万</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_un_miliardo___')">un miliardo 十亿</span>
+          </div>
+      </div>
+      <div class="grammar-card">
+        <h3 class="rule-title">序数词</h3>
+        <div class="rule-content">primo(第一), secondo(第二), terzo(第三), quarto(第四), quinto(第五), sesto(第六), settimo(第七), ottavo(第八), nono(第九), decimo(第十)
+从11起由基数+esimo：undicesimo
+序数词与名词性数一致：il terzo libro / le prime ore</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l26_primo___')">primo 第一</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_secondo___')">secondo 第二</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_decimo___')">decimo 第十</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_ventesimo____')">ventesimo 第二十</span>
+          </div>
+      </div>
+      <div class="grammar-card">
+        <h3 class="rule-title">分数与小数</h3>
+        <div class="rule-content">分子用基数词，分母用序数词。分子>1时分母用复数。
+1/2 = la metà/un mezzo(不能用secondo)
+1/3 = un terzo, 2/3 = due terzi
+1/4 = un quarto, 3/4 = tre quarti
+小数：0,5 = zero virgola cinque
+百分数：1% = uno per cento</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l26_la_met____')">la metà 一半</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_un_terzo_____')">un terzo 三分之一</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_tre_quarti_____')">tre quarti 四分之三</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_uno_per_cento_____')">uno per cento 百分之一</span>
+          </div>
+      </div>
+      <div class="grammar-card">
+        <h3 class="rule-title">集合数词</h3>
+        <div class="rule-content">dieci→una diecina(十来个), venti→una ventina(二十来个)
+trenta→una trentina(三十来个), cento→un centinaio(百来个)
+mille→un migliaio(千来个), dodici→una dozzina(一打/十二个)</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l26_una_decina____')">una decina 十来个</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_una_dozzina___')">una dozzina 一打</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_un_centinaio____')">un centinaio 百来个</span>
+          <span class="example-chip speakable" onclick="playAudio('l26_centinaia_____')">centinaia 数以百计</span>
+          </div>
+      </div></div>
+    </div>
+
+    <div class="section" id="sec-traps">
+      <div class="section-header"><div class="section-icon" style="background:rgba(206,43,55,0.12);">⚠️</div><h2 class="section-title">容易搞混的</h2></div>
+      <div class="trap-section">
+        <div class="trap-tabs"><div class="trap-tab active" onclick="showTrap('t0')">易错数字</div>
+          <div class="trap-tab" onclick="showTrap('t1')">日期表达</div>
+          </div>
+        <div class="trap-list" style="display:grid"><div class="trap-item" onclick="playAudio('l26')"><span class="word">ventuno(不是ventiuno)</span><span class="meaning">1/8时十位去元音</span></div>
+            <div class="trap-item" onclick="playAudio('l26')"><span class="word">ventitré(带重音)</span><span class="meaning">tre在复合词中带重音</span></div>
+            <div class="trap-item" onclick="playAudio('l26')"><span class="word">mille→duemila(不是milledue)</span><span class="meaning">复数用-mila</span></div>
+            <div class="trap-item" onclick="playAudio('l26')"><span class="word">un milione di euro</span><span class="meaning">milione后要加di</span></div>
+            </div>
+          <div class="trap-list" style="display:none"><div class="trap-item" onclick="playAudio('l26')"><span class="word">il primo maggio</span><span class="meaning">每月第一天用序数词</span></div>
+            <div class="trap-item" onclick="playAudio('l26')"><span class="word">il due maggio</span><span class="meaning">其他日子用基数词</span></div>
+            <div class="trap-item" onclick="playAudio('l26')"><span class="word">il 2024(duemilaventiquattro)</span><span class="meaning">年份直接用基数词</span></div>
+            <div class="trap-item" onclick="playAudio('l26')"><span class="word">il secolo ventesimo</span><span class="meaning">世纪用序数词</span></div>
+            </div>
+          
+      </div>
+    </div>
+
+    <div class="section" id="sec-dialogue">
+      <div class="section-header"><div class="section-icon" style="background:rgba(124,58,237,0.12);">💬</div><h2 class="section-title">生活对话</h2></div>
+      <div class="dialogue-card">
+        <div class="dialogue-line">
+          <div class="speaker speaker-a">A</div>
+          <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l26_dlga')">Quanto costa questo libro?</div><div class="dialogue-zh">这本书多少钱？</div></div>
+          <button class="play-line-btn" onclick="playAudio('l26_dlga')">🔊</button>
+        </div>
+        <div class="dialogue-line">
+          <div class="speaker speaker-b">B</div>
+          <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l26_dlgb')">Costa venticinque euro.</div><div class="dialogue-zh">25欧元。</div></div>
+          <button class="play-line-btn" onclick="playAudio('l26_dlgb')">🔊</button>
+        </div>
+        <div class="dialogue-line">
+          <div class="speaker speaker-a">A</div>
+          <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l26_dlga')">E questo?</div><div class="dialogue-zh">这本呢？</div></div>
+          <button class="play-line-btn" onclick="playAudio('l26_dlga')">🔊</button>
+        </div>
+        <div class="dialogue-line">
+          <div class="speaker speaker-b">B</div>
+          <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l26_dlgb')">Questo costa solo dieci euro. E il terzo libro della serie.</div><div class="dialogue-zh">这本只要10欧元。这是系列的第三本。</div></div>
+          <button class="play-line-btn" onclick="playAudio('l26_dlgb')">🔊</button>
+        </div></div>
+      <div style="text-align:center;margin-top:16px;"><button class="nav-btn" onclick="playAudio('l26_dlg_full')" style="padding:10px 24px;">🔊 播放整段对话</button></div>
+    </div>
+
+    <div class="section" id="sec-principle">
+      <div class="principle-card"><div class="emoji">💡</div><div class="text">数词核心：基数词记构成规则(1/8去元音)，序数词记前10个不规则(primo~decimo)，11+用-esimo。分数=基数+序数。百万/十亿后加di！</div></div>
+    </div>
+
+    <div class="section" id="sec-flashcard">
+      <div class="section-header"><div class="section-icon" style="background:rgba(232,113,10,0.12);">🃏</div><h2 class="section-title">闪卡练习 — 点击翻转</h2></div>
+      <div class="flashcard-container">
+        <div class="flashcard" id="flashcard" onclick="flipCard()">
+          <div class="fc-inner"><div class="fc-front"><div class="fc-label">词语</div><div class="fc-word" id="fcWord"></div></div>
+          <div class="fc-back"><div class="fc-label">形式</div><div class="fc-word" id="fcFullWord"></div><div class="fc-meaning" id="fcMeaning"></div></div></div>
+        </div>
+        <div class="fc-controls">
+          <button class="nav-btn" onclick="prevCard()">⬅ 上一个</button>
+          <span id="fcCounter" style="font-size:14px;color:var(--text-dim);">1 / 18</span>
+          <button class="nav-btn" onclick="nextCard()">下一个 ➡</button>
+          <button class="nav-btn" onclick="speakCurrentCard()" style="margin-left:8px;">🔊</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-nav">
+      <a class="nav-btn" href="index.html">🏠 返回导航页</a>
+      <a class="nav-btn" href="lezione04-aggettivi.html">◀ 上一课</a>
+      <a class="nav-btn" href="lezione06-avverbi.html">下一课 ▶</a>
+    </div>
+    <p><span class="it-flag" style="display:inline-block;width:18px;height:12px;border-radius:2px;background:linear-gradient(to right,#009246 33%,#fff 33% 66%,#ce2b37 66%);vertical-align:middle;margin-right:4px;"></span> 意大利语语法实战课程 · 第5课 · 数词 — 数一数，意大利语怎么说？</p>
+  </div>
+
+  <script>
+  const _audioEl = new Audio();
+  const _LESSON = 'l26';
+  function playAudio(key) {
+    if (window.__AC && __AC[key]) { _audioEl.pause(); _audioEl.src = __AC[key]; _audioEl.load(); _audioEl.play().catch(function(e){}); return; }
+    var s = document.createElement('script'); s.src = 'audio_data/' + _LESSON + '/' + key + '.js?v=1';
+    s.onload = function() { playAudio(key); }; s.onerror = function() { showToast('音频未收录'); }; document.head.appendChild(s);
+  }
+  function showToast(msg) {
+    var t = document.createElement('div'); t.textContent = msg;
+    t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12px 24px;border-radius:8px;font-size:14px;z-index:9999;opacity:0;transition:opacity 0.3s;max-width:90%;text-align:center';
+    document.body.appendChild(t); requestAnimationFrame(function() { t.style.opacity = '1'; });
+    setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2500);
+  }
+  function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
+  const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
+  document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+  setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);
+  const flashcards = [  {word:'uno/due/tre',masc:'1/2/3',fem:'1/2/3',mpl:'1/2/3',fpl:'1/2/3',meaning:'基数',audio:'l05_uno_due_tre'},
+  {word:'dieci/venti/cento',masc:'10/20/100',fem:'10/20/100',mpl:'10/20/100',fpl:'10/20/100',meaning:'基数',audio:'l05_dieci_venti_cento'},
+  {word:'mille/milione',masc:'1000/百万',fem:'1000/百万',mpl:'1000/百万',fpl:'1000/百万',meaning:'基数',audio:'l05_mille_milione'},
+  {word:'ventuno/trentatré',masc:'21/33',fem:'21/33',mpl:'21/33',fpl:'21/33',meaning:'去元音/加重音',audio:'l05_ventuno_trentatr_'},
+  {word:'primo/secondo',masc:'第一/第二',fem:'第一/第二',mpl:'第一/第二',fpl:'第一/第二',meaning:'序数',audio:'l05_primo_secondo'},
+  {word:'terzo/quarto/quinto',masc:'3/4/5',fem:'3/4/5',mpl:'3/4/5',fpl:'3/4/5',meaning:'序数',audio:'l05_terzo_quarto_quinto'},
+  {word:'decimo/ventesimo',masc:'第十/第二十',fem:'第十/第二十',mpl:'第十/第二十',fpl:'第十/第二十',meaning:'序数',audio:'l05_decimo_ventesimo'},
+  {word:'la metà/un mezzo',masc:'一半',fem:'一半',mpl:'一半',fpl:'一半',meaning:'分数',audio:'l05_la_met__un_mezzo'},
+  {word:'un terzo/due terzi',masc:'三分之一/三分之二',fem:'三分之一/三分之二',mpl:'三分之一/三分之二',fpl:'三分之一/三分之二',meaning:'分数',audio:'l05_un_terzo_due_terzi'},
+  {word:'tre quarti',masc:'四分之三',fem:'四分之三',mpl:'四分之三',fpl:'四分之三',meaning:'分数',audio:'l05_tre_quarti'},
+  {word:'uno per cento',masc:'百分之一',fem:'百分之一',mpl:'百分之一',fpl:'百分之一',meaning:'百分数',audio:'l05_uno_per_cento'},
+  {word:'una decina',masc:'十来个',fem:'十来个',mpl:'十来个',fpl:'十来个',meaning:'集合',audio:'l05_una_decina'},
+  {word:'una dozzina',masc:'一打',fem:'一打',mpl:'一打',fpl:'一打',meaning:'集合',audio:'l05_una_dozzina'},
+  {word:'un centinaio',masc:'百来个',fem:'百来个',mpl:'百来个',fpl:'百来个',meaning:'集合',audio:'l05_un_centinaio'},
+  {word:'un migliaio',masc:'千来个',fem:'千来个',mpl:'千来个',fpl:'千来个',meaning:'集合',audio:'l05_un_migliaio'},
+  {word:'0,5 = zero virgola cinque',masc:'零点五',fem:'零点五',mpl:'零点五',fpl:'零点五',meaning:'小数',audio:'l05_0_5___zero_virgola_c'},
+  {word:'il primo maggio',masc:'五月一日',fem:'五月一日',mpl:'五月一日',fpl:'五月一日',meaning:'日期',audio:'l05_il_primo_maggio'},
+  {word:'il due giugno',masc:'六月二日',fem:'六月二日',mpl:'六月二日',fpl:'六月二日',meaning:'日期',audio:'l05_il_due_giugno'}];
+  let fcIndex=0;
+  function updateFlashcard(){const c=flashcards[fcIndex];document.getElementById('fcWord').textContent=c.word;document.getElementById('fcFullWord').textContent=c.masc+' / '+c.fem;document.getElementById('fcMeaning').textContent=c.meaning;document.getElementById('fcCounter').textContent=(fcIndex+1)+' / '+flashcards.length;document.getElementById('flashcard').classList.remove('flipped');}
+  function flipCard(){document.getElementById('flashcard').classList.toggle('flipped');const c=flashcards[fcIndex];playAudio(c.audio);}
+  function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
+  function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
+  function speakCurrentCard(){const c=flashcards[fcIndex];playAudio(c.audio);}
+  updateFlashcard();
+  </script>
+</body>
+</html>

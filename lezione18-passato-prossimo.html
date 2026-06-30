@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第15课 · 近过去时 — 意大利语语法实战</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap');
+    :root {--green:#009246;--white:#f8f9fa;--red:#ce2b37;--blue:#1a73e8;--orange:#e8710a;--purple:#7c3aed;--bg:#f5f0e8;--card:#ffffff;--card-hover:#f0ebe3;--text:#2c2c2c;--text-dim:#6b6b6b;--border:#ddd5c8;--radius:16px;--shadow:0 4px 24px rgba(0,0,0,0.06);}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',-apple-system,sans-serif;line-height:1.7;overflow-x:hidden;}
+    .top-bar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;}
+    .top-bar .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;}
+    .flag-stripe{width:36px;height:24px;border-radius:4px;background:linear-gradient(to bottom,var(--green) 33%,var(--white) 33% 66%,var(--red) 66%);}
+    .progress-bar{height:3px;background:var(--border);border-radius:2px;width:200px;}
+    .progress-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--red));border-radius:2px;transition:width 0.5s;width:0%;}
+    .nav-btns{display:flex;gap:8px;}
+    .nav-btn{background:var(--card);border:1px solid var(--border);color:var(--text);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:13px;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;font-family:inherit;}
+    .nav-btn:hover{background:var(--card-hover);border-color:var(--blue);}
+    .lesson-nav-disabled{opacity:0.35;pointer-events:none;cursor:default;}
+    .container{max-width:860px;margin:0 auto;padding:80px 20px 60px;}
+    .hero{text-align:center;padding:60px 20px 40px;position:relative;}
+    .hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,146,70,0.08),rgba(206,43,55,0.06),transparent 70%);pointer-events:none;}
+    .lesson-badge{display:inline-block;padding:6px 16px;border-radius:20px;background:rgba(0,146,70,0.15);color:var(--green);font-size:13px;font-weight:500;margin-bottom:20px;border:1px solid rgba(0,146,70,0.3);}
+    .hero h1{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;margin-bottom:8px;background:linear-gradient(135deg,#2c2c2c 40%,var(--green) 70%,var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero .subtitle{font-size:18px;color:var(--text-dim);margin-bottom:24px;}
+    .hero .hint{display:inline-flex;align-items:center;gap:8px;background:var(--card);padding:10px 20px;border-radius:12px;border:1px solid var(--border);font-size:14px;color:var(--text-dim);}
+    .hero .hint .icon{font-size:20px;}
+    .section{margin-top:48px;opacity:0;transform:translateY(30px);transition:all 0.6s;}
+    .section.visible{opacity:1;transform:translateY(0);}
+    .section-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+    .section-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+    .section-title{font-size:22px;font-weight:700;}
+    .speakable{cursor:pointer;position:relative;border-bottom:1px dashed rgba(0,0,0,0.15);transition:all 0.2s;}
+    .speakable:hover{border-bottom-color:var(--green);color:var(--green);}
+    .speakable::after{content:'🔊';font-size:12px;margin-left:2px;opacity:0;transition:opacity 0.2s;position:relative;top:-2px;}
+    .speakable:hover::after{opacity:0.7;}
+    .speakable.speaking{color:var(--green);animation:pulse-speak 0.6s ease infinite;}
+    @keyframes pulse-speak{0%,100%{opacity:1;}50%{opacity:0.6;}}
+    .grammar-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);}
+    .grammar-card .key-point{font-size:17px;line-height:1.8;margin-bottom:16px;}
+    .gender-badge{display:inline-block;padding:3px 10px;border-radius:6px;font-size:13px;font-weight:600;}
+    .gender-m{background:rgba(26,115,232,0.15);color:var(--blue);}
+    .gender-f{background:rgba(232,113,10,0.15);color:var(--orange);}
+    .example-table{width:100%;border-collapse:separate;border-spacing:0;margin-top:16px;overflow:hidden;border-radius:12px;}
+    .example-table th{background:rgba(0,0,0,0.03);padding:12px 16px;text-align:left;font-size:13px;font-weight:600;color:var(--text-dim);}
+    .example-table td{padding:12px 16px;border-top:1px solid var(--border);font-size:15px;}
+    .example-table tr:hover td{background:rgba(0,0,0,0.02);}
+    .it-text{font-style:italic;font-weight:500;}
+    .it-flag{display:inline-block;width:20px;height:14px;border-radius:2px;background:linear-gradient(to right,#009246 33%,#fff 33% 66%,#ce2b37 66%);vertical-align:middle;margin-right:4px;}
+    .zh-text{color:var(--text-dim);font-size:14px;}
+    .mnemonic-card{background:linear-gradient(135deg,rgba(0,146,70,0.1),rgba(206,43,55,0.08));border:1px solid rgba(0,146,70,0.25);border-radius:var(--radius);padding:24px;text-align:center;margin-top:20px;}
+    .mnemonic-card .emoji{font-size:32px;margin-bottom:12px;}
+    .mnemonic-card .text{font-size:20px;font-weight:700;line-height:1.6;}
+    .mnemonic-card .text .hl-o{color:var(--blue);}
+    .mnemonic-card .text .hl-a{color:var(--orange);}
+    .mnemonic-card .text .hl-e{color:var(--purple);}
+    .rule-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:16px;}
+    .rule-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:all 0.3s;cursor:default;overflow:hidden;}
+    .rule-card:hover{border-color:var(--green);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,146,70,0.1);}
+    .rule-card .ending{font-size:36px;font-weight:700;font-family:'Playfair Display',serif;margin-bottom:8px;}
+    .rule-card .ending.masc{color:var(--blue);}.rule-card .ending.fem{color:var(--orange);}.rule-card .ending.both{color:var(--purple);}
+    .rule-card .gender-label{font-size:13px;font-weight:600;margin-bottom:12px;}
+    .rule-card .examples{display:flex;flex-wrap:wrap;gap:8px;}
+    .rule-card .example-chip{background:rgba(0,0,0,0.04);padding:5px 12px;border-radius:8px;font-size:14px;cursor:pointer;}
+    .rule-card .example-chip:hover{background:rgba(0,146,70,0.15);}
+    .trap-section{margin-top:12px;}
+    .trap-tabs{display:flex;gap:8px;margin-bottom:16px;}
+    .trap-tab{padding:8px 18px;border-radius:10px;background:var(--card);border:1px solid var(--border);cursor:pointer;font-size:14px;font-weight:500;transition:all 0.2s;color:var(--text-dim);}
+    .trap-tab.active{border-color:var(--red);color:var(--red);background:rgba(206,43,55,0.1);}
+    .trap-tab:hover:not(.active){border-color:var(--text-dim);}
+    .trap-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .trap-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:12px;transition:all 0.3s;cursor:pointer;}
+    .trap-item:hover{border-color:var(--red);transform:scale(1.02);}
+    .trap-item .article{font-size:13px;font-weight:700;min-width:28px;}
+    .trap-item .article.il{color:var(--blue);}.trap-item .article.la{color:var(--orange);}
+    .trap-item .word{font-size:18px;font-weight:600;font-style:italic;}
+    .trap-item .meaning{font-size:13px;color:var(--text-dim);margin-left:auto;}
+    .trap-note{background:rgba(206,43,55,0.08);border:1px solid rgba(206,43,55,0.2);border-radius:10px;padding:12px 16px;margin-top:12px;font-size:13px;color:#c0392b;}
+    .dialogue-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-top:16px;}
+    .dialogue-line{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.04);align-items:flex-start;}
+    .dialogue-line:last-child{border-bottom:none;}
+    .speaker{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0;}
+    .speaker-a{background:rgba(26,115,232,0.15);color:var(--blue);}
+    .speaker-b{background:rgba(0,146,70,0.15);color:var(--green);}
+    .dialogue-content{flex:1;}
+    .dialogue-it{font-size:16px;font-weight:500;cursor:pointer;}
+    .dialogue-zh{font-size:13px;color:var(--text-dim);margin-top:2px;}
+    .play-line-btn{background:none;border:1px solid var(--border);color:var(--text-dim);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px;flex-shrink:0;}
+    .play-line-btn:hover{border-color:var(--green);color:var(--green);}
+    .principle-card{background:linear-gradient(135deg,rgba(26,115,232,0.1),rgba(124,58,237,0.08));border:1px solid rgba(26,115,232,0.25);border-radius:var(--radius);padding:24px;margin-top:20px;text-align:center;}
+    .principle-card .icon{font-size:36px;margin-bottom:12px;}
+    .principle-card .text{font-size:18px;font-weight:700;line-height:1.6;}
+    .principle-card .examples-row{display:flex;justify-content:center;gap:20px;margin-top:16px;flex-wrap:wrap;}
+    .principle-card .example-pair{display:flex;flex-direction:column;align-items:center;gap:4px;}
+    .principle-card .good{color:var(--green);font-weight:600;}
+    .principle-card .bad{color:var(--red);text-decoration:line-through;opacity:0.5;font-size:13px;}
+    .footer{text-align:center;padding:40px 20px;color:var(--text-dim);font-size:13px;border-top:1px solid var(--border);margin-top:60px;}
+    .footer-nav{display:flex;justify-content:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
+    .footer-nav .nav-btn{text-decoration:none;display:inline-flex;align-items:center;padding:10px 20px;font-size:14px;}
+    .footer-nav .nav-btn:hover{background:var(--card-hover);border-color:var(--blue);}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    .animate-in{animation:fadeInUp 0.5s ease forwards;}
+    @media(max-width:640px){.hero h1{font-size:28px;}.rule-cards{grid-template-columns:1fr;}.trap-list{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="top-bar">
+  <div class="logo"><div class="flag-stripe"></div><span>意大利语语法实战</span></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="nav-btns">
+    <a class="nav-btn" href="index.html">🏠 导航</a>
+    <a class="nav-btn" href="lezione17-pronomi-oggetto.html">◀ 上一课</a>
+    <a class="nav-btn" href="lezione19-imperfetto.html">下一课 ▶</a>
+  </div>
+</div>
+<div class="container">
+  <div class="hero animate-in">
+    <div class="lesson-badge">Part 3 · 时态进阶 · 第 15 课</div>
+    <h1>近过去时</h1>
+    <p class="subtitle">Il passato prossimo</p>
+    <div class="hint"><span class="icon">👆</span>点击绿色下划线文字即可听到纯正意大利语发音
+      <div class="grammar-card">
+        <h3 class="rule-title">更多不规则过去分词</h3>
+        <div class="rule-content">高频不规则分词补充：<br>
+        <strong>piangere</strong>→pianto(哭), <strong>correre</strong>→corso(跑), <strong>scegliere</strong>→scelto(选择)<br>
+        <strong>tradurre</strong>→tradotto(翻译), <strong>porre</strong>→posto(放置), <strong>giungere</strong>→giunto(到达)<br>
+        <strong>spendere</strong>→speso(花费), <strong>uccidere</strong>→ucciso(杀死), <strong>dirigere</strong>→diretto(指导)</div>
+        <div class="examples">
+          <span class="example-chip">ho pianto 我哭了</span>
+          <span class="example-chip">hai corso 你跑了</span>
+          <span class="example-chip">ha scelto 他选择了</span>
+          <span class="example-chip">hanno speso 他们花了</span>
+        </div>
+      </div>
+</div>
+  </div>
+
+  <div class="section" id="sec-core">
+    <div class="section-header"><div class="section-icon" style="background:rgba(0,146,70,0.15);">🎯</div><h2 class="section-title">核心语法</h2></div>
+    <div class="grammar-card">
+      <p class="key-point">近过去时 = <span class='gender-badge gender-m'>avere/essere</span> + <span class='gender-badge gender-f'>过去分词</span><br>及物用avere，不及物/自反用essere</p>
+      <table class="example-table"><thead><tr><th>意大利语</th><th>意思</th><th>说明</th></tr></thead><tbody>
+<tr><td><span class="speakable it-text" onclick="playAudio('l27_ho_mangiato')">ho mangiato</span></td><td class="zh-text">我吃了</td><td>avere+过去分词</td></tr>
+<tr><td><span class="speakable it-text" onclick="playAudio('l27_sono_andato')">sono andato</span></td><td class="zh-text">我去了</td><td>essere+过去分词</td></tr>
+<tr><td><span class="speakable it-text" onclick="playAudio('l27_ho_scritto')">ho scritto</span></td><td class="zh-text">我写了</td><td>不规则过去分词</td></tr>
+<tr><td><span class="speakable it-text" onclick="playAudio('l27_si_alzato')">si è alzato</span></td><td class="zh-text">他起床了</td><td>自反→essere</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <div class="section" id="sec-mnemonic">
+    <div class="mnemonic-card"><div class="emoji">🧠</div><p class="text"><span class="hl-o">ho</span>+过去分词是及物，<span class="hl-a">sono</span>+过去分词是不及物！</p></div>
+  </div>
+
+  
+
+  
+
+  <div class="section" id="sec-dialogue">
+    <div class="section-header"><div class="section-icon" style="background:rgba(0,146,70,0.15);">🗣️</div><h2 class="section-title">生活对话</h2></div>
+    <div class="dialogue-box">
+<div class="dialogue-line">
+        <div class="speaker speaker-a">A</div>
+        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l27_come_stai')">Come stai?</div><div class="dialogue-zh">你好吗？</div></div>
+        <button class="play-line-btn" onclick="playAudio('l27_sto_bene_grazie')">🔊</button></div>
+<div class="dialogue-line">
+        <div class="speaker speaker-b">B</div>
+        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l27_cosa_studi_oggi')">Sto bene, grazie!</div><div class="dialogue-zh">我很好，谢谢！</div></div>
+        <button class="play-line-btn" onclick="playAudio('l27_studio_l_italiano')">🔊</button></div>
+<div class="dialogue-line">
+        <div class="speaker speaker-a">A</div>
+        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l27')">Cosa studi oggi?</div><div class="dialogue-zh">你今天学什么？</div></div>
+        <button class="play-line-btn" onclick="playAudio('l27')">🔊</button></div>
+<div class="dialogue-line">
+        <div class="speaker speaker-b">B</div>
+        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l27')">Studio l'italiano!</div><div class="dialogue-zh">我学意大利语！</div></div>
+        <button class="play-line-btn" onclick="playAudio('l27')">🔊</button></div>
+    </div>
+  </div>
+
+  <div class="section" id="sec-principle">
+    <div class="principle-card">
+      <div class="icon">🔑</div>
+      <p class="text">学语法最终是为了开口说！</p>
+      <div class="examples-row"><div class="example-pair"><span class="good">✅ 多练</span><span class="bad">❌ 只看</span></div><div class="example-pair"><span class="good">✅ 开口</span><span class="bad">❌ 沉默</span></div><div class="example-pair"><span class="good">✅ 坚持</span><span class="bad">❌ 放弃</span></div></div>
+    </div>
+  </div>
+
+<div class="section" id="sec-rules">
+  <div class="section-header"><div class="section-icon" style="background:rgba(26,115,232,0.15);">📋</div><h2 class="section-title">规律一览</h2></div>
+  <div class="rule-grid">
+<div class="grammar-card">
+  <h3 class="rule-title">规则过去分词构成</h3>
+  <div class="rule-content">-are → <strong>-ato</strong>：parlato(说了)、lavorato(工作了)、mangiato(吃了)
+-ere → <strong>-uto</strong>：creduto(相信了)、ricevuto(收到了)、saputo(知道了)
+-ire → <strong>-ito</strong>：dormito(睡了)、partito(出发了)、finito(完成了)</div>
+  <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l27_parlato___')">parlato 说了</span><span class="example-chip speakable" onclick="playAudio('l27_creduto____')">creduto 相信了</span><span class="example-chip speakable" onclick="playAudio('l27_dormito___')">dormito 睡了</span><span class="example-chip speakable" onclick="playAudio('l27_mangiato___')">mangiato 吃了</span></div>
+</div>
+<div class="grammar-card">
+  <h3 class="rule-title">不规则过去分词(一)</h3>
+  <div class="rule-content">essere→<strong>stato</strong>, fare→<strong>fatto</strong>, dire→<strong>detto</strong>, scrivere→<strong>scritto</strong>, aprire→<strong>aperto</strong>, chiudere→<strong>chiuso</strong>, prendere→<strong>preso</strong>, mettere→<strong>messo</strong></div>
+  <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l27_stato____')">stato 是/在</span><span class="example-chip speakable" onclick="playAudio('l27_fatto___')">fatto 做了</span><span class="example-chip speakable" onclick="playAudio('l27_detto___')">detto 说了</span><span class="example-chip speakable" onclick="playAudio('l27_scritto___')">scritto 写了</span><span class="example-chip speakable" onclick="playAudio('l27_aperto____')">aperto 打开了</span><span class="example-chip speakable" onclick="playAudio('l27_chiuso____')">chiuso 关上了</span><span class="example-chip speakable" onclick="playAudio('l27_preso___')">preso 拿了</span></div>
+</div>
+<div class="grammar-card">
+  <h3 class="rule-title">不规则过去分词(二)</h3>
+  <div class="rule-content">vedere→<strong>visto</strong>(看到), perdere→<strong>perso</strong>(丢失), decidere→<strong>deciso</strong>(决定), rimanere→<strong>rimasto</strong>(留下), offrire→<strong>offerto</strong>(提供), morire→<strong>morto</strong>(死), nascere→<strong>nato</strong>(出生), vivere→<strong>vissuto</strong>(生活), rompere→<strong>rotto</strong>(打破), leggere→<strong>letto</strong>(读), rispondere→<strong>risposto</strong>(回答)</div>
+  <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l27_visto____')">visto 看到了</span><span class="example-chip speakable" onclick="playAudio('l27_perso____')">perso 丢失了</span><span class="example-chip speakable" onclick="playAudio('l27_nato____')">nato 出生了</span><span class="example-chip speakable" onclick="playAudio('l27_letto___')">letto 读了</span><span class="example-chip speakable" onclick="playAudio('l27_risposto____')">risposto 回答了</span></div>
+</div>
+<div class="grammar-card">
+  <h3 class="rule-title">助动词选择 — 用avere的情况</h3>
+  <div class="rule-content">大多数及物动词：Ho comprato una macchina.
+部分不及物动作动词：Ho dormito bene. / Ho viaggiato molto.
+情态动词(potere/volere/dovere)——但当它们带用essere的动词时，也随之为essere</div>
+  <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l27_ho_comprato____')">ho comprato 我买了</span><span class="example-chip speakable" onclick="playAudio('l27_ho_lavorato_____')">ho lavorato 我工作了</span><span class="example-chip speakable" onclick="playAudio('l27_ho_mangiato____')">ho mangiato 我吃了</span></div>
+</div>
+<div class="grammar-card">
+  <h3 class="rule-title">助动词选择 — 用essere的情况</h3>
+  <div class="rule-content">运动动词(有方向性)：andare, venire, arrivare, partire, entrare, uscire, tornare, cadere
+状态变化动词：nascere, morire, diventare, crescere
+状态动词：stare, restare, rimanere
+反身动词：svegliarsi, alzarsi, chiamarsi
+过去分词必须与主语性数配合！Anna e andata. / I ragazzi sono arrivati.</div>
+  <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l27_sono_andato_a____')">sono andato/a 我去了</span><span class="example-chip speakable" onclick="playAudio('l27_sono_partito_a_____')">sono partito/a 我出发了</span><span class="example-chip speakable" onclick="playAudio('l27_mi_sono_alzato_a____')">mi sono alzato/a 我起床了</span></div>
+</div></div>
+</div>
+
+<div class="section" id="sec-traps">
+  <div class="section-header"><div class="section-icon" style="background:rgba(206,43,55,0.12);">⚠️</div><h2 class="section-title">容易搞混的</h2></div>
+  <div class="trap-section"><div class="trap-tabs"><div class="trap-tab active" onclick="showTrap('t0')">avere vs essere</div><div class="trap-tab" onclick="showTrap('t1')">过去分词配合规则</div></div><div class="trap-list" style="display:grid"><div class="trap-item" onclick="playAudio('l27')"><span class="word">Ho mangiato.</span><span class="meaning">及物动词→avere(我吃了)</span></div>
+<div class="trap-item" onclick="playAudio('l27')"><span class="word">Sono andato.</span><span class="meaning">运动动词→essere(我去了)</span></div>
+<div class="trap-item" onclick="playAudio('l27')"><span class="word">Mi sono alzato.</span><span class="meaning">自反动词→essere(我起床了)</span></div>
+<div class="trap-item" onclick="playAudio('l27')"><span class="word">Ho dormito.</span><span class="meaning">不及物动作→avere(我睡了)</span></div>
+<div class="trap-item" onclick="playAudio('l27')"><span class="word">Sono arrivato.</span><span class="meaning">到达→essere(我到了)</span></div>
+<div class="trap-item" onclick="playAudio('l27')"><span class="word">E nata nel 1990.</span><span class="meaning">出生→essere(她生于1990)</span></div>
+</div><div class="trap-list" style="display:none"><div class="trap-item" onclick="playAudio('l27')"><span class="word">Ho visto Maria→L'ho vista</span><span class="meaning">直接宾语代词前置→分词配合</span></div>
+<div class="trap-item" onclick="playAudio('l27')"><span class="word">Ho comprato i libri→Li ho comprati</span><span class="meaning">阳性复数配合</span></div>
+<div class="trap-item" onclick="playAudio('l27')"><span class="word">Sono andata a Roma.</span><span class="meaning">阴性主语配合(女性说)</span></div>
+<div class="trap-item" onclick="playAudio('l27')"><span class="word">Ci siamo alzati presto.</span><span class="meaning">自反动词+复数配合</span></div>
+<div class="trap-item" onclick="playAudio('l27')"><span class="word">Gliel'ho detta.</span><span class="meaning">组合代词+阴性配合</span></div>
+<div class="trap-item" onclick="playAudio('l27')"><span class="word">Le ragazze sono arrivate.</span><span class="meaning">阴性复数配合</span></div>
+</div></div>
+</div>
+
+<div class="section" id="sec-flashcard">
+  <div class="section-header"><div class="section-icon" style="background:rgba(232,113,10,0.12);">🃏</div><h2 class="section-title">闪卡练习 — 点击翻转</h2></div>
+  <div class="flashcard-container">
+    <div class="flashcard" id="flashcard" onclick="flipCard()">
+      <div class="fc-inner"><div class="fc-front"><div class="fc-label">词语</div><div class="fc-word" id="fcWord"></div></div>
+      <div class="fc-back"><div class="fc-label">形式</div><div class="fc-word" id="fcFullWord"></div><div class="fc-meaning" id="fcMeaning"></div></div></div>
+    </div>
+    <div class="fc-controls">
+      <button class="nav-btn" onclick="prevCard()">⬅ 上一个</button>
+      <span id="fcCounter" style="font-size:14px;color:var(--text-dim);">1 / 21</span>
+      <button class="nav-btn" onclick="nextCard()">下一个 ➡</button>
+      <button class="nav-btn" onclick="speakCurrentCard()" style="margin-left:8px;">🔊</button>
+    </div>
+  </div>
+</div>
+<script>
+const flashcards = [  {word:'parlare→parlato',masc:'规则-ato',fem:'规则-ato',mpl:'规则-ato',fpl:'规则-ato',meaning:'说了',audio:'l15_parlare_parlato'},
+  {word:'credere→creduto',masc:'规则-uto',fem:'规则-uto',mpl:'规则-uto',fpl:'规则-uto',meaning:'相信了',audio:'l15_credere_creduto'},
+  {word:'dormire→dormito',masc:'规则-ito',fem:'规则-ito',mpl:'规则-ito',fpl:'规则-ito',meaning:'睡了',audio:'l15_dormire_dormito'},
+  {word:'essere→stato',masc:'不规则',fem:'不规则',mpl:'不规则',fpl:'不规则',meaning:'是/在',audio:'l15_essere_stato'},
+  {word:'fare→fatto',masc:'不规则',fem:'不规则',mpl:'不规则',fpl:'不规则',meaning:'做了',audio:'l15_fare_fatto'},
+  {word:'dire→detto',masc:'不规则',fem:'不规则',mpl:'不规则',fpl:'不规则',meaning:'说了',audio:'l15_dire_detto'},
+  {word:'scrivere→scritto',masc:'不规则',fem:'不规则',mpl:'不规则',fpl:'不规则',meaning:'写了',audio:'l15_scrivere_scritt'},
+  {word:'aprire→aperto',masc:'不规则',fem:'不规则',mpl:'不规则',fpl:'不规则',meaning:'打开了',audio:'l15_aprire_aperto'},
+  {word:'prendere→preso',masc:'不规则',fem:'不规则',mpl:'不规则',fpl:'不规则',meaning:'拿了',audio:'l15_prendere_preso'},
+  {word:'vedere→visto',masc:'不规则',fem:'不规则',mpl:'不规则',fpl:'不规则',meaning:'看到了',audio:'l15_vedere_visto'},
+  {word:'leggere→letto',masc:'不规则',fem:'不规则',mpl:'不规则',fpl:'不规则',meaning:'读了',audio:'l15_leggere_letto'},
+  {word:'morire→morto',masc:'不规则',fem:'不规则',mpl:'不规则',fpl:'不规则',meaning:'死了',audio:'l15_morire_morto'},
+  {word:'nascere→nato',masc:'不规则',fem:'不规则',mpl:'不规则',fpl:'不规则',meaning:'出生了',audio:'l15_nascere_nato'},
+  {word:'vivere→vissuto',masc:'不规则',fem:'不规则',mpl:'不规则',fpl:'不规则',meaning:'生活了',audio:'l15_vivere_vissuto'},
+  {word:'rompere→rotto',masc:'不规则',fem:'不规则',mpl:'不规则',fpl:'不规则',meaning:'打破了',audio:'l15_rompere_rotto'},
+  {word:'ho lavorato',masc:'avere(及物)',fem:'avere(及物)',mpl:'avere(及物)',fpl:'avere(及物)',meaning:'我工作了',audio:'l15_ho_lavorato'},
+  {word:'sono andato',masc:'essere(运动)',fem:'essere(运动)',mpl:'essere(运动)',fpl:'essere(运动)',meaning:'我去了',audio:'l15_sono_andato'},
+  {word:'mi sono alzato',masc:'essere(自反)',fem:'essere(自反)',mpl:'essere(自反)',fpl:'essere(自反)',meaning:'我起床了',audio:'l15_mi_sono_alzato'},
+  {word:'ho mangiato',masc:'avere(及物)',fem:'avere(及物)',mpl:'avere(及物)',fpl:'avere(及物)',meaning:'我吃了',audio:'l15_ho_mangiato'},
+  {word:'sono partito',masc:'essere(出发)',fem:'essere(出发)',mpl:'essere(出发)',fpl:'essere(出发)',meaning:'我出发了',audio:'l15_sono_partito'},
+  {word:'sono stato',masc:'essere(状态)',fem:'essere(状态)',mpl:'essere(状态)',fpl:'essere(状态)',meaning:'我曾在',audio:'l15_sono_stato'}];
+let fcIndex=0;
+function updateFlashcard(){const c=flashcards[fcIndex];document.getElementById('fcWord').textContent=c.word;document.getElementById('fcArticle').textContent=c.masc;document.getElementById('fcFullWord').textContent=c.masc+' / '+c.fem;document.getElementById('fcMeaning').textContent=c.meaning;document.getElementById('fcCounter').textContent=(fcIndex+1)+' / '+flashcards.length;document.getElementById('flashcard').classList.remove('flipped');}
+function flipCard(){document.getElementById('flashcard').classList.toggle('flipped');const c=flashcards[fcIndex];playAudio(c.audio);}
+function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
+function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
+function speakCurrentCard(){const c=flashcards[fcIndex];playAudio(c.audio);}
+updateFlashcard();
+</script>
+</div>
+
+<div class="footer">
+  <div class="footer-nav">
+    <a class="nav-btn" href="index.html">🏠 返回导航页</a>
+    <a class="nav-btn" href="lezione17-pronomi-oggetto.html">◀ 上一课</a>
+    <a class="nav-btn" href="lezione19-imperfetto.html">下一课 ▶</a>
+  </div>
+  <p><span class="it-flag"></span> 意大利语语法实战课程 · 第15课 · 近过去时</p>
+</div>
+
+<script>
+// ===== 音频播放（按需加载）=====
+const _audioEl = new Audio();
+const _LESSON = 'l27';
+
+function playAudio(key) {
+  if (window.__AC && __AC[key]) {
+    _audioEl.pause();
+    _audioEl.src = __AC[key];
+    _audioEl.load();
+    _audioEl.play().catch(function(e) {
+      if (e.name === 'AbortError') return;
+      showToast('请先点击页面任意位置，再试一次 🔊');
+return;
+  }
+  var s = document.createElement('script');
+  s.src = 'audio_data/' + _LESSON + '/' + key + '.js?v=1';
+  s.onload = function() { playAudio(key); };
+  s.onerror = function() { showToast('音频未收录'); };
+  document.head.appendChild(s);
+}
+
+function showToast(msg) {
+  var t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12px 24px;border-radius:8px;font-size:14px;z-index:9999;opacity:0;transition:opacity 0.3s;max-width:90%;text-align:center';
+  document.body.appendChild(t);
+  requestAnimationFrame(function() { t.style.opacity = '1'; });
+  setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2500);
+}
+function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
+document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+// 安全兜底：3秒后所有未显示区块强制可见
+setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);
+</script>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第6课 · 副词 — 让动词更生动 — 意大利语语法实战</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap');
+    :root {--green:#009246;--white:#f8f9fa;--red:#ce2b37;--blue:#1a73e8;--orange:#e8710a;--purple:#7c3aed;--bg:#f5f0e8;--card:#ffffff;--card-hover:#f0ebe3;--text:#2c2c2c;--text-dim:#6b6b6b;--border:#ddd5c8;--radius:16px;--shadow:0 4px 24px rgba(0,0,0,0.06);}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',-apple-system,sans-serif;line-height:1.7;overflow-x:hidden;}
+    .top-bar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;}
+    .top-bar .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;}
+    .flag-stripe{width:36px;height:24px;border-radius:4px;background:linear-gradient(to bottom,var(--green) 33%,var(--white) 33% 66%,var(--red) 66%);}
+    .nav-btns{display:flex;gap:8px;}
+    .nav-btn{background:var(--card);border:1px solid var(--border);color:var(--text);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:13px;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;font-family:inherit;}
+    .nav-btn:hover{background:var(--card-hover);border-color:var(--blue);}
+    .lesson-nav-disabled{opacity:0.35;pointer-events:none;cursor:default;}
+    .container{max-width:860px;margin:0 auto;padding:80px 20px 60px;}
+    .hero{text-align:center;padding:60px 20px 40px;position:relative;}
+    .hero h1{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;margin-bottom:8px;background:linear-gradient(135deg,#2c2c2c 40%,var(--green) 70%,var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero .subtitle{font-size:18px;color:var(--text-dim);margin-bottom:24px;}
+    .section{margin-top:48px;opacity:0;transform:translateY(30px);transition:all 0.6s;}
+    .section.visible{opacity:1;transform:translateY(0);}
+    .section-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+    .section-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+    .section-title{font-size:22px;font-weight:700;}
+    .grammar-card{background:var(--card);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border);box-shadow:var(--shadow);}
+    .grammar-card .key-point{font-size:17px;line-height:1.7;}
+    .grammar-card .rule-title{font-size:16px;font-weight:700;color:var(--blue);margin-bottom:8px;}
+    .grammar-card .rule-content{font-size:14px;line-height:1.8;color:var(--text);}
+    .example-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+    .example-chip{display:inline-block;padding:6px 14px;border-radius:20px;background:rgba(0,0,0,0.04);font-size:13px;cursor:pointer;transition:all 0.2s;border:1px solid transparent;}
+    .example-chip:hover{background:var(--card-hover);border-color:var(--green);}
+    .gender-badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:12px;font-weight:600;}
+    .gender-badge.gender-m{background:rgba(0,146,70,0.15);color:var(--green);}
+    .gender-badge.gender-f{background:rgba(206,43,55,0.12);color:var(--red);}
+    .grammar-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;}
+    .grammar-table th,.grammar-table td{border:1px solid var(--border);padding:10px 14px;text-align:left;}
+    .grammar-table th{background:rgba(0,0,0,0.03);font-weight:600;}
+    .trap-section{margin-top:12px;}
+    .trap-tabs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+    .trap-tab{padding:8px 18px;border-radius:20px;background:var(--card);border:1px solid var(--border);cursor:pointer;font-size:13px;transition:all 0.2s;}
+    .trap-tab.active{background:var(--red);color:#fff;border-color:var(--red);}
+    .trap-item{background:var(--card);padding:14px 18px;border-radius:12px;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;display:flex;gap:10px;align-items:baseline;}
+    .trap-item:hover{border-color:var(--red);background:var(--card-hover);}
+    .trap-item .word{font-weight:600;font-size:16px;flex-shrink:0;}
+    .trap-item .meaning{color:var(--text-dim);font-size:13px;}
+    .trap-list{display:grid;grid-template-columns:1fr;gap:8px;}
+    .dialogue-card{background:var(--card);border-radius:var(--radius);padding:24px;border:1px solid var(--border);box-shadow:var(--shadow);}
+    .dialogue-line{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;}
+    .speaker{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;}
+    .speaker-a{background:rgba(0,146,70,0.15);color:var(--green);}
+    .speaker-b{background:rgba(206,43,55,0.12);color:var(--red);}
+    .dialogue-it{font-weight:600;font-size:16px;cursor:pointer;}
+    .dialogue-zh{font-size:14px;color:var(--text-dim);margin-top:4px;}
+    .play-line-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:4px 10px;cursor:pointer;font-size:14px;white-space:nowrap;}
+    .mnemonic-card{background:linear-gradient(135deg,rgba(0,146,70,0.06),rgba(206,43,55,0.04));border-radius:var(--radius);padding:24px;text-align:center;font-size:16px;line-height:1.8;border:1px solid var(--border);}
+    .mnemonic-card .text{max-width:600px;margin:0 auto;}
+    .principle-card{background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(26,115,232,0.06));border-radius:var(--radius);padding:28px;text-align:center;border:1px solid var(--border);}
+    .principle-card .text{font-size:16px;line-height:1.7;max-width:650px;margin:0 auto;}
+    .principle-card .emoji{font-size:36px;margin-bottom:12px;}
+    .hl-o{color:var(--green);font-weight:700;}
+    .hl-a{color:var(--red);font-weight:700;}
+    .hl-e{color:var(--purple);font-weight:700;}
+    .rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    @media (max-width:700px){.rule-grid{grid-template-columns:1fr;}}
+    .flashcard-container{max-width:400px;margin:0 auto;}
+    .flashcard{width:100%;height:220px;cursor:pointer;perspective:1000px;margin-bottom:20px;}
+    .fc-inner{position:relative;width:100%;height:100%;transition:transform 0.6s;transform-style:preserve-3d;border-radius:var(--radius);box-shadow:var(--shadow);}
+    .flipped .fc-inner{transform:rotateY(180deg);}
+    .fc-front,.fc-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;}
+    .fc-front{background:linear-gradient(135deg,var(--green),var(--red));color:#fff;}
+    .fc-back{background:var(--card);border:2px solid var(--green);transform:rotateY(180deg);color:var(--text);}
+    .fc-label{font-size:13px;opacity:0.7;margin-bottom:8px;}
+    .fc-word{font-size:28px;font-weight:700;}
+    .fc-meaning{font-size:16px;color:var(--text-dim);margin-top:8px;}
+    .fc-controls{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+    .footer{text-align:center;padding:40px 20px;color:var(--text-dim);font-size:13px;border-top:1px solid var(--border);margin-top:60px;}
+    .footer-nav{display:flex;justify-content:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <a href="index.html" class="nav-btn" style="text-decoration:none;">🏠</a>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html">📖 导航</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero">
+      <h1>副词 — 让动词更生动</h1>
+      <p class="subtitle">方式副词/时间副词/地点副词/数量副词/比较级最高级</p>
+    </div>
+
+    <div class="section" id="sec-core">
+      <div class="section-header"><div class="section-icon" style="background:rgba(0,146,70,0.15);">🎯</div><h2 class="section-title">核心语法</h2></div>
+      <div class="grammar-card">
+        <p class="key-point"><strong>副词(Avverbio)</strong>修饰动词、形容词或其他副词。方式副词规则构成：形容词阴性单数 + <strong>-mente</strong>(lenta→lentamente)。不规则方式副词：bene(好)、male(坏)、volentieri(乐意地)。</p>
+        <table class="grammar-table"><thead><tr><th>类别</th><th>形式</th><th>示例</th></tr></thead>
+        <tr><td>方式</td><td>-mente</td><td>lentamente(慢慢地)</td></tr>
+        <tr><td>时间</td><td>ora/dopo/oggi/mai</td><td>Oggi lavoro da casa.</td></tr>
+        <tr><td>地点</td><td>qui/la/dove/fuori</td><td>Vieni qui!</td></tr>
+        <tr><td>数量</td><td>molto/poco/troppo</td><td>Molto bene, grazie!</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section" id="sec-mnemonic">
+      <div class="mnemonic-card"><div class="emoji">🧠</div><p class="text"><span class="hl-o">-mente</span>加形容词阴单=方式副词(lenta+mente=lentamente)<br><span class="hl-a">bene/male/volentieri</span>不规则要牢记！<br><span class="hl-e">piu/meno</span>也可以修饰副词</p></div>
+    </div>
+
+    <div class="section" id="sec-rules">
+      <div class="section-header"><div class="section-icon" style="background:rgba(26,115,232,0.15);">📋</div><h2 class="section-title">规律一览</h2></div>
+      <div class="rule-grid">
+      <div class="grammar-card">
+        <h3 class="rule-title">方式副词构成</h3>
+        <div class="rule-content">形容词阴性单数 + -mente：lentamente(慢慢地), seriamente(认真地)
+以-e结尾直接加：cortesemente(礼貌地)
+以-le/-re结尾且前有元音→去掉-e再加：naturale→naturalmente
+不规则方式副词：bene(好), male(坏), volentieri(乐意地)</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l27_lentamente____')">lentamente 慢慢地</span>
+          <span class="example-chip speakable" onclick="playAudio('l27_seriamente____')">seriamente 认真地</span>
+          <span class="example-chip speakable" onclick="playAudio('l27_naturalmente____')">naturalmente 自然地</span>
+          <span class="example-chip speakable" onclick="playAudio('l27_bene__')">bene 好</span>
+          </div>
+      </div>
+      <div class="grammar-card">
+        <h3 class="rule-title">时间副词</h3>
+        <div class="rule-content">ora/adesso(现在), prima(之前), dopo(之后), oggi(今天), ieri(昨天), domani(明天)
+presto(早/快), tardi(晚), subito(立即), gia(已经), ancora(还/再)
+poi(然后), sempre(总是), mai(从不/曾经), spesso(经常)</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l27_oggi___')">oggi 今天</span>
+          <span class="example-chip speakable" onclick="playAudio('l27_domani___')">domani 明天</span>
+          <span class="example-chip speakable" onclick="playAudio('l27_sempre___')">sempre 总是</span>
+          <span class="example-chip speakable" onclick="playAudio('l27_mai___')">mai 从不</span>
+          </div>
+      </div>
+      <div class="grammar-card">
+        <h3 class="rule-title">地点副词</h3>
+        <div class="rule-content">qui/qua(这里), li/la(那里), dove(哪里), dappertutto(到处)
+dentro(里面), fuori(外面), su(向上), giu(向下)
+sopra(上面), sotto(下面), vicino(附近), lontano(远处)
+davanti(前面), dietro(后面), ovunque(无论何处)</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l27_qui___')">qui 这里</span>
+          <span class="example-chip speakable" onclick="playAudio('l27_la___')">la 那里</span>
+          <span class="example-chip speakable" onclick="playAudio('l27_dentro___')">dentro 里面</span>
+          <span class="example-chip speakable" onclick="playAudio('l27_fuori___')">fuori 外面</span>
+          </div>
+      </div>
+      <div class="grammar-card">
+        <h3 class="rule-title">数量副词</h3>
+        <div class="rule-content">molto(很/非常), poco(少/一点), troppo(太/过多), abbastanza(足够)
+piuttosto(相当), quasi(几乎), parecchio(相当多), assai(非常)
+piu(更多), meno(更少), soltanto/solo(仅仅), almeno(至少)</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l27_molto__')">molto 很</span>
+          <span class="example-chip speakable" onclick="playAudio('l27_poco__')">poco 少</span>
+          <span class="example-chip speakable" onclick="playAudio('l27_troppo__')">troppo 太</span>
+          <span class="example-chip speakable" onclick="playAudio('l27_abbastanza___')">abbastanza 足够</span>
+          </div>
+      </div>
+      <div class="grammar-card">
+        <h3 class="rule-title">副词的位置</h3>
+        <div class="rule-content">①最常用：紧跟在动词后(Mia sorella perde spesso le chiavi.)
+②复合时态：在助动词和分词之间(Ha molto apprezzato.)
+③修饰形容词/副词时：放在被修饰词之前(estremamente faticosa)</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l27_parla_bene_italiano_')">Parla bene italiano. 他意大利语说得好</span>
+          <span class="example-chip speakable" onclick="playAudio('l27_ha_molto_apprezzato_')">Ha molto apprezzato. 他非常欣赏</span>
+          </div>
+      </div>
+      <div class="grammar-card">
+        <h3 class="rule-title">副词的比较级和最高级</h3>
+        <div class="rule-content">比较级：piu/meno + 副词(Paolo guida piu velocemente di Marco.)
+绝对最高级：副词+issimo→-issimamente(书面)，或molto+副词
+不规则：bene→meglio(更好)→benissimo(非常好)
+male→peggio(更差)→malissimo(非常差)
+molto→piu(更多)→moltissimo(非常多)
+poco→meno(更少)→pochissimo(非常少)</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l27_meglio___')">meglio 更好</span>
+          <span class="example-chip speakable" onclick="playAudio('l27_peggio___')">peggio 更差</span>
+          <span class="example-chip speakable" onclick="playAudio('l27_benissimo____')">benissimo 非常好</span>
+          <span class="example-chip speakable" onclick="playAudio('l27_malissimo____')">malissimo 非常差</span>
+          </div>
+      </div></div>
+    </div>
+
+    <div class="section" id="sec-traps">
+      <div class="section-header"><div class="section-icon" style="background:rgba(206,43,55,0.12);">⚠️</div><h2 class="section-title">容易搞混的</h2></div>
+      <div class="trap-section">
+        <div class="trap-tabs"><div class="trap-tab active" onclick="showTrap('t0')">bene vs buono</div>
+          <div class="trap-tab" onclick="showTrap('t1')">molto/troppo/poco的两种词性</div>
+          </div>
+        <div class="trap-list" style="display:grid"><div class="trap-item" onclick="playAudio('l27')"><span class="word">Parla bene italiano.</span><span class="meaning">bene=副词(好地)→修饰动词parla</span></div>
+            <div class="trap-item" onclick="playAudio('l27')"><span class="word">Questo caffe e buono.</span><span class="meaning">buono=形容词(好的)→修饰名词caffe</span></div>
+            <div class="trap-item" onclick="playAudio('l27')"><span class="word">Sto bene, grazie.</span><span class="meaning">bene=副词(身体状况好)</span></div>
+            <div class="trap-item" onclick="playAudio('l27')"><span class="word">Sei molto buono con me.</span><span class="meaning">buono=形容词(善良的)</span></div>
+            </div>
+          <div class="trap-list" style="display:none"><div class="trap-item" onclick="playAudio('l27')"><span class="word">Molto bello.</span><span class="meaning">molto=副词(非常)→修饰形容词bello</span></div>
+            <div class="trap-item" onclick="playAudio('l27')"><span class="word">Molte persone.</span><span class="meaning">molto=形容词(很多的)→修饰名词persone</span></div>
+            <div class="trap-item" onclick="playAudio('l27')"><span class="word">Troppo caro.</span><span class="meaning">troppo=副词(太)→修饰形容词caro</span></div>
+            <div class="trap-item" onclick="playAudio('l27')"><span class="word">Troppi libri.</span><span class="meaning">troppo=形容词(太多的)→修饰复数libri</span></div>
+            </div>
+          
+      </div>
+    </div>
+
+    <div class="section" id="sec-dialogue">
+      <div class="section-header"><div class="section-icon" style="background:rgba(124,58,237,0.12);">💬</div><h2 class="section-title">生活对话</h2></div>
+      <div class="dialogue-card">
+        <div class="dialogue-line">
+          <div class="speaker speaker-a">A</div>
+          <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l27_dlga')">Come stai?</div><div class="dialogue-zh">你好吗？</div></div>
+          <button class="play-line-btn" onclick="playAudio('l27_dlga')">🔊</button>
+        </div>
+        <div class="dialogue-line">
+          <div class="speaker speaker-b">B</div>
+          <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l27_dlgb')">Bene, grazie! E tu?</div><div class="dialogue-zh">我很好，谢谢！你呢？</div></div>
+          <button class="play-line-btn" onclick="playAudio('l27_dlgb')">🔊</button>
+        </div>
+        <div class="dialogue-line">
+          <div class="speaker speaker-a">A</div>
+          <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l27_dlga')">Abbastanza bene. Oggi lavoro da casa.</div><div class="dialogue-zh">还不错。今天在家工作。</div></div>
+          <button class="play-line-btn" onclick="playAudio('l27_dlga')">🔊</button>
+        </div>
+        <div class="dialogue-line">
+          <div class="speaker speaker-b">B</div>
+          <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l27_dlgb')">Che bello! Allora ci vediamo dopo?</div><div class="dialogue-zh">真好！那我们回头见？</div></div>
+          <button class="play-line-btn" onclick="playAudio('l27_dlgb')">🔊</button>
+        </div></div>
+      <div style="text-align:center;margin-top:16px;"><button class="nav-btn" onclick="playAudio('l27_dlg_full')" style="padding:10px 24px;">🔊 播放整段对话</button></div>
+    </div>
+
+    <div class="section" id="sec-principle">
+      <div class="principle-card"><div class="emoji">💡</div><div class="text">副词核心：<strong>-mente</strong>构成方式副词(←形容词阴单)。位置：动词后最常见。比较级：piu/meno + 副词。不规则：bene→meglio→benissimo！</div></div>
+    </div>
+
+    <div class="section" id="sec-flashcard">
+      <div class="section-header"><div class="section-icon" style="background:rgba(232,113,10,0.12);">🃏</div><h2 class="section-title">闪卡练习 — 点击翻转</h2></div>
+      <div class="flashcard-container">
+        <div class="flashcard" id="flashcard" onclick="flipCard()">
+          <div class="fc-inner"><div class="fc-front"><div class="fc-label">词语</div><div class="fc-word" id="fcWord"></div></div>
+          <div class="fc-back"><div class="fc-label">形式</div><div class="fc-word" id="fcFullWord"></div><div class="fc-meaning" id="fcMeaning"></div></div></div>
+        </div>
+        <div class="fc-controls">
+          <button class="nav-btn" onclick="prevCard()">⬅ 上一个</button>
+          <span id="fcCounter" style="font-size:14px;color:var(--text-dim);">1 / 17</span>
+          <button class="nav-btn" onclick="nextCard()">下一个 ➡</button>
+          <button class="nav-btn" onclick="speakCurrentCard()" style="margin-left:8px;">🔊</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-nav">
+      <a class="nav-btn" href="index.html">🏠 返回导航页</a>
+      <a class="nav-btn" href="lezione05-numeri.html">◀ 上一课</a>
+      <a class="nav-btn" href="lezione07-indefiniti.html">下一课 ▶</a>
+    </div>
+    <p><span class="it-flag" style="display:inline-block;width:18px;height:12px;border-radius:2px;background:linear-gradient(to right,#009246 33%,#fff 33% 66%,#ce2b37 66%);vertical-align:middle;margin-right:4px;"></span> 意大利语语法实战课程 · 第6课 · 副词 — 让动词更生动</p>
+  </div>
+
+  <script>
+  const _audioEl = new Audio();
+  const _LESSON = 'l27';
+  function playAudio(key) {
+    if (window.__AC && __AC[key]) { _audioEl.pause(); _audioEl.src = __AC[key]; _audioEl.load(); _audioEl.play().catch(function(e){}); return; }
+    var s = document.createElement('script'); s.src = 'audio_data/' + _LESSON + '/' + key + '.js?v=1';
+    s.onload = function() { playAudio(key); }; s.onerror = function() { showToast('音频未收录'); }; document.head.appendChild(s);
+  }
+  function showToast(msg) {
+    var t = document.createElement('div'); t.textContent = msg;
+    t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12px 24px;border-radius:8px;font-size:14px;z-index:9999;opacity:0;transition:opacity 0.3s;max-width:90%;text-align:center';
+    document.body.appendChild(t); requestAnimationFrame(function() { t.style.opacity = '1'; });
+    setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2500);
+  }
+  function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
+  const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
+  document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+  setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);
+  const flashcards = [  {word:'lentamente',masc:'慢慢地',fem:'慢慢地',mpl:'慢慢地',fpl:'慢慢地',meaning:'方式副词',audio:'l06_lentamente'},
+  {word:'seriamente',masc:'认真地',fem:'认真地',mpl:'认真地',fpl:'认真地',meaning:'方式副词',audio:'l06_seriamente'},
+  {word:'naturalmente',masc:'自然地',fem:'自然地',mpl:'自然地',fpl:'自然地',meaning:'方式副词',audio:'l06_naturalmente'},
+  {word:'bene/meglio/benissimo',masc:'好/更好/非常好',fem:'好/更好/非常好',mpl:'好/更好/非常好',fpl:'好/更好/非常好',meaning:'不规则',audio:'l06_bene_meglio_benissim'},
+  {word:'male/peggio/malissimo',masc:'差/更差/非常差',fem:'差/更差/非常差',mpl:'差/更差/非常差',fpl:'差/更差/非常差',meaning:'不规则',audio:'l06_male_peggio_malissim'},
+  {word:'volentieri',masc:'乐意地',fem:'乐意地',mpl:'乐意地',fpl:'乐意地',meaning:'不规则方式',audio:'l06_volentieri'},
+  {word:'oggi/domani/ieri',masc:'今天/明天/昨天',fem:'今天/明天/昨天',mpl:'今天/明天/昨天',fpl:'今天/明天/昨天',meaning:'时间',audio:'l06_oggi_domani_ieri'},
+  {word:'sempre/mai',masc:'总是/从不',fem:'总是/从不',mpl:'总是/从不',fpl:'总是/从不',meaning:'时间',audio:'l06_sempre_mai'},
+  {word:'gia/ancora',masc:'已经/还',fem:'已经/还',mpl:'已经/还',fpl:'已经/还',meaning:'时间',audio:'l06_gia_ancora'},
+  {word:'subito/presto/tardi',masc:'立即/早/晚',fem:'立即/早/晚',mpl:'立即/早/晚',fpl:'立即/早/晚',meaning:'时间',audio:'l06_subito_presto_tardi'},
+  {word:'qui/la',masc:'这里/那里',fem:'这里/那里',mpl:'这里/那里',fpl:'这里/那里',meaning:'地点',audio:'l06_qui_la'},
+  {word:'dentro/fuori',masc:'里面/外面',fem:'里面/外面',mpl:'里面/外面',fpl:'里面/外面',meaning:'地点',audio:'l06_dentro_fuori'},
+  {word:'su/giu',masc:'向上/向下',fem:'向上/向下',mpl:'向上/向下',fpl:'向上/向下',meaning:'地点',audio:'l06_su_giu'},
+  {word:'molto/poco/troppo',masc:'很/少/太',fem:'很/少/太',mpl:'很/少/太',fpl:'很/少/太',meaning:'数量',audio:'l06_molto_poco_troppo'},
+  {word:'abbastanza/quasi',masc:'足够/几乎',fem:'足够/几乎',mpl:'足够/几乎',fpl:'足够/几乎',meaning:'数量',audio:'l06_abbastanza_quasi'},
+  {word:'Parla bene italiano.',masc:'说得好的',fem:'说得好的',mpl:'说得好的',fpl:'说得好的',meaning:'例',audio:'l06_parla_bene_italiano_'},
+  {word:'Molto bello.',masc:'非常美',fem:'非常美',mpl:'非常美',fpl:'非常美',meaning:'molto+adj',audio:'l06_molto_bello_'}];
+  let fcIndex=0;
+  function updateFlashcard(){const c=flashcards[fcIndex];document.getElementById('fcWord').textContent=c.word;document.getElementById('fcFullWord').textContent=c.masc+' / '+c.fem;document.getElementById('fcMeaning').textContent=c.meaning;document.getElementById('fcCounter').textContent=(fcIndex+1)+' / '+flashcards.length;document.getElementById('flashcard').classList.remove('flipped');}
+  function flipCard(){document.getElementById('flashcard').classList.toggle('flipped');const c=flashcards[fcIndex];playAudio(c.audio);}
+  function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
+  function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
+  function speakCurrentCard(){const c=flashcards[fcIndex];playAudio(c.audio);}
+  updateFlashcard();
+  </script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第7课 · 泛指形容词与代词 — 每个/所有/一些/没有人 — 意大利语语法实战</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap');
+    :root {--green:#009246;--white:#f8f9fa;--red:#ce2b37;--blue:#1a73e8;--orange:#e8710a;--purple:#7c3aed;--bg:#f5f0e8;--card:#ffffff;--card-hover:#f0ebe3;--text:#2c2c2c;--text-dim:#6b6b6b;--border:#ddd5c8;--radius:16px;--shadow:0 4px 24px rgba(0,0,0,0.06);}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',-apple-system,sans-serif;line-height:1.7;overflow-x:hidden;}
+    .top-bar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;}
+    .top-bar .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;}
+    .flag-stripe{width:36px;height:24px;border-radius:4px;background:linear-gradient(to bottom,var(--green) 33%,var(--white) 33% 66%,var(--red) 66%);}
+    .nav-btns{display:flex;gap:8px;}
+    .nav-btn{background:var(--card);border:1px solid var(--border);color:var(--text);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:13px;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;font-family:inherit;}
+    .nav-btn:hover{background:var(--card-hover);border-color:var(--blue);}
+    .lesson-nav-disabled{opacity:0.35;pointer-events:none;cursor:default;}
+    .container{max-width:860px;margin:0 auto;padding:80px 20px 60px;}
+    .hero{text-align:center;padding:60px 20px 40px;position:relative;}
+    .hero h1{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;margin-bottom:8px;background:linear-gradient(135deg,#2c2c2c 40%,var(--green) 70%,var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero .subtitle{font-size:18px;color:var(--text-dim);margin-bottom:24px;}
+    .section{margin-top:48px;opacity:0;transform:translateY(30px);transition:all 0.6s;}
+    .section.visible{opacity:1;transform:translateY(0);}
+    .section-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+    .section-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+    .section-title{font-size:22px;font-weight:700;}
+    .grammar-card{background:var(--card);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border);box-shadow:var(--shadow);}
+    .grammar-card .key-point{font-size:17px;line-height:1.7;}
+    .grammar-card .rule-title{font-size:16px;font-weight:700;color:var(--blue);margin-bottom:8px;}
+    .grammar-card .rule-content{font-size:14px;line-height:1.8;color:var(--text);}
+    .example-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+    .example-chip{display:inline-block;padding:6px 14px;border-radius:20px;background:rgba(0,0,0,0.04);font-size:13px;cursor:pointer;transition:all 0.2s;border:1px solid transparent;}
+    .example-chip:hover{background:var(--card-hover);border-color:var(--green);}
+    .gender-badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:12px;font-weight:600;}
+    .gender-badge.gender-m{background:rgba(0,146,70,0.15);color:var(--green);}
+    .gender-badge.gender-f{background:rgba(206,43,55,0.12);color:var(--red);}
+    .grammar-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;}
+    .grammar-table th,.grammar-table td{border:1px solid var(--border);padding:10px 14px;text-align:left;}
+    .grammar-table th{background:rgba(0,0,0,0.03);font-weight:600;}
+    .trap-section{margin-top:12px;}
+    .trap-tabs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+    .trap-tab{padding:8px 18px;border-radius:20px;background:var(--card);border:1px solid var(--border);cursor:pointer;font-size:13px;transition:all 0.2s;}
+    .trap-tab.active{background:var(--red);color:#fff;border-color:var(--red);}
+    .trap-item{background:var(--card);padding:14px 18px;border-radius:12px;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;display:flex;gap:10px;align-items:baseline;}
+    .trap-item:hover{border-color:var(--red);background:var(--card-hover);}
+    .trap-item .word{font-weight:600;font-size:16px;flex-shrink:0;}
+    .trap-item .meaning{color:var(--text-dim);font-size:13px;}
+    .trap-list{display:grid;grid-template-columns:1fr;gap:8px;}
+    .dialogue-card{background:var(--card);border-radius:var(--radius);padding:24px;border:1px solid var(--border);box-shadow:var(--shadow);}
+    .dialogue-line{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;}
+    .speaker{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;}
+    .speaker-a{background:rgba(0,146,70,0.15);color:var(--green);}
+    .speaker-b{background:rgba(206,43,55,0.12);color:var(--red);}
+    .dialogue-it{font-weight:600;font-size:16px;cursor:pointer;}
+    .dialogue-zh{font-size:14px;color:var(--text-dim);margin-top:4px;}
+    .play-line-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:4px 10px;cursor:pointer;font-size:14px;white-space:nowrap;}
+    .mnemonic-card{background:linear-gradient(135deg,rgba(0,146,70,0.06),rgba(206,43,55,0.04));border-radius:var(--radius);padding:24px;text-align:center;font-size:16px;line-height:1.8;border:1px solid var(--border);}
+    .mnemonic-card .text{max-width:600px;margin:0 auto;}
+    .principle-card{background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(26,115,232,0.06));border-radius:var(--radius);padding:28px;text-align:center;border:1px solid var(--border);}
+    .principle-card .text{font-size:16px;line-height:1.7;max-width:650px;margin:0 auto;}
+    .principle-card .emoji{font-size:36px;margin-bottom:12px;}
+    .hl-o{color:var(--green);font-weight:700;}
+    .hl-a{color:var(--red);font-weight:700;}
+    .hl-e{color:var(--purple);font-weight:700;}
+    .rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    @media (max-width:700px){.rule-grid{grid-template-columns:1fr;}}
+    .flashcard-container{max-width:400px;margin:0 auto;}
+    .flashcard{width:100%;height:220px;cursor:pointer;perspective:1000px;margin-bottom:20px;}
+    .fc-inner{position:relative;width:100%;height:100%;transition:transform 0.6s;transform-style:preserve-3d;border-radius:var(--radius);box-shadow:var(--shadow);}
+    .flipped .fc-inner{transform:rotateY(180deg);}
+    .fc-front,.fc-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;}
+    .fc-front{background:linear-gradient(135deg,var(--green),var(--red));color:#fff;}
+    .fc-back{background:var(--card);border:2px solid var(--green);transform:rotateY(180deg);color:var(--text);}
+    .fc-label{font-size:13px;opacity:0.7;margin-bottom:8px;}
+    .fc-word{font-size:28px;font-weight:700;}
+    .fc-meaning{font-size:16px;color:var(--text-dim);margin-top:8px;}
+    .fc-controls{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+    .footer{text-align:center;padding:40px 20px;color:var(--text-dim);font-size:13px;border-top:1px solid var(--border);margin-top:60px;}
+    .footer-nav{display:flex;justify-content:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <a href="index.html" class="nav-btn" style="text-decoration:none;">🏠</a>
+    <div class="nav-btns">
+      <a class="nav-btn" href="index.html">📖 导航</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero">
+      <h1>泛指形容词与代词 — 每个/所有/一些/没有人</h1>
+      <p class="subtitle">ogni/tutto/qualche/nessuno/qualcuno/tanto/poco</p>
+    </div>
+
+    <div class="section" id="sec-core">
+      <div class="section-header"><div class="section-icon" style="background:rgba(0,146,70,0.15);">🎯</div><h2 class="section-title">核心语法</h2></div>
+      <div class="grammar-card">
+        <p class="key-point"><strong>泛指词(Indefiniti)</strong>包括泛指形容词(修饰名词)和泛指代词(代替名词)。核心：<strong>ogni</strong>(每个·永远单数)、<strong>tutto</strong>(全部·需加冠词)、<strong>qualche</strong>(某个·永远单数+复数含义)、<strong>nessuno</strong>(没有一个·双重否定)。</p>
+        <table class="grammar-table"><thead><tr><th>类别</th><th>形式</th><th>示例</th></tr></thead>
+        <tr><td>ogni</td><td>每个(不变)</td><td>ogni giorno(每天)</td></tr>
+        <tr><td>tutto</td><td>全部(加冠词)</td><td>tutta la giornata(一整天)</td></tr>
+        <tr><td>qualche</td><td>某个/一些(单数)</td><td>qualche libro(一些书)</td></tr>
+        <tr><td>nessuno</td><td>没有一个</td><td>Nessuno e venuto.</td></tr>
+        <tr><td>qualcuno</td><td>有人(只代词)</td><td>Qualcuno mi ha detto.</td></tr>
+        <tr><td>qualcosa</td><td>某事(只代词)</td><td>Qualcosa e successo.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section" id="sec-mnemonic">
+      <div class="mnemonic-card"><div class="emoji">🧠</div><p class="text"><span class="hl-o">ogni</span>永远单数不变，<span class="hl-a">tutto</span>要加冠词！<br><span class="hl-e">qualche</span>+单数=一些(复数含义)<br><span class="hl-o">nessuno</span>动词前不加non，动词后要加non！</p></div>
+    </div>
+
+    <div class="section" id="sec-rules">
+      <div class="section-header"><div class="section-icon" style="background:rgba(26,115,232,0.15);">📋</div><h2 class="section-title">规律一览</h2></div>
+      <div class="rule-grid">
+      <div class="grammar-card">
+        <h3 class="rule-title">ogni — 每个(不变)</h3>
+        <div class="rule-content">ogni永远单数，永远不变化！
+ogni studente(每个学生) ✓
+ogni studenti ✗
+表达每天：ogni giorno = tutti i giorni</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l25_ogni_giorno___')">ogni giorno 每天</span>
+          <span class="example-chip speakable" onclick="playAudio('l25_ogni_studente_____')">ogni studente 每个学生</span>
+          <span class="example-chip speakable" onclick="playAudio('l25_ogni_volta___')">ogni volta 每次</span>
+          </div>
+      </div>
+      <div class="grammar-card">
+        <h3 class="rule-title">tutto — 全部(需加冠词)</h3>
+        <div class="rule-content">tutto需与定冠词连用：
+tutta la giornata(一整天), tutti i giorni(每一天)
+不要漏掉冠词：× tutto giorno → √ tutto il giorno</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l25_tutta_la_giornata___')">tutta la giornata 一整天</span>
+          <span class="example-chip speakable" onclick="playAudio('l25_tutti_i_giorni___')">tutti i giorni 每天</span>
+          <span class="example-chip speakable" onclick="playAudio('l25_tutto_il_libro____')">tutto il libro 整本书</span>
+          <span class="example-chip speakable" onclick="playAudio('l25_tutte_le_ragazze____')">tutte le ragazze 所有女孩</span>
+          </div>
+      </div>
+      <div class="grammar-card">
+        <h3 class="rule-title">qualche — 某个/一些(单数)</h3>
+        <div class="rule-content">qualche永远单数，后有复数含义：
+qualche libro = 某本书/一些书(一本以上但不明确)
+qualche amico = 一些朋友
+▲ 表达一些时：qualche+单数 = alcuni/e+复数</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l25_qualche_libro____')">qualche libro 一些书</span>
+          <span class="example-chip speakable" onclick="playAudio('l25_qualche_amico_____')">qualche amico 一些朋友</span>
+          <span class="example-chip speakable" onclick="playAudio('l25_qualche_volta___')">qualche volta 有时</span>
+          </div>
+      </div>
+      <div class="grammar-card">
+        <h3 class="rule-title">nessuno — 没有一个(双重否定)</h3>
+        <div class="rule-content">动词前：Nessuno e venuto. (没人来。——不带non)
+动词后：Non ho visto nessuno. (我没看见任何人。——带non)
+形容词：Non ho nessun dubbio. (我没有一点怀疑)</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l25_nessuno_e_venuto____')">Nessuno e venuto. 没人来</span>
+          <span class="example-chip speakable" onclick="playAudio('l25_non_ho_visto_nessuno')">Non ho visto nessuno. 我没看见任何人</span>
+          <span class="example-chip speakable" onclick="playAudio('l25_nessun_problema____')">nessun problema 没问题</span>
+          </div>
+      </div>
+      <div class="grammar-card">
+        <h3 class="rule-title">alcuni/qualcuno/qualcosa</h3>
+        <div class="rule-content">alcuni/e(一些)：Alcuni studenti sono arrivati.
+qualcuno(有人/某人)：Qualcuno mi ha detto...
+qualcosa(某事/某物)：Qualcosa e successo.
+chiunque(任何人)：Chiunque puo capire.
+qualsiasi/qualunque(无论哪个)：qualsiasi libro</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l25_alcuni_studenti_____')">alcuni studenti 一些学生</span>
+          <span class="example-chip speakable" onclick="playAudio('l25_qualcuno___')">qualcuno 有人</span>
+          <span class="example-chip speakable" onclick="playAudio('l25_qualcosa___')">qualcosa 某事</span>
+          <span class="example-chip speakable" onclick="playAudio('l25_chiunque____')">chiunque 任何人</span>
+          </div>
+      </div>
+      <div class="grammar-card">
+        <h3 class="rule-title">tanto/poco/molto/troppo</h3>
+        <div class="rule-content">这些词既可作形容词(随名词变)也可作代词：
+tanto(很多)：tanta gente(很多人), tanti dicono(很多人说)
+poco(很少)：poca acqua(很少水), pochi sanno(很少有人知道)
+molto(很多)：molta gente, molti pensano
+parecchio(相当多)：parecchio tempo, parecchi sono partiti</div>
+        <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l25_tanta_gente____')">tanta gente 很多人</span>
+          <span class="example-chip speakable" onclick="playAudio('l25_poca_acqua____')">poca acqua 很少水</span>
+          <span class="example-chip speakable" onclick="playAudio('l25_molti_pensano______')">molti pensano 很多人认为</span>
+          <span class="example-chip speakable" onclick="playAudio('l25_parecchio_tempo_____')">parecchio tempo 相当长时间</span>
+          </div>
+      </div></div>
+    </div>
+
+    <div class="section" id="sec-traps">
+      <div class="section-header"><div class="section-icon" style="background:rgba(206,43,55,0.12);">⚠️</div><h2 class="section-title">容易搞混的</h2></div>
+      <div class="trap-section">
+        <div class="trap-tabs"><div class="trap-tab active" onclick="showTrap('t0')">ogni vs tutti</div>
+          <div class="trap-tab" onclick="showTrap('t1')">nessuno双重否定</div>
+          </div>
+        <div class="trap-list" style="display:grid"><div class="trap-item" onclick="playAudio('l25')"><span class="word">ogni giorno</span><span class="meaning">每天(个体→每个单日)</span></div>
+            <div class="trap-item" onclick="playAudio('l25')"><span class="word">tutti i giorni</span><span class="meaning">每天(整体→所有日子)</span></div>
+            <div class="trap-item" onclick="playAudio('l25')"><span class="word">ogni studente</span><span class="meaning">每个学生</span></div>
+            <div class="trap-item" onclick="playAudio('l25')"><span class="word">tutti gli studenti</span><span class="meaning">所有学生</span></div>
+            </div>
+          <div class="trap-list" style="display:none"><div class="trap-item" onclick="playAudio('l25')"><span class="word">Nessuno e venuto.</span><span class="meaning">动词前不加non(没人来)</span></div>
+            <div class="trap-item" onclick="playAudio('l25')"><span class="word">Non ho visto nessuno.</span><span class="meaning">动词后要加non(我没看见任何人)</span></div>
+            <div class="trap-item" onclick="playAudio('l25')"><span class="word">nessun libro</span><span class="meaning">没有一本书(形容词)</span></div>
+            <div class="trap-item" onclick="playAudio('l25')"><span class="word">Non c'e nessuno.</span><span class="meaning">没有人在(固定搭配)</span></div>
+            </div>
+          
+      </div>
+    </div>
+
+    <div class="section" id="sec-dialogue">
+      <div class="section-header"><div class="section-icon" style="background:rgba(124,58,237,0.12);">💬</div><h2 class="section-title">生活对话</h2></div>
+      <div class="dialogue-card">
+        <div class="dialogue-line">
+          <div class="speaker speaker-a">A</div>
+          <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l25_dlga')">Hai qualche amico italiano?</div><div class="dialogue-zh">你有意大利朋友吗？</div></div>
+          <button class="play-line-btn" onclick="playAudio('l25_dlga')">🔊</button>
+        </div>
+        <div class="dialogue-line">
+          <div class="speaker speaker-b">B</div>
+          <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l25_dlgb')">Si, alcuni amici sono italiani.</div><div class="dialogue-zh">是的，有几个朋友是意大利人。</div></div>
+          <button class="play-line-btn" onclick="playAudio('l25_dlgb')">🔊</button>
+        </div>
+        <div class="dialogue-line">
+          <div class="speaker speaker-a">A</div>
+          <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l25_dlga')">Tutti parlano bene inglese?</div><div class="dialogue-zh">所有人都说英语好吗？</div></div>
+          <button class="play-line-btn" onclick="playAudio('l25_dlga')">🔊</button>
+        </div>
+        <div class="dialogue-line">
+          <div class="speaker speaker-b">B</div>
+          <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l25_dlgb')">Non tutti, ma qualcuno parla anche cinese!</div><div class="dialogue-zh">不是所有人，但有人也说中文！</div></div>
+          <button class="play-line-btn" onclick="playAudio('l25_dlgb')">🔊</button>
+        </div></div>
+      <div style="text-align:center;margin-top:16px;"><button class="nav-btn" onclick="playAudio('l25_dlg_full')" style="padding:10px 24px;">🔊 播放整段对话</button></div>
+    </div>
+
+    <div class="section" id="sec-principle">
+      <div class="principle-card"><div class="emoji">💡</div><div class="text">泛指词记住三组：<strong>ogni</strong>(单数不变) <strong>tutto+冠词</strong>(全部) <strong>nessuno</strong>(双重否定)。qualche+单数=复数含义！</div></div>
+    </div>
+
+    <div class="section" id="sec-flashcard">
+      <div class="section-header"><div class="section-icon" style="background:rgba(232,113,10,0.12);">🃏</div><h2 class="section-title">闪卡练习 — 点击翻转</h2></div>
+      <div class="flashcard-container">
+        <div class="flashcard" id="flashcard" onclick="flipCard()">
+          <div class="fc-inner"><div class="fc-front"><div class="fc-label">词语</div><div class="fc-word" id="fcWord"></div></div>
+          <div class="fc-back"><div class="fc-label">形式</div><div class="fc-word" id="fcFullWord"></div><div class="fc-meaning" id="fcMeaning"></div></div></div>
+        </div>
+        <div class="fc-controls">
+          <button class="nav-btn" onclick="prevCard()">⬅ 上一个</button>
+          <span id="fcCounter" style="font-size:14px;color:var(--text-dim);">1 / 18</span>
+          <button class="nav-btn" onclick="nextCard()">下一个 ➡</button>
+          <button class="nav-btn" onclick="speakCurrentCard()" style="margin-left:8px;">🔊</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-nav">
+      <a class="nav-btn" href="index.html">🏠 返回导航页</a>
+      <a class="nav-btn" href="lezione06-avverbi.html">◀ 上一课</a>
+      <a class="nav-btn" href="lezione08-comparativo-superlativo.html">下一课 ▶</a>
+    </div>
+    <p><span class="it-flag" style="display:inline-block;width:18px;height:12px;border-radius:2px;background:linear-gradient(to right,#009246 33%,#fff 33% 66%,#ce2b37 66%);vertical-align:middle;margin-right:4px;"></span> 意大利语语法实战课程 · 第7课 · 泛指形容词与代词 — 每个/所有/一些/没有人</p>
+  </div>
+
+  <script>
+  const _audioEl = new Audio();
+  const _LESSON = 'l25';
+  function playAudio(key) {
+    if (window.__AC && __AC[key]) { _audioEl.pause(); _audioEl.src = __AC[key]; _audioEl.load(); _audioEl.play().catch(function(e){}); return; }
+    var s = document.createElement('script'); s.src = 'audio_data/' + _LESSON + '/' + key + '.js?v=1';
+    s.onload = function() { playAudio(key); }; s.onerror = function() { showToast('音频未收录'); }; document.head.appendChild(s);
+  }
+  function showToast(msg) {
+    var t = document.createElement('div'); t.textContent = msg;
+    t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12px 24px;border-radius:8px;font-size:14px;z-index:9999;opacity:0;transition:opacity 0.3s;max-width:90%;text-align:center';
+    document.body.appendChild(t); requestAnimationFrame(function() { t.style.opacity = '1'; });
+    setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2500);
+  }
+  function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
+  const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
+  document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+  setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);
+  const flashcards = [  {word:'ogni giorno',masc:'每天',fem:'每天',mpl:'每天',fpl:'每天',meaning:'ogni不变',audio:'l07_ogni_giorno'},
+  {word:'ogni studente',masc:'每个学生',fem:'每个学生',mpl:'每个学生',fpl:'每个学生',meaning:'ogni',audio:'l07_ogni_studente'},
+  {word:'ogni volta',masc:'每次',fem:'每次',mpl:'每次',fpl:'每次',meaning:'ogni',audio:'l07_ogni_volta'},
+  {word:'tutto il giorno',masc:'一整天',fem:'一整天',mpl:'一整天',fpl:'一整天',meaning:'tutto+冠词',audio:'l07_tutto_il_giorno'},
+  {word:'tutti i giorni',masc:'每天',fem:'每天',mpl:'每天',fpl:'每天',meaning:'tutti+冠词',audio:'l07_tutti_i_giorni'},
+  {word:'tutta la notte',masc:'整夜',fem:'整夜',mpl:'整夜',fpl:'整夜',meaning:'tutta+冠词',audio:'l07_tutta_la_notte'},
+  {word:'qualche libro',masc:'一些书',fem:'一些书',mpl:'一些书',fpl:'一些书',meaning:'qualche+单数',audio:'l07_qualche_libro'},
+  {word:'qualche amico',masc:'一些朋友',fem:'一些朋友',mpl:'一些朋友',fpl:'一些朋友',meaning:'qualche',audio:'l07_qualche_amico'},
+  {word:'qualche volta',masc:'有时',fem:'有时',mpl:'有时',fpl:'有时',meaning:'qualche',audio:'l07_qualche_volta'},
+  {word:'Nessuno e venuto.',masc:'没人来',fem:'没人来',mpl:'没人来',fpl:'没人来',meaning:'动词前不加non',audio:'l07_nessuno_e_venuto_'},
+  {word:'Non ho visto nessuno.',masc:'我没看见任何人',fem:'我没看见任何人',mpl:'我没看见任何人',fpl:'我没看见任何人',meaning:'动词后加non',audio:'l07_non_ho_visto_nessuno'},
+  {word:'alcuni studenti',masc:'一些学生',fem:'一些学生',mpl:'一些学生',fpl:'一些学生',meaning:'alcuni',audio:'l07_alcuni_studenti'},
+  {word:'qualcuno',masc:'有人',fem:'有人',mpl:'有人',fpl:'有人',meaning:'代词',audio:'l07_qualcuno'},
+  {word:'qualcosa',masc:'某事',fem:'某事',mpl:'某事',fpl:'某事',meaning:'代词',audio:'l07_qualcosa'},
+  {word:'chiunque',masc:'任何人',fem:'任何人',mpl:'任何人',fpl:'任何人',meaning:'代词',audio:'l07_chiunque'},
+  {word:'qualsiasi libro',masc:'任何书',fem:'任何书',mpl:'任何书',fpl:'任何书',meaning:'qualsiasi',audio:'l07_qualsiasi_libro'},
+  {word:'tanta gente',masc:'很多人',fem:'很多人',mpl:'很多人',fpl:'很多人',meaning:'tanto',audio:'l07_tanta_gente'},
+  {word:'poco tempo',masc:'很少时间',fem:'很少时间',mpl:'很少时间',fpl:'很少时间',meaning:'poco',audio:'l07_poco_tempo'}];
+  let fcIndex=0;
+  function updateFlashcard(){const c=flashcards[fcIndex];document.getElementById('fcWord').textContent=c.word;document.getElementById('fcFullWord').textContent=c.masc+' / '+c.fem;document.getElementById('fcMeaning').textContent=c.meaning;document.getElementById('fcCounter').textContent=(fcIndex+1)+' / '+flashcards.length;document.getElementById('flashcard').classList.remove('flipped');}
+  function flipCard(){document.getElementById('flashcard').classList.toggle('flipped');const c=flashcards[fcIndex];playAudio(c.audio);}
+  function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
+  function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
+  function speakCurrentCard(){const c=flashcards[fcIndex];playAudio(c.audio);}
+  updateFlashcard();
+  </script>
+</body>
+</html>
