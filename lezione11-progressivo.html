@@ -102,201 +102,6 @@
     @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
     .animate-in{animation:fadeInUp 0.5s ease forwards;}
     @media(max-width:640px){.hero h1{font-size:28px;}.rule-cards{grid-template-columns:1fr;}.trap-list{grid-template-columns:1fr;}}
-  
-    /* ===== 闪卡翻转 ===== */
-    .flashcard-area {
-      display: flex; flex-direction: column; align-items: center;
-      margin-top: 16px; gap: 16px;
-    }
-    .flashcard {
-      width: 300px; height: 200px; perspective: 600px;
-      cursor: pointer;
-    }
-    .flashcard-inner {
-      position: relative; width: 100%; height: 100%;
-      transition: transform 0.6s; transform-style: preserve-3d;
-    }
-    .flashcard.flipped .flashcard-inner {
-      transform: rotateY(180deg);
-    }
-    .flashcard-front, .flashcard-back {
-      position: absolute; inset: 0; border-radius: var(--radius);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      backface-visibility: hidden; padding: 20px;
-    }
-    .flashcard-front {
-      background: linear-gradient(135deg, var(--card), #f0ebe3);
-      border: 1px solid var(--border);
-    }
-    .flashcard-back {
-      background: linear-gradient(135deg, rgba(0,146,70,0.15), rgba(26,115,232,0.1));
-      border: 1px solid rgba(0,146,70,0.3);
-      transform: rotateY(180deg);
-    }
-    .flashcard .front-word {
-      font-size: 28px; font-weight: 700; font-style: italic;
-    }
-    .flashcard .front-hint {
-      font-size: 13px; color: var(--text-dim); margin-top: 8px;
-    }
-    .flashcard .back-article {
-      font-size: 20px; font-weight: 700; margin-bottom: 4px;
-    }
-    .flashcard .back-word {
-      font-size: 24px; font-style: italic; font-weight: 600;
-    }
-    .flashcard .back-detail {
-      font-size: 13px; color: var(--text-dim); margin-top: 4px;
-    }
-    .flashcard .back-meaning {
-      font-size: 14px; color: var(--text-dim); margin-top: 2px;
-    }
-    .flashcard-nav {
-      display: flex; gap: 12px;
-    }
-    .flashcard-nav button {
-      background: var(--card); border: 1px solid var(--border);
-      color: var(--text); padding: 10px 24px; border-radius: 10px;
-      cursor: pointer; font-size: 14px; transition: all 0.2s;
-    }
-    .flashcard-nav button:hover {
-      background: var(--card-hover); border-color: var(--green);
-    }
-    .flashcard-counter {
-      font-size: 13px; color: var(--text-dim);
-    }
-
-    /* ===== 互动测验 ===== */
-    .quiz-section {
-      margin-top: 48px;
-    }
-    .quiz-header-bar {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 16px;
-    }
-    .quiz-counter {
-      font-size: 14px; color: var(--text-dim);
-    }
-    .quiz-counter strong { color: var(--green); font-size: 18px; }
-    .quiz-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 24px;
-      margin-bottom: 16px;
-    }
-    .quiz-question {
-      font-size: 17px; font-weight: 600; margin-bottom: 16px;
-    }
-    .quiz-question .quiz-word {
-      font-style: italic; color: var(--green); font-size: 22px;
-    }
-    .quiz-options {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-    }
-    .quiz-option {
-      background: rgba(0,0,0,0.02); border: 2px solid var(--border);
-      border-radius: 12px; padding: 14px; cursor: pointer;
-      transition: all 0.25s; text-align: center; font-size: 16px;
-    }
-    .quiz-option:hover:not(.answered) {
-      border-color: var(--blue); background: rgba(26,115,232,0.08);
-    }
-    .quiz-option.correct {
-      border-color: var(--green) !important;
-      background: rgba(0,146,70,0.15) !important;
-      color: var(--green);
-    }
-    .quiz-option.wrong {
-      border-color: var(--red) !important;
-      background: rgba(206,43,55,0.1) !important;
-      color: var(--red);
-    }
-    .quiz-option.answered { cursor: default; }
-    .quiz-feedback {
-      margin-top: 12px; padding: 10px 14px; border-radius: 8px;
-      font-size: 14px; display: none;
-    }
-    .quiz-feedback.show { display: block; }
-    .quiz-feedback.right {
-      background: rgba(0,146,70,0.1); color: var(--green);
-    }
-    .quiz-feedback.wrong-fb {
-      background: rgba(206,43,55,0.08); color: #c0392b;
-    }
-    .quiz-mode-tabs {
-      display: flex; gap: 8px; margin-bottom: 20px;
-    }
-    .quiz-mode-tab {
-      padding: 8px 18px; border-radius: 10px;
-      background: var(--card); border: 1px solid var(--border);
-      cursor: pointer; font-size: 14px; font-weight: 500;
-      transition: all 0.2s; color: var(--text-dim);
-    }
-    .quiz-mode-tab.active {
-      border-color: var(--orange); color: var(--orange);
-      background: rgba(232,113,10,0.1);
-    }
-
-    /* ===== 得分板 ===== */
-    .scoreboard {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 20px;
-      text-align: center; margin-top: 32px;
-    }
-    .score-display {
-      font-size: 48px; font-weight: 700;
-      background: linear-gradient(135deg, var(--green), var(--blue));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .score-label { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
-    .score-rank {
-      margin-top: 12px; font-size: 16px; font-weight: 600;
-    }
-    .quiz-card-header {
-      display: flex; align-items: center; gap: 8px;
-      margin-bottom: 8px;
-    }
-    .quiz-type-badge {
-      display: inline-block;
-      padding: 2px 10px;
-      border-radius: 999px;
-      color: #fff;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-    .quiz-sentence {
-      font-size: 18px;
-      line-height: 1.6;
-      padding: 12px 16px;
-      background: #f9f7f2;
-      border-radius: 10px;
-      border: 1px solid #e8e0d4;
-      margin-bottom: 4px;
-      font-family: 'Georgia','Times New Roman',serif;
-    }
-    .quiz-sentence-hint {
-      font-size: 13px;
-      color: #888;
-      margin-top: 4px;
-    }
-    .quiz-blank {
-      display: inline-block;
-      min-width: 60px;
-      border-bottom: 2px dashed #ce2b37;
-      color: #ce2b37;
-      font-weight: 700;
-    }
-    .quiz-option-tf {
-      min-width: 80px;
-      text-align: center;
-      font-weight: 600;
-    }
-    .quiz-option-tf:nth-child(1) { border-color: #4caf50; color: #2e7d32; }
-    .quiz-option-tf:nth-child(2) { border-color: #f44336; color: #c62828; }
-    .quiz-option-tf.correct:nth-child(1) { background: #c8e6c9; border-color: #4caf50; }
-    .quiz-option-tf.correct:nth-child(2) { background: #ffcdd2; border-color: #f44336; }
-
   </style>
 </head>
 <body>
@@ -338,59 +143,29 @@
 
   
 
-    <div class="section" id="sec-dialogue">
+  <div class="section" id="sec-dialogue">
     <div class="section-header"><div class="section-icon" style="background:rgba(0,146,70,0.15);">🗣️</div><h2 class="section-title">生活对话</h2></div>
     <div class="dialogue-box">
 <div class="dialogue-line">
         <div class="speaker speaker-a">A</div>
-        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l11_dlg1')">Cosa stai facendo?</div><div class="dialogue-zh">你在做什么？</div></div>
-        <button class="play-line-btn" onclick="playAudio('l11_dlg1')">🔊</button></div>
+        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l11_come_stai')">Come stai?</div><div class="dialogue-zh">你好吗？</div></div>
+        <button class="play-line-btn" onclick="playAudio('l11_sto_bene_grazie')">🔊</button></div>
 <div class="dialogue-line">
         <div class="speaker speaker-b">B</div>
-        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l11_dlg2')">Sto leggendo un libro.</div><div class="dialogue-zh">我在读一本书。</div></div>
-        <button class="play-line-btn" onclick="playAudio('l11_dlg2')">🔊</button></div>
+        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l11_cosa_studi_oggi')">Sto bene, grazie!</div><div class="dialogue-zh">我很好，谢谢！</div></div>
+        <button class="play-line-btn" onclick="playAudio('l11_studio_l_italiano')">🔊</button></div>
 <div class="dialogue-line">
         <div class="speaker speaker-a">A</div>
-        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l11_dlg3')">E Luca, cosa sta facendo?</div><div class="dialogue-zh">卢卡在做什么？</div></div>
-        <button class="play-line-btn" onclick="playAudio('l11_dlg3')">🔊</button></div>
+        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l11')">Cosa studi oggi?</div><div class="dialogue-zh">你今天学什么？</div></div>
+        <button class="play-line-btn" onclick="playAudio('l11')">🔊</button></div>
 <div class="dialogue-line">
         <div class="speaker speaker-b">B</div>
-        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l11_dlg4')">Lui sta studiando italiano.</div><div class="dialogue-zh">他在学意大利语。</div></div>
-        <button class="play-line-btn" onclick="playAudio('l11_dlg4')">🔊</button></div>
+        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l11')">Studio l'italiano!</div><div class="dialogue-zh">我学意大利语！</div></div>
+        <button class="play-line-btn" onclick="playAudio('l11')">🔊</button></div>
     </div>
   </div>
 
-<div class="section" id="sec-flashcard">
-    <div class="section-header">
-      <div class="section-icon" style="background:rgba(124,58,237,0.15);">🃏</div>
-      <h2 class="section-title">闪卡练习 — 现在进行时变位</h2>
-    </div>
-    <div class="flashcard-area">
-      <div class="flashcard" id="flashcard" onclick="flipCard()">
-        <div class="flashcard-inner" id="flashcardInner">
-          <div class="flashcard-front">
-            <div class="front-word" id="fcWord">sto mangiando</div>
-            <div class="front-hint">点击查看详情</div>
-          </div>
-          <div class="flashcard-back">
-            <div class="back-article" id="fcArticle" style="color:var(--blue)">sto mangiando</div>
-            <div class="back-word" id="fcFullWord">sto mangiando / stai mangiando</div>
-            <div class="back-detail" id="fcDetail">sta mangiando / stiamo mangiando / state mangiando / stanno mangiando</div>
-            <div class="back-meaning" id="fcMeaning">我正在吃</div>
-          </div>
-        </div>
-      </div>
-      <div class="flashcard-nav">
-        <button onclick="prevCard()">← 上一个</button>
-        <span class="flashcard-counter" id="fcCounter">1 / 20</span>
-        <button onclick="nextCard()">下一个 →</button>
-      </div>
-      <button class="nav-btn" onclick="speakCurrentCard()" style="margin-top:4px;">🔊 听发音</button>
-    </div>
-  </div>
-
-
-<div class="section" id="sec-principle">
+  <div class="section" id="sec-principle">
     <div class="principle-card">
       <div class="icon">🔑</div>
       <p class="text">学语法最终是为了开口说！</p>
@@ -398,36 +173,6 @@
     </div>
   </div>
 </div>
-
-
-
-  <!-- 互动测验 -->
-  <div class="section quiz-section" id="sec-quiz">
-    <div class="section-header">
-      <div class="section-icon" style="background:rgba(232,113,10,0.15);">📝</div>
-      <h2 class="section-title">小测验 — 现在进行时运用</h2>
-    </div>
-
-    <div class="quiz-mode-tabs">
-      <div class="quiz-mode-tab active" onclick="switchQuizMode('basic', this)">🟢 基础</div>
-      <div class="quiz-mode-tab" onclick="switchQuizMode('trap', this)">🔴 进阶/易错</div>
-      <div class="quiz-mode-tab" onclick="switchQuizMode('all', this)">🟣 全部</div>
-    </div>
-
-    <div class="quiz-header-bar">
-      <div class="quiz-counter">已答 <strong id="answeredCount">0</strong> / <span id="totalCount">20</span></div>
-      <button class="nav-btn" onclick="resetQuiz()">🔄 重来</button>
-    </div>
-
-    <div id="quizContainer"></div>
-
-    <div class="scoreboard" id="scoreboard" style="display:none;">
-      <div class="score-display" id="scoreValue">0</div>
-      <div class="score-label">测验得分</div>
-      <div class="score-rank" id="scoreRank"></div>
-      <button class="nav-btn" onclick="resetQuiz()" style="margin-top:16px;">🔄 重新测验</button>
-    </div>
-  </div>
 
 <div class="footer">
   <div class="footer-nav">
@@ -437,7 +182,6 @@
   </div>
   <p><span class="it-flag"></span> 意大利语语法实战课程 · 第11课 · 现在进行时</p>
 </div>
-
 
 <script>
 // ===== 音频播放（按需加载）=====
@@ -452,8 +196,7 @@ function playAudio(key) {
     _audioEl.play().catch(function(e) {
       if (e.name === 'AbortError') return;
       showToast('请先点击页面任意位置，再试一次 🔊');
-    });
-    return;
+return;
   }
   var s = document.createElement('script');
   s.src = 'audio_data/' + _LESSON + '/' + key + '.js?v=1';
@@ -471,148 +214,8 @@ function showToast(msg) {
   setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2500);
 }
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
-
-// ===== 闪卡系统 =====
-const flashcards = [{"word": "sto mangiando", "fr": "io", "full": "io sto mangiando", "detail": "我正在吃", "meaning": "stare+-ando", "audio": "l11_sto_mangiando"}, {"word": "stai scrivendo", "fr": "tu", "full": "tu stai scrivendo", "detail": "你正在写", "meaning": "stare+-endo", "audio": "l11_stai_scrivendo"}, {"word": "sta partendo", "fr": "lui/lei", "full": "lui/lei sta partendo", "detail": "他/她正在出发", "meaning": "stare+-endo", "audio": "l11_sta_partendo"}, {"word": "stiamo parlando", "fr": "noi", "full": "noi stiamo parlando", "detail": "我们正在说话", "meaning": "stare+-ando", "audio": "l11_stiamo_parlando"}, {"word": "state dormendo", "fr": "voi", "full": "voi state dormendo", "detail": "你们正在睡觉", "meaning": "stare+-endo", "audio": ""}, {"word": "stanno leggendo", "fr": "loro", "full": "loro stanno leggendo", "detail": "他们正在阅读", "meaning": "stare+-endo", "audio": ""}, {"word": "sto studiando", "fr": "io", "full": "io sto studiando", "detail": "我正在学习", "meaning": "studiare→studiando", "audio": ""}, {"word": "stai cucinando", "fr": "tu", "full": "tu stai cucinando", "detail": "你正在做饭", "meaning": "cucinare→cucinando", "audio": ""}, {"word": "sta lavorando", "fr": "lui/lei", "full": "lui/lei sta lavorando", "detail": "他/她正在工作", "meaning": "lavorare→lavorando", "audio": ""}, {"word": "stiamo cenando", "fr": "noi", "full": "noi stiamo cenando", "detail": "我们正在吃晚饭", "meaning": "cenare→cenando", "audio": ""}, {"word": "state giocando", "fr": "voi", "full": "voi state giocando", "detail": "你们正在玩", "meaning": "giocare→giocando", "audio": ""}, {"word": "stanno correndo", "fr": "loro", "full": "loro stanno correndo", "detail": "他们正在跑步", "meaning": "correre→correndo", "audio": ""}, {"word": "sto bevendo", "fr": "io", "full": "io sto bevendo", "detail": "我正在喝", "meaning": "bere→bevendo", "audio": ""}, {"word": "stai finendo", "fr": "tu", "full": "tu stai finendo", "detail": "你正在完成", "meaning": "finire→finendo", "audio": ""}, {"word": "sta capendo", "fr": "lui/lei", "full": "lui/lei sta capendo", "detail": "他/她正在理解", "meaning": "capire→capendo", "audio": ""}, {"word": "sto facendo", "fr": "io", "full": "io sto facendo", "detail": "我正在做", "meaning": "fare→facendo", "audio": ""}, {"word": "stai dicendo", "fr": "tu", "full": "tu stai dicendo", "detail": "你正在说", "meaning": "dire→dicendo", "audio": ""}, {"word": "sta venendo", "fr": "lui/lei", "full": "lui/lei sta venendo", "detail": "他/她正在来", "meaning": "venire→venendo", "audio": ""}, {"word": "stiamo andando", "fr": "noi", "full": "noi stiamo andando", "detail": "我们正在去", "meaning": "andare→andando", "audio": ""}, {"word": "stanno uscendo", "fr": "loro", "full": "loro stanno uscendo", "detail": "他们正在出去", "meaning": "uscire→uscendo", "audio": ""}];
-let fcIndex=0;
-
-function updateFlashcard(){
-  const c=flashcards[fcIndex];
-  document.getElementById('fcWord').textContent=c.word;
-  document.getElementById('fcArticle').textContent=c.fr;
-  document.getElementById('fcFullWord').textContent=c.full;
-  document.getElementById('fcDetail').textContent=c.detail;
-  document.getElementById('fcMeaning').textContent=c.meaning;
-  document.getElementById('fcCounter').textContent=(fcIndex+1)+' / '+flashcards.length;
-  document.getElementById('flashcard').classList.remove('flipped');
-}
-function flipCard(){
-  document.getElementById('flashcard').classList.toggle('flipped');
-  const c=flashcards[fcIndex];if(c.audio)playAudio(c.audio);
-}
-function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
-function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
-function speakCurrentCard(){const c=flashcards[fcIndex];if(c.audio)playAudio(c.audio);}
-
-// ===== 测验系统 =====
-const quizBank={"basic": [{"type": "fill", "word": "mangiare (io) 进行时", "answer": "sto mangiando", "options": ["sto mangiando", "stai mangiando", "sta mangiando", "stiamo mangiando"], "hint": "io sto mangiando", "audio": "l11_sto_mangiando"}, {"type": "fill", "word": "scrivere (tu) 进行时", "answer": "stai scrivendo", "options": ["stai scrivendo", "sto scrivendo", "sta scrivendo", "stiamo scrivendo"], "hint": "tu stai scrivendo", "audio": "l11_stai_scrivendo"}, {"type": "fill", "word": "partire (lui) 进行时", "answer": "sta partendo", "options": ["sta partendo", "stai partendo", "sto partendo", "stiamo partendo"], "hint": "lui sta partendo", "audio": "l11_sta_partendo"}, {"type": "fill", "word": "parlare (noi) 进行时", "answer": "stiamo parlando", "options": ["stiamo parlando", "sto parlando", "sta parlando", "state parlando"], "hint": "noi stiamo parlando", "audio": "l11_stiamo_parlando"}, {"type": "fill", "word": "-are动词的副动词词尾", "answer": "-ando", "options": ["-ando", "-endo", "-ato", "-uto"], "hint": "-are→-ando", "audio": ""}, {"type": "fill", "word": "-ere动词的副动词词尾", "answer": "-endo", "options": ["-endo", "-ando", "-uto", "-ito"], "hint": "-ere→-endo", "audio": ""}, {"type": "fill", "word": "-ire动词的副动词词尾", "answer": "-endo", "options": ["-endo", "-ando", "-ito", "-ato"], "hint": "-ire也→-endo", "audio": ""}, {"type": "fill", "word": "studiare (io)", "answer": "sto studiando", "options": ["sto studiando", "stai studiando", "sta studiando", "stiamo studiando"], "hint": "io sto studiando", "audio": ""}, {"type": "fill", "word": "cucinare (tu)", "answer": "stai cucinando", "options": ["stai cucinando", "sto cucinando", "sta cucinando", "stiamo cucinando"], "hint": "tu stai cucinando", "audio": ""}, {"type": "fill", "word": "lavorare (lui)", "answer": "sta lavorando", "options": ["sta lavorando", "stai lavorando", "sto lavorando", "stiamo lavorando"], "hint": "lui sta lavorando", "audio": ""}, {"type": "sentence", "word": "Io ___ una lettera.", "answer": "sto scrivendo", "options": ["sto scrivendo", "stai scrivendo", "sta scrivendo", "stiamo scrivendo"], "hint": "io sto scrivendo", "audio": ""}, {"type": "sentence", "word": "Tu ___ la cena.", "answer": "stai preparando", "options": ["stai preparando", "sto preparando", "sta preparando", "stiamo preparando"], "hint": "tu stai preparando", "audio": ""}, {"type": "sentence", "word": "Loro ___ al parco.", "answer": "stanno correndo", "options": ["stanno correndo", "stai correndo", "sto correndo", "stiamo correndo"], "hint": "loro stanno correndo", "audio": ""}, {"type": "sentence", "word": "Noi ___ italiano.", "answer": "stiamo studiando", "options": ["stiamo studiando", "sto studiando", "sta studiando", "state studiando"], "hint": "noi stiamo studiando", "audio": ""}, {"type": "sentence", "word": "Voi ___ la colazione.", "answer": "state facendo", "options": ["state facendo", "sto facendo", "stai facendo", "stiamo facendo"], "hint": "voi state facendo", "audio": ""}, {"type": "translate", "word": " \"你正在做什么？\"", "answer": "Cosa stai facendo?", "options": ["Cosa stai facendo?", "Cosa sto facendo?", "Cosa sta facendo?", "Cosa stiamo facendo?"], "hint": "tu stai facendo", "audio": ""}, {"type": "translate", "word": " \"他正在读一本书\"", "answer": "Sta leggendo un libro", "options": ["Sta leggendo un libro", "Sto leggendo un libro", "Stai leggendo un libro", "Stiamo leggendo un libro"], "hint": "lui sta leggendo", "audio": ""}, {"type": "translate", "word": " \"我们正在吃饭\"", "answer": "Stiamo mangiando", "options": ["Stiamo mangiando", "Sto mangiando", "Sta mangiando", "State mangiando"], "hint": "noi stiamo mangiando", "audio": ""}, {"type": "match", "word": "stare + ___?", "answer": "gerundio (副动词)", "options": ["gerundio (副动词)", "infinito (不定式)", "participio (分词)", "indicativo (直陈式)"], "hint": "stare+gerundio=现在进行时", "audio": ""}, {"type": "match", "word": "gerundio 词尾", "answer": "-ando/-endo", "options": ["-ando/-endo", "-ato/-uto/-ito", "-ante/-ente", "-ai/-ei"], "hint": "are→ando, ere/ire→endo", "audio": ""}], "trap": [{"type": "fill", "word": "fare的副动词形式", "answer": "facendo", "options": ["facendo", "fando", "fando", "fatto"], "hint": "fare→facendo（不规则）", "audio": ""}, {"type": "fill", "word": "dire的副动词形式", "answer": "dicendo", "options": ["dicendo", "dendo", "dando", "detto"], "hint": "dire→dicendo（不规则）", "audio": ""}, {"type": "fill", "word": "bere的副动词形式", "answer": "bevendo", "options": ["bevendo", "bendo", "bando", "bevuto"], "hint": "bere→bevendo（不规则）", "audio": ""}, {"type": "fill", "word": "venire的副动词形式", "answer": "venendo", "options": ["venendo", "venendo", "vendo", "venuto"], "hint": "venire→venendo", "audio": ""}, {"type": "fill", "word": "andare的副动词形式", "answer": "andando", "options": ["andando", "andendo", "ando", "andato"], "hint": "andare→andando", "audio": ""}, {"type": "fill", "word": "uscire的副动词形式", "answer": "uscendo", "options": ["uscendo", "uscendo", "uscando", "uscito"], "hint": "uscire→uscendo", "audio": ""}, {"type": "sentence", "word": "Sto ___ i compiti.", "answer": "facendo", "options": ["facendo", "fando", "fatto", "faccio"], "hint": "fare→facendo", "audio": ""}, {"type": "sentence", "word": "Cosa stai ___?", "answer": "dicendo", "options": ["dicendo", "dicendo", "detto", "dici"], "hint": "dire→dicendo", "audio": ""}, {"type": "sentence", "word": "Sta ___ a casa.", "answer": "venendo", "options": ["venendo", "venendo", "viene", "venuto"], "hint": "venire→venendo", "audio": ""}, {"type": "truefalse", "word": "现在进行时一定是stare+副动词", "answer": "对", "options": ["对", "错"], "hint": "固定结构stare + gerundio", "audio": ""}, {"type": "truefalse", "word": "所有动词的副动词都是规则的", "answer": "错", "options": ["对", "错"], "hint": "fare/dire/bere等不规则", "audio": ""}, {"type": "truefalse", "word": "现在进行时表示正在进行的动作", "answer": "对", "options": ["对", "错"], "hint": "stare+gerundio=正在做", "audio": ""}, {"type": "translate", "word": " \"他正在出门\"", "answer": "Sta uscendo", "options": ["Sta uscendo", "Sta usciendo", "Sta uscando", "Sta uscito"], "hint": "uscire→uscendo", "audio": ""}, {"type": "translate", "word": " \"我正在喝一杯咖啡\"", "answer": "Sto bevendo un caffè", "options": ["Sto bevendo un caffè", "Sto bendo un caffè", "Sto bevo un caffè", "Sto bevuto un caffè"], "hint": "bere→bevendo", "audio": ""}, {"type": "translate", "word": " \"你在说什么？\"", "answer": "Cosa stai dicendo?", "options": ["Cosa stai dicendo?", "Cosa stai dendo?", "Cosa stai dicendo?", "Cosa stai detto?"], "hint": "dire→dicendo", "audio": ""}, {"type": "sentence", "word": "Stiamo ___ a scuola.", "answer": "andando", "options": ["andando", "andendo", "ando", "andiamo"], "hint": "andare→andando", "audio": ""}, {"type": "fill", "word": "finire的副动词形式", "answer": "finendo", "options": ["finendo", "finando", "finito", "finisce"], "hint": "finire→finendo", "audio": ""}, {"type": "truefalse", "word": "意大利语现在进行时和英语现在进行时用法完全一样", "answer": "错", "options": ["对", "错"], "hint": "意大利语进行时使用范围比英语窄", "audio": ""}, {"type": "fill", "word": "capire的副动词形式", "answer": "capendo", "options": ["capendo", "capando", "capito", "capisce"], "hint": "capire→capendo", "audio": ""}, {"type": "sentence", "word": "State ___ la partita?", "answer": "guardando", "options": ["guardando", "guardendo", "guardato", "guardate"], "hint": "guardare→guardando", "audio": ""}]};let currentMode='basic';
-let currentQuizData=[];
-let quizScore=0;
-let quizAnswered=0;
-
-function switchQuizMode(mode,tabEl){
-  currentMode=mode;
-  document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));
-  if(tabEl)tabEl.classList.add('active');
-  resetQuiz();
-}
-
-function getQuizData(){
-  let pool;
-  if(currentMode==='basic')pool=quizBank.basic;
-  else if(currentMode==='trap')pool=quizBank.trap;
-  else pool=[...quizBank.basic,...quizBank.trap];
-  const shuffled=[...pool].sort(()=>Math.random()-0.5);
-  return shuffled.slice(0,20);
-}
-
-function buildQuiz(){
-  const container=document.getElementById('quizContainer');
-  container.innerHTML='';
-  currentQuizData=getQuizData();
-  document.getElementById('totalCount').textContent=currentQuizData.length;
-  const typeLabels={'fill':'填空形变','sentence':'句子填空','match':'搭配选择','translate':'翻译选择','truefalse':'判断正误'};
-  const typeColors={'fill':'#009246','sentence':'#1a73e8','match':'#7c3aed','translate':'#e8710a','truefalse':'#ce2b37'};
-  currentQuizData.forEach((q,i)=>{
-    const card=document.createElement('div');
-    card.className='quiz-card';card.id='quiz-'+i;
-    const badge='<span class="quiz-type-badge" style="background:'+(typeColors[q.type]||'#666')+'">'+(typeLabels[q.type]||q.type)+'</span>';
-    let questionHtml='';
-    if(q.type==='fill'){
-      questionHtml='<div class="quiz-question"><span class="quiz-word">'+q.word+'</span> 的正确答案是？</div>';
-    }else if(q.type==='sentence'){
-      questionHtml='<div class="quiz-question"><div class="quiz-sentence">'+q.word.replace(/___/g,'<span class="quiz-blank">___</span>')+'</div><div class="quiz-sentence-hint">请选择正确选项填入空白处：</div></div>';
-    }else if(q.type==='match'){
-      questionHtml='<div class="quiz-question">哪个选项与 <span class="quiz-word">'+q.word+'</span> 正确搭配？</div>';
-    }else if(q.type==='translate'){
-      questionHtml='<div class="quiz-question">请选择正确的翻译：<div class="quiz-sentence">'+q.word+'</div></div>';
-    }else if(q.type==='truefalse'){
-      questionHtml='<div class="quiz-question"><div class="quiz-sentence">'+q.word+'</div><div class="quiz-sentence-hint">判断上述说法的正误：</div></div>';
-    }
-    card.innerHTML='<div class="quiz-card-header">'+badge+'</div>'+questionHtml+'<div class="quiz-options">'+q.options.map((o,j)=>{
-      const safe=o.replace(/'/g,"\\'");
-      return '<div class="quiz-option'+(q.type==='truefalse'?' quiz-option-tf':'')+'" onclick="checkAnswer('+i+",'"+safe+"')"+'">'+o+'</div>';
-    }).join('')+'</div><div class="quiz-feedback" id="fb-'+i+'"></div>';
-    container.appendChild(card);
-  });
-}
-
-function checkAnswer(idx,chosen){
-  const q=currentQuizData[idx];
-  const card=document.getElementById('quiz-'+idx);
-  const options=card.querySelectorAll('.quiz-option');
-  const fb=document.getElementById('fb-'+idx);
-  if(options[0].classList.contains('answered'))return;
-  options.forEach(o=>o.classList.add('answered'));
-  const correct=q.answer;
-  if(chosen===correct){
-    quizScore++;
-    options.forEach(o=>{if(o.textContent===correct)o.classList.add('correct');});
-    fb.className='quiz-feedback show right';
-    fb.textContent='✅ 正确！'+q.hint;
-  }else{
-    options.forEach(o=>{if(o.textContent===chosen)o.classList.add('wrong');if(o.textContent===correct)o.classList.add('correct');});
-    fb.className='quiz-feedback show wrong-fb';
-    fb.textContent='❌ 正确答案是 '+correct+'：'+q.hint;
-  }
-  if(q.audio)playAudio(q.audio);
-  quizAnswered++;
-  document.getElementById('answeredCount').textContent=quizAnswered;
-  updateProgress();
-  if(quizAnswered===currentQuizData.length){
-    setTimeout(()=>{
-      const sb=document.getElementById('scoreboard');sb.style.display='block';
-      document.getElementById('scoreValue').textContent=quizScore+' / '+currentQuizData.length;
-      const pct=quizScore/currentQuizData.length;
-      let rank='';
-      if(pct>=0.95)rank='🏆 完美！语法大师！';
-      else if(pct>=0.85)rank='🌟 优秀！基本掌握！';
-      else if(pct>=0.70)rank='👍 不错！再练练易错点！';
-      else if(pct>=0.50)rank='💪 加油！多翻翻闪卡！';
-      else rank='📖 别气馁，回去复习规律吧！';
-      document.getElementById('scoreRank').textContent=rank;
-      scrollToSection('scoreboard');
-    },500);
-  }
-}
-
-function resetQuiz(){
-  quizScore=0;quizAnswered=0;
-  document.getElementById('scoreboard').style.display='none';
-  document.getElementById('answeredCount').textContent='0';
-  buildQuiz();updateProgress();
-}
-
-// ===== 进度条 =====
-function updateProgress(){
-  const total=currentQuizData.length||1;
-  const done=quizAnswered/total;
-  document.getElementById('progressFill').style.width=(done*100)+'%';
-}
-
-// ===== 滚动 =====
-function scrollToSection(id){
-  const el=document.getElementById('sec-'+id)||document.getElementById(id);
-  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-// ===== 初始化 =====
-requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
-
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
 document.querySelectorAll('.section').forEach(s=>observer.observe(s));
 // 安全兜底：3秒后所有未显示区块强制可见
 setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);
 </script>
-</body>
-</html>

@@ -101,165 +101,7 @@
     .footer-nav .nav-btn:hover{background:var(--card-hover);border-color:var(--blue);}
     @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
     .animate-in{animation:fadeInUp 0.5s ease forwards;}
-    
-
-/* ===== 闪卡翻转 ===== */
-    .flashcard-area {
-      display: flex; flex-direction: column; align-items: center;
-      margin-top: 16px; gap: 16px;
-    }
-    .flashcard {
-      width: 300px; height: 200px; perspective: 600px;
-      cursor: pointer;
-    }
-    .flashcard-inner {
-      position: relative; width: 100%; height: 100%;
-      transition: transform 0.6s; transform-style: preserve-3d;
-    }
-    .flashcard.flipped .flashcard-inner {
-      transform: rotateY(180deg);
-    }
-    .flashcard-front, .flashcard-back {
-      position: absolute; inset: 0; border-radius: var(--radius);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      backface-visibility: hidden; padding: 20px;
-    }
-    .flashcard-front {
-      background: linear-gradient(135deg, var(--card), #f0ebe3);
-      border: 1px solid var(--border);
-    }
-    .flashcard-back {
-      background: linear-gradient(135deg, rgba(0,146,70,0.15), rgba(26,115,232,0.1));
-      border: 1px solid rgba(0,146,70,0.3);
-      transform: rotateY(180deg);
-    }
-    .flashcard .front-word {
-      font-size: 28px; font-weight: 700; font-style: italic;
-    }
-    .flashcard .front-hint {
-      font-size: 13px; color: var(--text-dim); margin-top: 8px;
-    }
-    .flashcard .back-article {
-      font-size: 20px; font-weight: 700; margin-bottom: 4px;
-    }
-    .flashcard .back-word {
-      font-size: 24px; font-style: italic; font-weight: 600;
-    }
-    .flashcard .back-detail {
-      font-size: 13px; color: var(--text-dim); margin-top: 4px;
-    }
-    .flashcard .back-meaning {
-      font-size: 14px; color: var(--text-dim); margin-top: 2px;
-    }
-    .flashcard-nav {
-      display: flex; gap: 12px;
-    }
-    .flashcard-nav button {
-      background: var(--card); border: 1px solid var(--border);
-      color: var(--text); padding: 10px 24px; border-radius: 10px;
-      cursor: pointer; font-size: 14px; transition: all 0.2s;
-    }
-    .flashcard-nav button:hover {
-      background: var(--card-hover); border-color: var(--green);
-    }
-    .flashcard-counter {
-      font-size: 13px; color: var(--text-dim);
-    }
-
-
-/* ===== 互动测验 ===== */
-    .quiz-section {
-      margin-top: 48px;
-    }
-    .quiz-header-bar {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 16px;
-    }
-    .quiz-counter {
-      font-size: 14px; color: var(--text-dim);
-    }
-    .quiz-counter strong { color: var(--green); font-size: 18px; }
-    .quiz-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 24px;
-      margin-bottom: 16px;
-    }
-    .quiz-question {
-      font-size: 17px; font-weight: 600; margin-bottom: 16px;
-    }
-    .quiz-question .quiz-word {
-      font-style: italic; color: var(--green); font-size: 22px;
-    }
-    .quiz-options {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-    }
-    .quiz-option {
-      background: rgba(0,0,0,0.02); border: 2px solid var(--border);
-      border-radius: 12px; padding: 14px; cursor: pointer;
-      transition: all 0.25s; text-align: center; font-size: 16px;
-    }
-    .quiz-option:hover:not(.answered) {
-      border-color: var(--blue); background: rgba(26,115,232,0.08);
-    }
-    .quiz-option.correct {
-      border-color: var(--green) !important;
-      background: rgba(0,146,70,0.15) !important;
-      color: var(--green);
-    }
-    .quiz-option.wrong {
-      border-color: var(--red) !important;
-      background: rgba(206,43,55,0.1) !important;
-      color: var(--red);
-    }
-    .quiz-option.answered { cursor: default; }
-    .quiz-feedback {
-      margin-top: 12px; padding: 10px 14px; border-radius: 8px;
-      font-size: 14px; display: none;
-    }
-    .quiz-feedback.show { display: block; }
-    .quiz-feedback.right {
-      background: rgba(0,146,70,0.1); color: var(--green);
-    }
-    .quiz-feedback.wrong-fb {
-      background: rgba(206,43,55,0.08); color: #c0392b;
-    }
-    .quiz-mode-tabs {
-      display: flex; gap: 8px; margin-bottom: 20px;
-    }
-    .quiz-mode-tab {
-      padding: 8px 18px; border-radius: 10px;
-      background: var(--card); border: 1px solid var(--border);
-      cursor: pointer; font-size: 14px; font-weight: 500;
-      transition: all 0.2s; color: var(--text-dim);
-    }
-    .quiz-mode-tab.active {
-      border-color: var(--orange); color: var(--orange);
-      background: rgba(232,113,10,0.1);
-    }
-
-    /* ===== 得分板 ===== */
-    .scoreboard {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 20px;
-      text-align: center; margin-top: 32px;
-    }
-    .score-display {
-      font-size: 48px; font-weight: 700;
-      background: linear-gradient(135deg, var(--green), var(--blue));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .score-label { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
-    .score-rank {
-      margin-top: 12px; font-size: 16px; font-weight: 600;
-    }
-
-    /* ===== Footer ===== */
-
-
-
-
-@media(max-width:640px){.hero h1{font-size:28px;}.rule-cards{grid-template-columns:1fr;}.trap-list{grid-template-columns:1fr;}}
+    @media(max-width:640px){.hero h1{font-size:28px;}.rule-cards{grid-template-columns:1fr;}.trap-list{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
@@ -268,8 +110,6 @@
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   <div class="nav-btns">
     <a class="nav-btn" href="index.html">🏠 导航</a>
-        <button class="nav-btn" onclick="scrollToSection('quiz')">📝 测验</button>
-    <button class="nav-btn" onclick="playAudio('l15')">🔊 课名</button>
     <a class="nav-btn" href="lezione14-pronomi-oggetto.html">◀ 上一课</a>
     <a class="nav-btn" href="lezione16-imperfetto.html">下一课 ▶</a>
   </div>
@@ -303,57 +143,29 @@
 
   
 
-    <div class="section" id="sec-dialogue">
+  <div class="section" id="sec-dialogue">
     <div class="section-header"><div class="section-icon" style="background:rgba(0,146,70,0.15);">🗣️</div><h2 class="section-title">生活对话</h2></div>
     <div class="dialogue-box">
 <div class="dialogue-line">
         <div class="speaker speaker-a">A</div>
-        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l15_dlg1')">Cosa hai fatto ieri?</div><div class="dialogue-zh">你昨天做了什么？</div></div>
-        <button class="play-line-btn" onclick="playAudio('l15_dlg1')">🔊</button></div>
+        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l15_come_stai')">Come stai?</div><div class="dialogue-zh">你好吗？</div></div>
+        <button class="play-line-btn" onclick="playAudio('l15_sto_bene_grazie')">🔊</button></div>
 <div class="dialogue-line">
         <div class="speaker speaker-b">B</div>
-        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l15_dlg2')">Sono andato al mare.</div><div class="dialogue-zh">我去了海边。</div></div>
-        <button class="play-line-btn" onclick="playAudio('l15_dlg2')">🔊</button></div>
+        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l15_cosa_studi_oggi')">Sto bene, grazie!</div><div class="dialogue-zh">我很好，谢谢！</div></div>
+        <button class="play-line-btn" onclick="playAudio('l15_studio_l_italiano')">🔊</button></div>
 <div class="dialogue-line">
         <div class="speaker speaker-a">A</div>
-        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l15_dlg3')">Hai mangiato bene?</div><div class="dialogue-zh">吃得好吗？</div></div>
-        <button class="play-line-btn" onclick="playAudio('l15_dlg3')">🔊</button></div>
+        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l15')">Cosa studi oggi?</div><div class="dialogue-zh">你今天学什么？</div></div>
+        <button class="play-line-btn" onclick="playAudio('l15')">🔊</button></div>
 <div class="dialogue-line">
         <div class="speaker speaker-b">B</div>
-        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l15_dlg4')">Sì, ho mangiato una pizza buonissima!</div><div class="dialogue-zh">是的，我吃了一块非常好吃的披萨！</div></div>
-        <button class="play-line-btn" onclick="playAudio('l15_dlg4')">🔊</button></div>
-    </div>
-      <div style="text-align:center;margin-top:16px;"><button class="nav-btn" onclick="playAudio('l15_dlg_full')" style="padding:10px 24px;">🔊 播放整段对话</button></div>
+        <div class="dialogue-content"><div class="dialogue-it speakable" onclick="playAudio('l15')">Studio l'italiano!</div><div class="dialogue-zh">我学意大利语！</div></div>
+        <button class="play-line-btn" onclick="playAudio('l15')">🔊</button></div>
     </div>
   </div>
 
-  <div class="section" id="sec-flashcard">
-    <div class="section-header"><div class="section-icon" style="background:rgba(124,58,237,0.15);">🃏</div><h2 class="section-title">闪卡练习 — 点击翻转</h2></div>
-    <div class="flashcard-area">
-      <div class="flashcard" id="flashcard" onclick="flipCard()">
-        <div class="flashcard-inner" id="flashcardInner">
-          <div class="flashcard-front">
-            <div class="front-word" id="fcWord">ho parlato</div>
-            <div class="front-hint">点击查看详情</div>
-          </div>
-          <div class="flashcard-back">
-            <div class="back-article" id="fcArticle">avere</div>
-            <div class="back-word" id="fcFullWord">我说话了</div>
-            <div class="back-detail" id="fcDetail">我说话了</div>
-            <div class="back-meaning" id="fcMeaning">15课</div>
-          </div>
-        </div>
-      </div>
-      <div class="flashcard-nav">
-        <button onclick="prevCard()">← 上一个</button>
-        <span class="flashcard-counter" id="fcCounter">1 / 9</span>
-        <button onclick="nextCard()">下一个 →</button>
-      </div>
-      <button class="nav-btn" onclick="speakCurrentCard()" style="margin-top:4px;">🔊 听发音</button>
-    </div>
-  </div>
-
-<div class="section" id="sec-principle">
+  <div class="section" id="sec-principle">
     <div class="principle-card">
       <div class="icon">🔑</div>
       <p class="text">学语法最终是为了开口说！</p>
@@ -361,14 +173,6 @@
     </div>
   </div>
 </div>
-
-  <div class="section quiz-section" id="sec-quiz">
-    <div class="section-header"><div class="section-icon" style="background:rgba(232,113,10,0.15);">📝</div><h2 class="section-title">小测验</h2></div>
-    <div class="quiz-mode-tabs"><div class="quiz-mode-tab active" onclick="switchQuizMode('basic', this)">🟢 基础</div><div class="quiz-mode-tab" onclick="switchQuizMode('trap', this)">🔴 易错</div><div class="quiz-mode-tab" onclick="switchQuizMode('all', this)">🟣 全部</div></div>
-    <div class="quiz-header-bar"><div class="quiz-counter">已答 <strong id="answeredCount">0</strong> / <span id="totalCount">9</span></div><button class="nav-btn" onclick="resetQuiz()">🔄 重来</button></div>
-    <div id="quizContainer"></div>
-    <div class="scoreboard" id="scoreboard" style="display:none;"><div class="score-display" id="scoreValue">0</div><div class="score-label">测验得分</div><div class="score-rank" id="scoreRank"></div><button class="nav-btn" onclick="resetQuiz()" style="margin-top:16px;">🔄 重新测验</button></div>
-  </div>
 
 <div class="footer">
   <div class="footer-nav">
@@ -378,7 +182,6 @@
   </div>
   <p><span class="it-flag"></span> 意大利语语法实战课程 · 第15课 · 近过去时</p>
 </div>
-
 
 <script>
 // ===== 音频播放（按需加载）=====
@@ -393,8 +196,7 @@ function playAudio(key) {
     _audioEl.play().catch(function(e) {
       if (e.name === 'AbortError') return;
       showToast('请先点击页面任意位置，再试一次 🔊');
-    });
-    return;
+return;
   }
   var s = document.createElement('script');
   s.src = 'audio_data/' + _LESSON + '/' + key + '.js?v=1';
@@ -412,92 +214,8 @@ function showToast(msg) {
   setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2500);
 }
 function showTrap(type){var tabs=document.querySelectorAll('.trap-tab');var lists=document.querySelectorAll('.trap-list');tabs.forEach(function(t,i){t.classList.toggle('active',(i===0&&type==='t0')||(i===1&&type==='t1'));});lists.forEach(function(l,i){l.style.display=(i===0&&type==='t0')||(i===1&&type==='t1')?'grid':'none';});}
-const flashcards = [
-  {word:'ho parlato', article:'avere', meaning:'我说话了', audio:'l15_ho_mangiato'},
-  {word:'sono andato', article:'essere', meaning:'我去了', audio:'l15_sono_andato'},
-  {word:'ho scritto', article:'avere', meaning:'我写了', audio:'l15_ho_scritto'},
-  {word:'ho mangiato', article:'avere', meaning:'我吃了', audio:'l15_ho_mangiato'},
-  {word:'si è alzato', article:'essere(自反)', meaning:'他起床了', audio:'l15_si_alzato'},
-  {word:'ho dormito', article:'avere', meaning:'我睡了', audio:'l15_ho_mangiato'},
-  {word:'sono partito', article:'essere', meaning:'我出发了', audio:'l15_sono_andato'},
-  {word:'ho capito', article:'avere', meaning:'我明白了', audio:'l15_ho_scritto'},
-  {word:'sono rimasto', article:'essere', meaning:'我留下了', audio:'l15_sono_andato'},
-];
-const quizBank={
-  basic:[
-    {type:'fill', word:'ho parlato 的助动词是？', answer:'avere', options:["avere", "essere", "和are动词", "过去分词"], hint:'及物动词用avere', audio:''},
-    {type:'fill', word:'sono andato 的助动词是？', answer:'essere', options:["essere", "avere", "两个都行", "要看"], hint:'不及物运动动词用essere', audio:''},
-    {type:'fill', word:'ho mangiato 是什么时态？', answer:'近过去时', options:["近过去时", "未完成过去", "现在时", "将来时"], hint:'passato prossimo=近过去时', audio:''},
-    {type:'fill', word:'Ieri ___ mangiato la pizza.', answer:'ho', options:["ho", "sono", "ha", "è"], hint:'mangiare及物动词用avere', audio:''},
-    {type:'fill', word:'Lei ___ andata a Roma.', answer:'è', options:["è", "ha", "ho", "sono"], hint:'andare不及物用essere', audio:''},
-    {type:'fill', word:'过去分词和主语的性数配合出现在？', answer:'essere作助动词时', options:["essere作助动时", "avere作助动时", "所有情况", "never"], hint:'essere的过去分词要和主语配合', audio:''},
-  ],
-  trap:[
-    {type:'fill', word:'及物动词的过去分词是否需要和宾语配合？', answer:'一般不需要', options:["一般不需要", "必须配合", "只有阴性配合", "只有复数配合"], hint:'avere作助动词时过去分词一般不变', audio:''},
-    {type:'fill', word:'自反动词的助动词是？', answer:'essere', options:["essere", "avere", "两个都行", "si"], hint:'自反动词全部用essere', audio:''},
-    {type:'fill', word:'movimento动词如andare/venire的助动词？', answer:'essere', options:["essere", "avere", "两个都行", "及物用avere"], hint:'趋向动词用essere', audio:''},
-  ]
-};
-let currentMode='basic';let currentQuizData=[];let quizScore=0;let quizAnswered=0;
-
-function switchQuizMode(mode,tabEl){currentMode=mode;document.querySelectorAll('.quiz-mode-tab').forEach(t=>t.classList.remove('active'));if(tabEl)tabEl.classList.add('active');resetQuiz();}
-function getQuizData(){let pool;if(currentMode==='basic')pool=quizBank.basic;else if(currentMode==='trap')pool=quizBank.trap;else pool=[...quizBank.basic,...quizBank.trap];const shuffled=[...pool].sort(()=>Math.random()-0.5);return shuffled.slice(0,20);}
-function buildQuiz(){
-  const container=document.getElementById('quizContainer');
-  if(!container)return;
-  container.innerHTML='';
-  currentQuizData=getQuizData();
-  const tc=document.getElementById('totalCount');
-  if(tc)tc.textContent=currentQuizData.length;
-  currentQuizData.forEach((q,i)=>{
-    const card=document.createElement('div');card.className='quiz-card';card.id='quiz-'+i;
-    const shuffledOpts=[...q.options].sort(()=>Math.random()-0.5);
-    card.innerHTML='<div class="quiz-question"><span class="quiz-word">'+q.word+'</span></div><div class="quiz-options">'+shuffledOpts.map(o=>'<div class="quiz-option" onclick="checkAnswer('+i+',\''+o.replace(/'/g,"\\'")+'\')">'+o+'</div>').join('')+'</div><div class="quiz-feedback" id="fb-'+i+'"></div>';
-    container.appendChild(card);
-  });
-}
-function checkAnswer(idx,chosen){
-  const q=currentQuizData[idx];const card=document.getElementById('quiz-'+idx);
-  if(!card)return;
-  const options=card.querySelectorAll('.quiz-option');const fb=document.getElementById('fb-'+idx);
-  if(options[0]&&options[0].classList.contains('answered'))return;
-  options.forEach(o=>o.classList.add('answered'));
-  if(chosen===q.answer){
-    quizScore++;options.forEach(o=>{if(o.textContent===q.answer)o.classList.add('correct');});
-    if(fb){fb.className='quiz-feedback show right';fb.textContent='✅ 正确！'+q.hint;}
-  }else{
-    options.forEach(o=>{if(o.textContent===q.answer)o.classList.add('correct');if(o.textContent===chosen)o.classList.add('wrong');});
-    if(fb){fb.className='quiz-feedback show wrong-fb';fb.textContent='❌ 正确答案是 '+q.answer+'：'+q.hint;}
-  }
-  quizAnswered++;const ac=document.getElementById('answeredCount');
-  if(ac)ac.textContent=quizAnswered;
-  if(quizAnswered===currentQuizData.length){
-    setTimeout(()=>{
-      const sb=document.getElementById('scoreboard');
-      if(sb)sb.style.display='block';
-      const sv=document.getElementById('scoreValue');
-      if(sv)sv.textContent=quizScore+' / '+currentQuizData.length;
-    },500);
-  }
-}
-function resetQuiz(){quizScore=0;quizAnswered=0;const sb=document.getElementById('scoreboard');if(sb)sb.style.display='none';const ac=document.getElementById('answeredCount');if(ac)ac.textContent='0';buildQuiz();}
-function updateProgress(){}
-function scrollToSection(id){const el=document.getElementById('sec-'+id);if(el)el.scrollIntoView({behavior:'smooth'});}
-let fcIndex=0;
-function updateFlashcard(){
-  const c=flashcards[fcIndex];const w=document.getElementById('fcWord');const a=document.getElementById('fcArticle');const f=document.getElementById('fcFullWord');const m=document.getElementById('fcMeaning');const ct=document.getElementById('fcCounter');const fl=document.getElementById('flashcard');
-  if(w)w.textContent=c.word;if(a)a.textContent=c.article;if(f)f.textContent=c.meaning;if(m)m.textContent=c.meaning;if(ct)ct.textContent=(fcIndex+1)+' / '+flashcards.length;if(fl)fl.classList.remove('flipped');
-}
-function flipCard(){const fl=document.getElementById('flashcard');if(fl)fl.classList.toggle('flipped');const c=flashcards[fcIndex];if(c.audio)playAudio(c.audio);}
-function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
-function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
-function speakCurrentCard(){const c=flashcards[fcIndex];if(c.audio)playAudio(c.audio);}
-
-requestAnimationFrame(function(){buildQuiz();updateFlashcard();});
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
 document.querySelectorAll('.section').forEach(s=>observer.observe(s));
 // 安全兜底：3秒后所有未显示区块强制可见
 setTimeout(function(){document.querySelectorAll('.section:not(.visible)').forEach(function(s){s.classList.add('visible');});},3000);
 </script>
-</body>
-</html>
