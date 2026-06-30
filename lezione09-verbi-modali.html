@@ -196,6 +196,51 @@
   </div>
 </div>
 
+
+<div class="section" id="sec-flashcard">
+  <div class="section-header"><div class="section-icon" style="background:rgba(232,113,10,0.12);">🃏</div><h2 class="section-title">闪卡练习 — 点击翻转</h2></div>
+  <div class="flashcard-container">
+    <div class="flashcard" id="flashcard" onclick="flipCard()">
+      <div class="fc-inner"><div class="fc-front"><div class="fc-label">词语</div><div class="fc-word" id="fcWord"></div></div>
+      <div class="fc-back"><div class="fc-label">形式</div><div class="fc-word" id="fcFullWord"></div><div class="fc-meaning" id="fcMeaning"></div></div></div>
+    </div>
+    <div class="fc-controls">
+      <button class="nav-btn" onclick="prevCard()">⬅ 上一个</button>
+      <span id="fcCounter" style="font-size:14px;color:var(--text-dim);">1 / 20</span>
+      <button class="nav-btn" onclick="nextCard()">下一个 ➡</button>
+      <button class="nav-btn" onclick="speakCurrentCard()" style="margin-left:8px;">🔊</button>
+    </div>
+  </div>
+</div>
+<script>
+const flashcards = [  {word:'posso',masc:'我能',fem:'我能',mpl:'我能',fpl:'我能',meaning:'potere',audio:'l09_posso'},
+  {word:'puoi',masc:'你能',fem:'你能',mpl:'你能',fpl:'你能',meaning:'potere',audio:'l09_puoi'},
+  {word:'puo',masc:'他/她/它可以',fem:'他/她/它可以',mpl:'他/她/它可以',fpl:'他/她/它可以',meaning:'potere',audio:'l09_puo'},
+  {word:'possiamo',masc:'我们能',fem:'我们能',mpl:'我们能',fpl:'我们能',meaning:'potere',audio:'l09_possiamo'},
+  {word:'voglio',masc:'我想要',fem:'我想要',mpl:'我想要',fpl:'我想要',meaning:'volere',audio:'l09_voglio'},
+  {word:'vuoi',masc:'你想要',fem:'你想要',mpl:'你想要',fpl:'你想要',meaning:'volere',audio:'l09_vuoi'},
+  {word:'vuole',masc:'他/她想要',fem:'他/她想要',mpl:'他/她想要',fpl:'他/她想要',meaning:'volere',audio:'l09_vuole'},
+  {word:'vogliamo',masc:'我们想要',fem:'我们想要',mpl:'我们想要',fpl:'我们想要',meaning:'volere',audio:'l09_vogliamo'},
+  {word:'devo',masc:'我必须',fem:'我必须',mpl:'我必须',fpl:'我必须',meaning:'dovere',audio:'l09_devo'},
+  {word:'devi',masc:'你必须',fem:'你必须',mpl:'你必须',fpl:'你必须',meaning:'dovere',audio:'l09_devi'},
+  {word:'deve',masc:'他必须',fem:'他必须',mpl:'他必须',fpl:'他必须',meaning:'dovere',audio:'l09_deve'},
+  {word:'dobbiamo',masc:'我们必须',fem:'我们必须',mpl:'我们必须',fpl:'我们必须',meaning:'dovere',audio:'l09_dobbiamo'},
+  {word:'so',masc:'我会/我知道',fem:'我会/我知道',mpl:'我会/我知道',fpl:'我会/我知道',meaning:'sapere',audio:'l09_so'},
+  {word:'sai',masc:'你会/你知道',fem:'你会/你知道',mpl:'你会/你知道',fpl:'你会/你知道',meaning:'sapere',audio:'l09_sai'},
+  {word:'sa',masc:'他会/他知道',fem:'他会/他知道',mpl:'他会/他知道',fpl:'他会/他知道',meaning:'sapere',audio:'l09_sa'},
+  {word:'sappiamo',masc:'我们会/我们知道',fem:'我们会/我们知道',mpl:'我们会/我们知道',fpl:'我们会/我们知道',meaning:'sapere',audio:'l09_sappiamo'},
+  {word:'Posso entrare?',masc:'我能进来吗？',fem:'我能进来吗？',mpl:'我能进来吗？',fpl:'我能进来吗？',meaning:'请求许可',audio:'l09_posso_entrare_'},
+  {word:'Voglio studiare.',masc:'我想要学习',fem:'我想要学习',mpl:'我想要学习',fpl:'我想要学习',meaning:'表达意愿',audio:'l09_voglio_studiare'},
+  {word:'Devo andare.',masc:'我必须走了',fem:'我必须走了',mpl:'我必须走了',fpl:'我必须走了',meaning:'义务/必须',audio:'l09_devo_andare_'},
+  {word:'So nuotare.',masc:'我会游泳',fem:'我会游泳',mpl:'我会游泳',fpl:'我会游泳',meaning:'技能',audio:'l09_so_nuotare_'}];
+let fcIndex=0;
+function updateFlashcard(){const c=flashcards[fcIndex];document.getElementById('fcWord').textContent=c.word;document.getElementById('fcArticle').textContent=c.masc;document.getElementById('fcFullWord').textContent=c.masc+' / '+c.fem;document.getElementById('fcMeaning').textContent=c.meaning;document.getElementById('fcCounter').textContent=(fcIndex+1)+' / '+flashcards.length;document.getElementById('flashcard').classList.remove('flipped');}
+function flipCard(){document.getElementById('flashcard').classList.toggle('flipped');const c=flashcards[fcIndex];playAudio(c.audio);}
+function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
+function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
+function speakCurrentCard(){const c=flashcards[fcIndex];playAudio(c.audio);}
+updateFlashcard();
+</script>
 <div class="footer">
   <div class="footer-nav">
     <a class="nav-btn" href="index.html">🏠 返回导航页</a>

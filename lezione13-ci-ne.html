@@ -172,6 +172,68 @@
       <div class="examples-row"><div class="example-pair"><span class="good">✅ 多练</span><span class="bad">❌ 只看</span></div><div class="example-pair"><span class="good">✅ 开口</span><span class="bad">❌ 沉默</span></div><div class="example-pair"><span class="good">✅ 坚持</span><span class="bad">❌ 放弃</span></div></div>
     </div>
   </div>
+
+<div class="section" id="sec-rules">
+  <div class="section-header"><div class="section-icon" style="background:rgba(26,115,232,0.15);">📋</div><h2 class="section-title">规律一览</h2></div>
+  <div class="rule-grid">
+<div class="grammar-card">
+  <h3 class="rule-title">Ci -- 地点代词</h3>
+  <div class="rule-content">代替a/in/su+地点: Vai a Roma? -> Ci vai?</div>
+  <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l13_ci_vai_____')">ci vai 你去那里</span></div>
+</div>
+<div class="grammar-card">
+  <h3 class="rule-title">Ne -- 部分代词</h3>
+  <div class="rule-content">代替di+名词: Ne ho tre.</div>
+  <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l13_ne_ho_tre_____')">ne ho tre 我有三本</span></div>
+</div>
+<div class="grammar-card">
+  <h3 class="rule-title">固定表达</h3>
+  <div class="rule-content">Ce l'ho/Me ne vado/Ne vale la pena</div>
+  <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l13_ce_l_ho_____')">Ce l'ho 我拿到了</span></div>
+</div></div>
+</div>
+
+<div class="section" id="sec-traps">
+  <div class="section-header"><div class="section-icon" style="background:rgba(206,43,55,0.12);">⚠️</div><h2 class="section-title">容易搞混的</h2></div>
+  <div class="trap-section"><div class="trap-tabs"><div class="trap-tab active" onclick="showTrap('t0')">Ci vs Ne</div></div><div class="trap-list" style="display:grid"><div class="trap-item" onclick="playAudio('l13')"><span class="word">Ci vai(a Roma)</span><span class="meaning">ci=去那里</span></div>
+<div class="trap-item" onclick="playAudio('l13')"><span class="word">Ne vieni(da Roma)</span><span class="meaning">ne=从那里来</span></div>
+</div></div>
+</div>
+
+<div class="section" id="sec-flashcard">
+  <div class="section-header"><div class="section-icon" style="background:rgba(232,113,10,0.12);">🃏</div><h2 class="section-title">闪卡练习 — 点击翻转</h2></div>
+  <div class="flashcard-container">
+    <div class="flashcard" id="flashcard" onclick="flipCard()">
+      <div class="fc-inner"><div class="fc-front"><div class="fc-label">词语</div><div class="fc-word" id="fcWord"></div></div>
+      <div class="fc-back"><div class="fc-label">形式</div><div class="fc-word" id="fcFullWord"></div><div class="fc-meaning" id="fcMeaning"></div></div></div>
+    </div>
+    <div class="fc-controls">
+      <button class="nav-btn" onclick="prevCard()">⬅ 上一个</button>
+      <span id="fcCounter" style="font-size:14px;color:var(--text-dim);">1 / 10</span>
+      <button class="nav-btn" onclick="nextCard()">下一个 ➡</button>
+      <button class="nav-btn" onclick="speakCurrentCard()" style="margin-left:8px;">🔊</button>
+    </div>
+  </div>
+</div>
+<script>
+const flashcards = [  {word:'ci vai?',masc:'你去那里？',fem:'你去那里？',mpl:'你去那里？',fpl:'你去那里？',meaning:'地点ci',audio:'l13_ci_vai_'},
+  {word:'ci penso',masc:'我想到了',fem:'我想到了',mpl:'我想到了',fpl:'我想到了',meaning:'a+事物ci',audio:'l13_ci_penso'},
+  {word:'ne ho tre',masc:'我有三本',fem:'我有三本',mpl:'我有三本',fpl:'我有三本',meaning:'部分ne',audio:'l13_ne_ho_tre'},
+  {word:'ne parliamo',masc:'我们讨论这个',fem:'我们讨论这个',mpl:'我们讨论这个',fpl:'我们讨论这个',meaning:'主题ne',audio:'l13_ne_parliamo'},
+  {word:'Ce l\'ho',masc:'我拿到了',fem:'我拿到了',mpl:'我拿到了',fpl:'我拿到了',meaning:'固定',audio:'l13_ce_l_ho'},
+  {word:'Ci vuole tempo',masc:'需要时间',fem:'需要时间',mpl:'需要时间',fpl:'需要时间',meaning:'volerci',audio:'l13_ci_vuole_tempo'},
+  {word:'Me ne vado',masc:'我走了',fem:'我走了',mpl:'我走了',fpl:'我走了',meaning:'andarsene',audio:'l13_me_ne_vado'},
+  {word:'Ne vale la pena',masc:'值得',fem:'值得',mpl:'值得',fpl:'值得',meaning:'valerne',audio:'l13_ne_vale_la_pena'},
+  {word:'ci sono stato',masc:'我去过',fem:'我去过',mpl:'我去过',fpl:'我去过',meaning:'复合',audio:'l13_ci_sono_stato'},
+  {word:'Non ci vado',masc:'我不去',fem:'我不去',mpl:'我不去',fpl:'我不去',meaning:'andarci',audio:'l13_non_ci_vado'}];
+let fcIndex=0;
+function updateFlashcard(){const c=flashcards[fcIndex];document.getElementById('fcWord').textContent=c.word;document.getElementById('fcArticle').textContent=c.masc;document.getElementById('fcFullWord').textContent=c.masc+' / '+c.fem;document.getElementById('fcMeaning').textContent=c.meaning;document.getElementById('fcCounter').textContent=(fcIndex+1)+' / '+flashcards.length;document.getElementById('flashcard').classList.remove('flipped');}
+function flipCard(){document.getElementById('flashcard').classList.toggle('flipped');const c=flashcards[fcIndex];playAudio(c.audio);}
+function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
+function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
+function speakCurrentCard(){const c=flashcards[fcIndex];playAudio(c.audio);}
+updateFlashcard();
+</script>
 </div>
 
 <div class="footer">

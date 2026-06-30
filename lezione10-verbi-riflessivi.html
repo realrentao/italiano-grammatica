@@ -196,6 +196,51 @@
   </div>
 </div>
 
+
+<div class="section" id="sec-flashcard">
+  <div class="section-header"><div class="section-icon" style="background:rgba(232,113,10,0.12);">🃏</div><h2 class="section-title">闪卡练习 — 点击翻转</h2></div>
+  <div class="flashcard-container">
+    <div class="flashcard" id="flashcard" onclick="flipCard()">
+      <div class="fc-inner"><div class="fc-front"><div class="fc-label">词语</div><div class="fc-word" id="fcWord"></div></div>
+      <div class="fc-back"><div class="fc-label">形式</div><div class="fc-word" id="fcFullWord"></div><div class="fc-meaning" id="fcMeaning"></div></div></div>
+    </div>
+    <div class="fc-controls">
+      <button class="nav-btn" onclick="prevCard()">⬅ 上一个</button>
+      <span id="fcCounter" style="font-size:14px;color:var(--text-dim);">1 / 20</span>
+      <button class="nav-btn" onclick="nextCard()">下一个 ➡</button>
+      <button class="nav-btn" onclick="speakCurrentCard()" style="margin-left:8px;">🔊</button>
+    </div>
+  </div>
+</div>
+<script>
+const flashcards = [  {word:'mi alzo',masc:'我起床',fem:'我起床',mpl:'我起床',fpl:'我起床',meaning:'alzarsi',audio:'l10_mi_alzo'},
+  {word:'ti alzi',masc:'你起床',fem:'你起床',mpl:'你起床',fpl:'你起床',meaning:'alzarsi',audio:'l10_ti_alzi'},
+  {word:'si alza',masc:'他起床',fem:'他起床',mpl:'他起床',fpl:'他起床',meaning:'alzarsi',audio:'l10_si_alza'},
+  {word:'ci alziamo',masc:'我们起床',fem:'我们起床',mpl:'我们起床',fpl:'我们起床',meaning:'alzarsi',audio:'l10_ci_alziamo'},
+  {word:'mi sveglio',masc:'我醒来',fem:'我醒来',mpl:'我醒来',fpl:'我醒来',meaning:'svegliarsi',audio:'l10_mi_sveglio'},
+  {word:'ti svegli',masc:'你醒来',fem:'你醒来',mpl:'你醒来',fpl:'你醒来',meaning:'svegliarsi',audio:'l10_ti_svegli'},
+  {word:'si sveglia',masc:'他醒来',fem:'他醒来',mpl:'他醒来',fpl:'他醒来',meaning:'svegliarsi',audio:'l10_si_sveglia'},
+  {word:'mi chiamo',masc:'我叫',fem:'我叫',mpl:'我叫',fpl:'我叫',meaning:'chiamarsi',audio:'l10_mi_chiamo'},
+  {word:'come ti chiami',masc:'你叫什么',fem:'你叫什么',mpl:'你叫什么',fpl:'你叫什么',meaning:'chiamarsi',audio:'l10_come_ti_chiami'},
+  {word:'mi lavo',masc:'我洗(自己)',fem:'我洗(自己)',mpl:'我洗(自己)',fpl:'我洗(自己)',meaning:'lavarsi',audio:'l10_mi_lavo'},
+  {word:'mi vesto',masc:'我穿衣服',fem:'我穿衣服',mpl:'我穿衣服',fpl:'我穿衣服',meaning:'vestirsi',audio:'l10_mi_vesto'},
+  {word:'mi sono alzato',masc:'我起床了',fem:'我起床了',mpl:'我起床了',fpl:'我起床了',meaning:'passato prossimo',audio:'l10_mi_sono_alzato'},
+  {word:'si e svegliato',masc:'他醒了',fem:'他醒了',mpl:'他醒了',fpl:'他醒了',meaning:'passato prossimo',audio:'l10_si_e_svegliato'},
+  {word:'ci siamo incontrati',masc:'我们相遇了',fem:'我们相遇了',mpl:'我们相遇了',fpl:'我们相遇了',meaning:'相互动词',audio:'l10_ci_siamo_incont'},
+  {word:'ci vediamo',masc:'我们见面',fem:'我们见面',mpl:'我们见面',fpl:'我们见面',meaning:'相互/日常',audio:'l10_ci_vediamo'},
+  {word:'si accomodi',masc:'请坐(尊称)',fem:'请坐(尊称)',mpl:'请坐(尊称)',fpl:'请坐(尊称)',meaning:'尊称命令式',audio:'l10_si_accomodi'},
+  {word:'mettersi',masc:'穿上',fem:'穿上',mpl:'穿上',fpl:'穿上',meaning:'自反',audio:'l10_mettersi'},
+  {word:'prepararsi',masc:'准备',fem:'准备',mpl:'准备',fpl:'准备',meaning:'自反',audio:'l10_prepararsi'},
+  {word:'sentirsi bene',masc:'感觉好',fem:'感觉好',mpl:'感觉好',fpl:'感觉好',meaning:'sentirsi',audio:'l10_sentirsi_bene'},
+  {word:'sedersi',masc:'坐下',fem:'坐下',mpl:'坐下',fpl:'坐下',meaning:'自反',audio:'l10_sedersi'}];
+let fcIndex=0;
+function updateFlashcard(){const c=flashcards[fcIndex];document.getElementById('fcWord').textContent=c.word;document.getElementById('fcArticle').textContent=c.masc;document.getElementById('fcFullWord').textContent=c.masc+' / '+c.fem;document.getElementById('fcMeaning').textContent=c.meaning;document.getElementById('fcCounter').textContent=(fcIndex+1)+' / '+flashcards.length;document.getElementById('flashcard').classList.remove('flipped');}
+function flipCard(){document.getElementById('flashcard').classList.toggle('flipped');const c=flashcards[fcIndex];playAudio(c.audio);}
+function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
+function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
+function speakCurrentCard(){const c=flashcards[fcIndex];playAudio(c.audio);}
+updateFlashcard();
+</script>
 <div class="footer">
   <div class="footer-nav">
     <a class="nav-btn" href="index.html">🏠 返回导航页</a>

@@ -172,6 +172,90 @@
       <div class="examples-row"><div class="example-pair"><span class="good">✅ 多练</span><span class="bad">❌ 只看</span></div><div class="example-pair"><span class="good">✅ 开口</span><span class="bad">❌ 沉默</span></div><div class="example-pair"><span class="good">✅ 坚持</span><span class="bad">❌ 放弃</span></div></div>
     </div>
   </div>
+
+<div class="section" id="sec-rules">
+  <div class="section-header"><div class="section-icon" style="background:rgba(26,115,232,0.15);">📋</div><h2 class="section-title">规律一览</h2></div>
+  <div class="rule-grid">
+<div class="grammar-card">
+  <h3 class="rule-title">条件句(Periodo Ipotetico)时态配合</h3>
+  <div class="rule-content">第一类(真实)：se+直陈式现在 -> 直陈式现在/将来
+第二类(可能)：se+虚拟式未完成 -> 条件式现在
+第三类(不可能)：se+虚拟式愈过 -> 条件式过去</div>
+  <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l24_se_ho_tempo__vengo_')">Se ho tempo, vengo.</span><span class="example-chip speakable" onclick="playAudio('l24_se_avessi_tempo__ver')">Se avessi tempo, verrei.</span><span class="example-chip speakable" onclick="playAudio('l24_se_avessi_avuto_temp')">Se avessi avuto tempo, sarei venuto.</span></div>
+</div>
+<div class="grammar-card">
+  <h3 class="rule-title">常见错误TOP5</h3>
+  <div class="rule-content">1.avere/essere混用：运动动词用essere
+2.过去分词不配合：essere作助动词时必须配合
+3.c'e/ci sono混用：单数用c'e复数用ci sono
+4.直接/间接代词混用：lo=他/它(直接) gli=对他(间接)
+5.虚拟式忘用：Penso che.../Spero che...后要用虚拟式</div>
+  <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l24_ho_andato_x_____sono')">Ho andato(X) -> Sono andato</span><span class="example-chip speakable" onclick="playAudio('l24_l_ho_visto____l_ho_v')">L'ho visto -> L'ho vista(配合)</span><span class="example-chip speakable" onclick="playAudio('l24_c_e_molti_x_____ci_s')">c'e molti(X) -> ci sono molti</span></div>
+</div>
+<div class="grammar-card">
+  <h3 class="rule-title">学习路线建议</h3>
+  <div class="rule-content">1.先掌握现在时三个变位组(-are/-ere/-ire)
+2.然后学essere/avere两个助动词
+3.不规则动词从高频7个开始
+4.passato prossimo是最重要的过去时态
+5.imperfetto用于背景描写
+6.条件式Vorrei开启礼貌表达
+7.虚拟式让表达更地道
+8.命令式/条件从句是高级表达</div>
+  <div class="example-group"><span class="example-chip speakable" onclick="playAudio('l24________passato_pross')">现在时 -> Passato Prossimo</span><span class="example-chip speakable" onclick="playAudio('l24___________')">条件式 -> 虚拟式</span><span class="example-chip speakable" onclick="playAudio('l24____________')">命令式 -> 条件从句</span></div>
+</div></div>
+</div>
+
+<div class="section" id="sec-traps">
+  <div class="section-header"><div class="section-icon" style="background:rgba(206,43,55,0.12);">⚠️</div><h2 class="section-title">容易搞混的</h2></div>
+  <div class="trap-section"><div class="trap-tabs"><div class="trap-tab active" onclick="showTrap('t0')">最易混淆的动词变位</div><div class="trap-tab" onclick="showTrap('t1')">助动词选择速查</div></div><div class="trap-list" style="display:grid"><div class="trap-item" onclick="playAudio('l24')"><span class="word">sono = sono(essere的io/loro)</span><span class="meaning">同一形式两种意思</span></div>
+<div class="trap-item" onclick="playAudio('l24')"><span class="word">ha = ha(avere的lui/lei)</span><span class="meaning">h不发音</span></div>
+<div class="trap-item" onclick="playAudio('l24')"><span class="word">fa = fa(fare的lui)</span><span class="meaning">也是第三人称单数</span></div>
+<div class="trap-item" onclick="playAudio('l24')"><span class="word">c'e/ci sono</span><span class="meaning">单数vs复数</span></div>
+</div><div class="trap-list" style="display:none"><div class="trap-item" onclick="playAudio('l24')"><span class="word">Ho mangiato.</span><span class="meaning">及物动词->avere</span></div>
+<div class="trap-item" onclick="playAudio('l24')"><span class="word">Sono andato.</span><span class="meaning">运动动词->essere</span></div>
+<div class="trap-item" onclick="playAudio('l24')"><span class="word">Mi sono alzato.</span><span class="meaning">自反动词->essere</span></div>
+<div class="trap-item" onclick="playAudio('l24')"><span class="word">Ho dormito.</span><span class="meaning">不及物动作->avere(有些)</span></div>
+</div></div>
+</div>
+
+<div class="section" id="sec-flashcard">
+  <div class="section-header"><div class="section-icon" style="background:rgba(232,113,10,0.12);">🃏</div><h2 class="section-title">闪卡练习 — 点击翻转</h2></div>
+  <div class="flashcard-container">
+    <div class="flashcard" id="flashcard" onclick="flipCard()">
+      <div class="fc-inner"><div class="fc-front"><div class="fc-label">词语</div><div class="fc-word" id="fcWord"></div></div>
+      <div class="fc-back"><div class="fc-label">形式</div><div class="fc-word" id="fcFullWord"></div><div class="fc-meaning" id="fcMeaning"></div></div></div>
+    </div>
+    <div class="fc-controls">
+      <button class="nav-btn" onclick="prevCard()">⬅ 上一个</button>
+      <span id="fcCounter" style="font-size:14px;color:var(--text-dim);">1 / 13</span>
+      <button class="nav-btn" onclick="nextCard()">下一个 ➡</button>
+      <button class="nav-btn" onclick="speakCurrentCard()" style="margin-left:8px;">🔊</button>
+    </div>
+  </div>
+</div>
+<script>
+const flashcards = [  {word:'8+4+2+1+2+2+2=21',masc:'意大利语共21个时态',fem:'意大利语共21个时态',mpl:'意大利语共21个时态',fpl:'意大利语共21个时态',meaning:'时态总数',audio:'l24_8_4_2_1_2_2_2_2'},
+  {word:'Presente',masc:'现在时',fem:'现在时',mpl:'现在时',fpl:'现在时',meaning:'直陈式',audio:'l24_presente'},
+  {word:'Passato Prossimo',masc:'近过去时',fem:'近过去时',mpl:'近过去时',fpl:'近过去时',meaning:'直陈式',audio:'l24_passato_prossim'},
+  {word:'Imperfetto',masc:'未完成过去时',fem:'未完成过去时',mpl:'未完成过去时',fpl:'未完成过去时',meaning:'直陈式',audio:'l24_imperfetto'},
+  {word:'Futuro Semplice',masc:'简单将来时',fem:'简单将来时',mpl:'简单将来时',fpl:'简单将来时',meaning:'直陈式',audio:'l24_futuro_semplice'},
+  {word:'Condizionale',masc:'条件式',fem:'条件式',mpl:'条件式',fpl:'条件式',meaning:'礼貌表达',audio:'l24_condizionale'},
+  {word:'Congiuntivo',masc:'虚拟式',fem:'虚拟式',mpl:'虚拟式',fpl:'虚拟式',meaning:'主观/不确定',audio:'l24_congiuntivo'},
+  {word:'c\'e/ci sono',masc:'有/存在',fem:'有/存在',mpl:'有/存在',fpl:'有/存在',meaning:'esserci',audio:'l24_c_e_ci_sono'},
+  {word:'avere/essere',masc:'助动词选择',fem:'助动词选择',mpl:'助动词选择',fpl:'助动词选择',meaning:'关键语法',audio:'l24_avere_essere'},
+  {word:'lo/gli',masc:'直接/间接代词',fem:'直接/间接代词',mpl:'直接/间接代词',fpl:'直接/间接代词',meaning:'代词区别',audio:'l24_lo_gli'},
+  {word:'Se...verrei.',masc:'如果...我会',fem:'如果...我会',mpl:'如果...我会',fpl:'如果...我会',meaning:'第二类条件',audio:'l24_se___verrei_'},
+  {word:'Vorrei...',masc:'我想要',fem:'我想要',mpl:'我想要',fpl:'我想要',meaning:'礼貌请求',audio:'l24_vorrei___'},
+  {word:'Penso che...',masc:'我认为...',fem:'我认为...',mpl:'我认为...',fpl:'我认为...',meaning:'触发虚拟式',audio:'l24_penso_che___'}];
+let fcIndex=0;
+function updateFlashcard(){const c=flashcards[fcIndex];document.getElementById('fcWord').textContent=c.word;document.getElementById('fcArticle').textContent=c.masc;document.getElementById('fcFullWord').textContent=c.masc+' / '+c.fem;document.getElementById('fcMeaning').textContent=c.meaning;document.getElementById('fcCounter').textContent=(fcIndex+1)+' / '+flashcards.length;document.getElementById('flashcard').classList.remove('flipped');}
+function flipCard(){document.getElementById('flashcard').classList.toggle('flipped');const c=flashcards[fcIndex];playAudio(c.audio);}
+function nextCard(){fcIndex=(fcIndex+1)%flashcards.length;updateFlashcard();}
+function prevCard(){fcIndex=(fcIndex-1+flashcards.length)%flashcards.length;updateFlashcard();}
+function speakCurrentCard(){const c=flashcards[fcIndex];playAudio(c.audio);}
+updateFlashcard();
+</script>
 </div>
 
 <div class="footer">
